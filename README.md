@@ -20,3 +20,10 @@ of each.
 #### Daniel Rafailov (danielrafailov1)
 Emma needs to meal prep for the week. She opens the meal planning program, selects
 her dietary preferences and available ingredients and receives a personalized meal plan with recipes.
+
+#### Vedavi Anandan (vedavia)
+Kathy is frustrated as she can’t find recipes that match her dietary restrictions. 
+She’s allergic to three things and still wants to have a filling meal. She looks 
+for recipes by inputting the ingredients she wants excluded from her meals. She 
+saves ones that interest her in a separate folder. As she tries the recipes she 
+ranks them out of 5 and removes the recipes she doesn’t like.
