@@ -20,7 +20,7 @@ Interactor: recipe generation button controller -> from ingredients button contr
 As a user, Azaria wants to rank his recipes on a scale of 1 to 5, so that he could remember which recipes he likes. 
 He also wants to be able to place them into folders by theme, to create an organized directory.
 ##### Use Cases
-- Each recipe has an atrribute of an integer {1, 2, 3, 4, 5}. The user can set the integer by clicking on the respective star.
+- Each recipe has an attribute of an integer {1, 2, 3, 4, 5}. The user can set the integer by clicking on the respective star.
 - Each recipe has a field for its folder. A user can click on a folder button, and type or select the name of the folder it should be included in.
 Note: Each Folder is a Class that includes a list of recipes in that folder. Each recipe contains an atrribute for its star rating.
 
