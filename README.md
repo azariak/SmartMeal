@@ -14,10 +14,15 @@ Use case/Interactor: recipeSearchUI -> recipeSearchController -> recipeSearchFro
 Interactor: recipe generation button controller -> from ingredients button controller 
       -> text field/add more button controller -> recipeGenerationFromIngredientAPIController -> result UI
 ![1.jpg](images/1.jpg)
+login/signup view
 ![2.jpg](images/2.jpg)
+Main menu view
 ![3.jpg](images/3.jpg)
+recipe search view
 ![4.jpg](images/4.jpg)
-A demo sketch for the user story
+ingredient search view and result view
+
+A demo sketch for the user story and views
 
 
 #### Azaria Kelman (azariak)
