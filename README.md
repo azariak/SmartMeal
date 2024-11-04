@@ -7,9 +7,13 @@
 #### Nachuan Wang (December-17th)
 As a user, John wants to generate recipes from the ingredients he had on hand.
 
-UI: Main -> recipe generation -> from ingredients -> text field -> enter ingredients -> result as list
-Use case: recipeGeneration/recipeGenerationFromIngredient, APIController/recipeGenerationFromIngredientAPIController
-Interactor: recipe generation button controller -> from ingredients button controller-> text field controller?-> API controller -> result UI
+UI: Main -> recipe generation -> from ingredients -> text field -> enter ingredients(max 3) -> result as list
+Note: default 1 ingredient, press + button on UI to add more tet field for more ingredient
+Use case/Interactor: recipeSearchUI -> recipeSearchController -> recipeSearchFromIngredientUI -> recipeSearchFromIngredientController, APIController/recipeGenerationFromIngredientAPIController -> result DAO
+-> Result UI
+Interactor: recipe generation button controller -> from ingredients button controller 
+      -> text field/add more button controller -> recipeGenerationFromIngredientAPIController -> result UI
+
 
 #### Azaria Kelman (azariak)
 As a user, Azaria wants to rank his recipes on a scale of 1 to 5, so that he could remember which recipes he likes. He also wants to be able to place them into folders by theme, to make an organized directory.
