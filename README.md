@@ -37,8 +37,14 @@ of each.
 - Loading : loading the saved recipes
 
 #### Daniel Rafailov (danielrafailov1)
+#### User Story
 Emma needs to meal prep for the week. She opens the meal planning program, selects
 her dietary preferences and available ingredients and receives a personalized meal plan with recipes.
+#### Use Cases
+I want to open the SmartMeal app and be able to see the UI
+I want to be able to filter recipes by dietary preferences
+I want to be able to filter recipes by available ingredients
+
 
 #### Vedavi Anandan (vedavia)
 Kathy is frustrated as she can’t find recipes that match her dietary restrictions. 
