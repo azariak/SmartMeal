@@ -18,11 +18,15 @@ Note: Each Folder is a Class that includes a list of recipes in that folder. Eac
 
 
 #### Anisa (AHK9)
+#### User Story
 Sara previously generated her favourite recipe, but
 forgot what the ingredients were. She opens the SmartMeal program and 
 chooses to load her saved recipes. Her previously saved recipes are displayed 
 based on their rank, along with the ingredients, calories, and nutritional benefits 
 of each.
+#### Use Cases
+- Saving: Saving the loaded recipes 
+- Loading : loading the saved recipes
 
 #### Daniel Rafailov (danielrafailov1)
 Emma needs to meal prep for the week. She opens the meal planning program, selects
