@@ -8,7 +8,7 @@
 As a user, John wants to generate recipes from the ingredients he had on hand.
 
 UI: Main -> recipe generation -> from ingredients -> text field -> enter ingredients(max 3) -> result as list
-Note: default 1 ingredient, press + button on UI to add more tet field for more ingredient
+Note: default 1 ingredient, press + button on UI to add more text field for more ingredient
 Use case/Interactor: recipeSearchUI -> recipeSearchController -> recipeSearchFromIngredientUI -> recipeSearchFromIngredientController, APIController/recipeGenerationFromIngredientAPIController -> result DAO
 -> Result UI
 Interactor: recipe generation button controller -> from ingredients button controller 
