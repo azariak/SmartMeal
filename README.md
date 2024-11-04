@@ -8,7 +8,7 @@
 As a user, John wants to generate recipes from the ingredients he had on hand.
 
 #### Azaria Kelman (azariak)
-User story...
+As a user, Azaria wants to rank his recipes on a scale of 1 to 5, so that he could remember which recipes he likes. He also wants to be able to place them into folders by theme, to make an organized directory.
 
 #### Anisa (AHK()
 Sara previously generated her favourite recipe, but
