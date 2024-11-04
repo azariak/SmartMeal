@@ -13,6 +13,11 @@ Use case/Interactor: recipeSearchUI -> recipeSearchController -> recipeSearchFro
 -> Result UI
 Interactor: recipe generation button controller -> from ingredients button controller 
       -> text field/add more button controller -> recipeGenerationFromIngredientAPIController -> result UI
+![1.jpg](images/1.jpg)
+![2.jpg](images/2.jpg)
+![3.jpg](images/3.jpg)
+![4.jpg](images/4.jpg)
+A demo sketch for the user story
 
 
 #### Azaria Kelman (azariak)
