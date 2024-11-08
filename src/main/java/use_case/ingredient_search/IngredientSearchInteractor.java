@@ -1,4 +1,4 @@
-package use_case.recipe_search;
+package use_case.ingredient_search;
 
 public class IngredientSearchInteractor {
 }
