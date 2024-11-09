@@ -7,12 +7,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 // import javax.swing.event.DocumentEvent;
 // import javax.swing.event.DocumentListener;
 
 // import java.beans.PropertyChangeEvent;
 
-public class IngredientSearchView extends JPanel {
+public class IngredientSearchView extends JPanel implements ActionListener, PropertyChangeListener {
 
     private final String viewName = "log in";
     private IngredientSearchViewModel ingredientSearchViewModel;
@@ -32,11 +34,11 @@ public class IngredientSearchView extends JPanel {
         final JLabel title = new JLabel("Ingredient Search");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        final LabelTextPanel ingredientField1 = new LabelTextPanel(
+        final LabelTextPanel ingredient1 = new LabelTextPanel(
                 new JLabel("Ingredient 1"), ingredientField1);
-        final LabelTextPanel ingredientField2 = new LabelTextPanel(
+        final LabelTextPanel ingredient2 = new LabelTextPanel(
                 new JLabel("Ingredient 2"), ingredientField2);
-        final LabelTextPanel ingredientField3 = new LabelTextPanel(
+        final LabelTextPanel ingredient3 = new LabelTextPanel(
                 new JLabel("Ingredient 3"), ingredientField3);
 
         final JPanel buttons = new JPanel();
@@ -72,5 +74,15 @@ public class IngredientSearchView extends JPanel {
 
     public void setIngredientSearchController(IngredientSearchController ingredientSearchController) {
         this.ingredientSearchController = ingredientSearchController;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+
     }
 }

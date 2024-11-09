@@ -1,47 +1,46 @@
 package interface_adapter.ingredient_search;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.change_password.LoggedInState;
-import interface_adapter.change_password.LoggedInViewModel;
-import interface_adapter.login.LoginState;
-import interface_adapter.login.LoginViewModel;
-import use_case.ingredient_search.IngredientSearchInputBoundary;
 import use_case.ingredient_search.IngredientSearchInputData;
 import use_case.ingredient_search.IngredientSearchOutputBoundary;
-import use_case.login.LoginOutputData;
+import use_case.ingredient_search.IngredientSearchOutputData;
 
 public class IngredientSearchPresenter implements IngredientSearchOutputBoundary {
-    private final LoginViewModel loginViewModel;
-    private final LoggedInViewModel loggedInViewModel;
+    private final IngredientSearchViewModel ingredientSearchViewModel;
     private final ViewManagerModel viewManagerModel;
 
     public IngredientSearchPresenter(ViewManagerModel viewManagerModel,
-                          LoggedInViewModel loggedInViewModel,
-                          LoginViewModel loginViewModel) {
+                          IngredientSearchViewModel ingredientSearchViewModel) {
         this.viewManagerModel = viewManagerModel;
-        this.loggedInViewModel = loggedInViewModel;
-        this.loginViewModel = loginViewModel;
+        this.ingredientSearchViewModel = ingredientSearchViewModel;
     }
 
-    public void prepareSuccessView(LoginOutputData response) {
-        // On success, switch to the logged in view.
+    @Override
+    public void prepareSuccessView(IngredientSearchOutputData outputData) {
 
-        final LoggedInState loggedInState = loggedInViewModel.getState();
-        loggedInState.setUsername(response.getUsername());
-        this.loggedInViewModel.setState(loggedInState);
-        this.loggedInViewModel.firePropertyChanged();
-
-        this.viewManagerModel.setState(loggedInViewModel.getViewName());
-        this.viewManagerModel.firePropertyChanged();
     }
 
+    /**
+     * Temp code for demo.
+     *
+     * @param error the explanation of the failure
+     */
     public void prepareFailView(String error) {
-        final LoginState loginState = loginViewModel.getState();
-        loginState.setLoginError(error);
-        loginViewModel.firePropertyChanged();
     }
 
     public void execute(IngredientSearchInputData ingredientSearchInputData) {
 
+    }
+
+    @Override
+    public void prepareResultView(String ingredient1, String ingredient2, String ingredient3) {
+        final IngredientSearchState ingredientSearchState = IngredientSearchViewModel.getState();
+
+        ingredientSearchState.setIngredient1(ingredient1);
+        ingredientSearchState.setIngredient2(ingredient2);
+        ingredientSearchState.setIngredient3(ingredient3);
+
+        this.ingredientSearchViewModel.setState(ingredientSearchState);
+        this.ingredientSearchViewModel.firePropertyChanged();
     }
 }

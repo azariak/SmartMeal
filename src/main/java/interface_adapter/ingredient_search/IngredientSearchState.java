@@ -17,12 +17,15 @@ public class IngredientSearchState {
     public String getIngredient1() {
         return ingredient1;
     }
+
     public void setIngredient1(String ingredient1) {
         this.ingredient1 = ingredient1;
     }
+
     public void setIngredient2(String ingredient2) {
         this.ingredient2 = ingredient2;
     }
+
     public void setIngredient3(String ingredient3) {
         this.ingredient3 = ingredient3;
     }
