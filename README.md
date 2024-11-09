@@ -37,14 +37,12 @@ Note: Each Folder is a Class that includes a list of recipes in that folder. Eac
 
 #### Anisa (AHK9)
 #### User Story
-Sara generated her favourite recipe, but
-wants to save it for tomorrow. She chooses to save the recipe. Next day, she opens the SmartMeal program and 
-chooses to load her saved recipes. Her previously saved recipes are displayed 
-based on their rank, along with the ingredients, calories, and nutritional benefits 
-of each.
+- As a user Sara wants to reload her previously saved recipes in order to make her favorite 
+recipe.
 #### Use Cases
-- Saving: Saving the loaded recipes 
-- Loading : loading the saved recipes
+- The user clicks the saved recipes button and is then redirected to her previously
+saved recipes page
+- 
 
 #### Daniel Rafailov (danielrafailov1)
 #### User Story
