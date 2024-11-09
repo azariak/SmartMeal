@@ -34,7 +34,7 @@ public class IngredientSearchPresenter implements IngredientSearchOutputBoundary
 
     @Override
     public void prepareResultView(String ingredient1, String ingredient2, String ingredient3) {
-        final IngredientSearchState ingredientSearchState = IngredientSearchViewModel.getState();
+        final IngredientSearchState ingredientSearchState = ingredientSearchViewModel.getState();
 
         ingredientSearchState.setIngredient1(ingredient1);
         ingredientSearchState.setIngredient2(ingredient2);

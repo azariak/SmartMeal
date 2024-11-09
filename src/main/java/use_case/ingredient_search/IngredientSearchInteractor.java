@@ -1,10 +1,12 @@
 package use_case.ingredient_search;
 
+import data_access.InMemoryUserDataAccessObject;
+
 public class IngredientSearchInteractor implements IngredientSearchInputBoundary {
-    private final IngredientSearchDataAccessInterface ingredientSearchDataAccessObject;
+    private final InMemoryUserDataAccessObject ingredientSearchDataAccessObject;
     private final IngredientSearchOutputBoundary ingredientSearchPresenter;
 
-    public IngredientSearchInteractor(IngredientSearchDataAccessInterface ingredientSearchDataAccessObject,
+    public IngredientSearchInteractor(InMemoryUserDataAccessObject ingredientSearchDataAccessObject,
                                       IngredientSearchOutputBoundary ingredientSearchOutputBoundary) {
 
         this.ingredientSearchDataAccessObject = ingredientSearchDataAccessObject;

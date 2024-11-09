@@ -1,18 +1,23 @@
 package view;
 
-import interface_adapter.ingredient_search.IngredientSearchController;
-import interface_adapter.ingredient_search.IngredientSearchViewModel;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-// import javax.swing.event.DocumentEvent;
-// import javax.swing.event.DocumentListener;
 
-// import java.beans.PropertyChangeEvent;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
+import interface_adapter.ingredient_search.IngredientSearchController;
+import interface_adapter.ingredient_search.IngredientSearchState;
+import interface_adapter.ingredient_search.IngredientSearchViewModel;
+import interface_adapter.login.LoginState;
 
 public class IngredientSearchView extends JPanel implements ActionListener, PropertyChangeListener {
 
@@ -51,7 +56,12 @@ public class IngredientSearchView extends JPanel implements ActionListener, Prop
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(search)) {
-                            IngredientSearchController.execute(ingredientField1, ingredientField2, ingredientField3);
+                            final IngredientSearchState currentState = ingredientSearchViewModel.getState();
+
+                            ingredientSearchController.execute(
+                                    currentState.getIngredient1(),
+                                    currentState.getIngredient2(),
+                                    currentState.getIngredient3());
                         }
                     }
                 }
@@ -62,9 +72,9 @@ public class IngredientSearchView extends JPanel implements ActionListener, Prop
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(title);
-        this.add(ingredientField1);
-        this.add(ingredientField2);
-        this.add(ingredientField3);
+        this.add(ingredient1);
+        this.add(ingredient2);
+        this.add(ingredient3);
         this.add(buttons);
     }
 
@@ -76,13 +86,20 @@ public class IngredientSearchView extends JPanel implements ActionListener, Prop
         this.ingredientSearchController = ingredientSearchController;
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
+    private void setFields(IngredientSearchState state) {
+        ingredientField1.setText(state.getIngredient1());
+        ingredientField2.setText(state.getIngredient2());
+        ingredientField3.setText(state.getIngredient3());
+    }
 
+    @Override
+    public void actionPerformed(ActionEvent evt) {
+        System.out.println("Click " + evt.getActionCommand());
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-
+        final IngredientSearchState state = (IngredientSearchState) evt.getNewValue();
+        setFields(state);
     }
 }

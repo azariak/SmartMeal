@@ -22,6 +22,8 @@ public class Main {
                                             .addChangePasswordUseCase()
                                             .addLogoutUseCase()
                                             // added this line above
+                                            .addIngredientSearchView()
+                                            .addIngredientSearchUseCase()
                                             .build();
 
         application.pack();

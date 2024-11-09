@@ -13,6 +13,9 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.change_password.ChangePasswordController;
 import interface_adapter.change_password.ChangePasswordPresenter;
 import interface_adapter.change_password.LoggedInViewModel;
+import interface_adapter.ingredient_search.IngredientSearchController;
+import interface_adapter.ingredient_search.IngredientSearchPresenter;
+import interface_adapter.ingredient_search.IngredientSearchViewModel;
 import interface_adapter.login.LoginController;
 import interface_adapter.login.LoginPresenter;
 import interface_adapter.login.LoginViewModel;
@@ -24,8 +27,10 @@ import interface_adapter.signup.SignupViewModel;
 import use_case.change_password.ChangePasswordInputBoundary;
 import use_case.change_password.ChangePasswordInteractor;
 import use_case.change_password.ChangePasswordOutputBoundary;
+import use_case.ingredient_search.IngredientSearchDataAccessInterface;
 import use_case.ingredient_search.IngredientSearchInputBoundary;
 import use_case.ingredient_search.IngredientSearchInteractor;
+import use_case.ingredient_search.IngredientSearchOutputBoundary;
 import use_case.login.LoginInputBoundary;
 import use_case.login.LoginInteractor;
 import use_case.login.LoginOutputBoundary;
@@ -35,10 +40,7 @@ import use_case.logout.LogoutOutputBoundary;
 import use_case.signup.SignupInputBoundary;
 import use_case.signup.SignupInteractor;
 import use_case.signup.SignupOutputBoundary;
-import view.LoggedInView;
-import view.LoginView;
-import view.SignupView;
-import view.ViewManager;
+import view.*;
 
 /**
  * The AppBuilder class is responsible for putting together the pieces of
@@ -68,6 +70,9 @@ public class AppBuilder {
     private LoggedInViewModel loggedInViewModel;
     private LoggedInView loggedInView;
     private LoginView loginView;
+
+    private IngredientSearchView ingredientSearchView;
+    private IngredientSearchViewModel ingredientSearchViewModel;
 
     public AppBuilder() {
         cardPanel.setLayout(cardLayout);
@@ -166,6 +171,31 @@ public class AppBuilder {
 
         final LogoutController logoutController = new LogoutController(logoutInteractor);
         loggedInView.setLogoutController(logoutController);
+        return this;
+    }
+
+    public AppBuilder addIngredientSearchView() {
+        ingredientSearchViewModel = new IngredientSearchViewModel();
+        ingredientSearchView = new IngredientSearchView(ingredientSearchViewModel);
+        cardPanel.add(ingredientSearchView, ingredientSearchView.getViewName());
+        return this;
+    }
+
+    /**
+     * Adds the Ingredient Search Use Case to the application.
+     * @return this builder
+     */
+    public AppBuilder addIngredientSearchUseCase() {
+        final IngredientSearchOutputBoundary ingredientSearchOutputBoundary =
+                new IngredientSearchPresenter(viewManagerModel, ingredientSearchViewModel);
+
+        final IngredientSearchInputBoundary ingredientSearchInteractor =
+                new IngredientSearchInteractor(userDataAccessObject,
+                        ingredientSearchOutputBoundary);
+
+        final IngredientSearchController ingredientSearchController =
+                new IngredientSearchController(ingredientSearchInteractor);
+        ingredientSearchView.setIngredientSearchController(ingredientSearchController);
         return this;
     }
 
