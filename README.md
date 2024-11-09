@@ -38,7 +38,7 @@ Note: Each Folder is a Class that includes a list of recipes in that folder. Eac
 #### Anisa (AHK9)
 #### User Story
 - As a user Sara wants to reload her previously saved recipes in order to make her favorite 
-recipe.
+dish.
 #### Use Cases
 - The user clicks the saved recipes button and is then redirected to her previously
 saved recipes page
