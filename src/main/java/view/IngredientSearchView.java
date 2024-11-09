@@ -49,9 +49,7 @@ public class IngredientSearchView extends JPanel {
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(search)) {
-                            IngredientSearchController.execute(
-                                    //TBD
-                            );
+                            IngredientSearchController.execute(ingredientField1, ingredientField2, ingredientField3);
                         }
                     }
                 }
