@@ -34,6 +34,8 @@ He also wants to be able to place them into folders by theme, to create an organ
 - Each recipe has a field for its folder. A user can click on a folder button, and type or select the name of the folder it should be included in.
 Note: Each Folder is a Class that includes a list of recipes in that folder. Each recipe contains an atrribute for its star rating.
 
+![Ranking_view.jpg](images/Azaria_User_Story/Ranking_view.png)
+![Organizing_view.jpg](images/Azaria_User_Story/Organizing_view.png)
 
 #### Anisa (AHK9)
 #### User Story
