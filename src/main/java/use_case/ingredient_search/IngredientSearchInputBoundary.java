@@ -14,4 +14,6 @@ public interface IngredientSearchInputBoundary {
      * @param ingredientSearchInputData the input data
      */
     void execute(IngredientSearchInputData ingredientSearchInputData);
+
+    void switchToResultView();
 }

@@ -2,6 +2,7 @@ package interface_adapter.ingredient_search;
 
 import interface_adapter.ViewManagerModel;
 import interface_adapter.result.ResultViewModel;
+import interface_adapter.result.ResultViewState;
 import use_case.ingredient_search.IngredientSearchInputData;
 import use_case.ingredient_search.IngredientSearchOutputBoundary;
 import use_case.ingredient_search.IngredientSearchOutputData;
@@ -12,11 +13,10 @@ public class IngredientSearchPresenter implements IngredientSearchOutputBoundary
     private final ResultViewModel resultViewModel;
 
     public IngredientSearchPresenter(ViewManagerModel viewManagerModel,
-                          IngredientSearchViewModel ingredientSearchViewModel,
-                                     ResultViewModel resultViewModel) {
+                          IngredientSearchViewModel ingredientSearchViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.ingredientSearchViewModel = ingredientSearchViewModel;
-        this.resultViewModel = resultViewModel;
+        this.resultViewModel = new ResultViewModel();
 
     }
 
@@ -47,5 +47,15 @@ public class IngredientSearchPresenter implements IngredientSearchOutputBoundary
 
         this.ingredientSearchViewModel.setState(ingredientSearchState);
         this.ingredientSearchViewModel.firePropertyChanged();
+
+        this.viewManagerModel.setState(resultViewModel.getViewName());
+        this.viewManagerModel.firePropertyChanged();
     }
+
+    @Override
+    public void switchToResultView() {
+        viewManagerModel.setState(resultViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
+    }
+
 }

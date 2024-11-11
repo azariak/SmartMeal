@@ -27,7 +27,7 @@ import interface_adapter.ingredient_search.IngredientSearchViewModel;
  */
 public class IngredientSearchView extends JPanel implements ActionListener, PropertyChangeListener {
 
-    private final String viewName = "log in";
+    private final String viewName = "Ingredient Search";
     private IngredientSearchViewModel ingredientSearchViewModel;
     private IngredientSearchController ingredientSearchController;
 
@@ -69,6 +69,7 @@ public class IngredientSearchView extends JPanel implements ActionListener, Prop
                                     currentState.getIngredient2(),
                                     currentState.getIngredient3());
                         }
+
                     }
                 }
         );
