@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class ResultView extends JFrame {
+public class ResultView extends JPanel {
     // Temp implementation for debug only
     // TODO: figure a way to implement this.
     private final String viewName = "Demo Result View";
