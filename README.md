@@ -73,5 +73,7 @@ Kathy has allergies and inputs the ingredients she does not want in her meals to
 - The search button is clicked to generate a list of recipes.
 - The preferred recipes are saved to the users 'git statusSaved Recipes' page by clicking the save button.
 
+Test
+
 ![462547741_1884070615329762_27190600438312334_n.jpg](images/462547741_1884070615329762_27190600438312334_n.jpg)
 ![462547766_770258358585334_312687260887195250_n.jpg](images/462547766_770258358585334_312687260887195250_n.jpg)
