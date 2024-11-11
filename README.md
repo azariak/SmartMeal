@@ -58,8 +58,9 @@ ingredients on hand.
 
 
 #### Vedavi Anandan (vedavia)
-Kathy is frustrated as she can’t find recipes that match her dietary restrictions. 
-She’s allergic to three things and still wants to have a filling meal. She looks 
-for recipes by inputting the ingredients she wants excluded from her meals. She 
-saves ones that interest her in a separate folder. As she tries the recipes she 
-ranks them out of 5 and removes the recipes she doesn’t like.
+Kathy has allergies and inputs the ingredients she does not want in her meals to generate a list of safe recipes. 
+
+#### Use Cases
+- The excluded ingredients are listed in the 'Do not want:' field.
+- The search button is clicked to generate a list of recipes.
+- The preferred recipes are saved to the users 'git statusSaved Recipes' page by clicking the save button.
