@@ -1,6 +1,6 @@
 package use_case.load_saved_recipe;
 
-import entity.User;
+import entity.Recipe;
 
 /**
  * DAO for the Load Saved Recipe Use Case.
@@ -8,27 +8,16 @@ import entity.User;
 public interface LoadSavedRecipeDataAcessInterface {
 
     /**
-     * Saves the user.
-     * @param user the user to save
+     * Search the recipe.
+     * @param recipe the user to save
      */
-    void save(User user);
+    void search(Recipe recipe);
 
     /**
-     * Returns the user with the given username.
-     * @param username the username to look up
-     * @return the user with the given username
+     * Returns the saved recipe with the given recipe name.
+     * @param ingredient the username to look up
+     * @return the recipe with the given recipe name
      */
-    User get(String username);
+    Recipe get(String ingredient);
 
-    /**
-     * Returns the username of the curren user of the application.
-     * @return the username of the current user; null indicates that no one is logged into the application.
-     */
-    String getCurrentUsername();
-
-    /**
-     * Sets the username indicating who is the current user of the application.
-     * @param username the new current username; null to indicate that no one is currently logged into the application.
-     */
-    void setCurrentUsername(String username);
 }
