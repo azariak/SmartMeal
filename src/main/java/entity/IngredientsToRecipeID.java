@@ -13,15 +13,15 @@ public class IngredientsToRecipeID {
 
     // Note: FOR EACH RECIPE, YOU NEED ANOTHER API CALL FOR THE RECIPE DETAILS.
 
-
     // Store the API key as a constant in your code. DO NOT PUSH TO GIT.
-    private static final String API_KEY = "";
-
+    /**
+     * This class returns a list of recipes for the given ingredients.
+     */
     public static void main(String[] args) {
 
-        String ingredients = "chicken, flour,sugar, eggs, avacodo";
+        String ingredients = "cheese, pasta";
         String urlString = "https://api.spoonacular.com/recipes/complexSearch?apiKey="
-                + API_KEY + "&includeIngredients=" + ingredients + "&number=10";
+                + System.getenv("API_KEY") + "&includeIngredients=" + ingredients + "&number=10";
 
         try {
             // Make a GET request to the API
@@ -46,11 +46,13 @@ public class IngredientsToRecipeID {
 
                 // Output the response (for now, just print it)
                 System.out.println(response.toString());
-            } else {
+            }
+            else {
                 System.out.println("GET request failed. Response Code: " + responseCode);
             }
 
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
     }
