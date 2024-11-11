@@ -40,11 +40,17 @@ Note: Each Folder is a Class that includes a list of recipes in that folder. Eac
 #### Anisa (AHK9)
 #### User Story
 - As a user Sara wants to reload her previously saved recipes in order to make her favorite 
-recipe.
+dish.
 #### Use Cases
 - The user clicks the saved recipes button and is then redirected to her previously
 saved recipes page
-- 
+- The user clicks on a saved recipe from the list, and the application displays the full recipe details, including 
+ingredients, steps, and cooking time.
+- The user clicks a delete button on a saved recipe, and the application prompts for 
+confirmation before removing the recipe from her saved collection.
+- The user clicks a favorite or bookmark icon on a recipe, and the recipe 
+is highlighted or added to a "Favorites" section within the saved recipes.
+![anisausecase.jpeg](images/anisausecase.jpeg)
 
 #### Daniel Rafailov (danielrafailov1)
 #### User Story
