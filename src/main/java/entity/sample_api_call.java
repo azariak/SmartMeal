@@ -6,6 +6,10 @@ import java.io.BufferedReader;
 
 public class sample_api_call {
 
+    // THIS API CALL GETS A LIST OF RECIPES FOR THE GIVEN INGREDIENTS.
+    // FOR EACH RECIPE, YOU NEED ANOTHER API CALL FOR THE RECIPE DETAILS.
+
+
     // Store the API key as a constant in your code. DO NOT PUSH TO GIT.
     private static final String API_KEY = " ";
 
