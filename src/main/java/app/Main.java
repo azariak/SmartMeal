@@ -24,6 +24,7 @@ public class Main {
                                             // added this line above
                                             .addIngredientSearchView()
                                             .addIngredientSearchUseCase()
+                                            .addResultView()
                                             .build();
 
         application.pack();

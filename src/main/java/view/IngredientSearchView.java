@@ -11,13 +11,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
 import interface_adapter.ingredient_search.IngredientSearchController;
 import interface_adapter.ingredient_search.IngredientSearchState;
 import interface_adapter.ingredient_search.IngredientSearchViewModel;
-import interface_adapter.login.LoginState;
 
 public class IngredientSearchView extends JPanel implements ActionListener, PropertyChangeListener {
 
