@@ -34,6 +34,8 @@ He also wants to be able to place them into folders by theme, to create an organ
 - Each recipe has a field for its folder. A user can click on a folder button, and type or select the name of the folder it should be included in.
 Note: Each Folder is a Class that includes a list of recipes in that folder. Each recipe contains an atrribute for its star rating.
 
+![Ranking_view.jpg](images/Azaria_User_Story/Ranking_view.png)
+![Organizing_view.jpg](images/Azaria_User_Story/Organizing_view.png)
 
 #### Anisa (AHK9)
 #### User Story
@@ -52,17 +54,21 @@ is highlighted or added to a "Favorites" section within the saved recipes.
 
 #### Daniel Rafailov (danielrafailov1)
 #### User Story
-Emma needs to meal prep for the week. She opens the meal planning program, selects
-her dietary preferences and available ingredients and receives a personalized meal plan with recipes.
+Mia is a user with limited ingredients and/or dietary restrictions. She wants the SmartMeal app to suggest alternative
+ingredients for recipes she is interested in, allowing her to make the recipe even when she doesn’t have all the
+ingredients on hand.
 #### Use Cases
-I want to open the SmartMeal app and be able to see the UI
-I want to be able to filter recipes by dietary preferences
-I want to be able to filter recipes by available ingredients
+- Mia opens a recipe and sees a list of ingredient substitutions based on her dietary preferences and the ingredients she has.
+- If Mia doesn’t have a specific ingredient, she can click on it and view a list of suggested substitutes that match her dietary preferences.
+- When Mia selects a substitute ingredient, the recipe automatically updates with the substitution so she can proceed with the adjusted recipe.
 
+![RecipeDetailView.jpg](images/Daniel_User_Story/RecipeDetailView.jpg)
+![IngredientSubstitutionView](images/Daniel_User_Story/IngredientSubstitutionView.jpg)
 
 #### Vedavi Anandan (vedavia)
-Kathy is frustrated as she can’t find recipes that match her dietary restrictions. 
-She’s allergic to three things and still wants to have a filling meal. She looks 
-for recipes by inputting the ingredients she wants excluded from her meals. She 
-saves ones that interest her in a separate folder. As she tries the recipes she 
-ranks them out of 5 and removes the recipes she doesn’t like.
+Kathy has allergies and inputs the ingredients she does not want in her meals to generate a list of safe recipes. 
+
+#### Use Cases
+- The excluded ingredients are listed in the 'Do not want:' field.
+- The search button is clicked to generate a list of recipes.
+- The preferred recipes are saved to the users 'git statusSaved Recipes' page by clicking the save button.
