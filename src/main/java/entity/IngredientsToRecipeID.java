@@ -1,13 +1,15 @@
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.io.InputStreamReader;
-import java.io.BufferedReader;
 
+/**
+ * This class returns a list of recipes for the given ingredients.
+ */
 public class IngredientsToRecipeID {
 
-    // THIS API CALL GETS A LIST OF RECIPES FOR THE GIVEN INGREDIENTS.
-    // FOR EACH RECIPE, YOU NEED ANOTHER API CALL FOR THE RECIPE DETAILS.
+    // Note: FOR EACH RECIPE, YOU NEED ANOTHER API CALL FOR THE RECIPE DETAILS.
 
 
     // Store the API key as a constant in your code. DO NOT PUSH TO GIT.
