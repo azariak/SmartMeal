@@ -14,8 +14,9 @@ public class RecipeIDToJSON {
     public static void main(String[] args) {
 
         final String id = "654959"; // Sample ID for Pasta with Tuna
-        String urlString = "https://api.spoonacular.com/recipes/complexSearch?apiKey="
-                + System.getenv("API_KEY") + "{" + id + "}" + "/information";
+//        String urlString = "https://api.spoonacular.com/recipes/complexSearch?apiKey="
+//                + System.getenv("API_KEY") + "{" + id + "}" + "/information";
+        String urlString = "https://api.spoonacular.com/recipes/716429/information?includeNutrition=false";
 
         try {
             // Make a GET request to the API
