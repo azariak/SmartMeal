@@ -15,13 +15,9 @@ public class IngredientsToRecipeID {
 
 
     // Store the API key as a constant in your code. DO NOT PUSH TO GIT.
-    private static final String API_KEY = " ";
+    private static final String API_KEY = "";
 
     public static void main(String[] args) {
-        if (API_KEY == null || API_KEY.isEmpty()) {
-            System.out.println("API key is missing!");
-            return;
-        }
 
         String ingredients = "chicken, flour,sugar, eggs, avacodo";
         String urlString = "https://api.spoonacular.com/recipes/complexSearch?apiKey="
