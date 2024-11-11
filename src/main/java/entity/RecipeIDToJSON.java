@@ -11,17 +11,11 @@ import java.net.URL;
  */
 public class RecipeIDToJSON {
 
-    private static final String API_KEY = " ";
-
     public static void main(String[] args) {
 
-        if (API_KEY == null || API_KEY.isEmpty()) {
-            System.out.println("API key is missing!");
-            return;
-        }
-
-        String id = "638369"; // Sample ID for Korean Chicken
-        String urlString = "https://api.spoonacular.com/recipes/" + id +"/information";
+        final String id = "654959"; // Sample ID for Pasta with Tuna
+        String urlString = "https://api.spoonacular.com/recipes/complexSearch?apiKey="
+                + System.getenv("API_KEY") + "{" + id + "}" + "/information";
 
         try {
             // Make a GET request to the API
