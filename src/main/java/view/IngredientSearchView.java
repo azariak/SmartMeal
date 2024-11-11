@@ -16,6 +16,15 @@ import interface_adapter.ingredient_search.IngredientSearchController;
 import interface_adapter.ingredient_search.IngredientSearchState;
 import interface_adapter.ingredient_search.IngredientSearchViewModel;
 
+/**
+ * Represents the view component for searching ingredients within the application.
+ * <p>
+ * The IngredientSearchView class is responsible for displaying the user interface
+ * elements related to searching for ingredients, including input fields, search
+ * buttons, and result displays. It connects with the underlying model to retrieve
+ * ingredient data based on user input.
+ * </p>
+ */
 public class IngredientSearchView extends JPanel implements ActionListener, PropertyChangeListener {
 
     private final String viewName = "log in";
