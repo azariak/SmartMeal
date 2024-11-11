@@ -56,6 +56,8 @@ ingredients on hand.
 - If Mia doesn’t have a specific ingredient, she can click on it and view a list of suggested substitutes that match her dietary preferences.
 - When Mia selects a substitute ingredient, the recipe automatically updates with the substitution so she can proceed with the adjusted recipe.
 
+![RecipeDetailView.jpg](images/Daniel_User_Story/RecipeDetailView.jpg)
+![IngredientSubstitutionView](images/Daniel_User_Story/IngredientSubstitutionView.jpg)
 
 #### Vedavi Anandan (vedavia)
 Kathy has allergies and inputs the ingredients she does not want in her meals to generate a list of safe recipes. 
