@@ -23,4 +23,11 @@ public class IngredientSearchController {
 
         ingredientSearchUseCaseInteractor.execute(ingredientSearchInputData);
     }
+
+    /**
+     * Executes the "switch to LoginView" Use Case.
+     */
+    public void switchToResultView() {
+        ingredientSearchUseCaseInteractor.switchToResultView();
+    }
 }

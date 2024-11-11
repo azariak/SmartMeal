@@ -199,7 +199,7 @@ public class AppBuilder {
      */
     public AppBuilder addIngredientSearchUseCase() {
         final IngredientSearchOutputBoundary ingredientSearchOutputBoundary =
-                new IngredientSearchPresenter(viewManagerModel, ingredientSearchViewModel, resultViewModel);
+                new IngredientSearchPresenter(viewManagerModel, ingredientSearchViewModel);
 
         final IngredientSearchInputBoundary ingredientSearchInteractor =
                 new IngredientSearchInteractor(userDataAccessObject,

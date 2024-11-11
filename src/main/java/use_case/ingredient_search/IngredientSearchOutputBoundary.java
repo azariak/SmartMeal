@@ -21,4 +21,5 @@ public interface IngredientSearchOutputBoundary {
      */
     void prepareResultView(String ingredient1, String ingredient2, String ingredient3);
 
+    void switchToResultView();
 }

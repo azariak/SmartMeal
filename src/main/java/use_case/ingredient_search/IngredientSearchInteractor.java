@@ -21,4 +21,9 @@ public class IngredientSearchInteractor implements IngredientSearchInputBoundary
 
         ingredientSearchPresenter.prepareResultView(ingredient1, ingredient2, ingredient3);
         }
+
+    @Override
+    public void switchToResultView() {
+        ingredientSearchPresenter.switchToResultView();
+    }
 }
