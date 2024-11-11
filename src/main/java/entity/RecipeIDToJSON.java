@@ -15,11 +15,6 @@ public class RecipeIDToJSON {
 
     public static void main(String[] args) {
 
-        if (API_KEY == null || API_KEY.isEmpty()) {
-            System.out.println("API key is missing!");
-            return;
-        }
-
         String id = "638369"; // Sample ID for Korean Chicken
         String urlString = "https://api.spoonacular.com/recipes/" + id +"/information";
 
