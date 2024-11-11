@@ -4,7 +4,7 @@ import java.net.URL;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
 
-public class sample_api_call {
+public class IngredientsToRecipeID {
 
     // THIS API CALL GETS A LIST OF RECIPES FOR THE GIVEN INGREDIENTS.
     // FOR EACH RECIPE, YOU NEED ANOTHER API CALL FOR THE RECIPE DETAILS.
