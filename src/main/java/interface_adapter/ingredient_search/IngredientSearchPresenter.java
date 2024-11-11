@@ -1,6 +1,7 @@
 package interface_adapter.ingredient_search;
 
 import interface_adapter.ViewManagerModel;
+import interface_adapter.result.ResultViewModel;
 import use_case.ingredient_search.IngredientSearchInputData;
 import use_case.ingredient_search.IngredientSearchOutputBoundary;
 import use_case.ingredient_search.IngredientSearchOutputData;
@@ -8,11 +9,15 @@ import use_case.ingredient_search.IngredientSearchOutputData;
 public class IngredientSearchPresenter implements IngredientSearchOutputBoundary {
     private final IngredientSearchViewModel ingredientSearchViewModel;
     private final ViewManagerModel viewManagerModel;
+    private final ResultViewModel resultViewModel;
 
     public IngredientSearchPresenter(ViewManagerModel viewManagerModel,
-                          IngredientSearchViewModel ingredientSearchViewModel) {
+                          IngredientSearchViewModel ingredientSearchViewModel,
+                                     ResultViewModel resultViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.ingredientSearchViewModel = ingredientSearchViewModel;
+        this.resultViewModel = resultViewModel;
+
     }
 
     @Override

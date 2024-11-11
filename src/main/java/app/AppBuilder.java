@@ -21,6 +21,8 @@ import interface_adapter.login.LoginPresenter;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.logout.LogoutController;
 import interface_adapter.logout.LogoutPresenter;
+import interface_adapter.recipe_search.RecipeSearchViewModel;
+import interface_adapter.result.ResultViewModel;
 import interface_adapter.signup.SignupController;
 import interface_adapter.signup.SignupPresenter;
 import interface_adapter.signup.SignupViewModel;
@@ -73,6 +75,9 @@ public class AppBuilder {
 
     private IngredientSearchView ingredientSearchView;
     private IngredientSearchViewModel ingredientSearchViewModel;
+
+    private ResultViewModel resultViewModel;
+    private ResultView resultView;
 
     public AppBuilder() {
         cardPanel.setLayout(cardLayout);
@@ -181,13 +186,20 @@ public class AppBuilder {
         return this;
     }
 
+    public AppBuilder addResultView() {
+        resultViewModel = new ResultViewModel();
+        resultView = new ResultView("");
+        cardPanel.add(resultView, resultView.getViewName());
+        return this;
+    }
+
     /**
      * Adds the Ingredient Search Use Case to the application.
      * @return this builder
      */
     public AppBuilder addIngredientSearchUseCase() {
         final IngredientSearchOutputBoundary ingredientSearchOutputBoundary =
-                new IngredientSearchPresenter(viewManagerModel, ingredientSearchViewModel);
+                new IngredientSearchPresenter(viewManagerModel, ingredientSearchViewModel, resultViewModel);
 
         final IngredientSearchInputBoundary ingredientSearchInteractor =
                 new IngredientSearchInteractor(userDataAccessObject,
