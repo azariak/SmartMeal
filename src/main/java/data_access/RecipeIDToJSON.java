@@ -1,4 +1,4 @@
-package entity;
+package data_access;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,21 +7,16 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * This class returns a list of recipes for the given ingredients.
+ * This class takes a given recipe ID and returns a JSON of Recipe information.
  */
-public class IngredientsToRecipeID {
+public class RecipeIDToJSON {
 
-    // Note: FOR EACH RECIPE, YOU NEED ANOTHER API CALL FOR THE RECIPE DETAILS.
+    private static final String API_KEY = " ";
 
-    // Store the API key as a constant in your code. DO NOT PUSH TO GIT.
-    /**
-     * This class returns a list of recipes for the given ingredients.
-     */
     public static void main(String[] args) {
 
-        String ingredients = "cheese, pasta";
-        String urlString = "https://api.spoonacular.com/recipes/complexSearch?apiKey="
-                + System.getenv("API_KEY") + "&includeIngredients=" + ingredients + "&number=10";
+        String id = "638369"; // Sample ID for Korean Chicken
+        String urlString = "https://api.spoonacular.com/recipes/" + id +"/information";
 
         try {
             // Make a GET request to the API
@@ -46,14 +41,14 @@ public class IngredientsToRecipeID {
 
                 // Output the response (for now, just print it)
                 System.out.println(response.toString());
-            }
-            else {
+            } else {
                 System.out.println("GET request failed. Response Code: " + responseCode);
             }
 
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
+
+
     }
 }
