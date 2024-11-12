@@ -9,7 +9,7 @@ import java.net.URL;
 /**
  * This class takes a given recipe ID and returns a JSON of Recipe information.
  */
-public class RecipeIDToJSON {
+public class RecipeIDToRecipe {
 
 
     public static void main(String[] args) {
