@@ -6,15 +6,15 @@ package entity;
 public interface Recipe {
     /**
      * Returns the ingredients of the recipe.
-     * @return the username of the user.
+     * @return the ingrediants of the recipe.
      */
     String getingrediants();
 
     /**
-     * Returns the nutrition of the recipe.
-     * @return the nutrition of the recipe.
+     * Returns the nutritional benefits of the recipe.
+     * @return the nutritional benefits of the recipe.
      */
-    String getnutrition();
+    String getnutritionalbenefits();
 
     /**
      * Returns the name of the recipe.

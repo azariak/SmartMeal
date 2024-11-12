@@ -1,7 +1,5 @@
 package use_case.load_saved_recipe;
 
-import use_case.login.LoginOutputData;
-
 /**
  * The output boundary for the Load Saved Recipe Use Case.
  */
