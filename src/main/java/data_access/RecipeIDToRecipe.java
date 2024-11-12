@@ -45,13 +45,15 @@ public class RecipeIDToRecipe {
 
                 // Output the response (for now, just print it)
                 return response.toString();
-            } else {
-               return ("GET request failed. Response Code: " + responseCode);
+            }
+            else {
+                return "GET request failed. Response Code: " + responseCode;
             }
 
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             e.printStackTrace();
-            return ("Failed.");
+            return "Failed.";
         }
 
     }
