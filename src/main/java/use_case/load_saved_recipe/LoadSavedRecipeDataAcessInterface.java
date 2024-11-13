@@ -15,7 +15,7 @@ public interface LoadSavedRecipeDataAcessInterface {
 
     /**
      * Returns the saved recipe with the given recipe name.
-     * @param ingredient the username to look up
+     * @param ingredient the recipe to look up
      * @return the recipe with the given recipe name
      */
     Recipe get(String ingredient);
