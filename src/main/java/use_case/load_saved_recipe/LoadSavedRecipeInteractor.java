@@ -1,4 +1,12 @@
 package use_case.load_saved_recipe;
 
-public class LoadSavedRecipeInteractor {
+/**
+ * The Load saved recipe Interactor.
+ */
+public class LoadSavedRecipeInteractor implements LoadSavedRecipeInputBoundary {
+
+    @Override
+    public void execute(LoadSavedRecipeInputData loadsavedrecipeInputData) {
+
+    }
 }

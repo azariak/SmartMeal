@@ -1,5 +1,8 @@
 package use_case.ingredient_search;
 
+/**
+ * The Input Data for the Ingredient search Use Case.
+ */
 public class IngredientSearchInputData {
     private final String ingredient1;
     private final String ingredient2;
