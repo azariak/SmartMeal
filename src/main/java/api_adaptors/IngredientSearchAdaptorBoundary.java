@@ -13,4 +13,9 @@ public interface IngredientSearchAdaptorBoundary {
      */
     void ingredientSearchToApiCall(String ingredient1, String ingredient2, String ingredient3);
 
+    /**
+     * Excutes the api call and then pass the result to result api adaptor.
+     * @param ingredients ingredients
+     */
+    void excuteApiCall(String ingredients);
 }
