@@ -1,6 +1,9 @@
 package api_adaptors;
 
-public class ResultApiAdaptor implements ResultApiAdaptorBoundary{
+/**
+ * The adaptor that converts response to result view.
+ */
+public class ResultApiAdaptor implements ResultApiAdaptorBoundary {
     @Override
     public void prepareSucessResultView() {
 
