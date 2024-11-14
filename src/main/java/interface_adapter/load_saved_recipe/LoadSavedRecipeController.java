@@ -7,4 +7,12 @@ import use_case.load_saved_recipe.LoadSavedRecipeInputBoundary;
  */
 public class LoadSavedRecipeController {
     private final LoadSavedRecipeInputBoundary LoadSavedRecipeUseCaseInteractor;
+
+    public LoadSavedRecipeController(LoadSavedRecipeInputBoundary loadSavedRecipeUseCaseInteractor) {
+        LoadSavedRecipeUseCaseInteractor = loadSavedRecipeUseCaseInteractor;
+    }
+
+    public void loadRecipes(String recipe1, String recipe2, String recipe3) {
+
+    }
 }

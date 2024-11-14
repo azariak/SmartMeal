@@ -24,6 +24,8 @@ public class Main {
                                             // added this line above
                                             .addIngredientSearchView()
                                             .addIngredientSearchUseCase()
+                                            .addLoadSavedRecipeView()
+                                            .addLoadSavedRecipeUseCase()
                                             .addResultView()
                                             .build();
 

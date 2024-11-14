@@ -10,4 +10,6 @@ public interface LoadSavedRecipeInputBoundary {
      * @param loadsavedrecipeInputData the input data
      */
     void execute(LoadSavedRecipeInputData loadsavedrecipeInputData);
+
+    void switchToResultView();
 }
