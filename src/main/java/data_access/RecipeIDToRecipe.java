@@ -1,4 +1,4 @@
-package entity;
+package data_access;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,19 +9,18 @@ import java.net.URL;
 /**
  * This class takes a given recipe ID and returns a JSON of Recipe information.
  */
-public class RecipeIDToJSON {
+public class RecipeIDToRecipe {
 
-    private static final String API_KEY = " ";
+    /**
+     * This method fetches recipe data for a given recipe ID from the Spoonacular API
+     * and returns a HashMap mapping the recipe name to its ID.
+     *
+     * @param id The ID of the recipe.
+     * @return A HashMap where the key is the recipe name and the value is the recipe ID.
+     */
+    public static String recipeIDToRecipe(String id) {
 
-    public static void main(String[] args) {
-
-        if (API_KEY == null || API_KEY.isEmpty()) {
-            System.out.println("API key is missing!");
-            return;
-        }
-
-        String id = "638369"; // Sample ID for Korean Chicken
-        String urlString = "https://api.spoonacular.com/recipes/" + id +"/information";
+        final String urlString = "https://api.spoonacular.com/recipes/" + id + "/information?apiKey=" + System.getenv("API_KEY");
 
         try {
             // Make a GET request to the API
@@ -45,15 +44,17 @@ public class RecipeIDToJSON {
                 in.close();
 
                 // Output the response (for now, just print it)
-                System.out.println(response.toString());
-            } else {
-                System.out.println("GET request failed. Response Code: " + responseCode);
+                return response.toString();
+            }
+            else {
+                return "GET request failed. Response Code: " + responseCode;
             }
 
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-
+        catch (IOException e) {
+            e.printStackTrace();
+            return "Failed.";
+        }
 
     }
 }
