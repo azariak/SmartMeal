@@ -16,4 +16,8 @@ public interface LoadSavedRecipeOutputBoundary {
      * @param errorMessage the explanation of the failure
      */
     void prepareFailView(String errorMessage);
+
+    void prepareResultView(String recipe1, String recipe2, String recipe3);
+
+    void switchToResultView();
 }

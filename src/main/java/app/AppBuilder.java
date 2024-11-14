@@ -16,6 +16,9 @@ import interface_adapter.change_password.LoggedInViewModel;
 import interface_adapter.ingredient_search.IngredientSearchController;
 import interface_adapter.ingredient_search.IngredientSearchPresenter;
 import interface_adapter.ingredient_search.IngredientSearchViewModel;
+import interface_adapter.load_saved_recipe.LoadSavedRecipeController;
+import interface_adapter.load_saved_recipe.LoadSavedRecipePresenter;
+import interface_adapter.load_saved_recipe.LoadSavedRecipeViewModel;
 import interface_adapter.login.LoginController;
 import interface_adapter.login.LoginPresenter;
 import interface_adapter.login.LoginViewModel;
@@ -33,6 +36,9 @@ import use_case.ingredient_search.IngredientSearchDataAccessInterface;
 import use_case.ingredient_search.IngredientSearchInputBoundary;
 import use_case.ingredient_search.IngredientSearchInteractor;
 import use_case.ingredient_search.IngredientSearchOutputBoundary;
+import use_case.load_saved_recipe.LoadSavedRecipeInputBoundary;
+import use_case.load_saved_recipe.LoadSavedRecipeInteractor;
+import use_case.load_saved_recipe.LoadSavedRecipeOutputBoundary;
 import use_case.login.LoginInputBoundary;
 import use_case.login.LoginInteractor;
 import use_case.login.LoginOutputBoundary;
@@ -75,6 +81,9 @@ public class AppBuilder {
 
     private IngredientSearchView ingredientSearchView;
     private IngredientSearchViewModel ingredientSearchViewModel;
+
+    private LoadSavedRecipeView loadSavedRecipeView;
+    private LoadSavedRecipeViewModel loadSavedRecipeViewModel;
 
     private ResultViewModel resultViewModel;
     private ResultView resultView;
@@ -179,6 +188,20 @@ public class AppBuilder {
         return this;
     }
 
+    public AppBuilder addLoadSavedRecipeUseCase() {
+        final LoadSavedRecipeOutputBoundary loadSavedRecipeOutputBoundary =
+                new LoadSavedRecipePresenter(viewManagerModel, loadSavedRecipeViewModel);
+
+        final LoadSavedRecipeInputBoundary loadSavedRecipeInteractor =
+                new LoadSavedRecipeInteractor(userDataAccessObject,
+                        loadSavedRecipeOutputBoundary);
+
+        final LoadSavedRecipeController loadSavedRecipeController =
+                new LoadSavedRecipeController(loadSavedRecipeInteractor);
+        loadSavedRecipeView.setLoadSavedRecipeController(loadSavedRecipeController);
+        return this;
+    }
+
     public AppBuilder addIngredientSearchView() {
         ingredientSearchViewModel = new IngredientSearchViewModel();
         ingredientSearchView = new IngredientSearchView(ingredientSearchViewModel);
@@ -190,6 +213,13 @@ public class AppBuilder {
         resultViewModel = new ResultViewModel();
         resultView = new ResultView("");
         cardPanel.add(resultView, resultView.getViewName());
+        return this;
+    }
+
+    public AppBuilder addLoadSavedRecipeView() {
+        loadSavedRecipeViewModel = new LoadSavedRecipeViewModel();
+        loadSavedRecipeView = new LoadSavedRecipeView(loadSavedRecipeViewModel);
+        cardPanel.add(loadSavedRecipeView, loadSavedRecipeView.getViewName());
         return this;
     }
 
