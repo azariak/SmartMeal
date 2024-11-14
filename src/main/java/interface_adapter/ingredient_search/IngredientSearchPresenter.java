@@ -1,5 +1,6 @@
 package interface_adapter.ingredient_search;
 
+import api_adaptors.IngredientSearchAdaptor;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.result.ResultViewModel;
 import interface_adapter.result.ResultViewState;
@@ -11,12 +12,15 @@ public class IngredientSearchPresenter implements IngredientSearchOutputBoundary
     private final IngredientSearchViewModel ingredientSearchViewModel;
     private final ViewManagerModel viewManagerModel;
     private final ResultViewModel resultViewModel;
+    // TODO: Subject to change, refactor later.
+    private final IngredientSearchAdaptor ingredientSearchAdaptor;
 
     public IngredientSearchPresenter(ViewManagerModel viewManagerModel,
                           IngredientSearchViewModel ingredientSearchViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.ingredientSearchViewModel = ingredientSearchViewModel;
         this.resultViewModel = new ResultViewModel();
+        this.ingredientSearchAdaptor = new IngredientSearchAdaptor();
 
     }
 
@@ -38,7 +42,7 @@ public class IngredientSearchPresenter implements IngredientSearchOutputBoundary
     }
 
     @Override
-    public void prepareResultView(String ingredient1, String ingredient2, String ingredient3) {
+    public void prepareDemoResultView(String ingredient1, String ingredient2, String ingredient3) {
         final IngredientSearchState ingredientSearchState = ingredientSearchViewModel.getState();
 
         ingredientSearchState.setIngredient1(ingredient1);
@@ -53,9 +57,14 @@ public class IngredientSearchPresenter implements IngredientSearchOutputBoundary
     }
 
     @Override
-    public void switchToResultView() {
+    public void switchToDemoResultView() {
         viewManagerModel.setState(resultViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
+    }
+
+    @Override
+    public void prepareApiCall(String ingredient1, String ingredient2, String ingredient3) {
+        ingredientSearchAdaptor.ingredientSearchToApiCall(ingredient1, ingredient2, ingredient3);
     }
 
 }

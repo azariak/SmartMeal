@@ -5,7 +5,8 @@ package api_adaptors;
  */
 public class IngredientSearchAdaptor implements IngredientSearchAdaptorBoundary {
     @Override
-    public void ingredientSearchToApiCall() {
+    public void ingredientSearchToApiCall(String ingredient1, String ingredient2, String ingredient3) {
 
     }
+
 }
