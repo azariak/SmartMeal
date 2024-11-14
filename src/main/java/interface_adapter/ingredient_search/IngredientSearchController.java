@@ -3,6 +3,9 @@ package interface_adapter.ingredient_search;
 import use_case.ingredient_search.IngredientSearchInputBoundary;
 import use_case.ingredient_search.IngredientSearchInputData;
 
+/**
+ * The controller for ingredient search use case.
+ */
 public class IngredientSearchController {
 
     private final IngredientSearchInputBoundary ingredientSearchUseCaseInteractor;
@@ -12,10 +15,10 @@ public class IngredientSearchController {
     }
 
     /**
-     * Executes the Login Use Case.
+     * Executes the ingredient search use Case.
      * @param ingredient1 ingredient1
-     * @param ingredient2 2
-     * @param ingredient3 3
+     * @param ingredient2 ingredient2
+     * @param ingredient3 ingredient3
      */
     public void execute(String ingredient1, String ingredient2, String ingredient3) {
         final IngredientSearchInputData ingredientSearchInputData = new IngredientSearchInputData(

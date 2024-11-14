@@ -3,11 +3,13 @@ package interface_adapter.ingredient_search;
 import api_adaptors.IngredientSearchAdaptor;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.result.ResultViewModel;
-import interface_adapter.result.ResultViewState;
 import use_case.ingredient_search.IngredientSearchInputData;
 import use_case.ingredient_search.IngredientSearchOutputBoundary;
 import use_case.ingredient_search.IngredientSearchOutputData;
 
+/**
+ * The presenter for the ingredient search use case.
+ */
 public class IngredientSearchPresenter implements IngredientSearchOutputBoundary {
     private final IngredientSearchViewModel ingredientSearchViewModel;
     private final ViewManagerModel viewManagerModel;
@@ -37,10 +39,6 @@ public class IngredientSearchPresenter implements IngredientSearchOutputBoundary
     public void prepareFailView(String error) {
     }
 
-    public void execute(IngredientSearchInputData ingredientSearchInputData) {
-
-    }
-
     @Override
     public void prepareDemoResultView(String ingredient1, String ingredient2, String ingredient3) {
         final IngredientSearchState ingredientSearchState = ingredientSearchViewModel.getState();
@@ -63,8 +61,9 @@ public class IngredientSearchPresenter implements IngredientSearchOutputBoundary
     }
 
     @Override
-    public void prepareApiCall(String ingredient1, String ingredient2, String ingredient3) {
-        ingredientSearchAdaptor.ingredientSearchToApiCall(ingredient1, ingredient2, ingredient3);
+    public void prepareApiCall(IngredientSearchInputData ingredientSearchInputData) {
+        ingredientSearchAdaptor.ingredientSearchToApiCall(ingredientSearchInputData.getIngredient1(),
+                ingredientSearchInputData.getIngredient2(), ingredientSearchInputData.getIngredient3());
     }
 
 }
