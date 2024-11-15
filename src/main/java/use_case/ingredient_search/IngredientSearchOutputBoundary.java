@@ -1,5 +1,8 @@
 package use_case.ingredient_search;
 
+/**
+ * The boundary for ingredient search output.
+ */
 public interface IngredientSearchOutputBoundary {
     /**
      * Prepares the success view for the Ingredient Search Use Case.
@@ -19,7 +22,16 @@ public interface IngredientSearchOutputBoundary {
      * @param ingredient2 2
      * @param ingredient3 3
      */
-    void prepareResultView(String ingredient1, String ingredient2, String ingredient3);
+    void prepareDemoResultView(String ingredient1, String ingredient2, String ingredient3);
 
-    void switchToResultView();
+    /**
+     * Switch to demo result view.
+     */
+    void switchToDemoResultView();
+
+    /**
+     * Prepare for the api call.
+     * @param ingredientSearchInputData The input data of ingredient search view
+     */
+    void prepareApiCall(IngredientSearchInputData ingredientSearchInputData);
 }

@@ -24,15 +24,11 @@ public class IngredientSearchInteractor implements IngredientSearchInputBoundary
 
     @Override
     public void execute(IngredientSearchInputData ingredientSearchInputData) {
-        final String ingredient1 = ingredientSearchInputData.getIngredient1();
-        final String ingredient2 = ingredientSearchInputData.getIngredient2();
-        final String ingredient3 = ingredientSearchInputData.getIngredient3();
-
-        ingredientSearchPresenter.prepareResultView(ingredient1, ingredient2, ingredient3);
-        }
+        ingredientSearchPresenter.prepareApiCall(ingredientSearchInputData);
+    }
 
     @Override
     public void switchToResultView() {
-        ingredientSearchPresenter.switchToResultView();
+        ingredientSearchPresenter.switchToDemoResultView();
     }
 }
