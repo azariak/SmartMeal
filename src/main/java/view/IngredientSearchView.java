@@ -11,6 +11,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import interface_adapter.ingredient_search.IngredientSearchController;
 import interface_adapter.ingredient_search.IngredientSearchState;
@@ -76,6 +78,10 @@ public class IngredientSearchView extends JPanel implements ActionListener, Prop
 
         cancel.addActionListener(this);
 
+        addIngredient1Listener();
+        addIngredient2Listener();
+        addIngredient3Listener();
+
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(title);
@@ -83,6 +89,84 @@ public class IngredientSearchView extends JPanel implements ActionListener, Prop
         this.add(ingredient2);
         this.add(ingredient3);
         this.add(buttons);
+    }
+
+    private void addIngredient1Listener() {
+        ingredientField1.getDocument().addDocumentListener(new DocumentListener() {
+
+            private void documentListenerHelper() {
+                final IngredientSearchState currentState = ingredientSearchViewModel.getState();
+                currentState.setIngredient1(new String(ingredientField1.getText()));
+                ingredientSearchViewModel.setState(currentState);
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                documentListenerHelper();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                documentListenerHelper();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                documentListenerHelper();
+            }
+        });
+    }
+
+    private void addIngredient2Listener() {
+        ingredientField2.getDocument().addDocumentListener(new DocumentListener() {
+
+            private void documentListenerHelper() {
+                final IngredientSearchState currentState = ingredientSearchViewModel.getState();
+                currentState.setIngredient2(new String(ingredientField2.getText()));
+                ingredientSearchViewModel.setState(currentState);
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                documentListenerHelper();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                documentListenerHelper();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                documentListenerHelper();
+            }
+        });
+    }
+
+    private void addIngredient3Listener() {
+        ingredientField3.getDocument().addDocumentListener(new DocumentListener() {
+
+            private void documentListenerHelper() {
+                final IngredientSearchState currentState = ingredientSearchViewModel.getState();
+                currentState.setIngredient3(new String(ingredientField3.getText()));
+                ingredientSearchViewModel.setState(currentState);
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                documentListenerHelper();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                documentListenerHelper();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                documentListenerHelper();
+            }
+        });
     }
 
     public String getViewName() {

@@ -14,15 +14,15 @@ public class IngredientSearchInputData {
         this.ingredient3 = ingredient3;
     }
 
-    String getIngredient1() {
+    public String getIngredient1() {
         return ingredient1;
     }
 
-    String getIngredient2() {
+    public String getIngredient2() {
         return ingredient2;
     }
 
-    String getIngredient3() {
+    public String getIngredient3() {
         return ingredient3;
     }
 }
