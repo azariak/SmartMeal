@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -65,11 +66,11 @@ public class IngredientSearchView extends JPanel implements ActionListener, Prop
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(search)) {
                             final IngredientSearchState currentState = ingredientSearchViewModel.getState();
-
-                            ingredientSearchController.execute(
-                                    currentState.getIngredient1(),
-                                    currentState.getIngredient2(),
-                                    currentState.getIngredient3());
+                            final ArrayList<String> ingredients = new ArrayList<>();
+                            ingredients.add(currentState.getIngredient1());
+                            ingredients.add(currentState.getIngredient2());
+                            ingredients.add(currentState.getIngredient3());
+                            ingredientSearchController.execute(ingredients);
                         }
 
                     }

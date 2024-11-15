@@ -47,9 +47,6 @@ public class IngredientSearchPresenter implements IngredientSearchOutputBoundary
         ingredientSearchState.setIngredient2(ingredient2);
         ingredientSearchState.setIngredient3(ingredient3);
 
-        this.ingredientSearchViewModel.setState(ingredientSearchState);
-        this.ingredientSearchViewModel.firePropertyChanged();
-
         this.viewManagerModel.setState(resultViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
     }
@@ -62,8 +59,8 @@ public class IngredientSearchPresenter implements IngredientSearchOutputBoundary
 
     @Override
     public void prepareApiCall(IngredientSearchInputData ingredientSearchInputData) {
-        ingredientSearchAdaptor.ingredientSearchToApiCall(ingredientSearchInputData.getIngredient1(),
-                ingredientSearchInputData.getIngredient2(), ingredientSearchInputData.getIngredient3());
+        ingredientSearchAdaptor.ingredientSearchToApiCall(ingredientSearchInputData.getIngredients()
+        );
     }
 
 }

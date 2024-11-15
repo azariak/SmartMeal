@@ -1,5 +1,7 @@
 package api_adaptors;
 
+import java.util.ArrayList;
+
 /**
  * The Boundary for ingredient search output.
  */
@@ -7,11 +9,10 @@ public interface IngredientSearchAdaptorBoundary {
 
     /**
      * Convert the ingredient search queries to api call.
-     * @param ingredient1 ingredient input 1
-     * @param ingredient2 ingredient input 2
-     * @param ingredient3 ingredient input 3
+     *
+     * @param ingredients an arraylist of ingredients in strings
      */
-    void ingredientSearchToApiCall(String ingredient1, String ingredient2, String ingredient3);
+    void ingredientSearchToApiCall(ArrayList<String> ingredients);
 
     /**
      * Excutes the api call and then pass the result to result api adaptor.
