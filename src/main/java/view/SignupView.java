@@ -38,6 +38,7 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
 
     // TODO: line below is for demo
     private final JButton demoIngredientSearch;
+    private final JButton LoadSavedRecipes;
 
     public SignupView(SignupViewModel signupViewModel) {
         this.signupViewModel = signupViewModel;
@@ -62,6 +63,8 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         buttons.add(cancel);
         demoIngredientSearch = new JButton("Demo Ingredient Search");
         buttons.add(demoIngredientSearch);
+        LoadSavedRecipes = new JButton("Load Saved Recipes");
+        buttons.add(LoadSavedRecipes);
 
         signUp.addActionListener(
                 // This creates an anonymous subclass of ActionListener and instantiates it.
@@ -92,6 +95,14 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         signupController.switchToIngredienSearchView();
+                    }
+                }
+        );
+
+        LoadSavedRecipes.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        signupController.switchToLoadSavedRecipeView();
                     }
                 }
         );

@@ -53,4 +53,10 @@ public class SignupPresenter implements SignupOutputBoundary {
         viewManagerModel.setState("Ingredient Search");
         viewManagerModel.firePropertyChanged();
     }
+
+    @Override
+    public void switchToLoadSavedRecipeView() {
+        viewManagerModel.setState("Recipe Search");
+        viewManagerModel.firePropertyChanged();
+    }
 }
