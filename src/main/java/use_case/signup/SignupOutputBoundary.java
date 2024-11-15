@@ -23,4 +23,6 @@ public interface SignupOutputBoundary {
     void switchToLoginView();
 
     void switchToIngredientSearchView();
+
+    void switchToLoadSavedRecipeView();
 }
