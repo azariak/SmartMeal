@@ -1,5 +1,7 @@
 package interface_adapter.ingredient_search;
 
+import java.util.ArrayList;
+
 import use_case.ingredient_search.IngredientSearchInputBoundary;
 import use_case.ingredient_search.IngredientSearchInputData;
 
@@ -16,19 +18,18 @@ public class IngredientSearchController {
 
     /**
      * Executes the ingredient search use Case.
-     * @param ingredient1 ingredient1
-     * @param ingredient2 ingredient2
-     * @param ingredient3 ingredient3
+     *
+     * @param ingredients a arraylist of ingredients in strings
      */
-    public void execute(String ingredient1, String ingredient2, String ingredient3) {
+    public void execute(ArrayList<String> ingredients) {
         final IngredientSearchInputData ingredientSearchInputData = new IngredientSearchInputData(
-                ingredient1, ingredient2, ingredient3);
+                ingredients);
 
         ingredientSearchUseCaseInteractor.execute(ingredientSearchInputData);
     }
 
     /**
-     * Executes the "switch to LoginView" Use Case.
+     * Executes the "switch to result" Use Case.
      */
     public void switchToResultView() {
         ingredientSearchUseCaseInteractor.switchToResultView();

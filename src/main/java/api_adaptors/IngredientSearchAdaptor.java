@@ -10,18 +10,14 @@ import data_access.IngredientsToRecipeID;
  */
 public class IngredientSearchAdaptor implements IngredientSearchAdaptorBoundary {
     @Override
-    public void ingredientSearchToApiCall(String ingredient1, String ingredient2, String ingredient3) {
+    public void ingredientSearchToApiCall(ArrayList<String> ingredients) {
 
         final ArrayList<String> ingredientsArray = new ArrayList<>();
 
-        if (!"".equals(ingredient1)) {
-            ingredientsArray.add(ingredient1);
-        }
-        if (!"".equals(ingredient2)) {
-            ingredientsArray.add(ingredient2);
-        }
-        if (!"".equals(ingredient3)) {
-            ingredientsArray.add(ingredient3);
+        for (String ingredient : ingredients) {
+            if (!"".equals(ingredient)) {
+                ingredientsArray.add(ingredient);
+            }
         }
 
         final String output = String.join(",", ingredientsArray);
