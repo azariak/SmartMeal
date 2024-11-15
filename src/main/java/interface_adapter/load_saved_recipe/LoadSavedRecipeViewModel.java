@@ -8,7 +8,7 @@ import interface_adapter.ViewModel;
 public class LoadSavedRecipeViewModel extends ViewModel<LoadSavedRecipeState> {
 
     public LoadSavedRecipeViewModel() {
-        super("Recipe Search");
+        super("Saved Recipes");
         setState(new LoadSavedRecipeState());
     }
 }

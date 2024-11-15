@@ -6,12 +6,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import interface_adapter.load_saved_recipe.LoadSavedRecipeController;
 import interface_adapter.load_saved_recipe.LoadSavedRecipeState;
@@ -22,7 +25,7 @@ import interface_adapter.load_saved_recipe.LoadSavedRecipeViewModel;
  */
 public class LoadSavedRecipeView extends JPanel implements ActionListener, PropertyChangeListener {
 
-    private final String viewName = "Load Saved Recipes";
+    private final String viewName = "Saved Recipes";
     private LoadSavedRecipeViewModel loadSavedRecipeViewModel;
     private LoadSavedRecipeController loadSavedRecipeController;
 
