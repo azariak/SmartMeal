@@ -1,4 +1,4 @@
-package interface_adapter.Ranked;
-
-public class RankedPresenter {
-}
+//package interface_adapter.Ranked;
+//
+//public class RankedPresenter {
+//}

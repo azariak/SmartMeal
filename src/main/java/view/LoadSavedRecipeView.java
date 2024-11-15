@@ -20,7 +20,7 @@ import interface_adapter.load_saved_recipe.LoadSavedRecipeViewModel;
 /**
  * Represents the view component for loading saved recipes within the application.
  */
-public class LoadSavedRecipeView extends JPanel implements ActionListener, PropertyChangeListener {
+public class gitLoadSavedRecipeView extends JPanel implements ActionListener, PropertyChangeListener {
 
     private final String viewName = "Load Saved Recipes";
     private LoadSavedRecipeViewModel loadSavedRecipeViewModel;
