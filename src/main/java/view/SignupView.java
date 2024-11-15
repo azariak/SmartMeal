@@ -63,7 +63,7 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         buttons.add(cancel);
         demoIngredientSearch = new JButton("Demo Ingredient Search");
         buttons.add(demoIngredientSearch);
-        LoadSavedRecipes = new JButton("Load Saved Recipes");
+        LoadSavedRecipes = new JButton("Saved Recipes");
         buttons.add(LoadSavedRecipes);
 
         signUp.addActionListener(
