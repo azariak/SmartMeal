@@ -1,16 +1,19 @@
 package view;
 
-import java.awt.*;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import javax.swing.*;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import interface_adapter.main_menu.MainMenuController;
-import interface_adapter.main_menu.MainMenuState;
 import interface_adapter.main_menu.MainMenuViewModel;
+// import interface_adapter.main_menu.MainMenuState;
 
 /**
  * The main menu view.
@@ -90,13 +93,16 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
         return viewName;
     }
 
+    /**
+     * The click action.
+     * @param evt the event to be processed
+     */
     public void actionPerformed(ActionEvent evt) {
         System.out.println("Click " + evt.getActionCommand());
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        final MainMenuState state = (MainMenuState) evt.getNewValue();
     }
 
     public void setMainMenuController(MainMenuController mainMenuController) {

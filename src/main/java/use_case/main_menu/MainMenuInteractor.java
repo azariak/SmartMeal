@@ -1,8 +1,9 @@
 package use_case.main_menu;
 
-import use_case.main_menu.MainMenuInputBoundary;
-
-public class MainMenuInteractor implements MainMenuInputBoundary{
+/**
+ * The main menu interactor.
+ */
+public class MainMenuInteractor implements MainMenuInputBoundary {
     private final MainMenuOutputBoundary mainMenuPresenter;
 
     public MainMenuInteractor(MainMenuOutputBoundary mainMenuPresenter) {
