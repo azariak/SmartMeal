@@ -32,31 +32,31 @@ public class TestResultEntity implements TestResultEntityInterface {
 
     @Override
     public String getName() {
-        return "";
+        return name;
     }
 
     @Override
     public String getImage() {
-        return "";
+        return imageUrl;
     }
 
     @Override
     public Map<String, String> getProperties() {
-        return Map.of();
+        return properties;
     }
 
     @Override
     public ArrayList<String> getIngredients() {
-        return null;
+        return ingredients;
     }
 
     @Override
     public Map<String, String> getIngredientAmount() {
-        return Map.of();
+        return ingredientAmount;
     }
 
     @Override
     public ArrayList<String> getSteps() {
-        return null;
+        return steps;
     }
 }
