@@ -8,10 +8,13 @@ import java.beans.PropertyChangeListener;
 
 import javax.swing.*;
 
+import interface_adapter.main_menu.MainMenuController;
 import interface_adapter.main_menu.MainMenuState;
 import interface_adapter.main_menu.MainMenuViewModel;
-import interface_adapter.main_menu.MainMenuController;
 
+/**
+ * The main menu view.
+ */
 public class MainMenuView extends JPanel implements ActionListener, PropertyChangeListener {
     private final String viewName = "main menu";
 
@@ -23,7 +26,7 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
 
     // TODO: line below is for demo
     private final JButton demoIngredientSearch;
-    private final JButton LoadSavedRecipes;
+    private final JButton loadSavedRecipes;
 
     public MainMenuView(MainMenuViewModel mainMenuViewModel) {
         this.mainMenuViewModel = mainMenuViewModel;
@@ -33,6 +36,8 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         final JPanel buttons = new JPanel();
+        buttons.setLayout(new BoxLayout(buttons, BoxLayout.Y_AXIS));
+
         toLogin = new JButton(MainMenuViewModel.TO_LOGIN_BUTTON_LABEL);
         buttons.add(toLogin);
         signUp = new JButton(MainMenuViewModel.SIGNUP_BUTTON_LABEL);
@@ -40,8 +45,16 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
 
         demoIngredientSearch = new JButton("Demo Ingredient Search");
         buttons.add(demoIngredientSearch);
-        LoadSavedRecipes = new JButton("Saved Recipes");
-        buttons.add(LoadSavedRecipes);
+        loadSavedRecipes = new JButton("Saved Recipes");
+        buttons.add(loadSavedRecipes);
+
+        signUp.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        mainMenuController.switchToSignupView();
+                    }
+                }
+        );
 
         toLogin.addActionListener(
                 new ActionListener() {
@@ -59,7 +72,7 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
                 }
         );
 
-        LoadSavedRecipes.addActionListener(
+        loadSavedRecipes.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         mainMenuController.switchToLoadSavedRecipeView();
@@ -84,5 +97,9 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         final MainMenuState state = (MainMenuState) evt.getNewValue();
+    }
+
+    public void setMainMenuController(MainMenuController mainMenuController) {
+        this.mainMenuController = mainMenuController;
     }
 }

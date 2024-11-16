@@ -24,6 +24,9 @@ import interface_adapter.login.LoginPresenter;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.logout.LogoutController;
 import interface_adapter.logout.LogoutPresenter;
+import interface_adapter.main_menu.MainMenuController;
+import interface_adapter.main_menu.MainMenuPresenter;
+import interface_adapter.main_menu.MainMenuViewModel;
 import interface_adapter.recipe_search.RecipeSearchViewModel;
 import interface_adapter.result.ResultViewModel;
 import interface_adapter.signup.SignupController;
@@ -45,6 +48,9 @@ import use_case.login.LoginOutputBoundary;
 import use_case.logout.LogoutInputBoundary;
 import use_case.logout.LogoutInteractor;
 import use_case.logout.LogoutOutputBoundary;
+import use_case.main_menu.MainMenuInputBoundary;
+import use_case.main_menu.MainMenuInteractor;
+import use_case.main_menu.MainMenuOutputBoundary;
 import use_case.signup.SignupInputBoundary;
 import use_case.signup.SignupInteractor;
 import use_case.signup.SignupOutputBoundary;
@@ -87,6 +93,9 @@ public class AppBuilder {
 
     private ResultViewModel resultViewModel;
     private ResultView resultView;
+
+    private MainMenuView mainMenuView;
+    private MainMenuViewModel mainMenuViewModel;
 
     public AppBuilder() {
         cardPanel.setLayout(cardLayout);
@@ -216,6 +225,26 @@ public class AppBuilder {
         return this;
     }
 
+    public AppBuilder addMainMenuView() {
+        mainMenuViewModel = new MainMenuViewModel();
+        mainMenuView = new MainMenuView(mainMenuViewModel);
+        cardPanel.add(mainMenuView, mainMenuView.getViewName());
+        return this;
+    }
+
+    public AppBuilder addMainMenuUseCase() {
+        final MainMenuOutputBoundary mainMenuOutputBoundary =
+                new MainMenuPresenter(viewManagerModel, signupViewModel, loginViewModel, mainMenuViewModel);
+
+        final MainMenuInputBoundary mainMenuInputBoundary =
+                new MainMenuInteractor(mainMenuOutputBoundary);
+
+        final MainMenuController mainMenuController =
+                new MainMenuController(mainMenuInputBoundary);
+        mainMenuView.setMainMenuController(mainMenuController);
+        return this;
+    }
+
     public AppBuilder addLoadSavedRecipeView() {
         loadSavedRecipeViewModel = new LoadSavedRecipeViewModel();
         loadSavedRecipeView = new LoadSavedRecipeView(loadSavedRecipeViewModel);
@@ -251,7 +280,7 @@ public class AppBuilder {
 
         application.add(cardPanel);
 
-        viewManagerModel.setState(signupView.getViewName());
+        viewManagerModel.setState(mainMenuView.getViewName());
         viewManagerModel.firePropertyChanged();
 
         return application;

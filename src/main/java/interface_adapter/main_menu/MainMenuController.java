@@ -21,4 +21,8 @@ public class MainMenuController {
     public void switchToIngredienSearchView() {
         mainMenuInteractor.switchToIngredientSearchView();
     }
+
+    public void switchToSignupView() {
+        mainMenuInteractor.switchToSignupView();
+    }
 }

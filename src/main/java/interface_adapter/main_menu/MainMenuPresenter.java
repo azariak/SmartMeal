@@ -10,12 +10,17 @@ public class MainMenuPresenter implements MainMenuOutputBoundary {
     private final ViewManagerModel viewManagerModel;
     private final LoginViewModel loginViewModel;
     private final SignupViewModel signupViewModel;
+    private final MainMenuViewModel mainMenuViewModel;
 
 
-    public MainMenuPresenter(ViewManagerModel viewManagerModel, LoginViewModel loginViewModel, SignupViewModel signupViewModel) {
+    public MainMenuPresenter(ViewManagerModel viewManagerModel,
+                             SignupViewModel signupViewModel,
+                             LoginViewModel loginViewModel,
+                             MainMenuViewModel mainMenuViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.loginViewModel = loginViewModel;
         this.signupViewModel = signupViewModel;
+        this.mainMenuViewModel = mainMenuViewModel;
     }
 
     @Override
