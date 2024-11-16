@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * A mock result entity.
  */
-public class MockResultEntityForTesting implements TestResultEntityInterface {
+public class MockRecipeEntityForTesting implements TestRecipeEntityInterface {
 
     private final String name;
     private final String imageUrl;
@@ -18,12 +18,12 @@ public class MockResultEntityForTesting implements TestResultEntityInterface {
     private final Map<String, String> ingredientAmount;
     private final ArrayList<String> steps;
 
-    public MockResultEntityForTesting(String name,
-                            String imageUrl,
-                            Map<String, String> properties,
-                            ArrayList<String> ingredients,
-                            Map<String, String> ingredientAmount,
-                            ArrayList<String> steps) {
+    public MockRecipeEntityForTesting(String name,
+                                      String imageUrl,
+                                      Map<String, String> properties,
+                                      ArrayList<String> ingredients,
+                                      Map<String, String> ingredientAmount,
+                                      ArrayList<String> steps) {
 
         final Map<String, String> propertiesMock = setUpMockProperties();
 

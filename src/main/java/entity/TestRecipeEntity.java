@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * A result entity for testing purposes.
  */
-public class TestResultEntity implements TestResultEntityInterface {
+public class TestRecipeEntity implements TestRecipeEntityInterface {
 
     private final String name;
     private final String imageUrl;
@@ -15,7 +15,7 @@ public class TestResultEntity implements TestResultEntityInterface {
     private final Map<String, String> ingredientAmount;
     private final ArrayList<String> steps;
 
-    public TestResultEntity(String name,
+    public TestRecipeEntity(String name,
                             String imageUrl,
                             Map<String, String> properties,
                             ArrayList<String> ingredients,

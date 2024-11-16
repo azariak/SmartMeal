@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * A test of result entity.
  */
-public interface TestResultEntityInterface {
+public interface TestRecipeEntityInterface {
 
     /**
      * Get name.
