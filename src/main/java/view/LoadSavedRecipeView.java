@@ -6,12 +6,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import interface_adapter.load_saved_recipe.LoadSavedRecipeController;
 import interface_adapter.load_saved_recipe.LoadSavedRecipeState;
@@ -22,7 +25,7 @@ import interface_adapter.load_saved_recipe.LoadSavedRecipeViewModel;
  */
 public class LoadSavedRecipeView extends JPanel implements ActionListener, PropertyChangeListener {
 
-    private final String viewName = "Load Saved Recipes";
+    private final String viewName = "Saved Recipes";
     private LoadSavedRecipeViewModel loadSavedRecipeViewModel;
     private LoadSavedRecipeController loadSavedRecipeController;
 
@@ -32,6 +35,7 @@ public class LoadSavedRecipeView extends JPanel implements ActionListener, Prope
 
     private final JButton loadButton;
     private final JButton cancelButton;
+    private final JButton deleteButton;
 
     public LoadSavedRecipeView(LoadSavedRecipeViewModel loadSavedRecipeViewModel) {
         this.loadSavedRecipeViewModel = loadSavedRecipeViewModel;
@@ -44,10 +48,12 @@ public class LoadSavedRecipeView extends JPanel implements ActionListener, Prope
         final LabelTextPanel recipe3 = new LabelTextPanel(new JLabel("Recipe 3"), recipeField3);
 
         final JPanel buttons = new JPanel();
-        loadButton = new JButton("Load");
+        loadButton = new JButton("Back");
         buttons.add(loadButton);
         cancelButton = new JButton("Cancel");
         buttons.add(cancelButton);
+        deleteButton = new JButton("Delete");
+        buttons.add(deleteButton);
 
         loadButton.addActionListener(new ActionListener() {
             @Override
@@ -64,6 +70,7 @@ public class LoadSavedRecipeView extends JPanel implements ActionListener, Prope
         });
 
         cancelButton.addActionListener(this);
+        deleteButton.addActionListener(this);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 

@@ -1,43 +1,19 @@
 package entity;
 
 /**
- * Represents an ingredient with its name, quantity, and whether it is substitutable.
+ * A representation of an Ingredient in our program.
  */
-public class Ingredient {
-
-    private final String name;
-    private String quantity;
-    private final boolean isSubstitutable;
+public interface Ingredient {
 
     /**
-     * Constructs an Ingredient object with the specified name, quantity, and substitutability.
-     *
-     * @param name              The name of the ingredient.
-     * @param quantity          The quantity of the ingredient.
-     * @param isSubstitutable  Whether the ingredient can be substituted.
+     * A method that updates the quantity of an ingredient.
+     * @param newQuantity is the new quantity you want to update it with.
      */
-    public Ingredient(String name, String quantity, boolean isSubstitutable) {
-        this.name = name;
-        this.quantity = quantity;
-        this.isSubstitutable = isSubstitutable;
-    }
+    void updateQuantity(String newQuantity);
 
     /**
-     * Updates the quantity of the ingredient.
-     *
-     * @param newQuantity The new quantity of the ingredient.
+     * A method that gets the ingredient information for a given ingredient.
+     * @return the relevant ingredient information.
      */
-    public void updateQuantity(String newQuantity) {
-        this.quantity = newQuantity;
-    }
-
-    /**
-     * Retrieves the information about the ingredient.
-     * This includes the name, quantity, and whether it is substitutable.
-     *
-     * @return An array of objects containing the ingredient's name, quantity, and substitutability status.
-     */
-    public Object[] getIngredientInfo() {
-        return new Object[]{this.name, this.quantity, this.isSubstitutable};
-    }
+    Object[] getIngredientInfo();
 }

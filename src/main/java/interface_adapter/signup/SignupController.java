@@ -34,6 +34,10 @@ public class SignupController {
         userSignupUseCaseInteractor.switchToLoginView();
     }
 
+    public void switchToLoadSavedRecipeView() {
+        userSignupUseCaseInteractor.switchToLoadSavedRecipeView();
+    }
+
     public void switchToIngredienSearchView() {
         userSignupUseCaseInteractor.switchToIngredientSearchView();
     }

@@ -45,4 +45,9 @@ public class SignupInteractor implements SignupInputBoundary {
     public void switchToIngredientSearchView() {
         userPresenter.switchToIngredientSearchView();
     }
+
+    @Override
+    public void switchToLoadSavedRecipeView() {
+        userPresenter.switchToLoadSavedRecipeView();
+    }
 }
