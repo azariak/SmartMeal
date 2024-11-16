@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * A result entity for testing purposes.
  */
-public class TestResultEntity implements TestResultEntityInterface {
+public class TestRecipeEntity implements TestRecipeEntityInterface {
 
     private final String name;
     private final String imageUrl;
@@ -15,7 +15,7 @@ public class TestResultEntity implements TestResultEntityInterface {
     private final Map<String, String> ingredientAmount;
     private final ArrayList<String> steps;
 
-    public TestResultEntity(String name,
+    public TestRecipeEntity(String name,
                             String imageUrl,
                             Map<String, String> properties,
                             ArrayList<String> ingredients,
@@ -32,31 +32,31 @@ public class TestResultEntity implements TestResultEntityInterface {
 
     @Override
     public String getName() {
-        return "";
+        return name;
     }
 
     @Override
     public String getImage() {
-        return "";
+        return imageUrl;
     }
 
     @Override
     public Map<String, String> getProperties() {
-        return Map.of();
+        return properties;
     }
 
     @Override
     public ArrayList<String> getIngredients() {
-        return null;
+        return ingredients;
     }
 
     @Override
     public Map<String, String> getIngredientAmount() {
-        return Map.of();
+        return ingredientAmount;
     }
 
     @Override
     public ArrayList<String> getSteps() {
-        return null;
+        return steps;
     }
 }
