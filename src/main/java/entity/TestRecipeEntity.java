@@ -9,6 +9,7 @@ import java.util.Map;
 public class TestRecipeEntity implements TestRecipeEntityInterface {
 
     private final String name;
+    private final String id;
     private final String imageUrl;
     private final Map<String, String> properties;
     private final ArrayList<String> ingredients;
@@ -16,6 +17,7 @@ public class TestRecipeEntity implements TestRecipeEntityInterface {
     private final ArrayList<String> steps;
 
     public TestRecipeEntity(String name,
+                            String id,
                             String imageUrl,
                             Map<String, String> properties,
                             ArrayList<String> ingredients,
@@ -23,6 +25,7 @@ public class TestRecipeEntity implements TestRecipeEntityInterface {
                             ArrayList<String> steps) {
 
         this.name = name;
+        this.id = id;
         this.imageUrl = imageUrl;
         this.properties = properties;
         this.ingredients = ingredients;
@@ -32,6 +35,11 @@ public class TestRecipeEntity implements TestRecipeEntityInterface {
 
     @Override
     public String getName() {
+        return name;
+    }
+
+    @Override
+    public String getId() {
         return name;
     }
 

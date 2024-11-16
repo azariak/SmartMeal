@@ -15,6 +15,12 @@ public interface TestRecipeEntityInterface {
     String getName();
 
     /**
+     * Get id.
+     * @return id
+     */
+    String getId();
+
+    /**
      * Get image.
      * @return string of url
      */
