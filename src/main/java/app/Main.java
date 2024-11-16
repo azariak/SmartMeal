@@ -27,6 +27,8 @@ public class Main {
                                             .addLoadSavedRecipeView()
                                             .addLoadSavedRecipeUseCase()
                                             .addResultView()
+                                            .addMainMenuView()
+                                            .addMainMenuUseCase()
                                             .build();
 
         application.pack();
