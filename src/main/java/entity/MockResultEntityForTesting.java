@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.jetbrains.annotations.NotNull;
+
+/**
+ * A mock result entity.
+ */
 public class MockResultEntityForTesting implements TestResultEntityInterface {
 
     private final String name;
@@ -20,20 +25,51 @@ public class MockResultEntityForTesting implements TestResultEntityInterface {
                             Map<String, String> ingredientAmount,
                             ArrayList<String> steps) {
 
+        final Map<String, String> propertiesMock = setUpMockProperties();
+
+        final ArrayList<String> ingredientsMock = setUpMockIngredients();
+
+        final Map<String, String> ingredientAmountMock = setUpMockIngredientAmount();
+
+        final ArrayList<String> mockSteps = setUpMockSteps();
+
         this.name = "Pasta with Garlic, Scallions, Cauliflower & Breadcrumbs";
         this.imageUrl = "https://img.spoonacular.com/recipes/716429-556x370.jpg";
-        final Map<String, String> propertiesMock = new HashMap<String, String>() {
-            {
-                put("cheap", "false");
-                put("dairyFree", "false");
-                put("glutenFree", "false");
-                put("ketogenic", "false");
-                put("lowFodmap", "false");
-                put("vegan", "false");
-                put("vegetarian", "false");
-                put("veryHealthy", "false");
-            }
-        };
+        this.properties = propertiesMock;
+        this.ingredients = ingredientsMock;
+        this.ingredientAmount = ingredientAmountMock;
+        this.steps = mockSteps;
+    }
+
+    @NotNull
+    private static ArrayList<String> setUpMockSteps() {
+        final ArrayList<String> mockSteps = new ArrayList<>();
+        mockSteps.add("step 1");
+        mockSteps.add("step 2");
+        mockSteps.add("step 3");
+        mockSteps.add("step 4");
+        return mockSteps;
+    }
+
+    @NotNull
+    private static Map<String, String> setUpMockIngredientAmount() {
+        final Map<String, String> ingredientAmountMock = new HashMap<String, String>();
+        ingredientAmountMock.put("cauliflower florets", "473.176 ml");
+        ingredientAmountMock.put("Cheese", "2.0 Tbsps");
+        ingredientAmountMock.put("extra virgin olive oil", "1.0 Tbsp");
+        ingredientAmountMock.put("pasta", "170.097 g");
+        ingredientAmountMock.put("red pepper flakes", "2.0 pinches");
+        ingredientAmountMock.put("salt and pepper", "2.0 servings");
+        ingredientAmountMock.put("scallions", "3.0 ");
+        ingredientAmountMock.put("whole wheat bread crumbs", "59.147 ml");
+        ingredientAmountMock.put("white wine", "2.0 Tbsps");
+        ingredientAmountMock.put("butter", "1.0 Tbsp");
+        ingredientAmountMock.put("garlic", "5.0 cloves");
+        return ingredientAmountMock;
+    }
+
+    @NotNull
+    private static ArrayList<String> setUpMockIngredients() {
         final ArrayList<String> ingredientsMock = new ArrayList<String>();
         ingredientsMock.add("cauliflower florets");
         ingredientsMock.add("Cheese");
@@ -46,30 +82,22 @@ public class MockResultEntityForTesting implements TestResultEntityInterface {
         ingredientsMock.add("whole wheat bread crumbs");
         ingredientsMock.add("butter");
         ingredientsMock.add("garlic");
-        this.properties = propertiesMock;
-        this.ingredients = ingredientsMock;
-        final Map<String, String> ingredientAmountMock = new HashMap<String, String>() {
-            {
-                put("cauliflower florets", "473.176 ml");
-                put("Cheese", "2.0 Tbsps");
-                put("extra virgin olive oil", "1.0 Tbsp");
-                put("pasta", "170.097 g");
-                put("red pepper flakes", "2.0 pinches");
-                put("salt and pepper", "2.0 servings");
-                put("scallions", "3.0 ");
-                put("whole wheat bread crumbs", "59.147 ml");
-                put("white wine", "2.0 Tbsps");
-                put("butter", "1.0 Tbsp");
-                put("garlic", "5.0 cloves");
-            }
-        };
-        this.ingredientAmount = ingredientAmountMock;
-        final ArrayList<String> mockSteps = new ArrayList<>();
-        mockSteps.add("step 1");
-        mockSteps.add("step 2");
-        mockSteps.add("step 3");
-        mockSteps.add("step 4");
-        this.steps = mockSteps;
+        return ingredientsMock;
+    }
+
+    @NotNull
+    private static Map<String, String> setUpMockProperties() {
+        final Map<String, String> propertiesMock = new HashMap<String, String>();
+        final String falseString = "false";
+        propertiesMock.put("cheap", falseString);
+        propertiesMock.put("dairyFree", falseString);
+        propertiesMock.put("glutenFree", falseString);
+        propertiesMock.put("ketogenic", falseString);
+        propertiesMock.put("lowFodmap", falseString);
+        propertiesMock.put("vegan", falseString);
+        propertiesMock.put("vegetarian", falseString);
+        propertiesMock.put("veryHealthy", falseString);
+        return propertiesMock;
     }
 
     @Override
