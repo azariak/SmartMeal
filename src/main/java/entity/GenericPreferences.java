@@ -88,3 +88,4 @@ public class GenericPreferences implements Preferences{
         }
     }
 }
+
