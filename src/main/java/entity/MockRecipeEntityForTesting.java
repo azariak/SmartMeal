@@ -12,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
 public class MockRecipeEntityForTesting implements TestRecipeEntityInterface {
 
     private final String name;
+    private final String id;
     private final String imageUrl;
     private final Map<String, String> properties;
     private final ArrayList<String> ingredients;
@@ -23,7 +24,8 @@ public class MockRecipeEntityForTesting implements TestRecipeEntityInterface {
                                       Map<String, String> properties,
                                       ArrayList<String> ingredients,
                                       Map<String, String> ingredientAmount,
-                                      ArrayList<String> steps) {
+                                      ArrayList<String> steps, String id) {
+        this.id = "73420";
 
         final Map<String, String> propertiesMock = setUpMockProperties();
 
@@ -103,6 +105,11 @@ public class MockRecipeEntityForTesting implements TestRecipeEntityInterface {
     @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public String getId() {
+        return id;
     }
 
     @Override
