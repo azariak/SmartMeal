@@ -40,7 +40,7 @@ public class LoadSavedRecipeView extends JPanel implements ActionListener, Prope
     public LoadSavedRecipeView(LoadSavedRecipeViewModel loadSavedRecipeViewModel) {
         this.loadSavedRecipeViewModel = loadSavedRecipeViewModel;
 
-        final JLabel title = new JLabel("Load Saved Recipes");
+        final JLabel title = new JLabel("Saved Recipes");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         final LabelTextPanel recipe1 = new LabelTextPanel(new JLabel("Recipe 1"), recipeField1);
