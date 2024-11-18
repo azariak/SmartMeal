@@ -26,10 +26,19 @@ public class GenericPreferences implements Preferences{
         return dietaryRestrictions;
     }
 
+    /**
+     * A function that returns the users preferred substitutes for each ingredient.
+     * @return the users preferred substitutes for each ingredient.
+     */
     public HashMap<String, List<String>> getPreferredSubstitutes() {
         return preferredSubstitutes;
     }
 
+    /**
+     * A function that returns the users preferred substitutes for a given ingredient name.
+     * @param ingredientName is the name of the ingredient.
+     * @return the users preferred substitutes for a given ingredient name.
+     */
     public List<String> getPreferredSubstitutes(String ingredientName) {
         return preferredSubstitutes.get(ingredientName);
     }
@@ -68,13 +77,10 @@ public class GenericPreferences implements Preferences{
      * @param preferredSubstitute is the name of the ingredient which is the preferred substitute you want to remove.
      */
     public void removepreferredsubstitute(String ingredientName, String preferredSubstitute) {
-        // Check if the ingredientName exists in the map
         if (preferredSubstitutes.containsKey(ingredientName)) {
             final List<String> substitutes = preferredSubstitutes.get(ingredientName);
 
-            // Remove the substitute from the list
             if (substitutes.remove(preferredSubstitute)) {
-                // If the list becomes empty, remove the ingredient from the map
                 if (substitutes.isEmpty()) {
                     preferredSubstitutes.remove(ingredientName);
                 }
@@ -82,3 +88,4 @@ public class GenericPreferences implements Preferences{
         }
     }
 }
+
