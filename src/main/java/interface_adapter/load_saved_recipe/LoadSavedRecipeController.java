@@ -35,6 +35,9 @@ public class LoadSavedRecipeController {
         loadSavedRecipeUseCaseInteractor.switchToResultView();
     }
 
+    /**
+     * Load the saved recipes.
+     */
     public void loadRecipes(String recipe1, String recipe2, String recipe3) {
 
     }

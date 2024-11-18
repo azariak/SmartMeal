@@ -38,9 +38,11 @@ Note: Each Folder is a Class that includes a list of recipes in that folder. Eac
 ![Organizing_view.jpg](images/Azaria_User_Story/Organizing_view.png)
 
 #### Anisa (AHK9)
-#### User Story
-- As a user Sara wants to reload her previously saved recipes in order to make her favorite 
-dish.
+#### User Story 1
+- As a user, Sara wants to save her favorite recipe for later.
+#### User Story 2
+- As a user Sara wants to reload her previously saved recipes in order to make her favorite
+  dish.
 #### Use Cases
 - The user clicks the saved recipes button and is then redirected to her previously
 saved recipes page

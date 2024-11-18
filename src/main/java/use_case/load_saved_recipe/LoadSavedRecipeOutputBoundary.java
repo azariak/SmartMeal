@@ -17,7 +17,16 @@ public interface LoadSavedRecipeOutputBoundary {
      */
     void prepareFailView(String errorMessage);
 
+    /**
+     * Prepares the failure view for the Load Saved Recipe Use Case.
+     * @param recipe1 the recipe1.
+     * @param recipe2 the recipe2.
+     * @param recipe3 the recipe3.
+     */
     void prepareResultView(String recipe1, String recipe2, String recipe3);
 
+    /**
+     * Switch to result view.
+     */
     void switchToResultView();
 }
