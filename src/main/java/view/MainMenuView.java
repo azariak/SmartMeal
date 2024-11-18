@@ -89,6 +89,15 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
                 }
         );
 
+        rankedRecipes.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        mainMenuController.switchToRankedView();
+                    }
+                }
+        );
+
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(title);

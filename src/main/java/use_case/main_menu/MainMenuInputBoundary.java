@@ -24,4 +24,9 @@ public interface MainMenuInputBoundary {
      * Switch to signup view.
      */
     void switchToSignupView();
+
+    /**
+     * Switch to ranked view.
+     */
+    void switchToRankedView();
 }

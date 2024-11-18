@@ -29,4 +29,10 @@ public class MainMenuInteractor implements MainMenuInputBoundary {
     public void switchToSignupView() {
         mainMenuPresenter.switchToSignupView();
     }
+
+    @Override
+    public void switchToRankedView() {
+        mainMenuPresenter.switchToRankedView();
+    }
+
 }

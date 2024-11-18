@@ -40,4 +40,8 @@ public class MainMenuController {
     public void switchToSignupView() {
         mainMenuInteractor.switchToSignupView();
     }
+
+    public void switchToRankedView() {
+        mainMenuInteractor.switchToRankedView();
+    }
 }
