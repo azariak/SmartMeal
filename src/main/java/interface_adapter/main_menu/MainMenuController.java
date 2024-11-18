@@ -41,6 +41,9 @@ public class MainMenuController {
         mainMenuInteractor.switchToSignupView();
     }
 
+    /**
+     * Switch to ranked view.
+     */
     public void switchToRankedView() {
         mainMenuInteractor.switchToRankedView();
     }

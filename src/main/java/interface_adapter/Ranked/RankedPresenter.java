@@ -1,4 +1,11 @@
 //package interface_adapter.Ranked;
 //
-//public class RankedPresenter {
+//import use_case.ranked.RankedOutputBoundary;
+//
+//public class RankedPresenter{
+
+//
+//
+//
+//
 //}
