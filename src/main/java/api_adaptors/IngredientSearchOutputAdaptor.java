@@ -3,7 +3,7 @@ package api_adaptors;
 /**
  * The adaptor that converts response to result view.
  */
-public class ResultApiAdaptor implements ResultApiAdaptorBoundary {
+public class IngredientSearchOutputAdaptor implements ApiSearchOutputAdaptor {
     @Override
     public void prepareSucessResultView() {
 

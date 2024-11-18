@@ -3,7 +3,7 @@ package api_adaptors;
 /**
  * The Boundary for result view input.
  */
-public interface ResultApiAdaptorBoundary {
+public interface ApiSearchOutputAdaptor {
     /**
      *  Prepares the result view with eligible data input.
      */
