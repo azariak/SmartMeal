@@ -4,8 +4,6 @@ package entity;
  * The advanced recipe entity.
  */
 public class AdvancedRecipe extends GenericRecipe implements AdvancedRecipeInterface {
-    private String id;
-    private String name;
 
     public AdvancedRecipe(String id, String name) {
         super(name, id);
@@ -38,11 +36,11 @@ public class AdvancedRecipe extends GenericRecipe implements AdvancedRecipeInter
 
     @Override
     public String getName() {
-        return "";
+        return super.getName();
     }
 
     @Override
     public String getId() {
-        return "";
+        return super.getId();
     }
 }
