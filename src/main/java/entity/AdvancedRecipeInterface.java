@@ -3,7 +3,7 @@ package entity;
 /**
  * The representation of a recipe in our program.
  */
-public interface Recipe {
+public interface AdvancedRecipeInterface extends GenericRecipeInterface {
     /**
      * Returns the ingredients of the recipe.
      * @return the username of the user.
