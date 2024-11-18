@@ -8,7 +8,7 @@ public interface Recipe {
      * Returns the ingredients of the recipe.
      * @return the username of the user.
      */
-    String getingrediants();
+    String getingredients();
 
     /**
      * Returns the nutrition of the recipe.
