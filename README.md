@@ -52,7 +52,7 @@ ingredients, steps, and cooking time.
 confirmation before removing the recipe from her saved collection.
 - The user clicks a favorite or bookmark icon on a recipe, and the recipe 
 is highlighted or added to a "Favorites" section within the saved recipes.
-![anisausecase.jpeg](images/anisausecase.jpeg)
+![smartmeal.png](images/smartmeal.png)
 
 #### Daniel Rafailov (danielrafailov1)
 #### User Story

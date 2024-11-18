@@ -23,7 +23,7 @@ public class SavedRecipeController {
         final LoginInputData loginInputData = new LoginInputData(
                 username, password);
 
-        loginUseCaseInteractor.execute(loginInputData);
+        SavedRecipeUseCaseInteractor.execute(loginInputData);
     }
 
 }

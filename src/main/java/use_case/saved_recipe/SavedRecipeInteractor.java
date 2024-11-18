@@ -20,14 +20,17 @@ public class SavedRecipeInteractor {
 
     @Override
     public void execute(SavedRecipeInputData savedrecipeInputData) {
-        final String recipe1 = savedrecipeInputData.getRecipe1();
-        final String recipe2 = savedrecipeInputData.getRecipe2();
-        final String recipe3 = savedrecipeInputData.getRecipe3();
-        savedRecipePresenter.prepareResultView(recipe1, recipe2, recipe3);
+        final String recipeName = savedrecipeInputData.getRecipeName();
+        final String recipeCalories = savedrecipeInputData.getRecipeCalories();
+        final String recipeDescription = savedrecipeInputData.getRecipeDescription();
+        final String recipeIngredients = savedrecipeInputData.getRecipeIngredients();
+        final String recipeNutririon = savedrecipeInputData.getRecipeNutririon();
+        savedRecipePresenter.prepareResultView(recipeName, recipeCalories, recipeDescription, recipeIngredients,
+                recipeNutririon);
     }
 
     @Override
     public void switchToResultView() {
-        loadSavedRecipePresenter.switchToResultView();
+        savedRecipePresenter.switchToResultView();
     }
 }
