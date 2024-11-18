@@ -1,6 +1,6 @@
 package interface_adapter.ingredient_search;
 
-import api_adaptors.IngredientSearchAdaptor;
+import api_adaptors.IngredientSearchInputAdaptor;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.result.ResultViewModel;
 import use_case.ingredient_search.IngredientSearchInputData;
@@ -15,14 +15,14 @@ public class IngredientSearchPresenter implements IngredientSearchOutputBoundary
     private final ViewManagerModel viewManagerModel;
     private final ResultViewModel resultViewModel;
     // TODO: Subject to change, refactor later.
-    private final IngredientSearchAdaptor ingredientSearchAdaptor;
+    private final IngredientSearchInputAdaptor ingredientSearchInputAdaptor;
 
     public IngredientSearchPresenter(ViewManagerModel viewManagerModel,
                           IngredientSearchViewModel ingredientSearchViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.ingredientSearchViewModel = ingredientSearchViewModel;
         this.resultViewModel = new ResultViewModel();
-        this.ingredientSearchAdaptor = new IngredientSearchAdaptor();
+        this.ingredientSearchInputAdaptor = new IngredientSearchInputAdaptor();
 
     }
 
@@ -59,7 +59,7 @@ public class IngredientSearchPresenter implements IngredientSearchOutputBoundary
 
     @Override
     public void prepareApiCall(IngredientSearchInputData ingredientSearchInputData) {
-        ingredientSearchAdaptor.ingredientSearchToApiCall(ingredientSearchInputData.getIngredients()
+        ingredientSearchInputAdaptor.inputToApiCall(ingredientSearchInputData.getIngredients()
         );
     }
 

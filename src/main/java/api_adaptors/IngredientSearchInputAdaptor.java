@@ -8,9 +8,9 @@ import data_access.IngredientsToRecipeID;
 /**
  * The adaptor that converts ingredient search output to api call.
  */
-public class IngredientSearchAdaptor implements IngredientSearchAdaptorBoundary {
+public class IngredientSearchInputAdaptor implements ApiSearchInputAdaptor {
     @Override
-    public void ingredientSearchToApiCall(ArrayList<String> ingredients) {
+    public void inputToApiCall(ArrayList<String> ingredients) {
 
         final ArrayList<String> ingredientsArray = new ArrayList<>();
 
