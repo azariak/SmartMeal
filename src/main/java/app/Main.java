@@ -21,6 +21,7 @@ public class Main {
                                             .addLoginUseCase()
                                             .addChangePasswordUseCase()
                                             .addLogoutUseCase()
+                                            .addRankedView()
                                             // added this line above
                                             .addIngredientSearchView()
                                             .addIngredientSearchUseCase()

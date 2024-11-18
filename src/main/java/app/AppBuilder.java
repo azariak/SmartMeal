@@ -9,6 +9,7 @@ import javax.swing.WindowConstants;
 import data_access.InMemoryUserDataAccessObject;
 import entity.CommonUserFactory;
 import entity.UserFactory;
+import interface_adapter.Ranked.RankedViewModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.change_password.ChangePasswordController;
 import interface_adapter.change_password.ChangePasswordPresenter;
@@ -96,6 +97,9 @@ public class AppBuilder {
 
     private MainMenuView mainMenuView;
     private MainMenuViewModel mainMenuViewModel;
+
+    private RankedView rankedView;
+    private RankedViewModel rankedViewModel;
 
     public AppBuilder() {
         cardPanel.setLayout(cardLayout);
@@ -229,6 +233,13 @@ public class AppBuilder {
         mainMenuViewModel = new MainMenuViewModel();
         mainMenuView = new MainMenuView(mainMenuViewModel);
         cardPanel.add(mainMenuView, mainMenuView.getViewName());
+        return this;
+    }
+
+    public AppBuilder addRankedView() {
+        rankedViewModel = new RankedViewModel();
+        rankedView = new RankedView(rankedViewModel);
+        cardPanel.add(rankedView, rankedView.getViewName());
         return this;
     }
 
