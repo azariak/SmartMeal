@@ -11,15 +11,16 @@ import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
+
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import interface_adapter.load_saved_recipe.LoadSavedRecipeController;
 import interface_adapter.load_saved_recipe.LoadSavedRecipeState;
 import interface_adapter.load_saved_recipe.LoadSavedRecipeViewModel;
-import interface_adapter.login.LoginState;
+import interface_adapter.load_saved_recipe.LoadSavedRecipeState;
 
 /**
  * Represents the view component for loading saved recipes within the application.
@@ -33,20 +34,26 @@ public class LoadSavedRecipeView extends JPanel implements ActionListener, Prope
     private final JButton loadButton;
     private final JButton cancelButton;
     private final JButton deleteButton;
+    private final JList b;
 
     public LoadSavedRecipeView(LoadSavedRecipeViewModel loadSavedRecipeViewModel) {
         this.loadSavedRecipeViewModel = loadSavedRecipeViewModel;
 
         final JLabel title = new JLabel("Saved Recipes");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
-
         final JPanel buttons = new JPanel();
+        final String[] recipe = new String[]{"Lasagna:", "Beef Noodles:", "Chicken Noodle Soup:", "Shrimp Salad:", "Pasta:", "Shrimp Udon:", "Tomato Soup:"};
+        b = new JList(recipe);
+        final int num = 100000000;
+        b.setSelectedIndex(num);
+        buttons.add(b);
         loadButton = new JButton("load");
         buttons.add(loadButton);
         cancelButton = new JButton("Cancel");
         buttons.add(cancelButton);
         deleteButton = new JButton("Delete");
         buttons.add(deleteButton);
+
         loadButton.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {

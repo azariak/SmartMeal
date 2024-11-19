@@ -1,6 +1,5 @@
 package interface_adapter.saved_recipe;
 
-import use_case.login.LoginInputData;
 import use_case.saved_recipe.SavedRecipeInputBoundary;
 import use_case.saved_recipe.SavedRecipeInputData;
 
@@ -15,15 +14,19 @@ public class SavedRecipeController {
     }
     /**
      * Executes the Login Use Case.
-     * @param username the username of the user logging in
-     * @param password the password of the user logging in
+     * @param recipeName the username of the user logging in
+     * @param recipeDescription the password of the user logging in
+     * @param recipeNutririon the nutrition of the recipe.
+     * @param recipeIngredients the ingrediants of the recipe.
+     * @param recipeCalories the calories of the recipe.
      */
 
-    public void execute(String username, String password) {
-        final LoginInputData loginInputData = new LoginInputData(
-                username, password);
+    public void execute(String recipeName, String recipeDescription, String recipeNutririon, String recipeIngredients,
+                        String recipeCalories) {
+        final SavedRecipeInputData savedRecipeInputData = new SavedRecipeInputData(recipeName, recipeDescription,
+                recipeNutririon, recipeIngredients, recipeCalories);
 
-        SavedRecipeUseCaseInteractor.execute(loginInputData);
+        savedRecipeUseCaseInteractor.execute(savedRecipeInputData);
     }
 
 }
