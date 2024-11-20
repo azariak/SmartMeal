@@ -1,12 +1,13 @@
 
 package view;
 
-import java.awt.Component;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import javax.swing.*;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -34,7 +35,6 @@ public class LoadSavedRecipeView extends JPanel implements ActionListener, Prope
     private final JButton loadButton;
     private final JButton cancelButton;
     private final JButton deleteButton;
-    private final JList b;
 
     public LoadSavedRecipeView(LoadSavedRecipeViewModel loadSavedRecipeViewModel) {
         this.loadSavedRecipeViewModel = loadSavedRecipeViewModel;
@@ -42,18 +42,21 @@ public class LoadSavedRecipeView extends JPanel implements ActionListener, Prope
         final JLabel title = new JLabel("Saved Recipes");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         final JPanel buttons = new JPanel();
-        final String[] recipe = new String[]{"Lasagna:", "Beef Noodles:", "Chicken Noodle Soup:", "Shrimp Salad:", "Pasta:", "Shrimp Udon:", "Tomato Soup:"};
-        b = new JList(recipe);
-        final int num = 100000000;
-        b.setSelectedIndex(num);
-        buttons.add(b);
+        final JPanel recipesPanel = new JPanel();
+        final String[] recipe = new String[]{"Lasagna:4 cups shredded mozzarella cheese divided, ½ cup shredded Parmesan cheese shredded and divided", "Beef Noodles:", "Chicken Noodle Soup:", "Shrimp Salad:", "Pasta:", "Shrimp Udon:", "Tomato Soup:"};
+        final JList<String> recipeList = new JList<>(recipe);
+        recipeList.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+        recipeList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        final JScrollPane scrollPane = new JScrollPane(recipeList,
+                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setPreferredSize(new Dimension(300, 300));
         loadButton = new JButton("load");
         buttons.add(loadButton);
         cancelButton = new JButton("Cancel");
         buttons.add(cancelButton);
         deleteButton = new JButton("Delete");
         buttons.add(deleteButton);
-
         loadButton.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
@@ -90,6 +93,8 @@ public class LoadSavedRecipeView extends JPanel implements ActionListener, Prope
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(title);
+        this.add(recipesPanel);
+        this.add(scrollPane);
         this.add(buttons);
     }
 
