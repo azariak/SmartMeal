@@ -1,25 +1,27 @@
 
 package view;
 
-import java.awt.Component;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import javax.swing.*;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
+
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import interface_adapter.load_saved_recipe.LoadSavedRecipeController;
 import interface_adapter.load_saved_recipe.LoadSavedRecipeState;
 import interface_adapter.load_saved_recipe.LoadSavedRecipeViewModel;
-import interface_adapter.login.LoginState;
+import interface_adapter.load_saved_recipe.LoadSavedRecipeState;
 
 /**
  * Represents the view component for loading saved recipes within the application.
@@ -39,8 +41,16 @@ public class LoadSavedRecipeView extends JPanel implements ActionListener, Prope
 
         final JLabel title = new JLabel("Saved Recipes");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
-
         final JPanel buttons = new JPanel();
+        final JPanel recipesPanel = new JPanel();
+        final String[] recipe = new String[]{"Lasagna:4 cups shredded mozzarella cheese divided, ½ cup shredded Parmesan cheese shredded and divided", "Beef Noodles:", "Chicken Noodle Soup:", "Shrimp Salad:", "Pasta:", "Shrimp Udon:", "Tomato Soup:"};
+        final JList<String> recipeList = new JList<>(recipe);
+        recipeList.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+        recipeList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        final JScrollPane scrollPane = new JScrollPane(recipeList,
+                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setPreferredSize(new Dimension(300, 300));
         loadButton = new JButton("load");
         buttons.add(loadButton);
         cancelButton = new JButton("Cancel");
@@ -83,6 +93,8 @@ public class LoadSavedRecipeView extends JPanel implements ActionListener, Prope
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(title);
+        this.add(recipesPanel);
+        this.add(scrollPane);
         this.add(buttons);
     }
 

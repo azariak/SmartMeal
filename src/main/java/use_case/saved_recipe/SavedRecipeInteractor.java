@@ -1,13 +1,11 @@
 package use_case.saved_recipe;
 
 import data_access.InMemoryUserDataAccessObject;
-import use_case.load_saved_recipe.LoadSavedRecipeInputData;
-import use_case.load_saved_recipe.LoadSavedRecipeOutputBoundary;
 
 /**
- * The saved recipe Interactor.
+ * The Saved recipe Interactor.
  */
-public class SavedRecipeInteractor {
+public class SavedRecipeInteractor implements SavedRecipeInputBoundary {
     private final InMemoryUserDataAccessObject savedRecipeDataAccessObject;
     private final SavedRecipeOutputBoundary savedRecipePresenter;
 

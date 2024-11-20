@@ -41,4 +41,13 @@ public class LoadSavedRecipeController {
     public void loadRecipes(String recipe1, String recipe2, String recipe3) {
 
     }
+
+    /**
+     * Delete the saved recipes.
+     */
+
+//    public boolean deleteRecipe(String recipeName) {
+//        // Call the use case or repository to delete the recipe
+//        return viewModel.getRecipeRepository().delete(recipeName);
+//    }
 }
