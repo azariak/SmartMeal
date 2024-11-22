@@ -7,6 +7,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+import entity.GenericRecipeFactoryInterface;
+import entity.ResultFactoryInterface;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -22,6 +24,15 @@ public class ApiSearchDataAccessObject {
     static final int FIVE_THOUSAND = 5000;
     static final int TWO_HUNDRED = 200;
 
+    private final ResultFactoryInterface resultFactoryInterface;
+    private final GenericRecipeFactoryInterface genericRecipeFactoryInterface;
+
+    public ApiSearchDataAccessObject(ResultFactoryInterface resultFactoryInterface,
+                                     GenericRecipeFactoryInterface genericRecipeFactoryInterface) {
+        this.resultFactoryInterface = resultFactoryInterface;
+        this.genericRecipeFactoryInterface = genericRecipeFactoryInterface;
+    }
+
     /**
      * This method fetches recipe data for a given list of ingredients from the Spoonacular API
      * and returns a HashMap mapping recipe names to their corresponding IDs.
@@ -29,7 +40,7 @@ public class ApiSearchDataAccessObject {
      * @param ingredients The comma-separated list of ingredients.
      * @return A HashMap where the key is the recipe name and the value is the recipe ID.
      */
-    public static GenericResult ingredientsToRecipeID(String ingredients) {
+    public GenericResult ingredientsToRecipeID(String ingredients) {
         final ArrayList<GenericRecipe> resultRecipes = new ArrayList<>();
         final String urlString = "https://api.spoonacular.com/recipes/complexSearch?apiKey="
                 + System.getenv("API_KEY") + "&includeIngredients=" + ingredients + "&number=10";
@@ -57,20 +68,20 @@ public class ApiSearchDataAccessObject {
             exception.printStackTrace();
         }
 
-        final GenericResult result = new GenericResult(resultRecipes);
+        final GenericResult result = this.resultFactoryInterface.createGenericResult(resultRecipes);
         return result;
     }
 
-    private static void addRecipeEntityToResult(JSONArray results, int index, ArrayList<GenericRecipe> resultRecipes) {
+    private void addRecipeEntityToResult(JSONArray results, int index, ArrayList<GenericRecipe> resultRecipes) {
         final JSONObject recipe = results.getJSONObject(index);
         final String title = recipe.getString("title");
         final String id = String.valueOf(recipe.getInt("id"));
 
-        final GenericRecipe genericRecipe = new GenericRecipe(title, id);
+        final GenericRecipe genericRecipe = this.genericRecipeFactoryInterface.createGenericRecipe(title, id);
         resultRecipes.add(genericRecipe);
     }
 
-    private static JSONArray getObjects(HttpURLConnection connection) throws IOException {
+    private JSONArray getObjects(HttpURLConnection connection) throws IOException {
         final BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
         String inputLine;
         final StringBuilder response = new StringBuilder();
