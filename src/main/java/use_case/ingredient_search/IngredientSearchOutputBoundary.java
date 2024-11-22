@@ -29,9 +29,4 @@ public interface IngredientSearchOutputBoundary {
      */
     void switchToDemoResultView();
 
-    /**
-     * Prepare for the api call.
-     * @param ingredientSearchInputData The input data of ingredient search view
-     */
-    void prepareApiCall(IngredientSearchInputData ingredientSearchInputData);
 }

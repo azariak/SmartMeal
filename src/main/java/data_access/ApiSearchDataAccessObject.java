@@ -5,32 +5,24 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-import entity.GenericRecipeFactoryInterface;
-import entity.ResultFactoryInterface;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import entity.GenericRecipe;
-import entity.GenericResult;
+import use_case.ingredient_search.IngredientSearchDataAccessInterface;
 
 /**
  * The data access object for api search call to Spoonacular.
  */
-public class ApiSearchDataAccessObject {
+public class ApiSearchDataAccessObject implements IngredientSearchDataAccessInterface {
     // Note: FOR EACH RECIPE, YOU NEED ANOTHER API CALL FOR THE RECIPE DETAILS.
     // Store the API key as a constant in your code. DO NOT PUSH TO GIT.
     static final int FIVE_THOUSAND = 5000;
     static final int TWO_HUNDRED = 200;
 
-    private final ResultFactoryInterface resultFactoryInterface;
-    private final GenericRecipeFactoryInterface genericRecipeFactoryInterface;
-
-    public ApiSearchDataAccessObject(ResultFactoryInterface resultFactoryInterface,
-                                     GenericRecipeFactoryInterface genericRecipeFactoryInterface) {
-        this.resultFactoryInterface = resultFactoryInterface;
-        this.genericRecipeFactoryInterface = genericRecipeFactoryInterface;
+    public ApiSearchDataAccessObject() {
     }
 
     /**
@@ -40,8 +32,8 @@ public class ApiSearchDataAccessObject {
      * @param ingredients The comma-separated list of ingredients.
      * @return A HashMap where the key is the recipe name and the value is the recipe ID.
      */
-    public GenericResult ingredientsToRecipeID(String ingredients) {
-        final ArrayList<GenericRecipe> resultRecipes = new ArrayList<>();
+    public Map<String, String> excuteSearch(String ingredients) {
+        final Map<String, String> recipeMap = new HashMap<>();
         final String urlString = "https://api.spoonacular.com/recipes/complexSearch?apiKey="
                 + System.getenv("API_KEY") + "&includeIngredients=" + ingredients + "&number=10";
 
@@ -54,11 +46,7 @@ public class ApiSearchDataAccessObject {
 
             final int responseCode = connection.getResponseCode();
             if (responseCode == TWO_HUNDRED) {
-                final JSONArray results = getObjects(connection);
-
-                for (int i = 0; i < results.length(); i++) {
-                    addRecipeEntityToResult(results, i, resultRecipes);
-                }
+                addResultToRecipeMap(connection, recipeMap);
             }
             else {
                 System.out.println("GET request failed. Response Code: " + responseCode);
@@ -68,20 +56,26 @@ public class ApiSearchDataAccessObject {
             exception.printStackTrace();
         }
 
-        final GenericResult result = this.resultFactoryInterface.createGenericResult(resultRecipes);
-        return result;
+        return recipeMap;
     }
 
-    private void addRecipeEntityToResult(JSONArray results, int index, ArrayList<GenericRecipe> resultRecipes) {
-        final JSONObject recipe = results.getJSONObject(index);
-        final String title = recipe.getString("title");
-        final String id = String.valueOf(recipe.getInt("id"));
+    private static void addResultToRecipeMap(HttpURLConnection connection, Map<String,
+            String> recipeMap) throws IOException {
+        final JSONArray results = getObjects(connection);
 
-        final GenericRecipe genericRecipe = this.genericRecipeFactoryInterface.createGenericRecipe(title, id);
-        resultRecipes.add(genericRecipe);
+        for (int i = 0; i < results.length(); i++) {
+            final JSONObject recipe = results.getJSONObject(i);
+            final String title = recipe.getString("title");
+            final String id = String.valueOf(recipe.getInt("id"));
+
+            System.out.println(title);
+            System.out.println(id);
+
+            recipeMap.put(title, id);
+        }
     }
 
-    private JSONArray getObjects(HttpURLConnection connection) throws IOException {
+    private static JSONArray getObjects(HttpURLConnection connection) throws IOException {
         final BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
         String inputLine;
         final StringBuilder response = new StringBuilder();
