@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
+import data_access.ApiSearchDataAccessObject;
 import data_access.InMemoryUserDataAccessObject;
 import entity.CommonUserFactory;
 import entity.UserFactory;
@@ -77,6 +78,7 @@ public class AppBuilder {
 
     // thought question: is the hard dependency below a problem?
     private final InMemoryUserDataAccessObject userDataAccessObject = new InMemoryUserDataAccessObject();
+    private final IngredientSearchDataAccessInterface apiSearchDataAccessObject = new ApiSearchDataAccessObject();
 
     private SignupView signupView;
     private SignupViewModel signupViewModel;
@@ -197,6 +199,10 @@ public class AppBuilder {
         return this;
     }
 
+    /**
+     * Adds the load saved recipes use case to the application.
+     * @return this builder.
+     */
     public AppBuilder addLoadSavedRecipeUseCase() {
         final LoadSavedRecipeOutputBoundary loadSavedRecipeOutputBoundary =
                 new LoadSavedRecipePresenter(viewManagerModel, loadSavedRecipeViewModel);
@@ -211,6 +217,10 @@ public class AppBuilder {
         return this;
     }
 
+    /**
+     * Adds the ingredient search view to the application.
+     * @return this builder.
+     */
     public AppBuilder addIngredientSearchView() {
         ingredientSearchViewModel = new IngredientSearchViewModel();
         ingredientSearchView = new IngredientSearchView(ingredientSearchViewModel);
@@ -218,6 +228,10 @@ public class AppBuilder {
         return this;
     }
 
+    /**
+     * Adds the result view to the application.
+     * @return this builder.
+     */
     public AppBuilder addResultView() {
         resultViewModel = new ResultViewModel();
         resultView = new ResultView("");
@@ -225,6 +239,10 @@ public class AppBuilder {
         return this;
     }
 
+    /**
+     * Adds the main menu view to the application.
+     * @return this builder.
+     */
     public AppBuilder addMainMenuView() {
         mainMenuViewModel = new MainMenuViewModel();
         mainMenuView = new MainMenuView(mainMenuViewModel);
@@ -232,6 +250,10 @@ public class AppBuilder {
         return this;
     }
 
+    /**
+     * Adds the main menu use case to the application.
+     * @return this builder.
+     */
     public AppBuilder addMainMenuUseCase() {
         final MainMenuOutputBoundary mainMenuOutputBoundary =
                 new MainMenuPresenter(viewManagerModel, signupViewModel, loginViewModel, mainMenuViewModel);
@@ -245,6 +267,10 @@ public class AppBuilder {
         return this;
     }
 
+    /**
+     * Adds the load saved recipe view to the application.
+     * @return this builder.
+     */
     public AppBuilder addLoadSavedRecipeView() {
         loadSavedRecipeViewModel = new LoadSavedRecipeViewModel();
         loadSavedRecipeView = new LoadSavedRecipeView(loadSavedRecipeViewModel);
@@ -261,7 +287,7 @@ public class AppBuilder {
                 new IngredientSearchPresenter(viewManagerModel, ingredientSearchViewModel);
 
         final IngredientSearchInputBoundary ingredientSearchInteractor =
-                new IngredientSearchInteractor(userDataAccessObject,
+                new IngredientSearchInteractor(apiSearchDataAccessObject,
                         ingredientSearchOutputBoundary);
 
         final IngredientSearchController ingredientSearchController =
