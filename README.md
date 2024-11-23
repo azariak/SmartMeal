@@ -65,8 +65,8 @@ cooking or baking.
 - As a user, I want to be able to see alternative ingredient suggestions for a recipe so that I can use other ingredients
 if I don't have the ones mentioned in the recipe
 
-![RecipeDetailView.jpg](images/Daniel_User_Story/RecipeDetailView.jpg)
-![IngredientSubstitutionView](images/Daniel_User_Story/IngredientSubstitutionView.jpg)
+![RecipeDetailViewFinal.jpg](images/Daniel_User_Story/RecipeDetailViewFinal.jpg)
+![IngredientSubstitutionViewFinal](images/Daniel_User_Story/IngredientSubstitutionViewFinal.jpg)
 
 #### Vedavi Anandan (vedavia)
 Kathy has allergies and inputs the ingredients she does not want in her meals to generate a list of safe recipes. 

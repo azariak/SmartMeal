@@ -6,7 +6,7 @@ public class ResultViewModel extends ViewModel<ResultViewState> {
     public ResultViewModel() {
         // super("Result");
         // TODO: line below is for demo.
-        super("Demo Result View");
+        super("Result View");
         setState(new ResultViewState());
     }
 }

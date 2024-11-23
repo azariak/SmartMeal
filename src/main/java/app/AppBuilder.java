@@ -29,7 +29,6 @@ import interface_adapter.logout.LogoutPresenter;
 import interface_adapter.main_menu.MainMenuController;
 import interface_adapter.main_menu.MainMenuPresenter;
 import interface_adapter.main_menu.MainMenuViewModel;
-import interface_adapter.recipe_search.RecipeSearchViewModel;
 import interface_adapter.result.ResultViewModel;
 import interface_adapter.signup.SignupController;
 import interface_adapter.signup.SignupPresenter;
@@ -95,7 +94,7 @@ public class AppBuilder {
     private LoadSavedRecipeViewModel loadSavedRecipeViewModel;
 
     private ResultViewModel resultViewModel;
-    private ResultView resultView;
+    private DemoResultView resultView;
 
     private MainMenuView mainMenuView;
     private MainMenuViewModel mainMenuViewModel;
@@ -238,7 +237,7 @@ public class AppBuilder {
      */
     public AppBuilder addResultView() {
         resultViewModel = new ResultViewModel();
-        resultView = new ResultView("");
+        resultView = new DemoResultView("");
         cardPanel.add(resultView, resultView.getViewName());
         return this;
     }
