@@ -5,7 +5,7 @@ import entity.GenericResult;
 /**
  * Output Data for the ingredient search Use Case.
  */
-public class IngredientSearchOutputData implements IngredientSearchOutputBoundary {
+public class IngredientSearchOutputData {
     private final GenericResult result;
     private final boolean useCaseFailed;
 
@@ -14,13 +14,11 @@ public class IngredientSearchOutputData implements IngredientSearchOutputBoundar
         this.useCaseFailed = useCaseFailed;
     }
 
-    @Override
-    public void prepareSuccessView(IngredientSearchOutputData outputData) {
-
+    public GenericResult getResult() {
+        return result;
     }
 
-    @Override
-    public void prepareFailView(String errorMessage) {
-
+    public boolean isUseCaseFailed() {
+        return useCaseFailed;
     }
 }
