@@ -8,8 +8,8 @@ import javax.swing.WindowConstants;
 
 import data_access.ApiSearchDataAccessObject;
 import data_access.InMemoryUserDataAccessObject;
-import entity.CommonUserFactory;
-import entity.UserFactory;
+import entity.*;
+import entity.test.GenericRecipeFactory;
 import interface_adapter.Ranked.RankedViewModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.change_password.ChangePasswordController;
@@ -73,12 +73,14 @@ public class AppBuilder {
     private final CardLayout cardLayout = new CardLayout();
     // thought question: is the hard dependency below a problem?
     private final UserFactory userFactory = new CommonUserFactory();
+    private final GenericRecipeFactoryInterface genericRecipeFactory = new GenericRecipeFactory();
+    private final ResultFactoryInterface resultFactory = new GenericResultFactory();
     private final ViewManagerModel viewManagerModel = new ViewManagerModel();
     private final ViewManager viewManager = new ViewManager(cardPanel, cardLayout, viewManagerModel);
 
     // thought question: is the hard dependency below a problem?
     private final InMemoryUserDataAccessObject userDataAccessObject = new InMemoryUserDataAccessObject();
-    private final IngredientSearchDataAccessInterface apiSearchDataAccessObject = new ApiSearchDataAccessObject();
+    private final ApiSearchDataAccessObject apiSearchDataAccessObject = new ApiSearchDataAccessObject();
 
     private SignupView signupView;
     private SignupViewModel signupViewModel;
@@ -260,7 +262,7 @@ public class AppBuilder {
         return this;
     }
 
-      /**
+    /**
      * Adds the main menu use case to the application.
      * @return this builder.
      */
@@ -297,8 +299,11 @@ public class AppBuilder {
                 new IngredientSearchPresenter(viewManagerModel, ingredientSearchViewModel);
 
         final IngredientSearchInputBoundary ingredientSearchInteractor =
-                new IngredientSearchInteractor(apiSearchDataAccessObject,
-                        ingredientSearchOutputBoundary);
+                new IngredientSearchInteractor(
+                        ingredientSearchOutputBoundary,
+                        resultFactory,
+                        genericRecipeFactory,
+                        apiSearchDataAccessObject);
 
         final IngredientSearchController ingredientSearchController =
                 new IngredientSearchController(ingredientSearchInteractor);

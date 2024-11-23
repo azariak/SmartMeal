@@ -1,7 +1,12 @@
 package use_case.ingredient_search;
 
-import api_adaptors.ApiSearchInputAdaptor;
-import api_adaptors.IngredientSearchInputAdaptor;
+import data_access.ApiSearchDataAccessObject;
+import entity.*;
+import use_case.signup.SignupOutputData;
+
+import java.util.ArrayList;
+import java.util.Map;
+
 /**
  * Handles the core logic for searching recipes by ingredients.
  *
@@ -16,18 +21,33 @@ import api_adaptors.IngredientSearchInputAdaptor;
 public class IngredientSearchInteractor implements IngredientSearchInputBoundary {
 
     private final IngredientSearchOutputBoundary ingredientSearchPresenter;
-    private final ApiSearchInputAdaptor ingredientSearchInputAdaptor;
+    private final ResultFactoryInterface resultFactory;
+    private final GenericRecipeFactoryInterface genericRecipeFactory;
+    private final ApiSearchDataAccessObject apiSearchDataAccessObject;
 
-    public IngredientSearchInteractor(IngredientSearchDataAccessInterface ingredientSearchDataAccessObject,
-                                      IngredientSearchOutputBoundary ingredientSearchOutputBoundary) {
+    public IngredientSearchInteractor(IngredientSearchOutputBoundary ingredientSearchOutputBoundary,
+                                      ResultFactoryInterface resultFactory,
+                                      GenericRecipeFactoryInterface genericRecipeFactory,
+                                      ApiSearchDataAccessObject apiSearchDataAccessObject) {
 
         this.ingredientSearchPresenter = ingredientSearchOutputBoundary;
-        this.ingredientSearchInputAdaptor = new IngredientSearchInputAdaptor(ingredientSearchDataAccessObject);
+        this.genericRecipeFactory = genericRecipeFactory;
+        this.apiSearchDataAccessObject = apiSearchDataAccessObject;
+        this.resultFactory = resultFactory;
     }
 
     @Override
     public void execute(IngredientSearchInputData ingredientSearchInputData) {
-        ingredientSearchInputAdaptor.inputToApiCall(ingredientSearchInputData.getIngredients());
+        final Map<String, String> response =
+                apiSearchDataAccessObject.excuteSearch(ingredientSearchInputData.getIngredients());
+        final ArrayList<GenericRecipe> recipeArrayList = new ArrayList<>();
+
+        for (String key : response.keySet()) {
+            final GenericRecipe recipe = genericRecipeFactory.createGenericRecipe(key, response.get(key));
+            recipeArrayList.add(recipe);
+        }
+        final GenericResult result = resultFactory.createGenericResult(recipeArrayList);
+//        final IngredientSearchOutputData ingredientSearchOutputData = new IngredientSearchOutputData(result, false);
     }
 
     @Override
