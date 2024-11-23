@@ -7,13 +7,24 @@ import java.util.ArrayList;
  */
 public class IngredientSearchInputData {
 
-    private final ArrayList<String> ingredients;
+    private final String ingredients;
 
     public IngredientSearchInputData(ArrayList<String> ingredients) {
-        this.ingredients = ingredients;
+
+        final ArrayList<String> ingredientsArray = new ArrayList<>();
+
+        for (String ingredient : ingredients) {
+            if (!"".equals(ingredient)) {
+                ingredientsArray.add(ingredient);
+            }
+        }
+
+        final String convertedIngredients = String.join(",", ingredientsArray);
+
+        this.ingredients = convertedIngredients;
     }
 
-    public ArrayList<String> getIngredients() {
+    public String getIngredients() {
         return ingredients;
     }
 }
