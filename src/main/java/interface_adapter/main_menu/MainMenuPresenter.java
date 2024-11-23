@@ -49,7 +49,7 @@ public class MainMenuPresenter implements MainMenuOutputBoundary {
 
     @Override
     public void switchToRankedView() {
-        viewManagerModel.setState("Ranked Recipes");
+        viewManagerModel.setState("Ranked Recipes View");
         viewManagerModel.firePropertyChanged();
     }
 }

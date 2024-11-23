@@ -10,6 +10,7 @@ import data_access.ApiSearchDataAccessObject;
 import data_access.InMemoryUserDataAccessObject;
 import entity.CommonUserFactory;
 import entity.UserFactory;
+import interface_adapter.Ranked.RankedViewModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.change_password.ChangePasswordController;
 import interface_adapter.change_password.ChangePasswordPresenter;
@@ -98,6 +99,9 @@ public class AppBuilder {
 
     private MainMenuView mainMenuView;
     private MainMenuViewModel mainMenuViewModel;
+
+    private RankedView rankedView;
+    private RankedViewModel rankedViewModel;
 
     public AppBuilder() {
         cardPanel.setLayout(cardLayout);
@@ -250,7 +254,14 @@ public class AppBuilder {
         return this;
     }
 
-    /**
+    public AppBuilder addRankedView() {
+        rankedViewModel = new RankedViewModel();
+        rankedView = new RankedView(rankedViewModel);
+        cardPanel.add(rankedView, rankedView.getViewName());
+        return this;
+    }
+
+      /**
      * Adds the main menu use case to the application.
      * @return this builder.
      */
