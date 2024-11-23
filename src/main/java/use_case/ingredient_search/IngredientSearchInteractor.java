@@ -1,11 +1,13 @@
 package use_case.ingredient_search;
 
-import data_access.ApiSearchDataAccessObject;
-import entity.*;
-import use_case.signup.SignupOutputData;
-
 import java.util.ArrayList;
 import java.util.Map;
+
+import data_access.ApiSearchDataAccessObject;
+import entity.GenericRecipe;
+import entity.GenericRecipeFactoryInterface;
+import entity.GenericResult;
+import entity.ResultFactoryInterface;
 
 /**
  * Handles the core logic for searching recipes by ingredients.
@@ -47,7 +49,8 @@ public class IngredientSearchInteractor implements IngredientSearchInputBoundary
             recipeArrayList.add(recipe);
         }
         final GenericResult result = resultFactory.createGenericResult(recipeArrayList);
-//        final IngredientSearchOutputData ingredientSearchOutputData = new IngredientSearchOutputData(result, false);
+        //        final IngredientSearchOutputData ingredientSearchOutputData
+        //        = new IngredientSearchOutputData(result, false);
     }
 
     @Override
