@@ -16,17 +16,4 @@ public interface IngredientSearchOutputBoundary {
      */
     void prepareFailView(String errorMessage);
 
-    /**
-     * Temp code for demo.
-     * @param ingredient1 1
-     * @param ingredient2 2
-     * @param ingredient3 3
-     */
-    void prepareDemoResultView(String ingredient1, String ingredient2, String ingredient3);
-
-    /**
-     * Switch to demo result view.
-     */
-    void switchToDemoResultView();
-
 }
