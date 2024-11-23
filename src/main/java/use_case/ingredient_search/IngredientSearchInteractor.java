@@ -1,12 +1,10 @@
 package use_case.ingredient_search;
 
-import api_adaptors.ApiSearchInputAdaptor;
-import api_adaptors.IngredientSearchInputAdaptor;
 import data_access.ApiSearchDataAccessObject;
 import entity.*;
 import use_case.signup.SignupOutputData;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Map;
 
 /**
@@ -27,8 +25,7 @@ public class IngredientSearchInteractor implements IngredientSearchInputBoundary
     private final GenericRecipeFactoryInterface genericRecipeFactory;
     private final ApiSearchDataAccessObject apiSearchDataAccessObject;
 
-    public IngredientSearchInteractor(IngredientSearchDataAccessInterface ingredientSearchDataAccessObject,
-                                      IngredientSearchOutputBoundary ingredientSearchOutputBoundary,
+    public IngredientSearchInteractor(IngredientSearchOutputBoundary ingredientSearchOutputBoundary,
                                       ResultFactoryInterface resultFactory,
                                       GenericRecipeFactoryInterface genericRecipeFactory,
                                       ApiSearchDataAccessObject apiSearchDataAccessObject) {
@@ -43,17 +40,14 @@ public class IngredientSearchInteractor implements IngredientSearchInputBoundary
     public void execute(IngredientSearchInputData ingredientSearchInputData) {
         final Map<String, String> response =
                 apiSearchDataAccessObject.excuteSearch(ingredientSearchInputData.getIngredients());
+        final ArrayList<GenericRecipe> recipeArrayList = new ArrayList<>();
 
-        for (key : response.keySet()) {
+        for (String key : response.keySet()) {
             final GenericRecipe recipe = genericRecipeFactory.createGenericRecipe(key, response.get(key));
+            recipeArrayList.add(recipe);
         }
-
-
-        final GenericRecipe recipe = genericRecipeFactory.createGenericRecipe(, );
-        userDataAccessObject.save(user);
-
-        final SignupOutputData signupOutputData = new SignupOutputData(user.getName(), false);
-        userPresenter.prepareSuccessView(signupOutputData);
+        final GenericResult result = resultFactory.createGenericResult(recipeArrayList);
+//        final IngredientSearchOutputData ingredientSearchOutputData = new IngredientSearchOutputData(result, false);
     }
 
     @Override
