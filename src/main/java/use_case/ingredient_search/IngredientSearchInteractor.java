@@ -1,8 +1,10 @@
 package use_case.ingredient_search;
 
-import data_access.InMemoryUserDataAccessObject;
+import api_adaptors.ApiSearchInputAdaptor;
+import api_adaptors.IngredientSearchInputAdaptor;
 /**
  * Handles the core logic for searching recipes by ingredients.
+ *
  * <p>
  * The IngredientSearchInteractor class implements the ingredient search use case. It processes
  * the input data, performs the search logic, and coordinates with necessary components such as
@@ -12,19 +14,20 @@ import data_access.InMemoryUserDataAccessObject;
  */
 
 public class IngredientSearchInteractor implements IngredientSearchInputBoundary {
-    private final InMemoryUserDataAccessObject ingredientSearchDataAccessObject;
-    private final IngredientSearchOutputBoundary ingredientSearchPresenter;
 
-    public IngredientSearchInteractor(InMemoryUserDataAccessObject ingredientSearchDataAccessObject,
+    private final IngredientSearchOutputBoundary ingredientSearchPresenter;
+    private final ApiSearchInputAdaptor ingredientSearchInputAdaptor;
+
+    public IngredientSearchInteractor(IngredientSearchDataAccessInterface ingredientSearchDataAccessObject,
                                       IngredientSearchOutputBoundary ingredientSearchOutputBoundary) {
 
-        this.ingredientSearchDataAccessObject = ingredientSearchDataAccessObject;
         this.ingredientSearchPresenter = ingredientSearchOutputBoundary;
+        this.ingredientSearchInputAdaptor = new IngredientSearchInputAdaptor(ingredientSearchDataAccessObject);
     }
 
     @Override
     public void execute(IngredientSearchInputData ingredientSearchInputData) {
-        ingredientSearchPresenter.prepareApiCall(ingredientSearchInputData);
+        ingredientSearchInputAdaptor.inputToApiCall(ingredientSearchInputData.getIngredients());
     }
 
     @Override

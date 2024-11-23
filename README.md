@@ -56,13 +56,14 @@ is highlighted or added to a "Favorites" section within the saved recipes.
 
 #### Daniel Rafailov (danielrafailov1)
 #### User Story
-Mia is a user with limited ingredients and/or dietary restrictions. She wants the SmartMeal app to suggest alternative
-ingredients for recipes she is interested in, allowing her to make the recipe even when she doesn’t have all the
-ingredients on hand.
+Mia is a user with limited ingredients. She wants to be able to click on a recipe and view all the relevant details
+including alternative ingredient suggestions so that she can adapt the recipe easily and have greater flexibility when 
+cooking or baking.
+
 #### Use Cases
-- Mia opens a recipe and sees a list of ingredient substitutions based on her dietary preferences and the ingredients she has.
-- If Mia doesn’t have a specific ingredient, she can click on it and view a list of suggested substitutes that match her dietary preferences.
-- When Mia selects a substitute ingredient, the recipe automatically updates with the substitution so she can proceed with the adjusted recipe.
+- As a user, I want to be able to click on a recipe and view all the relevant details of it
+- As a user, I want to be able to see alternative ingredient suggestions for a recipe so that I can use other ingredients
+if I don't have the ones mentioned in the recipe
 
 ![RecipeDetailView.jpg](images/Daniel_User_Story/RecipeDetailView.jpg)
 ![IngredientSubstitutionView](images/Daniel_User_Story/IngredientSubstitutionView.jpg)
