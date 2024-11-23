@@ -10,4 +10,6 @@ public class ResultView {
     private ResultController resultController;
 
     private final
+
 }
+
