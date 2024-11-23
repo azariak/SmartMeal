@@ -3,12 +3,18 @@ package api_adaptors;
 import java.util.ArrayList;
 import java.util.Map;
 
-import data_access.IngredientsToRecipeID;
+import use_case.ingredient_search.IngredientSearchDataAccessInterface;
 
 /**
  * The adaptor that converts ingredient search output to api call.
  */
 public class IngredientSearchInputAdaptor implements ApiSearchInputAdaptor {
+    private final IngredientSearchDataAccessInterface ingredientSearchDataAccessObject;
+
+    public IngredientSearchInputAdaptor(IngredientSearchDataAccessInterface ingredientSearchDataAccessObject) {
+        this.ingredientSearchDataAccessObject = ingredientSearchDataAccessObject;
+    }
+
     @Override
     public void inputToApiCall(ArrayList<String> ingredients) {
 
@@ -28,7 +34,7 @@ public class IngredientSearchInputAdaptor implements ApiSearchInputAdaptor {
 
     @Override
     public void excuteApiCall(String ingredients) {
-        final Map<String, Integer> responseID = IngredientsToRecipeID.ingredientsToRecipeID(ingredients);
+        final Map<String, String> responseID = ingredientSearchDataAccessObject.excuteSearch(ingredients);
         System.out.println(responseID);
         
     }

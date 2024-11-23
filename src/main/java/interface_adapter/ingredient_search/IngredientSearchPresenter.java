@@ -1,9 +1,7 @@
 package interface_adapter.ingredient_search;
 
-import api_adaptors.IngredientSearchInputAdaptor;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.result.ResultViewModel;
-import use_case.ingredient_search.IngredientSearchInputData;
 import use_case.ingredient_search.IngredientSearchOutputBoundary;
 import use_case.ingredient_search.IngredientSearchOutputData;
 
@@ -15,14 +13,12 @@ public class IngredientSearchPresenter implements IngredientSearchOutputBoundary
     private final ViewManagerModel viewManagerModel;
     private final ResultViewModel resultViewModel;
     // TODO: Subject to change, refactor later.
-    private final IngredientSearchInputAdaptor ingredientSearchInputAdaptor;
 
     public IngredientSearchPresenter(ViewManagerModel viewManagerModel,
                           IngredientSearchViewModel ingredientSearchViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.ingredientSearchViewModel = ingredientSearchViewModel;
         this.resultViewModel = new ResultViewModel();
-        this.ingredientSearchInputAdaptor = new IngredientSearchInputAdaptor();
 
     }
 
@@ -55,12 +51,6 @@ public class IngredientSearchPresenter implements IngredientSearchOutputBoundary
     public void switchToDemoResultView() {
         viewManagerModel.setState(resultViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
-    }
-
-    @Override
-    public void prepareApiCall(IngredientSearchInputData ingredientSearchInputData) {
-        ingredientSearchInputAdaptor.inputToApiCall(ingredientSearchInputData.getIngredients()
-        );
     }
 
 }
