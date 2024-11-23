@@ -42,12 +42,4 @@ public class LoadSavedRecipeController {
 
     }
 
-    /**
-     * Delete the saved recipes.
-     */
-
-//    public boolean deleteRecipe(String recipeName) {
-//        // Call the use case or repository to delete the recipe
-//        return viewModel.getRecipeRepository().delete(recipeName);
-//    }
 }

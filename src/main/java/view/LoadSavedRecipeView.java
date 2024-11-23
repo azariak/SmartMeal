@@ -50,7 +50,8 @@ public class LoadSavedRecipeView extends JPanel implements ActionListener, Prope
         final JScrollPane scrollPane = new JScrollPane(recipeList,
                 JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.setPreferredSize(new Dimension(300, 300));
+        final int dim = 300;
+        scrollPane.setPreferredSize(new Dimension(dim, dim));
         loadButton = new JButton("load");
         buttons.add(loadButton);
         cancelButton = new JButton("Cancel");
@@ -85,6 +86,7 @@ public class LoadSavedRecipeView extends JPanel implements ActionListener, Prope
                     );
                 }
             }
+
         });
 
         cancelButton.addActionListener(this);
