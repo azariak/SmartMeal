@@ -19,6 +19,6 @@ public class ResultInteractor implements ResultInputBoundary {
      */
     @Override
     public void execute(ResultInputData inputData) {
-    //        resultApiDataAccessInterface.execute(inputData.getRecipe().getId());
+        resultApiDataAccessInterface.execute(inputData.getRecipe().getId());
     }
 }
