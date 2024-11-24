@@ -90,4 +90,3 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
     }
 
 }
-
