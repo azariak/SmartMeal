@@ -1,5 +1,7 @@
 package use_case.result;
 
+import entity.GenericRecipe;
+
 /**
  * The interactor for the result use case.
  */
