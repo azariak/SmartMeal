@@ -1,6 +1,9 @@
 # SmartMeal
 ## Recipe generation, recipe storage, and nutrient management 
 
+TODO:
+- [ ] As per Quercus Module, we should include: Title, authors, description. table of contents, feature list,
+installation instructions, how to use (with examples), licence, feedback and contributions
 
 ### Contributors
 
