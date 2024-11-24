@@ -1,7 +1,5 @@
 package use_case.result;
 
-import entity.GenericRecipe;
-
 /**
  * The interactor for the result use case.
  */
@@ -17,10 +15,10 @@ public class ResultInteractor implements ResultInputBoundary {
 
     /**
      * Execute the api search.
-     * @param recipe the recipe to search.
+     * @param inputData the input data.
      */
     @Override
-    public void execute(GenericRecipe recipe) {
-        resultApiDataAccessInterface.execute(recipe.getId());
+    public void execute(ResultInputData inputData) {
+    //        resultApiDataAccessInterface.execute(inputData.getRecipe().getId());
     }
 }
