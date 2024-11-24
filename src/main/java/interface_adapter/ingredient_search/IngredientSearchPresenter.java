@@ -16,10 +16,11 @@ public class IngredientSearchPresenter implements IngredientSearchOutputBoundary
     // TODO: Subject to change, refactor later.
 
     public IngredientSearchPresenter(ViewManagerModel viewManagerModel,
-                          IngredientSearchViewModel ingredientSearchViewModel) {
+                          IngredientSearchViewModel ingredientSearchViewModel,
+                                     ResultViewModel resultViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.ingredientSearchViewModel = ingredientSearchViewModel;
-        this.resultViewModel = new ResultViewModel();
+        this.resultViewModel = resultViewModel;
 
     }
 
@@ -33,7 +34,6 @@ public class IngredientSearchPresenter implements IngredientSearchOutputBoundary
 
         this.viewManagerModel.setState(resultViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
-
     }
 
     /**
@@ -42,28 +42,6 @@ public class IngredientSearchPresenter implements IngredientSearchOutputBoundary
      * @param error the explanation of the failure
      */
     public void prepareFailView(String error) {
-    }
-
-    /**
-     * Prepare the demo result view.
-     * @param ingredient1 ingredient1
-     * @param ingredient2 ingredient2
-     * @param ingredient3 ingredient3
-     */
-    public void prepareDemoResultView(String ingredient1, String ingredient2, String ingredient3) {
-        final IngredientSearchState ingredientSearchState = ingredientSearchViewModel.getState();
-
-        ingredientSearchState.setIngredient1(ingredient1);
-        ingredientSearchState.setIngredient2(ingredient2);
-        ingredientSearchState.setIngredient3(ingredient3);
-
-        this.viewManagerModel.setState(resultViewModel.getViewName());
-        this.viewManagerModel.firePropertyChanged();
-    }
-
-    public void switchToDemoResultView() {
-        viewManagerModel.setState(resultViewModel.getViewName());
-        viewManagerModel.firePropertyChanged();
     }
 
 }

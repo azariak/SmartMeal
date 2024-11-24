@@ -96,7 +96,7 @@ public class AppBuilder {
     private LoadSavedRecipeViewModel loadSavedRecipeViewModel;
 
     private ResultViewModel resultViewModel;
-    private DemoResultView resultView;
+    private ResultView resultView;
 
     private MainMenuView mainMenuView;
     private MainMenuViewModel mainMenuViewModel;
@@ -239,7 +239,7 @@ public class AppBuilder {
      */
     public AppBuilder addResultView() {
         resultViewModel = new ResultViewModel();
-        resultView = new DemoResultView("");
+        resultView = new ResultView(resultViewModel);
         cardPanel.add(resultView, resultView.getViewName());
         return this;
     }
@@ -296,7 +296,7 @@ public class AppBuilder {
      */
     public AppBuilder addIngredientSearchUseCase() {
         final IngredientSearchOutputBoundary ingredientSearchOutputBoundary =
-                new IngredientSearchPresenter(viewManagerModel, ingredientSearchViewModel);
+                new IngredientSearchPresenter(viewManagerModel, ingredientSearchViewModel, resultViewModel);
 
         final IngredientSearchInputBoundary ingredientSearchInteractor =
                 new IngredientSearchInteractor(
