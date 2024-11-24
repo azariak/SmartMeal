@@ -25,14 +25,17 @@ public class RankedView extends JPanel implements PropertyChangeListener {
 
         final JLabel title = new JLabel("<html><center><h1><font color=#fcba03>Ranked Recipes");
         title.setHorizontalAlignment(SwingConstants.CENTER);
-        final JLabel test = new JLabel(testRanking);
+        final JLabel test = new JLabel("<html>" + testRanking + "<font color=#08289c> <p> ");
         final JLabel test2 = new JLabel(testRanking2);
+
+        final JButton editButton = new JButton("<html><font color=#08289c> <p> Edit Rankings");
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(title);
         this.add(test);
         this.add(test2);
+        this.add(editButton);
 
     }
 
