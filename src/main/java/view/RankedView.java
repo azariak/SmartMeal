@@ -5,12 +5,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -22,14 +17,22 @@ import interface_adapter.logout.LogoutController;
 public class RankedView extends JPanel implements PropertyChangeListener {
 
     private final String viewName = "Ranked Recipes View";
+    private final String testRanking = "Sample recipe 1: ★★★☆☆";
+    private final String testRanking2 = "Sample recipe 2: ★★☆☆☆";
+
 
     public <RankedViewModel> RankedView(RankedViewModel rankedViewModel) {
 
-        final JLabel title = new JLabel(viewName);
+        final JLabel title = new JLabel("<html><center><h1><font color=#fcba03>Ranked Recipes");
+        title.setHorizontalAlignment(SwingConstants.CENTER);
+        final JLabel test = new JLabel(testRanking);
+        final JLabel test2 = new JLabel(testRanking2);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(title);
+        this.add(test);
+        this.add(test2);
 
     }
 
