@@ -23,11 +23,11 @@ public class Main {
                                             .addLogoutUseCase()
                                             .addRankedView()
                                             // added this line above
+                                            .addResultView()
                                             .addIngredientSearchView()
                                             .addIngredientSearchUseCase()
                                             .addLoadSavedRecipeView()
                                             .addLoadSavedRecipeUseCase()
-                                            .addResultView()
                                             .addMainMenuView()
                                             .addMainMenuUseCase()
                                             .build();

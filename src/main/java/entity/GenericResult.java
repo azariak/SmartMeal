@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * The generic result entity.
  */
 public class GenericResult implements Result {
+
     private ArrayList<GenericRecipe> recipes;
 
     public GenericResult() {
@@ -35,4 +36,9 @@ public class GenericResult implements Result {
             }
         }
     }
+
+    public ArrayList<GenericRecipe> getRecipes() {
+        return recipes;
+    }
+
 }
