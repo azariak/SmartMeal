@@ -1,7 +1,5 @@
 package use_case.result;
 
-import entity.GenericRecipe;
-
 /**
  * The input boundary for the result use case.
  */
@@ -9,7 +7,7 @@ public interface ResultInputBoundary {
 
     /**
      * Execute a api call.
-     * @param recipe the recipe to search.
+     * @param inputData the input data.
      */
-    void execute(GenericRecipe recipe);
+    void execute(ResultInputData inputData);
 }
