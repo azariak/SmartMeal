@@ -9,7 +9,5 @@ public class ResultView {
     private ResultViewModel resultViewModel;
     private ResultController resultController;
 
-    private final
-
 }
 
