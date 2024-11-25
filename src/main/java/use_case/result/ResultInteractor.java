@@ -6,21 +6,19 @@ import entity.GenericRecipe;
  * The interactor for the result use case.
  */
 public class ResultInteractor implements ResultInputBoundary {
-    private final ResultApiDataAccessInterface resultApiDataAccessInterface;
     private final ResultOutputBoundary resultPresenter;
 
-    public ResultInteractor(ResultApiDataAccessInterface resultApiDataAccessInterface,
-                            ResultOutputBoundary resultPresenter) {
-        this.resultApiDataAccessInterface = resultApiDataAccessInterface;
+    public ResultInteractor(ResultOutputBoundary resultPresenter) {
         this.resultPresenter = resultPresenter;
     }
 
     /**
-     * Execute the api search.
+     * Execute the recipe detail view.
      * @param inputData the input data.
      */
     @Override
     public void execute(ResultInputData inputData) {
-        resultApiDataAccessInterface.execute(inputData.getRecipe().getId());
+        final ResultOutputData resultOutputData = new ResultOutputData(inputData.getRecipe());
+        resultPresenter.prepareRecipeDetailView(resultOutputData);
     }
 }

@@ -105,4 +105,7 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
     public void propertyChange(PropertyChangeEvent evt) {
     }
 
+    public void setResultController(ResultController resultController) {
+        this.resultController = resultController;
+    }
 }
