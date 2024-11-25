@@ -29,6 +29,7 @@ import interface_adapter.logout.LogoutPresenter;
 import interface_adapter.main_menu.MainMenuController;
 import interface_adapter.main_menu.MainMenuPresenter;
 import interface_adapter.main_menu.MainMenuViewModel;
+import interface_adapter.recipe_detail.RecipeDetailViewModel;
 import interface_adapter.result.ResultViewModel;
 import interface_adapter.signup.SignupController;
 import interface_adapter.signup.SignupPresenter;
@@ -103,6 +104,9 @@ public class AppBuilder {
 
     private RankedView rankedView;
     private RankedViewModel rankedViewModel;
+
+    private RecipeDetailView recipeDetailView;
+    private RecipeDetailViewModel recipeDetailViewModel;
 
     public AppBuilder() {
         cardPanel.setLayout(cardLayout);
@@ -309,6 +313,10 @@ public class AppBuilder {
                 new IngredientSearchController(ingredientSearchInteractor);
         ingredientSearchView.setIngredientSearchController(ingredientSearchController);
         return this;
+    }
+
+    public AppBuilder addRecipeDetailVIew() {
+        recipeDetailViewModel = new RecipeDetailViewModel()
     }
 
     /**
