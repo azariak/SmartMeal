@@ -16,4 +16,9 @@ public interface GenericRecipeInterface {
      * @return id.
      */
     String getId();
+
+    /**
+     * Save the recipe ID.
+     */
+    void saveRecipe();
 }

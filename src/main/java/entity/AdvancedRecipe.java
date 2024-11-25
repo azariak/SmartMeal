@@ -1,11 +1,13 @@
 package entity;
 
+import java.io.IOException;
+
 /**
  * The advanced recipe entity.
  */
 public class AdvancedRecipe extends GenericRecipe implements AdvancedRecipeInterface {
 
-    public AdvancedRecipe(String id, String name) {
+    public AdvancedRecipe(String id, String name) throws IOException {
         super(name, id);
     }
 
