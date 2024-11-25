@@ -110,6 +110,15 @@ Test
 ![462547766_770258358585334_312687260887195250_n.jpg](images/462547766_770258358585334_312687260887195250_n.jpg)
 
 ### Installation Instructions
+- Dependencies:
+  - Java
+  - ...
 ### How to Use
+  - To open this app, run the `Main` file in `src\main\java\app\Main`. 
+  It will preserve information across sections.
+  - Once it is open...
+
 ### License
+
 ### Feedback & Contributions
+- To give feedback or contribute, you can open a GitHub issue, or create a pull request.
