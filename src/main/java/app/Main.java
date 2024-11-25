@@ -24,6 +24,7 @@ public class Main {
                                             .addRankedView()
                                             // added this line above
                                             .addResultView()
+                                            .addResultUseCase()
                                             .addIngredientSearchView()
                                             .addIngredientSearchUseCase()
                                             .addLoadSavedRecipeView()

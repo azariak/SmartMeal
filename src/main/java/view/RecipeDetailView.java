@@ -42,7 +42,7 @@ public class RecipeDetailView extends JFrame {
         final JPanel topPanel = new JPanel(new BorderLayout());
         final JButton backButton = new JButton("Back");
         final JLabel recipeNameLabel =
-                new JLabel("Recipe Name: " + recipeDetailViewModel.getRecipeName(), JLabel.CENTER);
+                new JLabel("Recipe Name: " + recipeDetailViewModel.getState().getRecipeName(), JLabel.CENTER);
         recipeNameLabel.setFont(new Font("Arial", Font.BOLD, SIXTEEN));
         topPanel.add(backButton, BorderLayout.WEST);
         topPanel.add(recipeNameLabel, BorderLayout.CENTER);
@@ -50,25 +50,17 @@ public class RecipeDetailView extends JFrame {
 
         // Center panel
         final JPanel centerPanel =
-                getjPanel(recipeDetailViewModel.getIngredients(), recipeDetailViewModel.getQuantities());
+                getjPanel(recipeDetailViewModel.getState().getIngredients(), recipeDetailViewModel.getState().getQuantities());
         add(centerPanel, BorderLayout.CENTER);
 
         // Bottom panel
         final JPanel bottomPanel = new JPanel(new BorderLayout());
         final JLabel instructionsLabel =
-                new JLabel("Instructions: " + recipeDetailViewModel.getInstructions(), JLabel.CENTER);
+                new JLabel("Instructions: " + recipeDetailViewModel.getState().getInstructions(), JLabel.CENTER);
         final JButton saveButton = new JButton("Save Recipe");
         bottomPanel.add(instructionsLabel, BorderLayout.CENTER);
         bottomPanel.add(saveButton, BorderLayout.EAST);
         add(bottomPanel, BorderLayout.SOUTH);
-
-        saveButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // recipeDetailController.saveRecipe(recipeDetailViewModel);
-                JOptionPane.showMessageDialog(null, "Recipe saved successfully!");
-            }
-        });
     }
 
     private static JPanel getjPanel(List<String> ingredients, List<String> quantities) {
