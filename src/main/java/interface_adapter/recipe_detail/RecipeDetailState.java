@@ -11,7 +11,7 @@ public class RecipeDetailState {
     private ArrayList<String> quantities = new ArrayList<>();
     private String instructions = "";
 
-    public String getRecipName() {
+    public String getRecipeName() {
         return recipeName;
     }
 
@@ -23,7 +23,7 @@ public class RecipeDetailState {
      * Getter method for quantities attribute.
      * @return an array list of quantities for each respective ingredient.
      */
-    public ArrayList<String> getquantities() {
+    public ArrayList<String> getQuantities() {
         return quantities;
     }
 
@@ -31,7 +31,7 @@ public class RecipeDetailState {
         return instructions;
     }
 
-    public void setRecipName(String recipeName2) {
+    public void setRecipeName(String recipeName2) {
         this.recipeName = recipeName2;
     }
 
@@ -43,7 +43,7 @@ public class RecipeDetailState {
      * Sets the quantities for each ingredient.
      * @param quantities2 is an array list of quantities.
      */
-    public void setquantities(ArrayList<String> quantities2) {
+    public void setQuantities(ArrayList<String> quantities2) {
         this.quantities = quantities2;
     }
 
