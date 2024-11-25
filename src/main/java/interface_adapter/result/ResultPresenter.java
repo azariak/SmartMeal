@@ -16,8 +16,8 @@ public class ResultPresenter implements ResultOutputBoundary {
     }
 
     public void prepareRecipeDetailView(ResultOutputData resultOutputData) {
-        final RecipeDetailState recipeDetailState = RecipeDetailViewModel.getState();
-        recipeDetailState.setRecipe(resultOutputData.getRecipe());
+        final RecipeDetailState recipeDetailState = recipeDetailViewModel.getState();
+        recipeDetailState.setGenericRecipe(resultOutputData.getGenericRecipe());
         this.recipeDetailViewModel.setState(recipeDetailState);
         this.recipeDetailViewModel.firePropertyChanged();
 
