@@ -1,27 +1,29 @@
 # SmartMeal
 ## Recipe generation, recipe storage, and nutrient management 
+
+### Table of Contents
+- [Title](#smartmeal)
+- [Description](#recipe-generation-recipe-storage-and-nutrient-management-)
+- [Table of Contents](#table-of-contents)
+- [Authors](#authors-)
+- [Use Cases (Feature list)](#use-cases)
+    - [Nachuan](#nachuan-wang-december-17th)
+    - [Azaria](#azaria-kelman-azariak)
+    - [Anisa](#anisa-ahk9)
+    - [Daniel](#daniel-rafailov-danielrafailov1)
+    - [Vedavi](#vedavi-anandan-vedavia)
+- [Installation Instructions](#installation-instructions)
+- [How to Use](#how-to-use)
+- [License](#license)
+- [Feedback & Contributions](#feedback--contributions)
+
+
 ### Authors: 
 - Anisa (AHK9)
 - Azaria Kelman (azariak)
 - Daniel Rafailov (danielrafailov1)
 - Nachuan Wang (December-17th)
 - Vedavi Anandan (vedavia)
-
-### Table of Contents
-- [Title](#smartmeal)  
-- [Description](#recipe-generation-recipe-storage-and-nutrient-management-)
-- [Table of Contents](#table-of-contents)
-- [Authors](#authors-)
-- [Use Cases (Feature list)](#use-cases)
-  - [Nachuan](#nachuan-wang-december-17th)
-  - [Azaria](#azaria-kelman-azariak)
-  - [Anisa](#anisa-ahk9)
-  - [Daniel](#daniel-rafailov-danielrafailov1)
-  - [Vedavi](#vedavi-anandan-vedavia)
-- [Installation Instructions](#installation-instructions)
-- [How to Use](#how-to-use)
-- [License](#license)
-- [Feedback & Contributions](#feedback--contributions)
 
 
 TODO:
