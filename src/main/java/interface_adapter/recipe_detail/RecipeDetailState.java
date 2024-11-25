@@ -1,15 +1,23 @@
 package interface_adapter.recipe_detail;
 
+import entity.GenericRecipe;
+
 import java.util.ArrayList;
 
 /**
  * RecipeDetailState. This contains the important information to be displayed.
  */
 public class RecipeDetailState {
+
+    private GenericRecipe genericRecipe;
     private String recipeName = "";
     private ArrayList<String> ingredients = new ArrayList<>();
     private ArrayList<String> quantities = new ArrayList<>();
     private String instructions = "";
+
+    public GenericRecipe getGenericRecipe() {
+        return genericRecipe;
+    }
 
     public String getRecipeName() {
         return recipeName;
@@ -31,6 +39,9 @@ public class RecipeDetailState {
         return instructions;
     }
 
+    public void setGenericRecipe(GenericRecipe genericRecipe) {
+        this.genericRecipe = genericRecipe;
+    }
     public void setRecipeName(String recipeName2) {
         this.recipeName = recipeName2;
     }
