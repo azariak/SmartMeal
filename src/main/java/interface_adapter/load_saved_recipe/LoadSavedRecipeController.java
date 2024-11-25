@@ -37,6 +37,9 @@ public class LoadSavedRecipeController {
 
     /**
      * Load the saved recipes.
+     * @param recipe1 recipe1.
+     * @param recipe2 recipe2.
+     * @param recipe3 recipe3.
      */
     public void loadRecipes(String recipe1, String recipe2, String recipe3) {
 
