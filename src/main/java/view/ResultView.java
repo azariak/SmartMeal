@@ -7,10 +7,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import entity.GenericRecipe;
 import interface_adapter.result.ResultController;
@@ -28,26 +25,13 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
     private final ResultViewModel resultViewModel;
     private ResultController resultController;
 
+
     public ResultView(ResultViewModel resultViewModel) {
         this.resultViewModel = resultViewModel;
+        this.resultViewModel.addPropertyChangeListener(this);
         final JLabel title = new JLabel("Results");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.add(title);
-
-        final JButton showResult = new JButton("Show Results");
-        showResult.setAlignmentX(Component.CENTER_ALIGNMENT);
-        showResult.addActionListener(
-                new ActionListener() {
-                    public void actionPerformed(ActionEvent evt) {
-                        if (evt.getSource().equals(showResult)) {
-                            addRecipeButtons();
-                            showResult.setVisible(false);
-                        }
-
-                    }
-                }
-        );
-        this.add(showResult);
 
     }
 
@@ -103,6 +87,9 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
+        if (evt.getPropertyName().equals("state")) {
+            addRecipeButtons();
+        }
     }
 
     public void setResultController(ResultController resultController) {
