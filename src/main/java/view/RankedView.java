@@ -1,7 +1,6 @@
 package view;
 
 import interface_adapter.Ranked.RankedViewModel;
-import interface_adapter.Ranked.RankedViewState;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -38,8 +37,21 @@ public class RankedView extends JPanel implements PropertyChangeListener {
 
         // Edit button
         final JButton editButton = new JButton("<html><font color=#08289c>Edit Rankings</font></html>");
-        final JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+
+        // Back button
+        final JButton backButton = new JButton("<html><font color=#FF0000>Back</font></html>");
+        backButton.addActionListener(e -> {
+            Container parent = this.getParent();
+            if (parent instanceof JPanel) {
+                CardLayout layout = (CardLayout) parent.getLayout();
+                layout.show(parent, "Main");
+            }
+        });
+
+        // Bottom panel with Edit and Back buttons
+        final JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, ten, 0));
         buttonPanel.add(editButton);
+        buttonPanel.add(backButton);
 
         // Layout settings
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -50,14 +62,16 @@ public class RankedView extends JPanel implements PropertyChangeListener {
         this.add(Box.createRigidArea(new Dimension(0, ten)));
         this.add(subTitlePanel);
         this.add(Box.createRigidArea(new Dimension(0, twenty)));
+
         // Create ranking boxes dynamically and add them to the panel
         for (String ranking : viewModel.getRankings()) {
             final JPanel box = createRankingBox(ranking);
             this.add(box);
             this.add(Box.createRigidArea(new Dimension(0, ten)));
         }
+
         this.add(Box.createRigidArea(new Dimension(0, twenty)));
-        this.add(buttonPanel);
+        this.add(buttonPanel); // Add the button panel at the bottom
     }
 
     private JPanel createRankingBox(String ranking) {
@@ -95,5 +109,4 @@ public class RankedView extends JPanel implements PropertyChangeListener {
     public String getViewName() {
         return "Ranked Recipes View";
     }
-
 }
