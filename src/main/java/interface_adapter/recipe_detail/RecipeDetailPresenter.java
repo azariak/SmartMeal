@@ -32,3 +32,4 @@ public class RecipeDetailPresenter implements RecipeDetailOutputBoundary {
         this.viewManagerModel.firePropertyChanged();
     }
 }
+
