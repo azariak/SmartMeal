@@ -1,11 +1,36 @@
 # SmartMeal
 ## Recipe generation, recipe storage, and nutrient management 
 
+### Table of Contents
+- [Title](#smartmeal)
+- [Description](#recipe-generation-recipe-storage-and-nutrient-management-)
+- [Table of Contents](#table-of-contents)
+- [Authors](#authors-)
+- [Use Cases (Feature list)](#use-cases)
+    - [Nachuan](#nachuan-wang-december-17th)
+    - [Azaria](#azaria-kelman-azariak)
+    - [Anisa](#anisa-ahk9)
+    - [Daniel](#daniel-rafailov-danielrafailov1)
+    - [Vedavi](#vedavi-anandan-vedavia)
+- [Installation Instructions](#installation-instructions)
+- [How to Use](#how-to-use)
+- [License](#license)
+- [Feedback & Contributions](#feedback--contributions)
+
+
+### Authors: 
+- Anisa (AHK9)
+- Azaria Kelman (azariak)
+- Daniel Rafailov (danielrafailov1)
+- Nachuan Wang (December-17th)
+- Vedavi Anandan (vedavia)
+
+
 TODO:
 - [ ] As per Quercus Module, we should include: Title, authors, description. table of contents, feature list,
 installation instructions, how to use (with examples), licence, feedback and contributions
 
-### Contributors
+### Use Cases
 
 #### Nachuan Wang (December-17th)
 As a user, John wants to generate recipes from the ingredients he had on hand.
@@ -83,3 +108,17 @@ Test
 
 ![462547741_1884070615329762_27190600438312334_n.jpg](images/462547741_1884070615329762_27190600438312334_n.jpg)
 ![462547766_770258358585334_312687260887195250_n.jpg](images/462547766_770258358585334_312687260887195250_n.jpg)
+
+### Installation Instructions
+- Dependencies:
+  - Java
+  - ...
+### How to Use
+  - To open this app, run the `Main` file in `src\main\java\app\Main`. 
+  It will preserve information across sections.
+  - Once it is open...
+
+### License
+
+### Feedback & Contributions
+- To give feedback or contribute, you can open a GitHub issue, or create a pull request.

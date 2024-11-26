@@ -12,7 +12,6 @@ public class Main {
      */
     public static void main(String[] args) {
         final AppBuilder appBuilder = new AppBuilder();
-        // TODO: add the Logout Use Case to the app using the appBuilder DONE
         final JFrame application = appBuilder
                                             .addLoginView()
                                             .addSignupView()
@@ -24,6 +23,7 @@ public class Main {
                                             .addRankedView()
                                             // added this line above
                                             .addResultView()
+                                            .addResultUseCase()
                                             .addIngredientSearchView()
                                             .addIngredientSearchUseCase()
                                             .addLoadSavedRecipeView()

@@ -29,6 +29,9 @@ import interface_adapter.logout.LogoutPresenter;
 import interface_adapter.main_menu.MainMenuController;
 import interface_adapter.main_menu.MainMenuPresenter;
 import interface_adapter.main_menu.MainMenuViewModel;
+import interface_adapter.recipe_detail.RecipeDetailViewModel;
+import interface_adapter.result.ResultController;
+import interface_adapter.result.ResultPresenter;
 import interface_adapter.result.ResultViewModel;
 import interface_adapter.signup.SignupController;
 import interface_adapter.signup.SignupPresenter;
@@ -52,6 +55,9 @@ import use_case.logout.LogoutOutputBoundary;
 import use_case.main_menu.MainMenuInputBoundary;
 import use_case.main_menu.MainMenuInteractor;
 import use_case.main_menu.MainMenuOutputBoundary;
+import use_case.result.ResultInputBoundary;
+import use_case.result.ResultInteractor;
+import use_case.result.ResultOutputBoundary;
 import use_case.signup.SignupInputBoundary;
 import use_case.signup.SignupInteractor;
 import use_case.signup.SignupOutputBoundary;
@@ -103,6 +109,9 @@ public class AppBuilder {
 
     private RankedView rankedView;
     private RankedViewModel rankedViewModel;
+
+    private RecipeDetailView recipeDetailView;
+    private RecipeDetailViewModel recipeDetailViewModel;
 
     public AppBuilder() {
         cardPanel.setLayout(cardLayout);
@@ -308,6 +317,28 @@ public class AppBuilder {
         final IngredientSearchController ingredientSearchController =
                 new IngredientSearchController(ingredientSearchInteractor);
         ingredientSearchView.setIngredientSearchController(ingredientSearchController);
+        return this;
+    }
+
+    public AppBuilder addRecipeDetailVIew() {
+        recipeDetailViewModel = new RecipeDetailViewModel();
+        return this;
+    }
+
+    /**
+     * The builder for the result use case.
+     * @return this builder.
+     */
+    public AppBuilder addResultUseCase() {
+        final ResultOutputBoundary resultOutputBoundary =
+                new ResultPresenter(recipeDetailViewModel, viewManagerModel);
+
+        final ResultInputBoundary resultInteractor =
+                new ResultInteractor(resultOutputBoundary);
+
+        final ResultController resultController =
+                new ResultController(resultInteractor);
+        resultView.setResultController(resultController);
         return this;
     }
 

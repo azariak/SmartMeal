@@ -1,13 +1,15 @@
-package use_case.result;
+package use_case.recipe_detail;
 
 import entity.GenericRecipe;
 
 /**
- * Output data for result use case.
+ * The input data for the Recipe Detail use case.
  */
-public class ResultOutputData {
+public class RecipeDetailInputData {
+
     private final GenericRecipe genericRecipe;
-    public ResultOutputData(GenericRecipe genericRecipe) {
+
+    public RecipeDetailInputData(GenericRecipe genericRecipe) {
         this.genericRecipe = genericRecipe;
     }
 

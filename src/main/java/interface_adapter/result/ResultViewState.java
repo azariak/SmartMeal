@@ -9,9 +9,6 @@ public class ResultViewState {
 
     private GenericResult result;
 
-    public ResultViewState() {
-    }
-
     public GenericResult getResult() {
         return result;
     }
