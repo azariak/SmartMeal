@@ -1,5 +1,7 @@
 package use_case.saved_recipe;
 
+import org.json.JSONObject;
+
 import entity.AdvancedRecipe;
 
 /**
@@ -20,4 +22,11 @@ public interface SavedRecipeDataAcessInterface {
      */
     AdvancedRecipe get(String ingredient);
 
+    /**
+     * Returns the user with the given username.
+     * @param recipeJson the recipe to look up
+     * @param fileName the file name.
+     */
+    void saveRecipe(JSONObject recipeJson, String fileName);
 }
+

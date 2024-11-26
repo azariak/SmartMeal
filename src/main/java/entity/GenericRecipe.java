@@ -1,10 +1,10 @@
 package entity;
 
-import org.json.JSONArray;
+import java.io.IOException;
+
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.FileWriter;
+import use_case.saved_recipe.SavedRecipeDataAcessInterface;
 
 /**
  * A generic recipe entity with basic information of a recipe.
@@ -12,10 +12,12 @@ import java.io.FileWriter;
 public class GenericRecipe implements GenericRecipeInterface {
     private final String name;
     private final String id;
+    private final SavedRecipeDataAcessInterface recipeSaver;
 
-    public GenericRecipe(String name, String id) throws IOException {
+    public GenericRecipe(String name, String id, SavedRecipeDataAcessInterface recipeSaver) throws IOException {
         this.name = name;
         this.id = id;
+        this.recipeSaver = recipeSaver;
     }
 
     @Override
@@ -28,19 +30,24 @@ public class GenericRecipe implements GenericRecipeInterface {
         return id;
     }
 
-    @Override
-    public void saveRecipe() {
-        final JSONObject recipe = new JSONObject();
-        recipe.put(this.id, this.name);
-        final JSONArray recipeList = new JSONArray();
-        recipeList.put(this);
-        try {
-            final FileWriter file = new FileWriter("recipename.json");
-            file.write(recipe.toString());
-        }
-        catch (IOException exception) {
-            System.out.println(exception.getMessage());
-        }
+    /**
+     * Get JSONObject.
+     * @return recipeJson.
+     */
+    public JSONObject toJson() {
+        final JSONObject recipeJson = new JSONObject();
+        recipeJson.put("id", this.id);
+        recipeJson.put("name", this.name);
+        return recipeJson;
+    }
+
+    /**
+     * Save recipes.
+     * @param fileName the file name.
+     */
+    public void save(String fileName) {
+        final JSONObject recipeJson = this.toJson();
+        recipeSaver.saveRecipe(recipeJson, fileName);
     }
 
 }
