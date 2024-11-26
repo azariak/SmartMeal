@@ -9,7 +9,11 @@ import javax.swing.WindowConstants;
 import data_access.ApiSearchDataAccessObject;
 import data_access.InMemoryUserDataAccessObject;
 import data_access.RecipeDetailDataAccessObject;
-import entity.*;
+import entity.CommonUserFactory;
+import entity.GenericRecipeFactoryInterface;
+import entity.GenericResultFactory;
+import entity.ResultFactoryInterface;
+import entity.UserFactory;
 import entity.test.GenericRecipeFactory;
 import interface_adapter.Ranked.RankedViewModel;
 import interface_adapter.ViewManagerModel;
@@ -42,7 +46,6 @@ import interface_adapter.signup.SignupViewModel;
 import use_case.change_password.ChangePasswordInputBoundary;
 import use_case.change_password.ChangePasswordInteractor;
 import use_case.change_password.ChangePasswordOutputBoundary;
-import use_case.ingredient_search.IngredientSearchDataAccessInterface;
 import use_case.ingredient_search.IngredientSearchInputBoundary;
 import use_case.ingredient_search.IngredientSearchInteractor;
 import use_case.ingredient_search.IngredientSearchOutputBoundary;
@@ -58,14 +61,26 @@ import use_case.logout.LogoutOutputBoundary;
 import use_case.main_menu.MainMenuInputBoundary;
 import use_case.main_menu.MainMenuInteractor;
 import use_case.main_menu.MainMenuOutputBoundary;
-import use_case.recipe_detail.*;
+import use_case.recipe_detail.RecipeDetailDataAccessInterface;
+import use_case.recipe_detail.RecipeDetailInputBoundary;
+import use_case.recipe_detail.RecipeDetailInteractor;
+import use_case.recipe_detail.RecipeDetailOutputBoundary;
 import use_case.result.ResultInputBoundary;
 import use_case.result.ResultInteractor;
 import use_case.result.ResultOutputBoundary;
 import use_case.signup.SignupInputBoundary;
 import use_case.signup.SignupInteractor;
 import use_case.signup.SignupOutputBoundary;
-import view.*;
+import view.IngredientSearchView;
+import view.LoadSavedRecipeView;
+import view.LoggedInView;
+import view.LoginView;
+import view.MainMenuView;
+import view.RankedView;
+import view.RecipeDetailView;
+import view.ResultView;
+import view.SignupView;
+import view.ViewManager;
 
 /**
  * The AppBuilder class is responsible for putting together the pieces of
@@ -270,6 +285,10 @@ public class AppBuilder {
         return this;
     }
 
+    /**
+     * Add the Ranked view to the application.
+     * @return this app builder.
+     */
     public AppBuilder addRankedView() {
         rankedViewModel = new RankedViewModel();
         rankedView = new RankedView(rankedViewModel);
@@ -354,6 +373,10 @@ public class AppBuilder {
         return this;
     }
 
+    /**
+     * Add the Recipe Detail use case to the application.
+     * @return this app builder.
+     */
     public AppBuilder addRecipeDetailUseCase() {
         final RecipeDetailOutputBoundary recipeDetailOutputBoundary =
                 new RecipeDetailPresenter(recipeDetailViewModel, viewManagerModel);
@@ -388,4 +411,3 @@ public class AppBuilder {
         return application;
     }
 }
-
