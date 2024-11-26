@@ -33,7 +33,7 @@ public class RankedViewModel extends ViewModel<RankedViewState> {
      */
     private void initializeStars() {
         for (int i = 1; i <= numRatings; i++) {
-            String starsString = "★".repeat(i) + "☆".repeat(numRatings - i);
+            final String starsString = "★".repeat(i) + "☆".repeat(numRatings - i);
             stars.put(i, starsString);
         }
     }
@@ -45,13 +45,14 @@ public class RankedViewModel extends ViewModel<RankedViewState> {
      */
     private RankedViewState initializeState() {
         // Replace this with your actual recipe names
-        final String[] recipeNames = {"Spaghetti Bolognese", "Chicken Alfredo", "Beef Stroganoff",
-                "Vegetarian Chili", "Lemon Tart", "Lemon Tart2"};
+        final String[] recipeNames = {"Spaghetti Bolognese", "Chicken Alfredo", "Beef Stroganof"
+                + "f", "Vegetarian Chili", "Lemon Tart", "Lemon Tart2"};
 
-        RankedViewState state = new RankedViewState();
+        final RankedViewState state = new RankedViewState();
         for (int i = 0; i < numRecipes; i++) {
             // Use the recipe name if it exists, otherwise default to "Unnamed recipe"
-            final String recipeName = i < recipeNames.length ? recipeNames[i] : "Unnamed recipe";
+            final String recipeName;
+            recipeName = recipeNames[i];
             final String ranking = recipeName + ": " + stars.get(i + 1);
             state.addRanking(ranking);
         }
