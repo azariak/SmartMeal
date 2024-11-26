@@ -29,6 +29,8 @@ import interface_adapter.logout.LogoutPresenter;
 import interface_adapter.main_menu.MainMenuController;
 import interface_adapter.main_menu.MainMenuPresenter;
 import interface_adapter.main_menu.MainMenuViewModel;
+import interface_adapter.recipe_detail.RecipeDetailController;
+import interface_adapter.recipe_detail.RecipeDetailPresenter;
 import interface_adapter.recipe_detail.RecipeDetailViewModel;
 import interface_adapter.result.ResultController;
 import interface_adapter.result.ResultPresenter;
@@ -55,6 +57,7 @@ import use_case.logout.LogoutOutputBoundary;
 import use_case.main_menu.MainMenuInputBoundary;
 import use_case.main_menu.MainMenuInteractor;
 import use_case.main_menu.MainMenuOutputBoundary;
+import use_case.recipe_detail.*;
 import use_case.result.ResultInputBoundary;
 import use_case.result.ResultInteractor;
 import use_case.result.ResultOutputBoundary;
@@ -112,6 +115,7 @@ public class AppBuilder {
 
     private RecipeDetailView recipeDetailView;
     private RecipeDetailViewModel recipeDetailViewModel;
+    private RecipeDetailDataAccessInterface recipeDetailDataAccessInterface;
 
     public AppBuilder() {
         cardPanel.setLayout(cardLayout);
@@ -320,11 +324,6 @@ public class AppBuilder {
         return this;
     }
 
-    public AppBuilder addRecipeDetailVIew() {
-        recipeDetailViewModel = new RecipeDetailViewModel();
-        return this;
-    }
-
     /**
      * The builder for the result use case.
      * @return this builder.
@@ -339,6 +338,35 @@ public class AppBuilder {
         final ResultController resultController =
                 new ResultController(resultInteractor);
         resultView.setResultController(resultController);
+        return this;
+    }
+
+    /**
+     * Add the Recipe Detail view to the application.
+     * @return this app builder.
+     */
+    public AppBuilder addRecipeDetailView() {
+        recipeDetailViewModel = new RecipeDetailViewModel();
+        recipeDetailView = new RecipeDetailView(recipeDetailViewModel);
+        cardPanel.add(recipeDetailView, recipeDetailView.getName());
+        return this;
+    }
+
+    public AppBuilder addRecipeDetailUseCase() {
+        final RecipeDetailOutputBoundary recipeDetailOutputBoundary =
+                new RecipeDetailPresenter(recipeDetailViewModel, viewManagerModel);
+
+        final RecipeDetailInputBoundary recipeDetailInteractor =
+                new RecipeDetailInteractor(
+                        recipeDetailDataAccessInterface,
+                        recipeDetailOutputBoundary,
+                        genericRecipeFactory);
+
+        final RecipeDetailController recipeDetailController =
+                new RecipeDetailController(recipeDetailInteractor);
+
+        recipeDetailView.setRecipeDetailController(recipeDetailController);
+
         return this;
     }
 
