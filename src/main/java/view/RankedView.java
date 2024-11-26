@@ -28,7 +28,6 @@ public class RankedView extends JPanel implements PropertyChangeListener {
         title.setHorizontalAlignment(SwingConstants.CENTER);
         subTitle.setHorizontalAlignment(SwingConstants.CENTER);
 
-        // Wrapping title and subtitle in FlowLayout panels for perfect centering
         final JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
         titlePanel.add(title);
 
@@ -39,17 +38,17 @@ public class RankedView extends JPanel implements PropertyChangeListener {
         final JButton editButton = new JButton("<html><font color=#08289c>Edit Rankings</font></html>");
 
         // Back button
-        final JButton backButton = new JButton("<html><font color=#FF0000>Back</font></html>");
-        backButton.addActionListener(e -> {
-            Container parent = this.getParent();
+        final JButton backButton = new JButton("<html><font color=#08289c>Back</font></html>");
+        backButton.addActionListener(back -> {
+            final Container parent = this.getParent();
             if (parent instanceof JPanel) {
-                CardLayout layout = (CardLayout) parent.getLayout();
+                final CardLayout layout = (CardLayout) parent.getLayout();
                 layout.show(parent, "Main");
             }
         });
 
-        // Bottom panel with Edit and Back buttons
-        final JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, ten, 0));
+        // Panel for edit and back buttons
+        final JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 0));
         buttonPanel.add(editButton);
         buttonPanel.add(backButton);
 
@@ -59,20 +58,21 @@ public class RankedView extends JPanel implements PropertyChangeListener {
 
         // Adding components
         this.add(titlePanel);
-        this.add(Box.createRigidArea(new Dimension(0, ten)));
+        this.add(Box.createRigidArea(new Dimension(0, 10)));
         this.add(subTitlePanel);
-        this.add(Box.createRigidArea(new Dimension(0, twenty)));
+        this.add(Box.createRigidArea(new Dimension(0, 20)));
 
         // Create ranking boxes dynamically and add them to the panel
         for (String ranking : viewModel.getRankings()) {
             final JPanel box = createRankingBox(ranking);
             this.add(box);
-            this.add(Box.createRigidArea(new Dimension(0, ten)));
+            this.add(Box.createRigidArea(new Dimension(0, 10)));
         }
 
-        this.add(Box.createRigidArea(new Dimension(0, twenty)));
-        this.add(buttonPanel); // Add the button panel at the bottom
+        this.add(Box.createRigidArea(new Dimension(0, 20)));
+        this.add(buttonPanel);
     }
+
 
     private JPanel createRankingBox(String ranking) {
         final JLabel label = new JLabel("<html><font color=#08289c>" + ranking + "</font></html>");
