@@ -26,6 +26,8 @@ public class Main {
                                             .addResultUseCase()
                                             .addIngredientSearchView()
                                             .addIngredientSearchUseCase()
+                                            .addRecipeDetailView()
+                                            .addRecipeDetailUseCase()
                                             .addLoadSavedRecipeView()
                                             .addLoadSavedRecipeUseCase()
                                             .addMainMenuView()

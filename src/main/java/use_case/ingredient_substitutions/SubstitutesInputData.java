@@ -1,12 +1,13 @@
 package use_case.ingredient_substitutions;
 
 /**
- * Input data class for retrieving ingredient substitutes.
+ * The input data for the ingredient substitutes use case.
  */
-public class IngredientToSubstituteInputData {
+public class SubstitutesInputData {
+
     private final String ingredientName;
 
-    public IngredientToSubstituteInputData(String ingredientName) {
+    public SubstitutesInputData(String ingredientName) {
         this.ingredientName = ingredientName;
     }
 

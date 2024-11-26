@@ -1,18 +1,11 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.List;
+import java.awt.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import interface_adapter.recipe_detail.RecipeDetailController;
 import interface_adapter.recipe_detail.RecipeDetailViewModel;
@@ -20,76 +13,129 @@ import interface_adapter.recipe_detail.RecipeDetailViewModel;
 /**
  * The RecipeDetailView for our program.
  */
-public class RecipeDetailView extends JFrame {
+public class RecipeDetailView extends JPanel implements PropertyChangeListener {
 
-    static final int SIXTEEN = 16;
-    static final int SIX_HUNDRED = 600;
-    static final int FOUR_HUNDRED = 400;
-
+    private final String viewName = "Recipe Detail";
     private final RecipeDetailViewModel recipeDetailViewModel;
-    private final RecipeDetailController recipeDetailController;
+    private RecipeDetailController recipeDetailController;
 
-    public RecipeDetailView(RecipeDetailViewModel viewModel, RecipeDetailController controller) {
-        this.recipeDetailViewModel = viewModel;
-        this.recipeDetailController = controller;
+    // Constructor to initialize the ViewModel and layout
+    public RecipeDetailView(RecipeDetailViewModel recipeDetailViewModel) {
+        this.recipeDetailViewModel = recipeDetailViewModel;
+        this.recipeDetailViewModel.addPropertyChangeListener(this);
 
-        setTitle("Recipe Detail View");
-        setSize(SIX_HUNDRED, FOUR_HUNDRED);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new BorderLayout());
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        final JLabel title = new JLabel("Recipe Detail");
+        title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.add(title);
 
-        // Top panel
-        final JPanel topPanel = new JPanel(new BorderLayout());
-        final JButton backButton = new JButton("Back");
-        final JLabel recipeNameLabel =
-                new JLabel("Recipe Name: " + recipeDetailViewModel.getState().getRecipeName(), JLabel.CENTER);
-        recipeNameLabel.setFont(new Font("Arial", Font.BOLD, SIXTEEN));
-        topPanel.add(backButton, BorderLayout.WEST);
-        topPanel.add(recipeNameLabel, BorderLayout.CENTER);
-        add(topPanel, BorderLayout.NORTH);
-
-        // Center panel
-        final JPanel centerPanel =
-                getjPanel(recipeDetailViewModel.getState().getIngredients(), recipeDetailViewModel.getState().getQuantities());
-        add(centerPanel, BorderLayout.CENTER);
-
-        // Bottom panel
-        final JPanel bottomPanel = new JPanel(new BorderLayout());
-        final JLabel instructionsLabel =
-                new JLabel("Instructions: " + recipeDetailViewModel.getState().getInstructions(), JLabel.CENTER);
-        final JButton saveButton = new JButton("Save Recipe");
-        bottomPanel.add(instructionsLabel, BorderLayout.CENTER);
-        bottomPanel.add(saveButton, BorderLayout.EAST);
-        add(bottomPanel, BorderLayout.SOUTH);
+        // Build the Recipe Detail View
+        buildRecipeDetailView();
     }
 
-    private static JPanel getjPanel(List<String> ingredients, List<String> quantities) {
-        final JPanel centerPanel = new JPanel();
-        centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
+    /**
+     * Main method that calls all helper methods to build the view.
+     */
+    public void buildRecipeDetailView() {
+        this.add(createTopPanel());
+        this.add(createIngredientPanel());
+        this.add(createQuantityPanel());
+        this.add(createSubstitutionsPanel());
+        this.add(createInstructionsPanel());
+    }
 
-        for (int i = 0; i < ingredients.size(); i++) {
-            final JPanel ingredientRow = new JPanel(new FlowLayout(FlowLayout.LEFT));
-            final JLabel ingredientLabel = new JLabel(ingredients.get(i) + ": ");
-            final JLabel quantityLabel = new JLabel(quantities.get(i));
-            final JButton substituteButton = new JButton("Click for more info");
+    // Create and return the top panel with recipe name and back button
+    private JPanel createTopPanel() {
+        final JButton backButton = new JButton("Back");
+        final JLabel recipeLabel = new JLabel("Recipe Name:");
+        final JLabel recipeName = new JLabel(recipeDetailViewModel.getState().getRecipeName());
 
-            ingredientRow.add(ingredientLabel);
-            ingredientRow.add(quantityLabel);
-            ingredientRow.add(substituteButton);
+        final JPanel topPanel = new JPanel();
+        topPanel.add(backButton);
+        topPanel.add(recipeLabel);
+        topPanel.add(recipeName);
 
-            centerPanel.add(ingredientRow);
+        return topPanel;
+    }
 
-            final int finalI = i;
-            substituteButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    JOptionPane.showMessageDialog(null, "Substitute options for "
-                            + ingredients.get(finalI));
-                }
-            });
+    // Create and return the panel displaying ingredients
+    private JPanel createIngredientPanel() {
+        final JPanel ingredientPanel = new JPanel();
+        ingredientPanel.setLayout(new BoxLayout(ingredientPanel, BoxLayout.Y_AXIS));
 
+        final JLabel ingredientsLabel = new JLabel("Ingredients");
+        ingredientPanel.add(ingredientsLabel);
+
+        final ArrayList<String> ingredients = recipeDetailViewModel.getState().getIngredients();
+        for (String ingredient : ingredients) {
+            ingredientPanel.add(new JLabel(ingredient));
         }
 
-        return centerPanel;
+        return ingredientPanel;
+    }
+
+    // Create and return the panel displaying quantities for each ingredient
+    private JPanel createQuantityPanel() {
+        final JPanel quantityPanel = new JPanel();
+        quantityPanel.setLayout(new BoxLayout(quantityPanel, BoxLayout.Y_AXIS));
+
+        final JLabel quantityLabel = new JLabel("Quantity");
+        quantityPanel.add(quantityLabel);
+
+        final ArrayList<String> quantities = recipeDetailViewModel.getState().getQuantities();
+        for (String quantity : quantities) {
+            quantityPanel.add(new JLabel(quantity));
+        }
+
+        return quantityPanel;
+    }
+
+    // Create and return the panel for ingredient substitutions
+    private JPanel createSubstitutionsPanel() {
+        final JPanel substitutionsPanel = new JPanel();
+        substitutionsPanel.setLayout(new BoxLayout(substitutionsPanel, BoxLayout.Y_AXIS));
+
+        final JLabel substitutionsLabel = new JLabel("Substitute Ingredients");
+        substitutionsPanel.add(substitutionsLabel);
+
+        // Add dummy buttons for substitutions (could link to some action later)
+        final ArrayList<String> ingredients = recipeDetailViewModel.getState().getIngredients();
+        for (String ingredient : ingredients) {
+            final JButton substituteButton = new JButton("Substitutes for " + ingredient);
+            substitutionsPanel.add(substituteButton);
+        }
+
+        return substitutionsPanel;
+    }
+
+    // Create and return the panel displaying the recipe instructions
+    private JPanel createInstructionsPanel() {
+        final JPanel bottomPanel = new JPanel();
+
+        final JLabel instructionsLabel = new JLabel("Instructions");
+        final String instructions = recipeDetailViewModel.getState().getInstructions();
+        final JLabel instructionsText = new JLabel(instructions);
+
+        bottomPanel.add(instructionsLabel);
+        bottomPanel.add(instructionsText);
+
+        return bottomPanel;
+    }
+
+    // Property change listener to update the view when the model's state changes
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if (evt.getPropertyName().equals("state")) {
+            // Handle the change in the state here if needed (e.g., updating the view when the state changes)
+        }
+    }
+
+    // Return the name of the view (for example, used by a controller to identify the view)
+    public String getViewName() {
+        return viewName;
+    }
+
+    public void setRecipeDetailController(RecipeDetailController recipeDetailController) {
+        this.recipeDetailController = recipeDetailController;
     }
 }
