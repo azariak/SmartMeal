@@ -15,6 +15,7 @@ public class RecipeDetailDataAccessObject implements RecipeDetailDataAccessInter
 
     @Override
     public ArrayList<Integer> getIngredientIds(GenericRecipe genericRecipe) {
+        System.out.println(genericRecipe.getId());
         final String recipeString = RecipeIDToRecipe.recipeIDToRecipe(genericRecipe.getId());
         final JSONObject recipe = new JSONObject(recipeString);
 
