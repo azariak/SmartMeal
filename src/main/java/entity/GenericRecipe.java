@@ -4,20 +4,16 @@ import java.io.IOException;
 
 import org.json.JSONObject;
 
-import use_case.saved_recipe.SavedRecipeDataAcessInterface;
-
 /**
  * A generic recipe entity with basic information of a recipe.
  */
 public class GenericRecipe implements GenericRecipeInterface {
     private final String name;
     private final String id;
-    private final SavedRecipeDataAcessInterface recipeSaver;
 
-    public GenericRecipe(String name, String id, SavedRecipeDataAcessInterface recipeSaver) throws IOException {
+    public GenericRecipe(String name, String id) throws IOException {
         this.name = name;
         this.id = id;
-        this.recipeSaver = recipeSaver;
     }
 
     @Override
@@ -41,13 +37,13 @@ public class GenericRecipe implements GenericRecipeInterface {
         return recipeJson;
     }
 
-    /**
-     * Save recipes.
-     * @param fileName the file name.
-     */
-    public void save(String fileName) {
-        final JSONObject recipeJson = this.toJson();
-        recipeSaver.saveRecipe(recipeJson, fileName);
-    }
+//    /**
+//     * Save recipes.
+//     * @param fileName the file name.
+//     */
+//    public void save(String fileName) {
+//        final JSONObject recipeJson = this.toJson();
+//        recipeSaver.saveRecipe(recipeJson, fileName);
+//    }
 
 }

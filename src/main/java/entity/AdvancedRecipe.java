@@ -2,15 +2,13 @@ package entity;
 
 import java.io.IOException;
 
-import use_case.saved_recipe.SavedRecipeDataAcessInterface;
-
 /**
  * The advanced recipe entity.
  */
 public class AdvancedRecipe extends GenericRecipe implements AdvancedRecipeInterface {
 
-    public AdvancedRecipe(String id, String name, SavedRecipeDataAcessInterface recipeSaver) throws IOException {
-        super(name, id, recipeSaver);
+    public AdvancedRecipe(String id, String name) throws IOException {
+        super(name, id);
     }
 
     @Override

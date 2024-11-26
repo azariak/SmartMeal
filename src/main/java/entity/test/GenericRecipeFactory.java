@@ -7,7 +7,6 @@ import entity.AdvancedRecipe;
 import entity.GenericRecipe;
 import entity.GenericRecipeFactoryInterface;
 import entity.TemporaryAdvancedRecipe;
-import use_case.saved_recipe.SavedRecipeDataAcessInterface;
 
 /**
  * The generic recipe factory.
@@ -15,14 +14,8 @@ import use_case.saved_recipe.SavedRecipeDataAcessInterface;
 public class GenericRecipeFactory implements GenericRecipeFactoryInterface {
 
     @Override
-    public GenericRecipe createGenericRecipe(String name, String id, SavedRecipeDataAcessInterface recipeSaver)
-            throws IOException {
-        return new GenericRecipe(name, id, recipeSaver);
-    }
-
-    @Override
     public GenericRecipe createGenericRecipe(String name, String id) throws IOException {
-        return null;
+        return new GenericRecipe(name, id);
     }
 
     @Override
