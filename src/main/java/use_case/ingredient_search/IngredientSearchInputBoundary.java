@@ -1,5 +1,7 @@
 package use_case.ingredient_search;
 
+import java.io.IOException;
+
 /**
  * Defines the input boundary for ingredient search use cases.
  * <p>
@@ -13,7 +15,7 @@ public interface IngredientSearchInputBoundary {
      * Executes the ingredient search use case.
      * @param ingredientSearchInputData the input data
      */
-    void execute(IngredientSearchInputData ingredientSearchInputData);
+    void execute(IngredientSearchInputData ingredientSearchInputData) throws IOException;
 
     void switchToResultView();
 }

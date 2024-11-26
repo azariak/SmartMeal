@@ -1,5 +1,6 @@
 package use_case.ingredient_search;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -39,7 +40,7 @@ public class IngredientSearchInteractor implements IngredientSearchInputBoundary
     }
 
     @Override
-    public void execute(IngredientSearchInputData ingredientSearchInputData) {
+    public void execute(IngredientSearchInputData ingredientSearchInputData) throws IOException {
         final Map<String, String> response =
                 apiSearchDataAccessObject.excuteSearch(ingredientSearchInputData.getIngredients());
         final ArrayList<GenericRecipe> recipeArrayList = new ArrayList<>();

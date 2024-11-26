@@ -16,4 +16,5 @@ public interface GenericRecipeInterface {
      * @return id.
      */
     String getId();
+
 }

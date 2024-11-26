@@ -1,5 +1,6 @@
 package interface_adapter.ingredient_search;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import use_case.ingredient_search.IngredientSearchInputBoundary;
@@ -21,7 +22,7 @@ public class IngredientSearchController {
      *
      * @param ingredients a arraylist of ingredients in strings
      */
-    public void execute(ArrayList<String> ingredients) {
+    public void execute(ArrayList<String> ingredients) throws IOException {
         final IngredientSearchInputData ingredientSearchInputData = new IngredientSearchInputData(
                 ingredients);
 

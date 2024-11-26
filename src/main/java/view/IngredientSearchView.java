@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
@@ -70,7 +71,12 @@ public class IngredientSearchView extends JPanel implements ActionListener, Prop
                             ingredients.add(currentState.getIngredient1());
                             ingredients.add(currentState.getIngredient2());
                             ingredients.add(currentState.getIngredient3());
-                            ingredientSearchController.execute(ingredients);
+                            try {
+                                ingredientSearchController.execute(ingredients);
+                            }
+                            catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
                         }
 
                     }
