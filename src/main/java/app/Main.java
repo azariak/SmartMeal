@@ -23,10 +23,10 @@ public class Main {
                                             .addRankedView()
                                             // added this line above
                                             .addResultView()
+                                            .addRecipeDetailView()
                                             .addResultUseCase()
                                             .addIngredientSearchView()
                                             .addIngredientSearchUseCase()
-                                            .addRecipeDetailView()
                                             .addRecipeDetailUseCase()
                                             .addLoadSavedRecipeView()
                                             .addLoadSavedRecipeUseCase()
