@@ -1,14 +1,29 @@
 package view;
 
-import interface_adapter.Ranked.RankedViewModel;
-import interface_adapter.Ranked.RankedViewState;
-
-import javax.swing.*;
-import javax.swing.border.TitledBorder;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.TitledBorder;
+
+import interface_adapter.Ranked.RankedViewModel;
+
+/**
+ * Ranked view.
+ */
 public class RankedView extends JPanel implements PropertyChangeListener {
 
     private final RankedViewModel viewModel;
@@ -29,7 +44,6 @@ public class RankedView extends JPanel implements PropertyChangeListener {
         title.setHorizontalAlignment(SwingConstants.CENTER);
         subTitle.setHorizontalAlignment(SwingConstants.CENTER);
 
-        // Wrapping title and subtitle in FlowLayout panels for perfect centering
         final JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
         titlePanel.add(title);
 
@@ -38,24 +52,39 @@ public class RankedView extends JPanel implements PropertyChangeListener {
 
         // Edit button
         final JButton editButton = new JButton("<html><font color=#08289c>Edit Rankings</font></html>");
-        final JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+
+        // Back button
+        final JButton backButton = new JButton("<html><font color=#08289c>Back</font></html>");
+        backButton.addActionListener(back -> {
+            final Container parent = this.getParent();
+            if (parent instanceof JPanel) {
+                final CardLayout layout = (CardLayout) parent.getLayout();
+                layout.show(parent, "Main");
+            }
+        });
+
+        // Panel for edit and back buttons
+        final JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 0));
         buttonPanel.add(editButton);
+        buttonPanel.add(backButton);
 
         // Layout settings
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        this.setBorder(BorderFactory.createEmptyBorder(twenty, twenty, twenty, twenty));
 
         // Adding components
         this.add(titlePanel);
         this.add(Box.createRigidArea(new Dimension(0, ten)));
         this.add(subTitlePanel);
         this.add(Box.createRigidArea(new Dimension(0, twenty)));
+
         // Create ranking boxes dynamically and add them to the panel
         for (String ranking : viewModel.getRankings()) {
             final JPanel box = createRankingBox(ranking);
             this.add(box);
             this.add(Box.createRigidArea(new Dimension(0, ten)));
         }
+
         this.add(Box.createRigidArea(new Dimension(0, twenty)));
         this.add(buttonPanel);
     }
@@ -95,5 +124,4 @@ public class RankedView extends JPanel implements PropertyChangeListener {
     public String getViewName() {
         return "Ranked Recipes View";
     }
-
 }

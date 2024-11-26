@@ -145,3 +145,4 @@ public class RecipeDetailView extends JPanel implements PropertyChangeListener {
         this.recipeDetailController = recipeDetailController;
     }
 }
+
