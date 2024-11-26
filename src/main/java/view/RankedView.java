@@ -1,13 +1,29 @@
 package view;
 
-import interface_adapter.Ranked.RankedViewModel;
-
-import javax.swing.*;
-import javax.swing.border.TitledBorder;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.TitledBorder;
+
+import interface_adapter.Ranked.RankedViewModel;
+
+/**
+ * Ranked view.
+ */
 public class RankedView extends JPanel implements PropertyChangeListener {
 
     private final RankedViewModel viewModel;
@@ -54,25 +70,24 @@ public class RankedView extends JPanel implements PropertyChangeListener {
 
         // Layout settings
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        this.setBorder(BorderFactory.createEmptyBorder(twenty, twenty, twenty, twenty));
 
         // Adding components
         this.add(titlePanel);
-        this.add(Box.createRigidArea(new Dimension(0, 10)));
+        this.add(Box.createRigidArea(new Dimension(0, ten)));
         this.add(subTitlePanel);
-        this.add(Box.createRigidArea(new Dimension(0, 20)));
+        this.add(Box.createRigidArea(new Dimension(0, twenty)));
 
         // Create ranking boxes dynamically and add them to the panel
         for (String ranking : viewModel.getRankings()) {
             final JPanel box = createRankingBox(ranking);
             this.add(box);
-            this.add(Box.createRigidArea(new Dimension(0, 10)));
+            this.add(Box.createRigidArea(new Dimension(0, ten)));
         }
 
-        this.add(Box.createRigidArea(new Dimension(0, 20)));
+        this.add(Box.createRigidArea(new Dimension(0, twenty)));
         this.add(buttonPanel);
     }
-
 
     private JPanel createRankingBox(String ranking) {
         final JLabel label = new JLabel("<html><font color=#08289c>" + ranking + "</font></html>");

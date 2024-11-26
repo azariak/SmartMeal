@@ -20,23 +20,26 @@ public class RecipeIDToRecipe {
      */
     public static String recipeIDToRecipe(String id) {
 
-        final String urlString = "https://api.spoonacular.com/recipes/" + id + "/information?apiKey=" + System.getenv("API_KEY");
+        final String urlString = "https://api.spoonacular.com/recipes/"
+                + id + "/information?apiKey=" + System.getenv("API_KEY");
 
         try {
             // Make a GET request to the API
-            URL url = new URL(urlString);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            final URL url = new URL(urlString);
+            final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
-            connection.setConnectTimeout(5000);  // Set connection timeout (ms)
-            connection.setReadTimeout(5000);  // Set read timeout (ms)
+            // Set connection timeout (ms)
+            connection.setConnectTimeout(5000);
+            // Set read timeout (ms)
+            connection.setReadTimeout(5000);
 
             // Get the response code
             int responseCode = connection.getResponseCode();
             if (responseCode == 200) {
                 // If the request is successful, read the response
-                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                final BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String inputLine;
-                StringBuffer response = new StringBuffer();
+                final StringBuffer response = new StringBuffer();
 
                 while ((inputLine = in.readLine()) != null) {
                     response.append(inputLine);
