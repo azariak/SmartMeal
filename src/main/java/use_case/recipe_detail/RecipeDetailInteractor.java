@@ -2,6 +2,7 @@ package use_case.recipe_detail;
 
 import java.util.ArrayList;
 
+import data_access.RecipeDetailDataAccessObject;
 import entity.GenericRecipe;
 import entity.GenericRecipeFactoryInterface;
 import entity.TemporaryAdvancedRecipe;
@@ -15,10 +16,10 @@ public class RecipeDetailInteractor implements RecipeDetailInputBoundary {
     private final RecipeDetailOutputBoundary recipeDetailPresenter;
     private final GenericRecipeFactoryInterface genericRecipeFactory;
 
-    public RecipeDetailInteractor(RecipeDetailDataAccessInterface recipeDetailDataAccessInterface,
-                                  RecipeDetailOutputBoundary recipeDetailOutputBoundary,
-                                  GenericRecipeFactoryInterface genericRecipeFactory) {
-        this.recipeDetailDataAccessObject = recipeDetailDataAccessInterface;
+    public RecipeDetailInteractor(RecipeDetailOutputBoundary recipeDetailOutputBoundary,
+                                  GenericRecipeFactoryInterface genericRecipeFactory,
+                                  RecipeDetailDataAccessObject recipeDetailDataAccessObject) {
+        this.recipeDetailDataAccessObject = recipeDetailDataAccessObject;
         this.recipeDetailPresenter = recipeDetailOutputBoundary;
         this.genericRecipeFactory = genericRecipeFactory;
     }

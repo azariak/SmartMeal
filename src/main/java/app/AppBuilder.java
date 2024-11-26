@@ -8,6 +8,7 @@ import javax.swing.WindowConstants;
 
 import data_access.ApiSearchDataAccessObject;
 import data_access.InMemoryUserDataAccessObject;
+import data_access.RecipeDetailDataAccessObject;
 import entity.*;
 import entity.test.GenericRecipeFactory;
 import interface_adapter.Ranked.RankedViewModel;
@@ -90,6 +91,7 @@ public class AppBuilder {
     // thought question: is the hard dependency below a problem?
     private final InMemoryUserDataAccessObject userDataAccessObject = new InMemoryUserDataAccessObject();
     private final ApiSearchDataAccessObject apiSearchDataAccessObject = new ApiSearchDataAccessObject();
+    private final RecipeDetailDataAccessObject recipeDetailDataAccessObject = new RecipeDetailDataAccessObject();
 
     private SignupView signupView;
     private SignupViewModel signupViewModel;
@@ -348,7 +350,7 @@ public class AppBuilder {
     public AppBuilder addRecipeDetailView() {
         recipeDetailViewModel = new RecipeDetailViewModel();
         recipeDetailView = new RecipeDetailView(recipeDetailViewModel);
-        cardPanel.add(recipeDetailView, recipeDetailView.getName());
+        cardPanel.add(recipeDetailView, recipeDetailView.getViewName());
         return this;
     }
 
@@ -358,9 +360,9 @@ public class AppBuilder {
 
         final RecipeDetailInputBoundary recipeDetailInteractor =
                 new RecipeDetailInteractor(
-                        recipeDetailDataAccessInterface,
                         recipeDetailOutputBoundary,
-                        genericRecipeFactory);
+                        genericRecipeFactory,
+                        recipeDetailDataAccessObject);
 
         final RecipeDetailController recipeDetailController =
                 new RecipeDetailController(recipeDetailInteractor);
@@ -386,3 +388,4 @@ public class AppBuilder {
         return application;
     }
 }
+

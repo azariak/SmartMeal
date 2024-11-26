@@ -28,9 +28,6 @@ public class RecipeDetailView extends JPanel implements PropertyChangeListener {
         final JLabel title = new JLabel("Recipe Detail");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.add(title);
-
-        // Build the Recipe Detail View
-        buildRecipeDetailView();
     }
 
     /**
@@ -38,9 +35,7 @@ public class RecipeDetailView extends JPanel implements PropertyChangeListener {
      */
     public void buildRecipeDetailView() {
         this.add(createTopPanel());
-        this.add(createIngredientPanel());
-        this.add(createQuantityPanel());
-        this.add(createSubstitutionsPanel());
+        this.add(createMiddlePanel());
         this.add(createInstructionsPanel());
     }
 
@@ -56,6 +51,16 @@ public class RecipeDetailView extends JPanel implements PropertyChangeListener {
         topPanel.add(recipeName);
 
         return topPanel;
+    }
+
+    private JPanel createMiddlePanel() {
+        final JPanel middlePanel = new JPanel();
+        middlePanel.add(createIngredientPanel());
+        middlePanel.add(Box.createRigidArea(new Dimension(40, 0)));
+        middlePanel.add(createQuantityPanel());
+        middlePanel.add(Box.createRigidArea(new Dimension(40, 0)));
+        middlePanel.add(createSubstitutionsPanel());
+        return middlePanel;
     }
 
     // Create and return the panel displaying ingredients
@@ -126,7 +131,8 @@ public class RecipeDetailView extends JPanel implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getPropertyName().equals("state")) {
-            // Handle the change in the state here if needed (e.g., updating the view when the state changes)
+            recipeDetailController.execute(recipeDetailViewModel.getState().getGenericRecipe());
+            buildRecipeDetailView();
         }
     }
 
@@ -139,3 +145,4 @@ public class RecipeDetailView extends JPanel implements PropertyChangeListener {
         this.recipeDetailController = recipeDetailController;
     }
 }
+
