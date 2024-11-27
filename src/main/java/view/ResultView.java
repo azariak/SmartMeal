@@ -72,6 +72,13 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
         this.add(recipeButtons);
     }
 
+    /**
+     * Remove all recipe buttons.
+     */
+    public void removeAllRecipeButtons() {
+        recipeButtons.removeAll();
+    }
+
     private void addListenerToRecipeButtonByIndex(JButton recipeButton,
                                                   ArrayList<GenericRecipe> recipeArrayList,
                                                   int recipeIndex) {
@@ -98,6 +105,7 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getPropertyName().equals("state")) {
+            removeAllRecipeButtons();
             addRecipeButtons();
         }
     }
