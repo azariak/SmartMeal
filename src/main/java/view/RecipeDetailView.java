@@ -17,6 +17,14 @@ import interface_adapter.recipe_detail.RecipeDetailViewModel;
  */
 public class RecipeDetailView extends JPanel implements PropertyChangeListener {
 
+    // Constants
+    private static final int THIRTY = 30;
+    private static final int ZERO = 0;
+    private static final int TWO_HUNDRED = 200;
+    private static final int FIFTEEN = 15;
+    private static final int TEN = 10;
+
+    // Instance variables
     private final String viewName = "Recipe Detail";
     private final RecipeDetailViewModel recipeDetailViewModel;
     private RecipeDetailController recipeDetailController;
@@ -65,9 +73,9 @@ public class RecipeDetailView extends JPanel implements PropertyChangeListener {
     private JPanel createMiddlePanel() {
         final JPanel middlePanel = new JPanel();
         middlePanel.add(createIngredientPanel());
-        middlePanel.add(Box.createRigidArea(new Dimension(30, 0)));
+        middlePanel.add(Box.createRigidArea(new Dimension(THIRTY, ZERO)));
         middlePanel.add(createQuantityPanel());
-        middlePanel.add(Box.createRigidArea(new Dimension(30, 0)));
+        middlePanel.add(Box.createRigidArea(new Dimension(THIRTY, ZERO)));
         middlePanel.add(createSubstitutionsPanel());
         return middlePanel;
     }
@@ -118,12 +126,12 @@ public class RecipeDetailView extends JPanel implements PropertyChangeListener {
             final JButton substituteButton = new JButton("Substitutes for " + ingredient);
 
             // Set button size (example: 100px width, 30px height)
-            substituteButton.setPreferredSize(new Dimension(200, 15));
-            substituteButton.setMaximumSize(new Dimension(200, 15));
-            substituteButton.setMinimumSize(new Dimension(200, 15));
+            substituteButton.setPreferredSize(new Dimension(TWO_HUNDRED, FIFTEEN));
+            substituteButton.setMaximumSize(new Dimension(TWO_HUNDRED, FIFTEEN));
+            substituteButton.setMinimumSize(new Dimension(TWO_HUNDRED, FIFTEEN));
 
             // Optionally reduce font size for smaller buttons
-            substituteButton.setFont(new Font(substituteButton.getFont().getName(), Font.PLAIN, 10));
+            substituteButton.setFont(new Font(substituteButton.getFont().getName(), Font.PLAIN, TEN));
 
             substitutionsPanel.add(substituteButton);
         }
@@ -145,7 +153,6 @@ public class RecipeDetailView extends JPanel implements PropertyChangeListener {
         return bottomPanel;
     }
 
-    // Property change listener to update the view when the model's state changes
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getPropertyName().equals("state")) {
@@ -154,7 +161,6 @@ public class RecipeDetailView extends JPanel implements PropertyChangeListener {
         }
     }
 
-    // Return the name of the view (for example, used by a controller to identify the view)
     public String getViewName() {
         return viewName;
     }

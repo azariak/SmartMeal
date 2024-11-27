@@ -6,8 +6,13 @@ package use_case.ingredient_substitutions;
 public interface SubstitutesInputBoundary {
 
     /**
-     * Executes the Recipe Detail Use Case.
+     * Executes the ingredient substitutions Use Case.
      * @param substitutesInputData is the input data.
      */
     void execute(SubstitutesInputData substitutesInputData);
+
+    /**
+     * Back to last view.
+     */
+    void backToLastView();
 }

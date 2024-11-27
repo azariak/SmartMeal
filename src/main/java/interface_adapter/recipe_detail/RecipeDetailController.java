@@ -21,7 +21,6 @@ public class RecipeDetailController {
      */
     public void execute(GenericRecipe genericRecipe) {
         final RecipeDetailInputData recipeDetailInputData = new RecipeDetailInputData(genericRecipe);
-
         recipeDetailInteractor.execute(recipeDetailInputData);
     }
 
