@@ -20,26 +20,26 @@ public class RecipeIDToRecipe {
      */
     public static String recipeIDToRecipe(String id) {
 
-        final String urlString = "https://api.spoonacular.com/recipes/"
-                + id + "/information?apiKey=" + System.getenv("API_KEY");
+        final String urlString =
+                "https://api.spoonacular.com/recipes/" + id + "/information?apiKey=" + System.getenv("API_KEY");
+        final int fiveThousand = 5000;
+        final int twoHundred = 200;
 
         try {
             // Make a GET request to the API
             final URL url = new URL(urlString);
             final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
-            // Set connection timeout (ms)
-            connection.setConnectTimeout(5000);
-            // Set read timeout (ms)
-            connection.setReadTimeout(5000);
+            connection.setConnectTimeout(fiveThousand);
+            connection.setReadTimeout(fiveThousand);
 
             // Get the response code
-            int responseCode = connection.getResponseCode();
-            if (responseCode == 200) {
+            final int responseCode = connection.getResponseCode();
+            if (responseCode == twoHundred) {
                 // If the request is successful, read the response
                 final BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String inputLine;
-                final StringBuffer response = new StringBuffer();
+                final StringBuilder response = new StringBuilder();
 
                 while ((inputLine = in.readLine()) != null) {
                     response.append(inputLine);
@@ -54,8 +54,9 @@ public class RecipeIDToRecipe {
             }
 
         }
-        catch (IOException e) {
-            e.printStackTrace();
+        catch (IOException ex) {
+            ex.printStackTrace();
+            System.out.println("Failed blah blah blah");
             return "Failed.";
         }
 
