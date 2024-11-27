@@ -30,8 +30,8 @@ public class ViewManagerModel extends ViewModel<String> {
     public String getPreviousViewName() {
         String result = "";
         if (!this.viewHistory.isEmpty()) {
-            result = this.viewHistory.get(0);
-            viewHistory.remove(0);
+            result = this.viewHistory.get(viewHistory.size() - 1);
+            viewHistory.remove(viewHistory.size() - 1);
         }
         return result;
     }
@@ -41,7 +41,7 @@ public class ViewManagerModel extends ViewModel<String> {
      * @param name view name.
      */
     public void addViewHistory(String name) {
-        this.viewHistory.add(0, name);
+        this.viewHistory.add(name);
 
     }
 }
