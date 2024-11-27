@@ -28,7 +28,6 @@ public class IngredientSearchPresenter implements IngredientSearchOutputBoundary
         final ResultViewState resultViewState = resultViewModel.getState();
         resultViewState.setResult(outputData.getResult());
         this.resultViewModel.setState(resultViewState);
-        this.resultViewModel.setPrevisousViewName(viewManagerModel.getState());
         this.resultViewModel.firePropertyChanged();
 
         this.viewManagerModel.switchView(resultViewModel.getViewName());
