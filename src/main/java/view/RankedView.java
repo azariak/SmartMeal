@@ -7,6 +7,8 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -19,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
+import interface_adapter.Ranked.RankedController;
 import interface_adapter.Ranked.RankedViewModel;
 
 /**
@@ -32,6 +35,8 @@ public class RankedView extends JPanel implements PropertyChangeListener {
     private final int fontSize = 12;
     private final int ten = 10;
     private final int twenty = 20;
+    private RankedController rankedController;
+
 
     public RankedView(RankedViewModel rankedViewModel) {
         this.viewModel = rankedViewModel;
@@ -55,11 +60,10 @@ public class RankedView extends JPanel implements PropertyChangeListener {
 
         // Back button
         final JButton backButton = new JButton("<html><font color=#08289c>Back</font></html>");
-        backButton.addActionListener(back -> {
-            final Container parent = this.getParent();
-            if (parent instanceof JPanel) {
-                final CardLayout layout = (CardLayout) parent.getLayout();
-                layout.show(parent, "Main");
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                rankedController.backTolastView();
+
             }
         });
 
@@ -124,4 +128,9 @@ public class RankedView extends JPanel implements PropertyChangeListener {
     public String getViewName() {
         return "Ranked Recipes View";
     }
+
+    public void setRankedController(RankedController rankedController) {
+        this.rankedController = rankedController;
+    }
+
 }
