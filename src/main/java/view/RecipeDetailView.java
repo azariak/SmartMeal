@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
@@ -45,6 +47,13 @@ public class RecipeDetailView extends JPanel implements PropertyChangeListener {
         final JLabel recipeLabel = new JLabel("Recipe Name:");
         final JLabel recipeName = new JLabel(recipeDetailViewModel.getState().getRecipeName());
 
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent event) {
+
+            }
+        });
+
         final JPanel topPanel = new JPanel();
         topPanel.add(backButton);
         topPanel.add(recipeLabel);
@@ -56,9 +65,9 @@ public class RecipeDetailView extends JPanel implements PropertyChangeListener {
     private JPanel createMiddlePanel() {
         final JPanel middlePanel = new JPanel();
         middlePanel.add(createIngredientPanel());
-        middlePanel.add(Box.createRigidArea(new Dimension(40, 0)));
+        middlePanel.add(Box.createRigidArea(new Dimension(30, 0)));
         middlePanel.add(createQuantityPanel());
-        middlePanel.add(Box.createRigidArea(new Dimension(40, 0)));
+        middlePanel.add(Box.createRigidArea(new Dimension(30, 0)));
         middlePanel.add(createSubstitutionsPanel());
         return middlePanel;
     }
@@ -107,6 +116,15 @@ public class RecipeDetailView extends JPanel implements PropertyChangeListener {
         final ArrayList<String> ingredients = recipeDetailViewModel.getState().getIngredients();
         for (String ingredient : ingredients) {
             final JButton substituteButton = new JButton("Substitutes for " + ingredient);
+
+            // Set button size (example: 100px width, 30px height)
+            substituteButton.setPreferredSize(new Dimension(200, 15));
+            substituteButton.setMaximumSize(new Dimension(200, 15));
+            substituteButton.setMinimumSize(new Dimension(200, 15));
+
+            // Optionally reduce font size for smaller buttons
+            substituteButton.setFont(new Font(substituteButton.getFont().getName(), Font.PLAIN, 10));
+
             substitutionsPanel.add(substituteButton);
         }
 
