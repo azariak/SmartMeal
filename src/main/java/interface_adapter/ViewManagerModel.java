@@ -28,8 +28,11 @@ public class ViewManagerModel extends ViewModel<String> {
      * @return the name of the last view.
      */
     public String getPreviousViewName() {
-        final String result = this.viewHistory.get(0);
-        viewHistory.remove(0);
+        String result = "";
+        if (!this.viewHistory.isEmpty()) {
+            result = this.viewHistory.get(0);
+            viewHistory.remove(0);
+        }
         return result;
     }
 
