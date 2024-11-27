@@ -11,10 +11,8 @@ public interface ResultInputBoundary {
      */
     void execute(ResultInputData inputData);
 
-
     /**
      * Back to last view.
-     * @param previsousViewName the name of the previous view.
      */
-    void backToLastView(String previsousViewName);
+    void backToLastView();
 }

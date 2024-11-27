@@ -30,8 +30,8 @@ public class ResultPresenter implements ResultOutputBoundary {
     }
 
     @Override
-    public void backToLastView(String previousViewName) {
-        this.viewManagerModel.setState(previousViewName);
+    public void backToLastView() {
+        this.viewManagerModel.setState(this.viewManagerModel.getPrevisousViewName());
         this.viewManagerModel.firePropertyChanged();
     }
 }

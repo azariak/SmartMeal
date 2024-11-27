@@ -21,7 +21,7 @@ public class ResultInteractor implements ResultInputBoundary {
     }
 
     @Override
-    public void backToLastView(String previousViewName) {
-        resultPresenter.backToLastView(previousViewName);
+    public void backToLastView() {
+        resultPresenter.backToLastView();
     }
 }

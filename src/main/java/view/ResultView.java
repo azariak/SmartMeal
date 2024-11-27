@@ -41,7 +41,7 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
         final JButton back = new JButton("Back");
         back.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                resultController.backTolastView(resultViewModel.getPrevisousViewName());
+                resultController.backTolastView();
 
             }
         });

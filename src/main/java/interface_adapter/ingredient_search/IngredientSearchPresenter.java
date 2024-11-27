@@ -31,7 +31,7 @@ public class IngredientSearchPresenter implements IngredientSearchOutputBoundary
         this.resultViewModel.setPrevisousViewName(viewManagerModel.getState());
         this.resultViewModel.firePropertyChanged();
 
-        this.viewManagerModel.setState(resultViewModel.getViewName());
+        this.viewManagerModel.switchView(resultViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
     }
 
