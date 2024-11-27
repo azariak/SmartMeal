@@ -64,11 +64,11 @@ public class ViewModel<T> {
         this.support.addPropertyChangeListener(listener);
     }
 
-    public String getPrevisousViewName() {
+    public String getPreviousViewName() {
         return previsousViewName;
     }
 
-    public void setPrevisousViewName(String name) {
+    public void setPreviousViewName(String name) {
         this.previsousViewName = name;
 
     }
