@@ -23,11 +23,12 @@ import javax.swing.border.TitledBorder;
 
 import interface_adapter.Ranked.RankedController;
 import interface_adapter.Ranked.RankedViewModel;
+import interface_adapter.result.ResultViewModel;
 
 /**
  * Ranked view.
  */
-public class RankedView extends JPanel implements PropertyChangeListener {
+public class RankedView extends JPanel implements ActionListener, PropertyChangeListener {
 
     private final RankedViewModel viewModel;
     private final Color recipeBoxBackground = new Color(240, 240, 255);
@@ -36,6 +37,7 @@ public class RankedView extends JPanel implements PropertyChangeListener {
     private final int ten = 10;
     private final int twenty = 20;
     private RankedController rankedController;
+
 
 
     public RankedView(RankedViewModel rankedViewModel) {
@@ -133,4 +135,8 @@ public class RankedView extends JPanel implements PropertyChangeListener {
         this.rankedController = rankedController;
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
 }
