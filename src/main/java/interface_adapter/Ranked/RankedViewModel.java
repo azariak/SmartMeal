@@ -104,4 +104,6 @@ public class RankedViewModel extends ViewModel<RankedViewState> {
         // Convert the List<String> to a String[] and return.
         return rankingsList.toArray(new String[0]);
     }
+
+
 }

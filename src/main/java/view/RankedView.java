@@ -1,9 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -20,21 +18,29 @@ import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
 import interface_adapter.Ranked.RankedViewModel;
+import interface_adapter.Ranked.RankedController;
 
 /**
- * Ranked view.
+ * Ranked view for displaying and managing recipe rankings.
  */
 public class RankedView extends JPanel implements PropertyChangeListener {
 
     private final RankedViewModel viewModel;
+    private final RankedController controller;
     private final Color recipeBoxBackground = new Color(240, 240, 255);
     private final Color lineBorder = new Color(8, 40, 156);
     private final int fontSize = 12;
     private final int ten = 10;
     private final int twenty = 20;
 
-    public RankedView(RankedViewModel rankedViewModel) {
+    /**
+     * Constructs the RankedView with ViewModel and Controller.
+     *
+     * @param rankedViewModel the view model for ranked recipes
+     */
+    public RankedView(RankedViewModel rankedViewModel, RankedController rankedController){
         this.viewModel = rankedViewModel;
+        this.controller = rankedController;
         this.viewModel.addPropertyChangeListener(this);
 
         // Title and subtitle
@@ -56,11 +62,7 @@ public class RankedView extends JPanel implements PropertyChangeListener {
         // Back button
         final JButton backButton = new JButton("<html><font color=#08289c>Back</font></html>");
         backButton.addActionListener(back -> {
-            final Container parent = this.getParent();
-            if (parent instanceof JPanel) {
-                final CardLayout layout = (CardLayout) parent.getLayout();
-                layout.show(parent, "Main");
-            }
+            this.controller.onBackButtonClicked();
         });
 
         // Panel for edit and back buttons
@@ -89,6 +91,12 @@ public class RankedView extends JPanel implements PropertyChangeListener {
         this.add(buttonPanel);
     }
 
+    /**
+     * Creates a panel for displaying a single recipe ranking.
+     *
+     * @param ranking the ranking string to display
+     * @return a JPanel containing the ranking
+     */
     private JPanel createRankingBox(String ranking) {
         final JLabel label = new JLabel("<html><font color=#08289c>" + ranking + "</font></html>");
         label.setHorizontalAlignment(SwingConstants.LEFT);
@@ -109,18 +117,33 @@ public class RankedView extends JPanel implements PropertyChangeListener {
         return panel;
     }
 
+    /**
+     * Handles property changes in the view model.
+     *
+     * @param evt the property change event
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        if ("ranking".equals(evt.getPropertyName())) {
+        if ("rankings".equals(evt.getPropertyName())) {
             this.removeAll();
+
+            // Recreate the entire view with updated rankings
             for (String ranking : viewModel.getRankings()) {
-                this.add(createRankingBox(ranking));
+                final JPanel box = createRankingBox(ranking);
+                this.add(box);
+                this.add(Box.createRigidArea(new Dimension(0, ten)));
             }
+
             this.revalidate();
             this.repaint();
         }
     }
 
+    /**
+     * Returns the name of the view.
+     *
+     * @return the view name
+     */
     public String getViewName() {
         return "Ranked Recipes View";
     }

@@ -15,6 +15,8 @@ import entity.GenericResultFactory;
 import entity.ResultFactoryInterface;
 import entity.UserFactory;
 import entity.test.GenericRecipeFactory;
+import interface_adapter.Ranked.RankedController;
+import interface_adapter.Ranked.RankedPresenter;
 import interface_adapter.Ranked.RankedViewModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.change_password.ChangePasswordController;
@@ -291,7 +293,9 @@ public class AppBuilder {
      */
     public AppBuilder addRankedView() {
         rankedViewModel = new RankedViewModel();
-        rankedView = new RankedView(rankedViewModel);
+        RankedPresenter rankedPresenter = new RankedPresenter(viewManagerModel);  // Pass viewManagerModel here
+        RankedController rankedController = new RankedController(rankedPresenter);
+        rankedView = new RankedView(rankedViewModel, rankedController);
         cardPanel.add(rankedView, rankedView.getViewName());
         return this;
     }
