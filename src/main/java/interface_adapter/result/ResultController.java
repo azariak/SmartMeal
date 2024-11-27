@@ -23,4 +23,12 @@ public class ResultController {
 
         resultUseCaseInteractor.execute(resultInputData);
     }
+
+    /**
+     * Back to last view.
+     * @param previousViewName the name of the previous.
+     */
+    public void backTolastView(String previousViewName) {
+        resultUseCaseInteractor.backToLastView(previousViewName);
+    }
 }

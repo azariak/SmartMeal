@@ -24,7 +24,7 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
     private final String viewName = "Result View";
     private final ResultViewModel resultViewModel;
     private ResultController resultController;
-
+    private final JPanel recipeButtons;
 
     public ResultView(ResultViewModel resultViewModel) {
         this.resultViewModel = resultViewModel;
@@ -33,15 +33,25 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.add(title);
 
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        this.recipeButtons = new JPanel();
+        recipeButtons.setLayout(new BoxLayout(recipeButtons, BoxLayout.Y_AXIS));
+
+        final JButton back = new JButton("Back");
+        back.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                resultController.backTolastView(resultViewModel.getPrevisousViewName());
+
+            }
+        });
+        this.add(back);
     }
 
     /**
      * Add the recipe buttons.
      */
     public void addRecipeButtons() {
-
-        final JPanel buttons = new JPanel();
-        buttons.setLayout(new BoxLayout(buttons, BoxLayout.Y_AXIS));
 
         final ArrayList<GenericRecipe> recipeArrayList = resultViewModel.getState().getResult().getRecipes();
 
@@ -56,10 +66,10 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
 
                 addListenerToRecipeButtonByIndex(recipeButton, recipeArrayList, recipeIndex);
 
-                buttons.add(recipeButton);
+                recipeButtons.add(recipeButton);
             }
         }
-        this.add(buttons);
+        this.add(recipeButtons);
     }
 
     private void addListenerToRecipeButtonByIndex(JButton recipeButton,
