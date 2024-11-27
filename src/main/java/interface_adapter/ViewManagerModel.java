@@ -16,7 +16,7 @@ public class ViewManagerModel extends ViewModel<String> {
      * @param view view.
      */
     public void switchView(String view) {
-        this.setPrevisousViewName(this.getState());
+        this.setPreviousViewName(this.getState());
         this.setState(view);
     }
 }
