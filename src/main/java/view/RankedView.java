@@ -1,9 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -23,7 +21,6 @@ import javax.swing.border.TitledBorder;
 
 import interface_adapter.Ranked.RankedController;
 import interface_adapter.Ranked.RankedViewModel;
-import interface_adapter.result.ResultViewModel;
 
 /**
  * Ranked view.
@@ -33,21 +30,23 @@ public class RankedView extends JPanel implements ActionListener, PropertyChange
     private final RankedViewModel viewModel;
     private final Color recipeBoxBackground = new Color(240, 240, 255);
     private final Color lineBorder = new Color(8, 40, 156);
-    private final int fontSize = 12;
-    private final int ten = 10;
-    private final int twenty = 20;
+
     private RankedController rankedController;
-
-
 
     public RankedView(RankedViewModel rankedViewModel) {
         this.viewModel = rankedViewModel;
         this.viewModel.addPropertyChangeListener(this);
+        final int panelHeight = 500;
+        final int panelWidth = 200;
+        this.setPreferredSize(new Dimension(panelWidth, panelHeight));
 
         // Title and subtitle
         final JLabel title = new JLabel("<html><h1><font color=#fcba03>Ranked Recipes</font></h1></html>");
         final JLabel subTitle = new JLabel("<html><h3><font color=#1F4529>Use this "
                 + "view to find the recipes you've ranked or to add new rankings!</font></h3></html>");
+        final JLabel editText = new JLabel("<html><h3><font color=#a1150b>You are now in "
+                + "editing mode.</font></h3></html>");
+
         title.setHorizontalAlignment(SwingConstants.CENTER);
         subTitle.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -57,8 +56,20 @@ public class RankedView extends JPanel implements ActionListener, PropertyChange
         final JPanel subTitlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
         subTitlePanel.add(subTitle);
 
+        final JPanel editTextPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        editTextPanel.add(editText);
+        editTextPanel.setVisible(false);
+
         // Edit button
         final JButton editButton = new JButton("<html><font color=#08289c>Edit Rankings</font></html>");
+        editButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                editTextPanel.setVisible(!editTextPanel.isVisible());
+                revalidate();
+                repaint();
+            }
+        });
 
         // Back button
         final JButton backButton = new JButton("<html><font color=#08289c>Back</font></html>");
@@ -76,10 +87,12 @@ public class RankedView extends JPanel implements ActionListener, PropertyChange
 
         // Layout settings
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        final int twenty = 20;
         this.setBorder(BorderFactory.createEmptyBorder(twenty, twenty, twenty, twenty));
 
         // Adding components
         this.add(titlePanel);
+        final int ten = 10;
         this.add(Box.createRigidArea(new Dimension(0, ten)));
         this.add(subTitlePanel);
         this.add(Box.createRigidArea(new Dimension(0, twenty)));
@@ -91,7 +104,9 @@ public class RankedView extends JPanel implements ActionListener, PropertyChange
             this.add(Box.createRigidArea(new Dimension(0, ten)));
         }
 
-        this.add(Box.createRigidArea(new Dimension(0, twenty)));
+        this.add(editTextPanel);
+
+        this.add(Box.createRigidArea(new Dimension(0, 0)));
         this.add(buttonPanel);
     }
 
@@ -103,6 +118,7 @@ public class RankedView extends JPanel implements ActionListener, PropertyChange
         panel.setLayout(new BorderLayout());
         panel.add(label, BorderLayout.CENTER);
 
+        final int fontSize = 12;
         panel.setBorder(BorderFactory.createTitledBorder(
                 BorderFactory.createLineBorder(lineBorder),
                 "Recipe Ranking",
