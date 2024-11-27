@@ -1,4 +1,18 @@
 package use_case.ranked;
 
-public class RankedInputBoundary {
+/**
+ * The input boundary for the result use case.
+ */
+public interface RankedInputBoundary {
+
+    /**
+     * Execute a api call.
+     * @param inputData the input data.
+     */
+    void execute(RankedInputData inputData);
+
+    /**
+     * Back to last view.
+     */
+    void backToLastView();
 }

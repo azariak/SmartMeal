@@ -15,6 +15,8 @@ import entity.GenericResultFactory;
 import entity.ResultFactoryInterface;
 import entity.UserFactory;
 import entity.test.GenericRecipeFactory;
+import interface_adapter.Ranked.RankedController;
+import interface_adapter.Ranked.RankedPresenter;
 import interface_adapter.Ranked.RankedViewModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.change_password.ChangePasswordController;
@@ -61,6 +63,9 @@ import use_case.logout.LogoutOutputBoundary;
 import use_case.main_menu.MainMenuInputBoundary;
 import use_case.main_menu.MainMenuInteractor;
 import use_case.main_menu.MainMenuOutputBoundary;
+import use_case.ranked.RankedInputBoundary;
+import use_case.ranked.RankedInteractor;
+import use_case.ranked.RankedOutputBoundary;
 import use_case.recipe_detail.RecipeDetailDataAccessInterface;
 import use_case.recipe_detail.RecipeDetailInputBoundary;
 import use_case.recipe_detail.RecipeDetailInteractor;
@@ -293,8 +298,21 @@ public class AppBuilder {
         rankedViewModel = new RankedViewModel();
         rankedView = new RankedView(rankedViewModel);
         cardPanel.add(rankedView, rankedView.getViewName());
+
+        final RankedOutputBoundary rankedOutputBoundary =
+                new RankedPresenter(rankedViewModel, viewManagerModel);
+
+        final RankedInputBoundary rankedInteractor =
+                new RankedInteractor(rankedOutputBoundary);
+
+        final RankedController rankedController =
+                new RankedController(rankedInteractor);
+        rankedView.setRankedController(rankedController);
+
         return this;
     }
+
+
 
     /**
      * Adds the main menu use case to the application.
