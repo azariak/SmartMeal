@@ -27,7 +27,9 @@ public class RankedController {
     /**
      * Back to last view.
      */
-    public void backTolastView() {
+    public void backToLastView() {
+
         rankedUseCaseInteractor.backToLastView();
+
     }
 }

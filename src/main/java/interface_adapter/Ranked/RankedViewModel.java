@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import interface_adapter.ViewModel;
+import interface_adapter.result.ResultViewState;
 
 /**
  * ViewModel class for managing the state and behavior of the Ranked Recipes View.
@@ -26,6 +27,7 @@ public class RankedViewModel extends ViewModel<RankedViewState> {
         initializeStars();
         setState(initializeState());
     }
+
 
     /**
      * Initializes the star ratings for each possible rating value.
@@ -104,4 +106,6 @@ public class RankedViewModel extends ViewModel<RankedViewState> {
         // Convert the List<String> to a String[] and return.
         return rankingsList.toArray(new String[0]);
     }
+
+
 }

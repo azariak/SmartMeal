@@ -62,7 +62,7 @@ public class RankedView extends JPanel implements PropertyChangeListener {
         final JButton backButton = new JButton("<html><font color=#08289c>Back</font></html>");
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                rankedController.backTolastView();
+                rankedController.backToLastView();
 
             }
         });

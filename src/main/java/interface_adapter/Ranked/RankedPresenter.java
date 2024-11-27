@@ -2,8 +2,6 @@ package interface_adapter.Ranked;
 
 import entity.Ranked;
 import interface_adapter.ViewManagerModel;
-import interface_adapter.recipe_detail.RecipeDetailState;
-import interface_adapter.recipe_detail.RecipeDetailViewModel;
 import use_case.ranked.RankedOutputBoundary;
 import use_case.ranked.RankedOutputData;
 
@@ -21,9 +19,9 @@ public class RankedPresenter implements RankedOutputBoundary {
     }
 
     @Override
-    public void prepareRecipeRankView(RankedOutputData resultOutputData) {
-        final RankedState rankedState = rankedViewModel.getState();
-        rankedState.setGenericRecipe(resultOutputData.getGenericRecipe());
+    public void prepareRecipeRankView(RankedOutputData rankedOutputData) {
+        final RankedViewState rankedState = rankedViewModel.getState();
+        rankedState.setGenericRecipe(rankedOutputData.getGenericRecipe());
         this.rankedViewModel.setState(rankedState);
         this.rankedViewModel.firePropertyChanged();
 

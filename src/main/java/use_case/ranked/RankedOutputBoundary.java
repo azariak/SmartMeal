@@ -7,6 +7,8 @@ import entity.Ranked;
  */
 public interface RankedOutputBoundary {
 
+    void prepareRecipeRankView(RankedOutputData rankedOutputData);
+
     /**
      * Prepare the ranked detail view.
      * @param rankedOutputData the result out put data.

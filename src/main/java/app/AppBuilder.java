@@ -308,6 +308,7 @@ public class AppBuilder {
         final RankedController rankedController =
                 new RankedController(rankedInteractor);
         rankedView.setRankedController(rankedController);
+
         return this;
     }
 

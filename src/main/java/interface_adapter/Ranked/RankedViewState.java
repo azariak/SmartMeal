@@ -1,5 +1,7 @@
 package interface_adapter.Ranked;
 
+import entity.GenericRecipe;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,5 +37,8 @@ public class RankedViewState {
      */
     public void updateRanking(int index, String ranking) {
         rankings.set(index, ranking);
+    }
+
+    public void setGenericRecipe(GenericRecipe genericRecipe) {
     }
 }
