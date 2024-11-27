@@ -9,4 +9,9 @@ public interface RecipeDetailOutputBoundary {
      * @param outputData the output data
      */
     void prepareSuccessView(RecipeDetailOutputData outputData);
+
+    /**
+     * Back to last view.
+     */
+    void backToLastView();
 }

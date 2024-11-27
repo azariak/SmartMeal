@@ -50,7 +50,7 @@ public class RecipeDetailView extends JPanel implements PropertyChangeListener {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
-
+                recipeDetailController.backTolastView();
             }
         });
 

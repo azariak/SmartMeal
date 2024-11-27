@@ -10,4 +10,9 @@ public interface RecipeDetailInputBoundary {
      * @param recipeDetailInputData the input data.
      */
     void execute(RecipeDetailInputData recipeDetailInputData);
+
+    /**
+     * Back to last view.
+     */
+    void backToLastView();
 }

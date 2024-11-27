@@ -44,4 +44,9 @@ public class RecipeDetailInteractor implements RecipeDetailInputBoundary {
 
         recipeDetailPresenter.prepareSuccessView(recipeDetailOutputData);
     }
+
+    @Override
+    public void backToLastView() {
+        recipeDetailPresenter.backToLastView();
+    }
 }

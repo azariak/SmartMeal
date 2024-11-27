@@ -25,8 +25,9 @@ public class ResultPresenter implements ResultOutputBoundary {
         this.recipeDetailViewModel.setState(recipeDetailState);
         this.recipeDetailViewModel.firePropertyChanged();
 
-        this.viewManagerModel.setState(recipeDetailViewModel.getViewName());
+        this.viewManagerModel.switchView(recipeDetailViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
+
     }
 
     @Override
