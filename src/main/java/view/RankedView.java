@@ -36,8 +36,8 @@ public class RankedView extends JPanel implements ActionListener, PropertyChange
     public RankedView(RankedViewModel rankedViewModel) {
         this.viewModel = rankedViewModel;
         this.viewModel.addPropertyChangeListener(this);
-        final int panelHeight = 500;
-        final int panelWidth = 200;
+        final int panelHeight = 600;
+        final int panelWidth = 100;
         this.setPreferredSize(new Dimension(panelWidth, panelHeight));
 
         // Title and subtitle
