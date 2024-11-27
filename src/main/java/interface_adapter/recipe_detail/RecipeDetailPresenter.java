@@ -26,5 +26,11 @@ public class RecipeDetailPresenter implements RecipeDetailOutputBoundary {
         recipeDetailState.setRecipeName(outputData.getTemporaryAdvancedRecipe().getRecipeName());
         recipeDetailState.setInstructions(outputData.getTemporaryAdvancedRecipe().getInstructions());
     }
+
+    @Override
+    public void backToLastView() {
+        this.viewManagerModel.setState(this.viewManagerModel.getPreviousViewName());
+        this.viewManagerModel.firePropertyChanged();
+    }
 }
 

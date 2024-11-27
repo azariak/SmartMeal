@@ -25,4 +25,11 @@ public class RecipeDetailController {
         recipeDetailInteractor.execute(recipeDetailInputData);
     }
 
+    /**
+     * Back to last view.
+     */
+    public void backTolastView() {
+        recipeDetailInteractor.backToLastView();
+    }
+
 }
