@@ -18,6 +18,8 @@ public class ViewModel<T> {
 
     private T state;
 
+    private String previsousViewName = "";
+
     public ViewModel(String viewName) {
         this.viewName = viewName;
     }
@@ -61,4 +63,14 @@ public class ViewModel<T> {
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         this.support.addPropertyChangeListener(listener);
     }
+
+    public String getPrevisousViewName() {
+        return previsousViewName;
+    }
+
+    public void setPrevisousViewName(String name) {
+        this.previsousViewName = name;
+
+    }
+
 }

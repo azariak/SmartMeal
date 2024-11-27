@@ -1,7 +1,5 @@
 package use_case.result;
 
-import entity.GenericRecipe;
-
 /**
  * The interactor for the result use case.
  */
@@ -20,5 +18,10 @@ public class ResultInteractor implements ResultInputBoundary {
     public void execute(ResultInputData inputData) {
         final ResultOutputData resultOutputData = new ResultOutputData(inputData.getRecipe());
         resultPresenter.prepareRecipeDetailView(resultOutputData);
+    }
+
+    @Override
+    public void backToLastView() {
+        resultPresenter.backToLastView();
     }
 }

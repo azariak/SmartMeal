@@ -10,4 +10,9 @@ public interface ResultInputBoundary {
      * @param inputData the input data.
      */
     void execute(ResultInputData inputData);
+
+    /**
+     * Back to last view.
+     */
+    void backToLastView();
 }
