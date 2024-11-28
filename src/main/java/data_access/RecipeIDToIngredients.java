@@ -5,8 +5,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.*;
 
 import org.json.JSONObject;
+import org.json.JSONArray;
+import java.util.ArrayList;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -19,31 +22,52 @@ import use_case.map_groceries.MapGroceriesDataAccessInterface;
  */
 public class RecipeIDToIngredients {
 
-    private static final String API_KEY = System.getenv("API_KEY");
     private static final String BASE_URL = "https://api.spoonacular.com/recipes/";
 
     /**
-     * Returns a JSON Object with ingredient information for a recipe.
+     * Returns an array with ingredient information for a recipe.
      * @param id the recipe id.
-     * @return The JSON Object with ingredient information.
+     * @return The ArrayList with ingredient names or null if request fails.
      * @throws IOException if error occurs during API call.
      */
-    public JSONObject getFullIngredients(String id) throws IOException {
-        final OkHttpClient client = new OkHttpClient();
+    public static ArrayList<String> getFullIngredients(String id) throws IOException {
+        ArrayList<String> result = null;
 
-        final String url = BASE_URL + id + "/ingredientWidget.json" + "&apiKey="
-                + System.getenv("API_KEY");
+        final String urlString = BASE_URL + id + "/ingredientWidget.json" + "?apiKey="
+                + "ac77230dfdf14548b77b78cb800fe0af";
+        try {
+            // Create url
+            final URL url = new URL(urlString);
+            // Open connection
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            // Set request method type to GET
+            connection.setRequestMethod("GET");
+            // Get response code.
+            final int responseCode = connection.getResponseCode();
 
-        final Request request = new Request.Builder().url(url).get()
-                .addHeader("Content-Type", "application/json").build();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String inputLine;
+                StringBuilder response = new StringBuilder();
 
-        try (Response response = client.newCall(request).execute()) {
-            if (!response.isSuccessful()) {
-                throw new IOException("Unexpected Code: " + response);
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+
+                // Output the list of ingredients.
+                final String stringresult = response.toString();
+                final JSONArray jsonArray = new JSONArray(stringresult.substring(15, stringresult.length() - 1));
+                final ArrayList<String> finalresult = new ArrayList<>();
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    finalresult.add(jsonArray.getJSONObject(i).getString("name"));
+                }
+                result = finalresult;
             }
-            return new JSONObject(response.toString());
         }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return result;
     }
-
 }
-
