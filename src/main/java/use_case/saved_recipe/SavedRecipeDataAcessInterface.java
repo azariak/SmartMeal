@@ -1,8 +1,10 @@
 package use_case.saved_recipe;
 
+import entity.GenericRecipe;
 import org.json.JSONObject;
 
 import entity.AdvancedRecipe;
+import entity.GenericRecipe;
 
 /**
  * DAO for the Saved Recipe Use Case.
@@ -28,5 +30,11 @@ public interface SavedRecipeDataAcessInterface {
      * @param fileName the file name.
      */
     void saveRecipe(JSONObject recipeJson, String fileName);
+
+    /**
+     * Returns the recipe with the given id.
+     * @param id the recipe to look up
+     */
+    GenericRecipe load(String id);
 }
 
