@@ -1,19 +1,20 @@
 package data_access;
 
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import org.json.JSONObject;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import use_case.map_groceries.MapGroceriesDataAccessInterface;
+
 /**
- * This class takes a given recipe ID and returns a Map of the required
+ * This class takes a given recipe ID and returns a JSONObject of the required
  * ingredients.
  */
 public class RecipeIDToIngredients {

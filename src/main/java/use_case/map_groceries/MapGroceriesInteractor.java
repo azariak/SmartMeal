@@ -14,17 +14,35 @@ public class MapGroceriesInteractor implements MapGroceriesInputBoundary {
 
     private final MapGroceriesOutputBoundary mapGroceriesPresenter;
     private final GroceryList groceryList;
+    private final MapGroceriesDataAccessInterface mapGroceriesDataAccessInterface;
 
     public MapGroceriesInteractor(MapGroceriesOutputBoundary mapGroceriesPresenter,
-                                  GroceryList groceryList) {
+                                  GroceryList groceryList,
+                                  MapGroceriesDataAccessInterface mapGroceriesDataAccessInterface) {
         this.mapGroceriesPresenter = mapGroceriesPresenter;
         this.groceryList = groceryList;
+        this.mapGroceriesDataAccessInterface = mapGroceriesDataAccessInterface;
     }
 
     @Override
     public void execute(MapGroceriesInputData mapGroceriesInputData) {
+        // Recipe id
+        final String id = mapGroceriesInputData.getID();
+        /* The Grocery List output data.
+        final GroceryList groceries =
+
+         */
 
     }
 
+    @Override
+    public void goToGroceryView() {
+
+    }
+
+    @Override
+    public void goToLastView() {
+
+    }
 
 }
