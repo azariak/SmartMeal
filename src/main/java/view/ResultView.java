@@ -7,7 +7,10 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
-import javax.swing.*;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import entity.GenericRecipe;
 import interface_adapter.result.ResultController;
@@ -20,13 +23,14 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
 
     private static final Integer MAXIMUM_RECIPE_TO_DISPLAY = 10;
     private static final Integer MINIMUM_RECIPE_TO_DISPLAY = 0;
+    private static final String VIEW_NAME = "Result View";
 
-    private final String viewName = "Result View";
     private final ResultViewModel resultViewModel;
     private ResultController resultController;
     private final JPanel recipeButtons;
 
     public ResultView(ResultViewModel resultViewModel) {
+
         this.resultViewModel = resultViewModel;
         this.resultViewModel.addPropertyChangeListener(this);
         final JLabel title = new JLabel("Results");
@@ -39,12 +43,7 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
         recipeButtons.setLayout(new BoxLayout(recipeButtons, BoxLayout.Y_AXIS));
 
         final JButton back = new JButton("Back");
-        back.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                resultController.backTolastView();
-
-            }
-        });
+        back.addActionListener(evt -> resultController.backTolastView());
         this.add(back);
     }
 
@@ -57,14 +56,13 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
 
         if (recipeArrayList.size() == MINIMUM_RECIPE_TO_DISPLAY) {
             final JLabel zeroRecipeErrorMessage = new JLabel("No Recipe Found");
-            this.add(zeroRecipeErrorMessage);
+            recipeButtons.add(zeroRecipeErrorMessage);
         }
         else {
             for (int i = 0; i < Math.min(MAXIMUM_RECIPE_TO_DISPLAY, recipeArrayList.size()); i++) {
-                final int recipeIndex = i;
-                final JButton recipeButton = new JButton(recipeArrayList.get(recipeIndex).getName());
+                final JButton recipeButton = new JButton(recipeArrayList.get(i).getName());
 
-                addListenerToRecipeButtonByIndex(recipeButton, recipeArrayList, recipeIndex);
+                addListenerToRecipeButtonByIndex(recipeButton, recipeArrayList, i);
 
                 recipeButtons.add(recipeButton);
             }
@@ -82,19 +80,17 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
     private void addListenerToRecipeButtonByIndex(JButton recipeButton,
                                                   ArrayList<GenericRecipe> recipeArrayList,
                                                   int recipeIndex) {
-        recipeButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
+        recipeButton.addActionListener(evt -> {
 
-                if (evt.getSource().equals(recipeButton)) {
-                    resultController.execute(recipeArrayList.get(recipeIndex));
-                }
-
+            if (evt.getSource().equals(recipeButton)) {
+                resultController.execute(recipeArrayList.get(recipeIndex));
             }
+
         });
     }
 
     public String getViewName() {
-        return viewName;
+        return VIEW_NAME;
     }
 
     @Override
