@@ -9,6 +9,7 @@ import javax.swing.WindowConstants;
 import data_access.ApiSearchDataAccessObject;
 import data_access.InMemoryUserDataAccessObject;
 import data_access.RecipeDetailDataAccessObject;
+import data_access.SubstitutesDataAccessObject;
 import entity.CommonUserFactory;
 import entity.GenericRecipeFactoryInterface;
 import entity.GenericResultFactory;
@@ -25,6 +26,9 @@ import interface_adapter.change_password.LoggedInViewModel;
 import interface_adapter.ingredient_search.IngredientSearchController;
 import interface_adapter.ingredient_search.IngredientSearchPresenter;
 import interface_adapter.ingredient_search.IngredientSearchViewModel;
+import interface_adapter.ingredient_substitutions.SubstitutesController;
+import interface_adapter.ingredient_substitutions.SubstitutesPresenter;
+import interface_adapter.ingredient_substitutions.SubstitutesViewModel;
 import interface_adapter.load_saved_recipe.LoadSavedRecipeController;
 import interface_adapter.load_saved_recipe.LoadSavedRecipePresenter;
 import interface_adapter.load_saved_recipe.LoadSavedRecipeViewModel;
@@ -51,6 +55,9 @@ import use_case.change_password.ChangePasswordOutputBoundary;
 import use_case.ingredient_search.IngredientSearchInputBoundary;
 import use_case.ingredient_search.IngredientSearchInteractor;
 import use_case.ingredient_search.IngredientSearchOutputBoundary;
+import use_case.ingredient_substitutions.SubstitutesInputBoundary;
+import use_case.ingredient_substitutions.SubstitutesInteractor;
+import use_case.ingredient_substitutions.SubstitutesOutputBoundary;
 import use_case.load_saved_recipe.LoadSavedRecipeInputBoundary;
 import use_case.load_saved_recipe.LoadSavedRecipeInteractor;
 import use_case.load_saved_recipe.LoadSavedRecipeOutputBoundary;
@@ -76,16 +83,7 @@ import use_case.result.ResultOutputBoundary;
 import use_case.signup.SignupInputBoundary;
 import use_case.signup.SignupInteractor;
 import use_case.signup.SignupOutputBoundary;
-import view.IngredientSearchView;
-import view.LoadSavedRecipeView;
-import view.LoggedInView;
-import view.LoginView;
-import view.MainMenuView;
-import view.RankedView;
-import view.RecipeDetailView;
-import view.ResultView;
-import view.SignupView;
-import view.ViewManager;
+import view.*;
 
 /**
  * The AppBuilder class is responsible for putting together the pieces of
@@ -112,6 +110,7 @@ public class AppBuilder {
     private final InMemoryUserDataAccessObject userDataAccessObject = new InMemoryUserDataAccessObject();
     private final ApiSearchDataAccessObject apiSearchDataAccessObject = new ApiSearchDataAccessObject();
     private final RecipeDetailDataAccessObject recipeDetailDataAccessObject = new RecipeDetailDataAccessObject();
+    private final SubstitutesDataAccessObject substitutesDataAccessObject = new SubstitutesDataAccessObject();
 
     private SignupView signupView;
     private SignupViewModel signupViewModel;
@@ -137,7 +136,9 @@ public class AppBuilder {
 
     private RecipeDetailView recipeDetailView;
     private RecipeDetailViewModel recipeDetailViewModel;
-    private RecipeDetailDataAccessInterface recipeDetailDataAccessInterface;
+
+    private SubstitutesView substitutesView;
+    private SubstitutesViewModel substitutesViewModel;
 
     public AppBuilder() {
         cardPanel.setLayout(cardLayout);
@@ -405,11 +406,37 @@ public class AppBuilder {
                         genericRecipeFactory,
                         recipeDetailDataAccessObject);
 
-        final RecipeDetailController recipeDetailController =
-                new RecipeDetailController(recipeDetailInteractor);
-
+        final RecipeDetailController recipeDetailController = new RecipeDetailController(recipeDetailInteractor);
         recipeDetailView.setRecipeDetailController(recipeDetailController);
+        return this;
+    }
 
+    /**
+     * Add the Substitutes view to the application.
+     * @return this app builder.
+     */
+    public AppBuilder addSubstitutesView() {
+        substitutesViewModel = new SubstitutesViewModel();
+        substitutesView = new SubstitutesView(substitutesViewModel);
+        cardPanel.add(substitutesView, substitutesView.getViewName());
+        return this;
+    }
+
+    /**
+     * Add the ingredient substitutes use case to the application.
+     * @return this app builder
+     */
+    public AppBuilder addSubstitutesUseCase() {
+        final SubstitutesOutputBoundary substitutesOutputBoundary =
+                new SubstitutesPresenter(substitutesViewModel, viewManagerModel);
+
+        final SubstitutesInputBoundary substitutesInteractor =
+                new SubstitutesInteractor(
+                        substitutesOutputBoundary,
+                        substitutesDataAccessObject);
+
+        final SubstitutesController substitutesController = new SubstitutesController(substitutesInteractor);
+        recipeDetailView.setSubstitutesController(substitutesController);
         return this;
     }
 

@@ -41,14 +41,17 @@ public class IngredientSearchInteractor implements IngredientSearchInputBoundary
 
     @Override
     public void execute(IngredientSearchInputData ingredientSearchInputData) throws IOException {
+        // recipe title and id
         final Map<String, String> response =
                 apiSearchDataAccessObject.excuteSearch(ingredientSearchInputData.getIngredients());
         final ArrayList<GenericRecipe> recipeArrayList = new ArrayList<>();
 
         for (String key : response.keySet()) {
             final GenericRecipe recipe = genericRecipeFactory.createGenericRecipe(key, response.get(key));
+            // add generic recipe to list
             recipeArrayList.add(recipe);
         }
+        // contains array list of generic recipes
         final GenericResult result = resultFactory.createGenericResult(recipeArrayList);
         final IngredientSearchOutputData ingredientSearchOutputData =
                 new IngredientSearchOutputData(result, false);
