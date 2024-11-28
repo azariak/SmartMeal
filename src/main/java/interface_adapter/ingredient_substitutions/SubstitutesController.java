@@ -8,10 +8,10 @@ import use_case.ingredient_substitutions.SubstitutesInputData;
  */
 public class SubstitutesController {
 
-    private final SubstitutesInputBoundary substitutesinteractor;
+    private final SubstitutesInputBoundary substitutesInteractor;
 
-    public SubstitutesController(SubstitutesInputBoundary substitutesinteractor) {
-        this.substitutesinteractor = substitutesinteractor;
+    public SubstitutesController(SubstitutesInputBoundary substitutesInteractor) {
+        this.substitutesInteractor = substitutesInteractor;
     }
 
     /**
@@ -20,6 +20,13 @@ public class SubstitutesController {
      */
     public void execute(String ingredientName) {
         final SubstitutesInputData substitutesInputData = new SubstitutesInputData(ingredientName);
-        substitutesinteractor.execute(substitutesInputData);
+        substitutesInteractor.execute(substitutesInputData);
+    }
+
+    /**
+     * Back to last view.
+     */
+    public void backTolastView() {
+        substitutesInteractor.backToLastView();
     }
 }
