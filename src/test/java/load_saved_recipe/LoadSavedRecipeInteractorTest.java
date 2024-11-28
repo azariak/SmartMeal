@@ -1,34 +1,31 @@
 package load_saved_recipe;
 
 import data_access.InMemoryUserDataAccessObject;
-import entity.CommonUserFactory;
 import entity.GenericRecipe;
-import entity.AdvancedRecipe;
-import entity.UserFactory;
+import entity.CommonUserFactory;
 import org.junit.jupiter.api.Test;
 import use_case.load_saved_recipe.*;
-import use_case.login.*;
-
-import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class LoadSavedRecipeInteractorTest {
 
     @Test
-    void successTest() {
+    void successRecipeFoundTest() {
+        // Setup input and repository
         LoadSavedRecipeInputData inputData = new LoadSavedRecipeInputData("1", "Lasagna");
-        LoadSavedRecipeDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
+        LoadSavedRecipeDataAccessInterface recipeRepository = new InMemoryUserDataAccessObject();
 
-        UserFactory factory = new CommonUserFactory();
-        AdvancedRecipe recipe =
-        userRepository.save(recipe);
+        // Save the recipe in the repository
+        GenericRecipe lasagna = new GenericRecipe("1", "Lasagna");
+        recipeRepository.save(lasagna);
 
-        // This creates a successPresenter that tests whether the test case is as we expect.
-        LoginOutputBoundary successPresenter = new LoginOutputBoundary() {
+        // Setup presenter to verify success
+        LoadSavedRecipeOutputBoundary successPresenter = new LoadSavedRecipeOutputBoundary() {
             @Override
-            public void prepareSuccessView(LoginOutputData user) {
-                assertEquals("Paul", user.getUsername());
+            public void prepareSuccessView(LoadSavedRecipeOutputData outputData) {
+                assertEquals("1", outputData.getRecipeId());
+                assertEquals("Lasagna", outputData.getRecipeName());
             }
 
             @Override
@@ -37,90 +34,79 @@ public class LoadSavedRecipeInteractorTest {
             }
         };
 
-        LoadSavedRecipeInputBoundary interactor = new LoginInteractor(userRepository, successPresenter);
+        // Execute interactor
+        LoadSavedRecipeInputBoundary interactor = new LoadSavedRecipeInteractor(recipeRepository, successPresenter);
         interactor.execute(inputData);
     }
 
     @Test
-    void successUserLoggedInTest() {
-        LoginInputData inputData = new LoginInputData("Paul", "password");
-        LoginUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
+    void failureRecipeNotFoundTest() {
+        // Setup input and repository
+        LoadSavedRecipeInputData inputData = new LoadSavedRecipeInputData("999", "NonExistentRecipe");
+        LoadSavedRecipeDataAccessInterface recipeRepository = new InMemoryUserDataAccessObject();
 
-        // For the success test, we need to add Paul to the data access repository before we log in.
-        UserFactory factory = new CommonUserFactory();
-        User user = factory.create("Paul", "password");
-        userRepository.save(user);
-
-        // This creates a successPresenter that tests whether the test case is as we expect.
-        LoginOutputBoundary successPresenter = new LoginOutputBoundary() {
+        // Setup presenter to verify failure
+        LoadSavedRecipeOutputBoundary failurePresenter = new LoadSavedRecipeOutputBoundary() {
             @Override
-            public void prepareSuccessView(LoginOutputData user) {
-                assertEquals("Paul", userRepository.getCurrentUsername());
-            }
-
-            @Override
-            public void prepareFailView(String error) {
-                fail("Use case failure is unexpected.");
-            }
-        };
-
-        LoginInputBoundary interactor = new LoginInteractor(userRepository, successPresenter);
-        assertEquals(null, userRepository.getCurrentUsername());
-
-        interactor.execute(inputData);
-    }
-
-    @Test
-    void failurePasswordMismatchTest() {
-        LoadSavedRecipeInputData inputData = new LoadSavedRecipeInputData("Paul", "wrong");
-        LoadSavedRecipeDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
-
-        // For this failure test, we need to add Paul to the data access repository before we log in, and
-        // the passwords should not match.
-        UserFactory factory = new CommonUserFactory();
-        GenericRecipe recipe = factory.create("Paul", "password");
-        userRepository.save(recipe);
-
-        // This creates a presenter that tests whether the test case is as we expect.
-        LoginOutputBoundary failurePresenter = new LoginOutputBoundary() {
-            @Override
-            public void prepareSuccessView(LoginOutputData user) {
-                // this should never be reached since the test case should fail
+            public void prepareSuccessView(LoadSavedRecipeOutputData outputData) {
                 fail("Use case success is unexpected.");
             }
 
             @Override
             public void prepareFailView(String error) {
-                assertEquals("Incorrect password for \"Paul\".", error);
+                assertEquals("Recipe with ID \"999\" does not exist.", error);
             }
         };
 
-        LoadSavedRecipeInputBoundary interactor = new LoadSavedRecipeInteractor(userRepository, failurePresenter);
+        // Execute interactor
+        LoadSavedRecipeInputBoundary interactor = new LoadSavedRecipeInteractor(recipeRepository, failurePresenter);
         interactor.execute(inputData);
     }
 
     @Test
-    void failureUserDoesNotExistTest() {
-        LoadSavedRecipeInputData inputData = new LoginInputData("", "");
-        LoadSavedRecipeDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
+    void failureEmptyInputTest() {
+        // Setup input and repository
+        LoadSavedRecipeInputData inputData = new LoadSavedRecipeInputData("", "");
+        LoadSavedRecipeDataAccessInterface recipeRepository = new InMemoryUserDataAccessObject();
 
-        // Add Paul to the repo so that when we check later they already exist
-
-        // This creates a presenter that tests whether the test case is as we expect.
-        LoginOutputBoundary failurePresenter = new LoadSavedRecipeOutputBoundary() {
+        // Setup presenter to verify failure
+        LoadSavedRecipeOutputBoundary failurePresenter = new LoadSavedRecipeOutputBoundary() {
             @Override
-            public void prepareSuccessView(LoadSavedRecipeOutputData recipe) {
-                // this should never be reached since the test case should fail
+            public void prepareSuccessView(LoadSavedRecipeOutputData outputData) {
                 fail("Use case success is unexpected.");
             }
 
             @Override
             public void prepareFailView(String error) {
-                assertEquals("recipe does not exist", error);
+                assertEquals("Recipe ID and name cannot be empty.", error);
             }
         };
 
-        LoadSavedRecipeInputBoundary interactor = new LoadSavedRecipeInteractor(userRepository, failurePresenter);
+        // Execute interactor
+        LoadSavedRecipeInputBoundary interactor = new LoadSavedRecipeInteractor(recipeRepository, failurePresenter);
+        interactor.execute(inputData);
+    }
+
+    @Test
+    void failureInvalidRepositoryTest() {
+        // Setup input and use a null repository to simulate failure
+        LoadSavedRecipeInputData inputData = new LoadSavedRecipeInputData("1", "Lasagna");
+
+        // Setup presenter to verify failure
+        LoadSavedRecipeOutputBoundary failurePresenter = new LoadSavedRecipeOutputBoundary() {
+            @Override
+            public void prepareSuccessView(LoadSavedRecipeOutputData outputData) {
+                fail("Use case success is unexpected.");
+            }
+
+            @Override
+            public void prepareFailView(String error) {
+                assertEquals("Data access error: repository is null.", error);
+            }
+        };
+
+        // Execute interactor with null repository
+        LoadSavedRecipeInputBoundary interactor = new LoadSavedRecipeInteractor(null, failurePresenter);
         interactor.execute(inputData);
     }
 }
