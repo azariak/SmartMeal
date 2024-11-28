@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -72,7 +71,7 @@ public class IngredientSearchView extends JPanel implements ActionListener, Prop
 
     private void addCancelButton() {
         cancel = new JButton("cancel");
-        cancel.addActionListener(this);
+        cancel.addActionListener(evt -> ingredientSearchController.backTolastView());
 
         buttons.add(cancel);
     }
