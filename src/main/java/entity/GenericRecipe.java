@@ -1,7 +1,10 @@
 package entity;
 
+import java.io.FileWriter;
 import java.io.IOException;
 
+import com.google.gson.Gson;
+import data_access.FileRecipeSaver;
 import org.json.JSONObject;
 
 /**
@@ -26,6 +29,13 @@ public class GenericRecipe implements GenericRecipeInterface {
         return id;
     }
 
+    @Override
+    public void save(FileRecipeSaver recipeSaver) {
+        final Gson gson = new Gson();
+        gson.toJson(this);
+
+    }
+
     /**
      * Get JSONObject.
      * @return recipeJson.
@@ -36,14 +46,5 @@ public class GenericRecipe implements GenericRecipeInterface {
         recipeJson.put("name", this.name);
         return recipeJson;
     }
-
-//    /**
-//     * Save recipes.
-//     * @param fileName the file name.
-//     */
-//    public void save(String fileName) {
-//        final JSONObject recipeJson = this.toJson();
-//        recipeSaver.saveRecipe(recipeJson, fileName);
-//    }
 
 }
