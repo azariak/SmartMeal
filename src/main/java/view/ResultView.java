@@ -49,8 +49,10 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
 
     private void addRecipeButtonsPanel() {
         this.recipeButtons = new JPanel();
+
         recipeButtons.setBorder(BorderFactory.createTitledBorder("Results"));
         recipeButtons.setLayout(new BoxLayout(recipeButtons, BoxLayout.Y_AXIS));
+
         this.add(recipeButtons);
     }
 
