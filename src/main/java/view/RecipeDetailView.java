@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
+import interface_adapter.ingredient_substitutions.SubstitutesController;
 import interface_adapter.recipe_detail.RecipeDetailController;
 import interface_adapter.recipe_detail.RecipeDetailViewModel;
 
@@ -28,6 +29,7 @@ public class RecipeDetailView extends JPanel implements PropertyChangeListener {
     private final String viewName = "Recipe Detail";
     private final RecipeDetailViewModel recipeDetailViewModel;
     private RecipeDetailController recipeDetailController;
+    private SubstitutesController substitutesController;
 
     // Constructor to initialize the ViewModel and layout
     public RecipeDetailView(RecipeDetailViewModel recipeDetailViewModel) {
@@ -112,7 +114,6 @@ public class RecipeDetailView extends JPanel implements PropertyChangeListener {
         return quantityPanel;
     }
 
-    // Create and return the panel for ingredient substitutions
     private JPanel createSubstitutionsPanel() {
         final JPanel substitutionsPanel = new JPanel();
         substitutionsPanel.setLayout(new BoxLayout(substitutionsPanel, BoxLayout.Y_AXIS));
@@ -120,18 +121,23 @@ public class RecipeDetailView extends JPanel implements PropertyChangeListener {
         final JLabel substitutionsLabel = new JLabel("Substitute Ingredients");
         substitutionsPanel.add(substitutionsLabel);
 
-        // Add dummy buttons for substitutions (could link to some action later)
         final ArrayList<String> ingredients = recipeDetailViewModel.getState().getIngredients();
-        for (String ingredient : ingredients) {
-            final JButton substituteButton = new JButton("Substitutes for " + ingredient);
+        for (int i = 0; i < ingredients.size(); i++) {
+            final String ingredient = ingredients.get(i);
 
-            // Set button size (example: 100px width, 30px height)
+            final JButton substituteButton = new JButton("Substitutes for " + ingredient + " (" + i + ")");
+
             substituteButton.setPreferredSize(new Dimension(TWO_HUNDRED, FIFTEEN));
             substituteButton.setMaximumSize(new Dimension(TWO_HUNDRED, FIFTEEN));
             substituteButton.setMinimumSize(new Dimension(TWO_HUNDRED, FIFTEEN));
-
-            // Optionally reduce font size for smaller buttons
             substituteButton.setFont(new Font(substituteButton.getFont().getName(), Font.PLAIN, TEN));
+
+            substituteButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent event) {
+                    substitutesController.execute(ingredient);
+                }
+            });
 
             substitutionsPanel.add(substituteButton);
         }
@@ -167,6 +173,10 @@ public class RecipeDetailView extends JPanel implements PropertyChangeListener {
 
     public void setRecipeDetailController(RecipeDetailController recipeDetailController) {
         this.recipeDetailController = recipeDetailController;
+    }
+
+    public void setSubstitutesController(SubstitutesController substitutesController) {
+        this.substitutesController = substitutesController;
     }
 }
 
