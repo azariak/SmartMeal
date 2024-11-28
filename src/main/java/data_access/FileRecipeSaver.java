@@ -14,19 +14,31 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import entity.AdvancedRecipe;
+import use_case.load_saved_recipe.LoadSavedRecipeDataAcessInterface;
 import use_case.saved_recipe.SavedRecipeDataAcessInterface;
 
 /**
  * The DAO for Recipe data.
  */
-public class FileRecipeSaver implements SavedRecipeDataAcessInterface {
+public class FileRecipeSaver implements SavedRecipeDataAcessInterface,
+                                         LoadSavedRecipeDataAcessInterface {
     @Override
     public void save(AdvancedRecipe recipe) {
     }
 
     @Override
+    public void search(AdvancedRecipe recipe) {
+
+    }
+
+    @Override
     public AdvancedRecipe get(String ingredient) {
         return null;
+    }
+
+    @Override
+    public void readJson(JSONObject recipeJson, String fileName) {
+
     }
 
     @Override

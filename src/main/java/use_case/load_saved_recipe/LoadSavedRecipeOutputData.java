@@ -1,22 +1,27 @@
 package use_case.load_saved_recipe;
 
+import entity.GenericRecipe;
+
 /**
  * Output Data for the load saved recipe Use Case.
  */
 public class LoadSavedRecipeOutputData {
 
-    private final String recipeId;
-    private final String recipeName;
+    private final GenericRecipe recipeId;
+    private final GenericRecipe recipeName;
+    private final boolean useCaseFailed;
 
     /**
      * Constructor to initialize LoadSavedRecipeOutputData with a recipe ID and name.
      *
      * @param recipeId   the unique identifier for the recipe.
      * @param recipeName the name of the recipe.
+     * @param useCaseFailed when failed.
      */
-    public LoadSavedRecipeOutputData(String recipeId, String recipeName) {
+    public LoadSavedRecipeOutputData(GenericRecipe recipeId, GenericRecipe recipeName, boolean useCaseFailed) {
         this.recipeId = recipeId;
         this.recipeName = recipeName;
+        this.useCaseFailed = useCaseFailed;
     }
 
     /**
@@ -24,7 +29,7 @@ public class LoadSavedRecipeOutputData {
      *
      * @return the recipe ID as a String.
      */
-    public String getRecipeId() {
+    public GenericRecipe getRecipeId() {
         return recipeId;
     }
 
@@ -33,7 +38,11 @@ public class LoadSavedRecipeOutputData {
      *
      * @return the recipe name as a String.
      */
-    public String getRecipeName() {
+    public GenericRecipe getRecipeName() {
         return recipeName;
+    }
+
+    public boolean isUseCaseFailed() {
+        return useCaseFailed;
     }
 }
