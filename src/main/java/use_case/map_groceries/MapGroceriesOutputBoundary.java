@@ -8,11 +8,11 @@ public interface MapGroceriesOutputBoundary {
      * Prepares the Details view for the Map Groceries use case.
      * @param outputData the output data.
      */
-    void prepareDetailsView(MapGroceriesOutputData outputData);
+    void prepareGroceriesView(MapGroceriesOutputData outputData);
 
     /**
      * Prepares the No Groceries Found view for the Map Groceries use case.
      * @param errorMessage the error message to be outputted.
      */
-    void prepareNoGroceriesFoundView(String errorMessage);
+    void goToNoGroceriesFoundView(String errorMessage);
 }
