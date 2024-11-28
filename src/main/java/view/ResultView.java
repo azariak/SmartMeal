@@ -7,6 +7,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -27,24 +28,30 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
 
     private final ResultViewModel resultViewModel;
     private ResultController resultController;
-    private final JPanel recipeButtons;
+    private JPanel recipeButtons;
 
     public ResultView(ResultViewModel resultViewModel) {
 
         this.resultViewModel = resultViewModel;
         this.resultViewModel.addPropertyChangeListener(this);
-        final JLabel title = new JLabel("Results");
-        title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.add(title);
-
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        this.recipeButtons = new JPanel();
-        recipeButtons.setLayout(new BoxLayout(recipeButtons, BoxLayout.Y_AXIS));
+        addRecipeButtonsPanel();
+        addBackButton();
+    }
 
+    private void addBackButton() {
         final JButton back = new JButton("Back");
+        back.setAlignmentX(Component.RIGHT_ALIGNMENT);
         back.addActionListener(evt -> resultController.backTolastView());
         this.add(back);
+    }
+
+    private void addRecipeButtonsPanel() {
+        this.recipeButtons = new JPanel();
+        recipeButtons.setBorder(BorderFactory.createTitledBorder("Results"));
+        recipeButtons.setLayout(new BoxLayout(recipeButtons, BoxLayout.Y_AXIS));
+        this.add(recipeButtons);
     }
 
     /**
@@ -67,7 +74,6 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
                 recipeButtons.add(recipeButton);
             }
         }
-        this.add(recipeButtons);
     }
 
     /**

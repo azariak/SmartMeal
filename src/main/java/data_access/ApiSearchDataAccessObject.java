@@ -59,7 +59,7 @@ public class ApiSearchDataAccessObject implements IngredientSearchDataAccessInte
         return recipeMap;
     }
 
-    private static void addResultToRecipeMap(HttpURLConnection connection, Map<String,
+    private void addResultToRecipeMap(HttpURLConnection connection, Map<String,
             String> recipeMap) throws IOException {
         final JSONArray results = getObjects(connection);
 
@@ -75,7 +75,7 @@ public class ApiSearchDataAccessObject implements IngredientSearchDataAccessInte
         }
     }
 
-    private static JSONArray getObjects(HttpURLConnection connection) throws IOException {
+    private JSONArray getObjects(HttpURLConnection connection) throws IOException {
         final BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
         String inputLine;
         final StringBuilder response = new StringBuilder();
