@@ -173,7 +173,21 @@ public class AppBuilder {
     public AppBuilder addLoggedInView() {
         loggedInViewModel = new LoggedInViewModel();
         loggedInView = new LoggedInView(loggedInViewModel);
+
+        final LoginOutputBoundary loginOutputBoundary = new LoginPresenter(viewManagerModel,
+                loggedInViewModel, loginViewModel);
+        final LoginInputBoundary loginInteractor = new LoginInteractor(
+                userDataAccessObject, loginOutputBoundary);
+
+        // Create a login controller with the view manager or card layout
+        final LoginController loginController = new LoginController(loginInteractor);
+
+        // Set the login controller in the logged in view
+        loggedInView.setLoginController(loginController);
+
+        // Add the view to the card panel
         cardPanel.add(loggedInView, loggedInView.getViewName());
+
         return this;
     }
 

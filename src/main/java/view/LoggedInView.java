@@ -45,6 +45,7 @@ public class LoggedInView extends JPanel implements PropertyChangeListener {
     private final JButton loadSavedRecipes;
 
     private final JButton rankedRecipes;
+
     private LoginController loginController;
 
 
@@ -168,23 +169,6 @@ public class LoggedInView extends JPanel implements PropertyChangeListener {
         this.logoutController = logoutController;
     }
 
-    // TODO: Implement these methods with actual view switching logic
-    private void switchToIngredienSearchView() {
-        System.out.println("Switching to Ingredient Search View");
-        loginController.switchToIngredienSearchView();
-
-    }
-
-    private void switchToLoadSavedRecipeView() {
-        System.out.println("Switching to Saved Recipes View");
-        loginController.switchToLoadSavedRecipeView();
-    }
-
-    private void switchToRankedView() {
-        System.out.println("Switching to Ranked Recipes View");
-        loginController.switchToRankedView();
-        // Add actual view switching logic here
-    }
     public void setLoginController(LoginController loginController) {
         this.loginController = loginController;
     }
