@@ -1,6 +1,7 @@
 package view;
 
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Font;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -167,7 +168,7 @@ public class LoggedInView extends JPanel implements PropertyChangeListener {
         if (evt.getPropertyName().equals("state")) {
             final LoggedInState state = (LoggedInState) evt.getNewValue();
             // Update welcome message dynamically
-            ((JLabel) this.getComponent(1)).setText("Welcome " + state.getUsername() + "!");
+            ((JLabel) this.getComponent(1)).setText("Welcome " + state.getUsername() + " :)");
         }
         else if (evt.getPropertyName().equals("password")) {
             final LoggedInState state = (LoggedInState) evt.getNewValue();
