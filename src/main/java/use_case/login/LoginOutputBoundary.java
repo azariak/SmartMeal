@@ -15,4 +15,10 @@ public interface LoginOutputBoundary {
      * @param errorMessage the explanation of the failure
      */
     void prepareFailView(String errorMessage);
+
+    void switchToRankedView();
+
+    void switchToLoadSavedRecipeView();
+
+    void switchToIngredientSearchView();
 }

@@ -42,4 +42,22 @@ public class LoginPresenter implements LoginOutputBoundary {
         loginState.setLoginError(error);
         loginViewModel.firePropertyChanged();
     }
+
+    @Override
+    public void switchToIngredientSearchView() {
+        viewManagerModel.switchView("Ingredient Search");
+        viewManagerModel.firePropertyChanged();
+    }
+
+    @Override
+    public void switchToLoadSavedRecipeView() {
+        viewManagerModel.switchView("Saved Recipes");
+        viewManagerModel.firePropertyChanged();
+    }
+
+    @Override
+    public void switchToRankedView() {
+        this.viewManagerModel.switchView("Ranked Recipes View");
+        viewManagerModel.firePropertyChanged();
+    }
 }

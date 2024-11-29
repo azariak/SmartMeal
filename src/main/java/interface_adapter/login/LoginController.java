@@ -25,4 +25,25 @@ public class LoginController {
 
         loginUseCaseInteractor.execute(loginInputData);
     }
+
+    /**
+     * Switch to saved recipe view.
+     */
+    public void switchToLoadSavedRecipeView() {
+        loginUseCaseInteractor.switchToLoadSavedRecipeView();
+    }
+
+    /**
+     * Switch to demo ingredient search view.
+     */
+    public void switchToIngredienSearchView() {
+        loginUseCaseInteractor.switchToIngredientSearchView();
+    }
+
+    /**
+     * Switch to ranked view.
+     */
+    public void switchToRankedView() {
+        loginUseCaseInteractor.switchToRankedView();
+    }
 }
