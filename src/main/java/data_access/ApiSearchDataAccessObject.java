@@ -39,6 +39,7 @@ public class ApiSearchDataAccessObject implements IngredientSearchDataAccessInte
 
         try {
             final URL url = new URL(urlString);
+            System.out.println("Executed ingredient to recipe Search API");
             final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.setConnectTimeout(FIVE_THOUSAND);
