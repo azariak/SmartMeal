@@ -37,4 +37,19 @@ public class LoginInteractor implements LoginInputBoundary {
             }
         }
     }
+
+    @Override
+    public void switchToIngredientSearchView() {
+        loginPresenter.switchToIngredientSearchView();
+    }
+
+    @Override
+    public void switchToLoadSavedRecipeView() {
+        loginPresenter.switchToLoadSavedRecipeView();
+    }
+
+    @Override
+    public void switchToRankedView() {
+        loginPresenter.switchToRankedView();
+    }
 }

@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -13,10 +15,13 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import interface_adapter.Ranked.RankedController;
 import interface_adapter.change_password.ChangePasswordController;
 import interface_adapter.change_password.LoggedInState;
 import interface_adapter.change_password.LoggedInViewModel;
 import interface_adapter.logout.LogoutController;
+import interface_adapter.login.LoginController;
+import use_case.main_menu.MainMenuInteractor;
 
 /**
  * The View for when the user is logged into the program.
@@ -36,6 +41,14 @@ public class LoggedInView extends JPanel implements PropertyChangeListener {
     private final JTextField passwordInputField = new JTextField(15);
     private final JButton changePassword;
 
+    private final JButton demoIngredientSearch;
+    private final JButton loadSavedRecipes;
+
+    private final JButton rankedRecipes;
+
+    private LoginController loginController;
+
+
     public LoggedInView(LoggedInViewModel loggedInViewModel) {
         this.loggedInViewModel = loggedInViewModel;
         this.loggedInViewModel.addPropertyChangeListener(this);
@@ -46,7 +59,7 @@ public class LoggedInView extends JPanel implements PropertyChangeListener {
         final LabelTextPanel passwordInfo = new LabelTextPanel(
                 new JLabel("Password"), passwordInputField);
 
-        final JLabel usernameInfo = new JLabel("Currently logged in: ");
+        final JLabel usernameInfo = new JLabel("Welcome, ");
         username = new JLabel();
 
         final JPanel buttons = new JPanel();
@@ -55,6 +68,14 @@ public class LoggedInView extends JPanel implements PropertyChangeListener {
 
         changePassword = new JButton("Change Password");
         buttons.add(changePassword);
+
+        demoIngredientSearch = new JButton("Demo Ingredient Search");
+        buttons.add(demoIngredientSearch);
+        loadSavedRecipes = new JButton("Saved Recipes");
+        buttons.add(loadSavedRecipes);
+
+        rankedRecipes = new JButton("Ranked Recipes");
+        buttons.add(rankedRecipes);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -83,7 +104,6 @@ public class LoggedInView extends JPanel implements PropertyChangeListener {
         });
 
         changePassword.addActionListener(
-                // This creates an anonymous subclass of ActionListener and instantiates it.
                 evt -> {
                     if (evt.getSource().equals(changePassword)) {
                         final LoggedInState currentState = loggedInViewModel.getState();
@@ -97,14 +117,9 @@ public class LoggedInView extends JPanel implements PropertyChangeListener {
         );
 
         logOut.addActionListener(
-                // This creates an anonymous subclass of ActionListener and instantiates it.
                 evt -> {
                     if (evt.getSource().equals(logOut)) {
-                        // TODO: execute the logout use case through the Controller
-
                         logoutController.execute(loggedInViewModel.getState().getUsername());
-                        // 1. get the state out of the loggedInViewModel. It contains the username.
-                        // 2. Execute the logout Controller.
                     }
                 }
         );
@@ -116,6 +131,18 @@ public class LoggedInView extends JPanel implements PropertyChangeListener {
         this.add(passwordInfo);
         this.add(passwordErrorField);
         this.add(buttons);
+
+        demoIngredientSearch.addActionListener(
+                evt -> loginController.switchToIngredienSearchView()
+        );
+
+        loadSavedRecipes.addActionListener(
+                evt -> loginController.switchToLoadSavedRecipeView()
+        );
+
+        rankedRecipes.addActionListener(
+                evt -> loginController.switchToRankedView()
+        );
     }
 
     @Override
@@ -128,7 +155,6 @@ public class LoggedInView extends JPanel implements PropertyChangeListener {
             final LoggedInState state = (LoggedInState) evt.getNewValue();
             JOptionPane.showMessageDialog(null, "password updated for " + state.getUsername());
         }
-
     }
 
     public String getViewName() {
@@ -141,5 +167,9 @@ public class LoggedInView extends JPanel implements PropertyChangeListener {
 
     public void setLogoutController(LogoutController logoutController) {
         this.logoutController = logoutController;
+    }
+
+    public void setLoginController(LoginController loginController) {
+        this.loginController = loginController;
     }
 }
