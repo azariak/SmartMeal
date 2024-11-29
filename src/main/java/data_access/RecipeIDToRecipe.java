@@ -27,6 +27,7 @@ public class RecipeIDToRecipe {
 
         try {
             // Make a GET request to the API
+            System.out.println("Executed recipe ID to Recipe Detail Search");
             final URL url = new URL(urlString);
             final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");

@@ -33,6 +33,7 @@ public class IngredientNameToSubstitutes {
                 + System.getenv("API_KEY") + "&ingredientName=" + ingredientName;
 
         try {
+            System.out.println("Executed Ingredient Name To Substitutes Search: " + ingredientName);
             final URL url = new URL(urlString);
             final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
