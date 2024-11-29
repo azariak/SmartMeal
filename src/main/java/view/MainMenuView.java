@@ -1,7 +1,6 @@
 package view;
 
-import java.awt.Component;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -62,6 +61,7 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
         this.add(Box.createVerticalStrut(50));
         this.add(title);
         this.add(Box.createVerticalStrut(50));
+        this.setPreferredSize(new Dimension(650, 550));
 
         // Create the functional buttons panel
         final JPanel buttons = new JPanel();
