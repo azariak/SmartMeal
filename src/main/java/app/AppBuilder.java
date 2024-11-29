@@ -451,6 +451,7 @@ public class AppBuilder {
 
         final SubstitutesController substitutesController = new SubstitutesController(substitutesInteractor);
         recipeDetailView.setSubstitutesController(substitutesController);
+        substitutesView.setSubstitutesController(substitutesController);
         return this;
     }
 
