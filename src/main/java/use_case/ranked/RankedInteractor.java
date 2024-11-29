@@ -27,4 +27,9 @@ public class RankedInteractor implements RankedInputBoundary {
     public void backToLastView() {
         rankedPresenter.backToLastView();
     }
+
+    @Override
+    public void updateStarRating(String recipeId, int starRating) {
+
+    }
 }

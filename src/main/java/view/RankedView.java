@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -19,23 +20,32 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
-import interface_adapter.Ranked.RankedController;
-import interface_adapter.Ranked.RankedViewModel;
+import interface_adapter.ranked.RankedController;
+import interface_adapter.ranked.RankedViewModel;
 
 /**
- * Ranked view.
+ * This class represents the Ranked View for displaying and editing ranked recipes.
+ * It allows users to view the rankings of their recipes and edit the ratings in edit mode.
  */
 public class RankedView extends JPanel implements ActionListener, PropertyChangeListener {
 
     private final RankedViewModel viewModel;
     private final Color recipeBoxBackground = new Color(240, 240, 255);
     private final Color lineBorder = new Color(8, 40, 156);
+    private final Color starColor = new Color(255, 215, 0);
+    private boolean isEditMode;
 
     private RankedController rankedController;
+    private JPanel rankingsPanel;
 
     public RankedView(RankedViewModel rankedViewModel) {
         this.viewModel = rankedViewModel;
         this.viewModel.addPropertyChangeListener(this);
+
+        initializeView();
+    }
+
+    private void initializeView() {
         final int panelHeight = 600;
         final int panelWidth = 100;
         this.setPreferredSize(new Dimension(panelWidth, panelHeight));
@@ -44,8 +54,8 @@ public class RankedView extends JPanel implements ActionListener, PropertyChange
         final JLabel title = new JLabel("<html><h1><font color=#fcba03>Ranked Recipes</font></h1></html>");
         final JLabel subTitle = new JLabel("<html><h3><font color=#1F4529>Use this "
                 + "view to find the recipes you've ranked or to add new rankings!</font></h3></html>");
-        final JLabel editText = new JLabel("<html><h3><font color=#a1150b>You are now in "
-                + "editing mode.</font></h3></html>");
+        final JLabel editText = new JLabel("<html><h3><font color=#a1150b>Edit mode: Click on stars "
+                + "to change rating</font></h3></html>");
 
         title.setHorizontalAlignment(SwingConstants.CENTER);
         subTitle.setHorizontalAlignment(SwingConstants.CENTER);
@@ -65,7 +75,9 @@ public class RankedView extends JPanel implements ActionListener, PropertyChange
         editButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                editTextPanel.setVisible(!editTextPanel.isVisible());
+                isEditMode = !isEditMode;
+                editTextPanel.setVisible(isEditMode);
+                updateRankingsDisplay();
                 revalidate();
                 repaint();
             }
@@ -76,7 +88,6 @@ public class RankedView extends JPanel implements ActionListener, PropertyChange
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 rankedController.backToLastView();
-
             }
         });
 
@@ -90,56 +101,98 @@ public class RankedView extends JPanel implements ActionListener, PropertyChange
         final int twenty = 20;
         this.setBorder(BorderFactory.createEmptyBorder(twenty, twenty, twenty, twenty));
 
+        // Rankings panel
+        rankingsPanel = new JPanel();
+        rankingsPanel.setLayout(new BoxLayout(rankingsPanel, BoxLayout.Y_AXIS));
+        updateRankingsDisplay();
+
         // Adding components
         this.add(titlePanel);
         final int ten = 10;
         this.add(Box.createRigidArea(new Dimension(0, ten)));
         this.add(subTitlePanel);
         this.add(Box.createRigidArea(new Dimension(0, twenty)));
-
-        // Create ranking boxes dynamically and add them to the panel
-        for (String ranking : viewModel.getRankings()) {
-            final JPanel box = createRankingBox(ranking);
-            this.add(box);
-            this.add(Box.createRigidArea(new Dimension(0, ten)));
-        }
-
+        this.add(rankingsPanel);
         this.add(editTextPanel);
-
         this.add(Box.createRigidArea(new Dimension(0, 0)));
         this.add(buttonPanel);
     }
 
-    private JPanel createRankingBox(String ranking) {
-        final JLabel label = new JLabel("<html><font color=#08289c>" + ranking + "</font></html>");
-        label.setHorizontalAlignment(SwingConstants.LEFT);
+    private void updateRankingsDisplay() {
+        rankingsPanel.removeAll();
+        final String[] rankings = viewModel.getRankings();
 
-        final JPanel panel = new JPanel();
-        panel.setLayout(new BorderLayout());
-        panel.add(label, BorderLayout.CENTER);
+        for (int i = 0; i < rankings.length; i++) {
+            final int recipeIndex = i;
+            final JPanel recipePanel = new JPanel(new BorderLayout());
 
-        final int fontSize = 12;
-        panel.setBorder(BorderFactory.createTitledBorder(
-                BorderFactory.createLineBorder(lineBorder),
-                "Recipe Ranking",
-                TitledBorder.CENTER,
-                TitledBorder.TOP,
-                new Font("Arial", Font.BOLD, fontSize),
-                lineBorder
-        ));
-        panel.setBackground(recipeBoxBackground);
-        return panel;
+            // Extract recipe name and current stars
+            final String[] parts = rankings[i].split(": ");
+            final String recipeName = parts[0];
+            final String currentStars = parts[1];
+            final int currentStarCount = currentStars.length() - currentStars.replace("★", "").length();
+
+            // Recipe name label
+            final JLabel nameLabel = new JLabel("<html><font color=#08289c>" + recipeName + "</font></html>");
+
+            // Star panel
+            final JPanel starPanel = new JPanel(new GridLayout(1, 5));
+            final int numStars = 5;
+            for (int j = 1; j <= numStars; j++) {
+                final int starCount = j;
+
+                final JButton starButton;
+                if (j <= currentStarCount) {
+                    starButton = new JButton("★");
+                }
+                else {
+                    starButton = new JButton("☆");
+                }
+                starButton.setOpaque(true);
+                starButton.setBackground(recipeBoxBackground);
+                final int twenty = 20;
+                starButton.setFont(new Font("Dialog", Font.BOLD, twenty));
+                starButton.setForeground(starColor);
+                starButton.setBorder(BorderFactory.createEmptyBorder());
+                starButton.setContentAreaFilled(false);
+
+                if (isEditMode) {
+                    starButton.addActionListener(e -> {
+                        viewModel.updateStarRating(recipeIndex, starCount);
+                    });
+                }
+
+                starPanel.add(starButton);
+                starPanel.setBackground(recipeBoxBackground);
+            }
+
+            recipePanel.add(nameLabel, BorderLayout.WEST);
+            recipePanel.add(starPanel, BorderLayout.EAST);
+
+            final int twelve = 12;
+            recipePanel.setBorder(BorderFactory.createTitledBorder(
+                    BorderFactory.createLineBorder(lineBorder),
+                    "Recipe Ranking",
+                    TitledBorder.CENTER,
+                    TitledBorder.TOP,
+                    new Font("Arial", Font.BOLD, twelve),
+                    lineBorder
+            ));
+            recipePanel.setBackground(recipeBoxBackground);
+
+            rankingsPanel.add(recipePanel);
+            final int ten = 10;
+            rankingsPanel.add(Box.createRigidArea(new Dimension(0, ten)));
+        }
+
+        revalidate();
+        repaint();
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        if ("ranking".equals(evt.getPropertyName())) {
-            this.removeAll();
-            for (String ranking : viewModel.getRankings()) {
-                this.add(createRankingBox(ranking));
-            }
-            this.revalidate();
-            this.repaint();
+        if ("rankings".equals(evt.getPropertyName())) {
+            updateRankingsDisplay();
         }
     }
 
@@ -153,6 +206,5 @@ public class RankedView extends JPanel implements ActionListener, PropertyChange
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
     }
 }

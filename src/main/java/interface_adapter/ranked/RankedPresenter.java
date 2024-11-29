@@ -1,4 +1,4 @@
-package interface_adapter.Ranked;
+package interface_adapter.ranked;
 
 import entity.Ranked;
 import interface_adapter.ViewManagerModel;

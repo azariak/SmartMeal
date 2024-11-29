@@ -1,8 +1,6 @@
 package view;
 
 import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -15,13 +13,11 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import interface_adapter.Ranked.RankedController;
 import interface_adapter.change_password.ChangePasswordController;
 import interface_adapter.change_password.LoggedInState;
 import interface_adapter.change_password.LoggedInViewModel;
 import interface_adapter.logout.LogoutController;
 import interface_adapter.login.LoginController;
-import use_case.main_menu.MainMenuInteractor;
 
 /**
  * The View for when the user is logged into the program.

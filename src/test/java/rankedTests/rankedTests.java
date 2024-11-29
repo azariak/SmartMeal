@@ -1,4 +1,4 @@
-import interface_adapter.Ranked.RankedViewModel;
+import interface_adapter.ranked.RankedViewModel;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
