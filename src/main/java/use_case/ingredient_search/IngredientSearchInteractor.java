@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
-import data_access.ApiSearchDataAccessObject;
+import data_access.IngredientSearchDataAccessObject;
 import entity.GenericRecipe;
 import entity.GenericRecipeFactoryInterface;
 import entity.GenericResult;
@@ -26,16 +26,16 @@ public class IngredientSearchInteractor implements IngredientSearchInputBoundary
     private final IngredientSearchOutputBoundary ingredientSearchPresenter;
     private final ResultFactoryInterface resultFactory;
     private final GenericRecipeFactoryInterface genericRecipeFactory;
-    private final ApiSearchDataAccessObject apiSearchDataAccessObject;
+    private final IngredientSearchDataAccessObject ingredientSearchDataAccessObject;
 
     public IngredientSearchInteractor(IngredientSearchOutputBoundary ingredientSearchOutputBoundary,
                                       ResultFactoryInterface resultFactory,
                                       GenericRecipeFactoryInterface genericRecipeFactory,
-                                      ApiSearchDataAccessObject apiSearchDataAccessObject) {
+                                      IngredientSearchDataAccessObject ingredientSearchDataAccessObject) {
 
         this.ingredientSearchPresenter = ingredientSearchOutputBoundary;
         this.genericRecipeFactory = genericRecipeFactory;
-        this.apiSearchDataAccessObject = apiSearchDataAccessObject;
+        this.ingredientSearchDataAccessObject = ingredientSearchDataAccessObject;
         this.resultFactory = resultFactory;
     }
 
@@ -43,7 +43,7 @@ public class IngredientSearchInteractor implements IngredientSearchInputBoundary
     public void execute(IngredientSearchInputData ingredientSearchInputData) throws IOException {
         // recipe title and id
         final Map<String, String> response =
-                apiSearchDataAccessObject.excuteSearch(ingredientSearchInputData.getIngredients());
+                ingredientSearchDataAccessObject.excuteSearch(ingredientSearchInputData.getIngredients());
         final ArrayList<GenericRecipe> recipeArrayList = new ArrayList<>();
 
         for (String key : response.keySet()) {

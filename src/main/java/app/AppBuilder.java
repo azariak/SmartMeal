@@ -1,15 +1,13 @@
 package app;
 
 import java.awt.CardLayout;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import data_access.ApiSearchDataAccessObject;
-import data_access.InMemoryUserDataAccessObject;
-import data_access.RecipeDetailDataAccessObject;
-import data_access.SubstitutesDataAccessObject;
+import data_access.*;
 import entity.CommonUserFactory;
 import entity.GenericRecipeFactoryInterface;
 import entity.GenericResultFactory;
@@ -115,11 +113,13 @@ public class AppBuilder {
     private final ViewManagerModel viewManagerModel = new ViewManagerModel();
     private final ViewManager viewManager = new ViewManager(cardPanel, cardLayout, viewManagerModel);
 
+    private final ApiAccessKeyManagerInterface apiAccessKeyManager = new ApiAccessKeyManager();
+
     // thought question: is the hard dependency below a problem?
-    private final InMemoryUserDataAccessObject userDataAccessObject = new InMemoryUserDataAccessObject();
-    private final ApiSearchDataAccessObject apiSearchDataAccessObject = new ApiSearchDataAccessObject();
-    private final RecipeDetailDataAccessObject recipeDetailDataAccessObject = new RecipeDetailDataAccessObject();
-    private final SubstitutesDataAccessObject substitutesDataAccessObject = new SubstitutesDataAccessObject();
+    private InMemoryUserDataAccessObject userDataAccessObject;
+    private IngredientSearchDataAccessObject ingredientSearchDataAccessObject;
+    private RecipeDetailDataAccessObject recipeDetailDataAccessObject;
+    private SubstitutesDataAccessObject substitutesDataAccessObject;
 
     private SignupView signupView;
     private SignupViewModel signupViewModel;
@@ -151,6 +151,26 @@ public class AppBuilder {
 
     public AppBuilder() {
         cardPanel.setLayout(cardLayout);
+        addApiKeysToApiKeyManager();
+        initializeDAO();
+    }
+
+    private void initializeDAO() {
+        userDataAccessObject = new InMemoryUserDataAccessObject();
+        ingredientSearchDataAccessObject = new IngredientSearchDataAccessObject(apiAccessKeyManager);
+        recipeDetailDataAccessObject = new RecipeDetailDataAccessObject();
+        substitutesDataAccessObject = new SubstitutesDataAccessObject();
+    }
+
+    private void addApiKeysToApiKeyManager() {
+        final ArrayList<String> apiKeys = new ArrayList<>();
+        apiKeys.add("6a75fe8f70484b03928ac2c05178f256");
+        apiKeys.add("62842003bb3446dea5816857c6fb7b1f");
+        apiKeys.add("e52f205468974e43b331a87df0ea9378");
+        apiKeys.add("c73fb848e5334d60857265f0b5234458");
+        apiKeys.add("d4ce1e00e8534867af36c1e1fec240bf");
+
+        apiAccessKeyManager.addApiKeys(apiKeys);
     }
 
     /**
@@ -377,7 +397,7 @@ public class AppBuilder {
                         ingredientSearchOutputBoundary,
                         resultFactory,
                         genericRecipeFactory,
-                        apiSearchDataAccessObject);
+                        ingredientSearchDataAccessObject);
 
         final IngredientSearchController ingredientSearchController =
                 new IngredientSearchController(ingredientSearchInteractor);
