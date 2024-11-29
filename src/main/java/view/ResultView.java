@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -41,10 +40,11 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
     }
 
     private void addBackButton() {
+        final JPanel backButtonPanel = new JPanel();
         final JButton back = new JButton("Back");
-        back.setAlignmentX(Component.RIGHT_ALIGNMENT);
         back.addActionListener(evt -> resultController.backTolastView());
-        this.add(back);
+        backButtonPanel.add(back);
+        this.add(backButtonPanel);
     }
 
     private void addRecipeButtonsPanel() {
