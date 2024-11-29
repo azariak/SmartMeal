@@ -70,6 +70,7 @@ public class SubstitutesView extends JPanel implements PropertyChangeListener {
      */
     public JPanel createBottomPanel() {
         final JPanel bottomPanel = new JPanel();
+        bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.Y_AXIS));
         final ArrayList<String> ingredientSubstitutes = substitutesViewModel.getState().getIngredientSubstitutes();
         for (int i = 0; i < ingredientSubstitutes.size(); i++) {
             final String ingredientName = ingredientSubstitutes.get(i);

@@ -18,6 +18,7 @@ public class SubstitutesPresenter implements SubstitutesOutputBoundary {
     @Override
     public void prepareSuccessView(SubstitutesOutputData substitutesOutputData) {
         final SubstitutesState substitutesState = substitutesViewModel.getState();
+        substitutesState.setIngredientName(substitutesOutputData.getIngredientName());
         substitutesState.setIngredientSubstitutes(substitutesOutputData.getIngredientSubstitutes());
         System.out.println(substitutesOutputData.getIngredientSubstitutes());
 
