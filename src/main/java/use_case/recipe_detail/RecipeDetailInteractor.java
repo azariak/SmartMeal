@@ -8,7 +8,7 @@ import entity.GenericRecipeFactoryInterface;
 import entity.TemporaryAdvancedRecipe;
 
 /**
- * The Recipe Detail Interactor.
+ * The interactor for the Recipe Detail use case.
  */
 public class RecipeDetailInteractor implements RecipeDetailInputBoundary {
 

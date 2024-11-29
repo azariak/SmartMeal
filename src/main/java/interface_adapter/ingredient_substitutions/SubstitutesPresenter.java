@@ -4,6 +4,9 @@ import interface_adapter.ViewManagerModel;
 import use_case.ingredient_substitutions.SubstitutesOutputBoundary;
 import use_case.ingredient_substitutions.SubstitutesOutputData;
 
+/**
+ * The presenter for the ingredient substitutions use case.
+ */
 public class SubstitutesPresenter implements SubstitutesOutputBoundary {
 
     private final SubstitutesViewModel substitutesViewModel;

@@ -1,16 +1,17 @@
 package view;
 
-import interface_adapter.ingredient_substitutions.SubstitutesController;
-import interface_adapter.ingredient_substitutions.SubstitutesViewModel;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Component;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-
 import java.util.ArrayList;
+
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import interface_adapter.ingredient_substitutions.SubstitutesController;
+import interface_adapter.ingredient_substitutions.SubstitutesViewModel;
 
 /**
  * View for the ingredient substitutions use case.
@@ -47,12 +48,7 @@ public class SubstitutesView extends JPanel implements PropertyChangeListener {
     public JPanel createTopPanel() {
         final JPanel topPanel = new JPanel();
         final JButton backButton = new JButton("Back");
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent event) {
-                substitutesController.backTolastView();
-            }
-        });
+        backButton.addActionListener(event -> substitutesController.backTolastView());
         final JLabel ingredientLabel = new JLabel("Ingredient Name:");
         final JLabel ingredientName = new JLabel(substitutesViewModel.getState().getIngredientName());
         System.out.println("Ingredient name dummy is : " + substitutesViewModel.getState().getIngredientName());

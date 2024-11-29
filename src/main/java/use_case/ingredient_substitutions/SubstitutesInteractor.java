@@ -1,12 +1,11 @@
 package use_case.ingredient_substitutions;
 
+import java.util.ArrayList;
+
 import data_access.SubstitutesDataAccessObject;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * The Substitutes interactor.
+ * The interactor for the ingredient substitutes use case.
  */
 public class SubstitutesInteractor implements SubstitutesInputBoundary {
 

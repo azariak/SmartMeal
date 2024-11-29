@@ -1,13 +1,19 @@
 package view;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
-import javax.swing.*;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import org.jetbrains.annotations.NotNull;
 
 import interface_adapter.ingredient_substitutions.SubstitutesController;
 import interface_adapter.recipe_detail.RecipeDetailController;
@@ -18,20 +24,17 @@ import interface_adapter.recipe_detail.RecipeDetailViewModel;
  */
 public class RecipeDetailView extends JPanel implements PropertyChangeListener {
 
-    // Constants
     private static final int THIRTY = 30;
     private static final int ZERO = 0;
     private static final int TWO_HUNDRED = 200;
     private static final int FIFTEEN = 15;
     private static final int TEN = 10;
 
-    // Instance variables
     private final String viewName = "Recipe Detail";
     private final RecipeDetailViewModel recipeDetailViewModel;
     private RecipeDetailController recipeDetailController;
     private SubstitutesController substitutesController;
 
-    // Constructor to initialize the ViewModel and layout
     public RecipeDetailView(RecipeDetailViewModel recipeDetailViewModel) {
         this.recipeDetailViewModel = recipeDetailViewModel;
         this.recipeDetailViewModel.addPropertyChangeListener(this);
@@ -43,7 +46,7 @@ public class RecipeDetailView extends JPanel implements PropertyChangeListener {
     }
 
     /**
-     * Main method that calls all helper methods to build the view.
+     * Method that calls all helper methods to build the view.
      */
     public void buildRecipeDetailView() {
         this.add(createTopPanel());
@@ -51,18 +54,12 @@ public class RecipeDetailView extends JPanel implements PropertyChangeListener {
         this.add(createInstructionsPanel());
     }
 
-    // Create and return the top panel with recipe name and back button
     private JPanel createTopPanel() {
         final JButton backButton = new JButton("Back");
         final JLabel recipeLabel = new JLabel("Recipe Name:");
         final JLabel recipeName = new JLabel(recipeDetailViewModel.getState().getRecipeName());
 
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent event) {
-                recipeDetailController.backTolastView();
-            }
-        });
+        backButton.addActionListener(event -> recipeDetailController.backToLastView());
 
         final JPanel topPanel = new JPanel();
         topPanel.add(backButton);
@@ -82,7 +79,6 @@ public class RecipeDetailView extends JPanel implements PropertyChangeListener {
         return middlePanel;
     }
 
-    // Create and return the panel displaying ingredients
     private JPanel createIngredientPanel() {
         final JPanel ingredientPanel = new JPanel();
         ingredientPanel.setLayout(new BoxLayout(ingredientPanel, BoxLayout.Y_AXIS));
@@ -98,7 +94,6 @@ public class RecipeDetailView extends JPanel implements PropertyChangeListener {
         return ingredientPanel;
     }
 
-    // Create and return the panel displaying quantities for each ingredient
     private JPanel createQuantityPanel() {
         final JPanel quantityPanel = new JPanel();
         quantityPanel.setLayout(new BoxLayout(quantityPanel, BoxLayout.Y_AXIS));
@@ -123,21 +118,7 @@ public class RecipeDetailView extends JPanel implements PropertyChangeListener {
 
         final ArrayList<String> ingredients = recipeDetailViewModel.getState().getIngredients();
         for (int i = 0; i < ingredients.size(); i++) {
-            final String ingredient = ingredients.get(i);
-
-            final JButton substituteButton = new JButton("Substitutes for " + ingredient + " (" + i + ")");
-
-            substituteButton.setPreferredSize(new Dimension(TWO_HUNDRED, FIFTEEN));
-            substituteButton.setMaximumSize(new Dimension(TWO_HUNDRED, FIFTEEN));
-            substituteButton.setMinimumSize(new Dimension(TWO_HUNDRED, FIFTEEN));
-            substituteButton.setFont(new Font(substituteButton.getFont().getName(), Font.PLAIN, TEN));
-
-            substituteButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent event) {
-                    substitutesController.execute(ingredient);
-                }
-            });
+            final JButton substituteButton = getjButton(ingredients, i);
 
             substitutionsPanel.add(substituteButton);
         }
@@ -145,7 +126,21 @@ public class RecipeDetailView extends JPanel implements PropertyChangeListener {
         return substitutionsPanel;
     }
 
-    // Create and return the panel displaying the recipe instructions
+    @NotNull
+    private JButton getjButton(ArrayList<String> ingredients, int i) {
+        final String ingredient = ingredients.get(i);
+
+        final JButton substituteButton = new JButton("Substitutes for " + ingredient + " (" + i + ")");
+
+        substituteButton.setPreferredSize(new Dimension(TWO_HUNDRED, FIFTEEN));
+        substituteButton.setMaximumSize(new Dimension(TWO_HUNDRED, FIFTEEN));
+        substituteButton.setMinimumSize(new Dimension(TWO_HUNDRED, FIFTEEN));
+        substituteButton.setFont(new Font(substituteButton.getFont().getName(), Font.PLAIN, TEN));
+        substituteButton.addActionListener(event -> substitutesController.execute(ingredient));
+
+        return substituteButton;
+    }
+
     private JPanel createInstructionsPanel() {
         final JPanel bottomPanel = new JPanel();
 

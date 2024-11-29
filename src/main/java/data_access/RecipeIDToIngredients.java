@@ -5,16 +5,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.*;
-
-import org.json.JSONObject;
-import org.json.JSONArray;
 import java.util.ArrayList;
 
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-import use_case.map_groceries.MapGroceriesDataAccessInterface;
+import org.json.JSONArray;
 
 /**
  * This class takes a given recipe ID and returns a JSONObject of the required
@@ -36,19 +29,15 @@ public class RecipeIDToIngredients {
         final String urlString = BASE_URL + id + "/ingredientWidget.json" + "?apiKey="
                 + "ac77230dfdf14548b77b78cb800fe0af";
         try {
-            // Create url
             final URL url = new URL(urlString);
-            // Open connection
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            // Set request method type to GET
+            final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
-            // Get response code.
             final int responseCode = connection.getResponseCode();
 
             if (responseCode == HttpURLConnection.HTTP_OK) {
-                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                final BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String inputLine;
-                StringBuilder response = new StringBuilder();
+                final StringBuilder response = new StringBuilder();
 
                 while ((inputLine = in.readLine()) != null) {
                     response.append(inputLine);

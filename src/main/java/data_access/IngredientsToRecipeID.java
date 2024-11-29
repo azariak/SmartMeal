@@ -16,8 +16,6 @@ import org.json.JSONObject;
  */
 public class IngredientsToRecipeID {
 
-    // Note: FOR EACH RECIPE, YOU NEED ANOTHER API CALL FOR THE RECIPE DETAILS.
-    // Store the API key as a constant in your code. DO NOT PUSH TO GIT.
     static final int FIVE_THOUSAND = 5000;
     static final int TWO_HUNDRED = 200;
 
@@ -56,8 +54,8 @@ public class IngredientsToRecipeID {
                 System.out.println("GET request failed. Response Code: " + responseCode);
             }
         }
-        catch (IOException e) {
-            e.printStackTrace();
+        catch (IOException ex) {
+            ex.printStackTrace();
         }
 
         return recipeMap;

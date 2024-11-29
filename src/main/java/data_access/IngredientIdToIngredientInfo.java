@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
 import org.json.JSONObject;
 
 /**
@@ -17,9 +18,8 @@ public class IngredientIdToIngredientInfo {
 
     /**
      * Fetches information for a specific ingredient ID.
-     *
      * @param ingredientId The ID of the ingredient.
-     * @param amount       The amount of the ingredient.
+     * @param amount The amount of the ingredient.
      * @return A JSONObject containing ingredient information, or null if the request fails.
      */
     public static JSONObject getIngredientInfo(int ingredientId, double amount) {
