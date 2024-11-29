@@ -2,9 +2,6 @@ package interface_adapter.load_saved_recipe;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
 
 import data_access.FileRecipeSaver;
 import entity.AdvancedRecipe;
