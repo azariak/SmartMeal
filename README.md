@@ -33,25 +33,17 @@ installation instructions, how to use (with examples), licence, feedback and con
 ### Use Cases
 
 #### Nachuan Wang (December-17th)
-As a user, John wants to generate recipes from the ingredients he had on hand.
+As a user, John wants to search for recipes from the ingredients he had on hand.
 
-UI: MainView -> recipeSearchButton -> RecipeSearchView -> IngredientSearchButton -> IngredientSearchView -> text field/AddMoreButto  -> enter ingredients(max 3) -> SearchButton -> ResultView(TBD)
-Note: default 1 ingredient, press + button on UI to add more text field for more ingredient
-Use case/Interactor: MainMenuView -> RecipeSearchView -> recipeSearchController -> IngredientSearchView -> IngredientSearchInteractor/InputDataBoundary/OutputDataBoundary -> APIController/recipeGenerationFromIngredientAPIController -> result DAO(TBD)
--> Result UI
-Interactor: recipe generation button controller -> from ingredients button controller 
-      -> text field/add more button controller -> recipeGenerationFromIngredientAPIController -> result UI
-![1.jpg](images/1.jpg)
-login/signup view
-![2.jpg](images/2.jpg)
-Main menu view
-![3.jpg](images/3.jpg)
-recipe search view
-![4.jpg](images/4.jpg)
-ingredient search view and result view
+UI: MainMenuView -> IngredientSearchButton -> IngredientSearchView -> enter ingredients(max 3) -> SearchButton -> ResultView
+Use case: MainMenuView -> MainMenuUseCase -> IngredientSearchView -> IngredientSearchUseCase -> 
+apiDAO -> ResultView
 
-A demo sketch for the user story and views
 
+![ingredient_search_view.jpg](images/Nachuan_User_Story/ingredient_search_view.jpg)
+Ingredient Search view
+![result_view.jpg](images/Nachuan_User_Story/result_view.jpg)
+Result view
 
 #### Azaria Kelman (azariak)
 ##### User story
