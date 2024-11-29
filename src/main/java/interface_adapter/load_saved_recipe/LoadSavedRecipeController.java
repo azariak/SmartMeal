@@ -45,4 +45,9 @@ public class LoadSavedRecipeController {
 
     }
 
+    /**
+     * Back button.
+     */
+    public void backToLastView() {
+    }
 }

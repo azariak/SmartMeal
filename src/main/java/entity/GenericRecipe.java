@@ -43,8 +43,8 @@ public class GenericRecipe implements GenericRecipeInterface {
      */
     public JSONObject toJson() {
         final JSONObject recipeJson = new JSONObject();
-        recipeJson.put("id", this.id);
-        recipeJson.put("name", this.name);
+        recipeJson.put("recipe id", this.id);
+        recipeJson.put("recipe", this.name);
         final JSONArray recipeList = new JSONArray();
         recipeList.put(this);
         return recipeJson;

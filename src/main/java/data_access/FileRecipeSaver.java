@@ -22,6 +22,7 @@ import use_case.saved_recipe.SavedRecipeDataAcessInterface;
  */
 public class FileRecipeSaver implements SavedRecipeDataAcessInterface,
                                          LoadSavedRecipeDataAcessInterface {
+
     @Override
     public void save(AdvancedRecipe recipe) {
     }
@@ -43,7 +44,7 @@ public class FileRecipeSaver implements SavedRecipeDataAcessInterface,
 
     @Override
     public void saveRecipe(JSONObject recipeJson, String fileName) {
-        try (FileWriter file = new FileWriter(fileName, true)) {
+        try (FileWriter file = new FileWriter("src/main/java/data_access/recipe.json", true)) {
             final int num = 4;
             file.write(recipeJson.toString(num));
             file.write(System.lineSeparator());
@@ -54,11 +55,18 @@ public class FileRecipeSaver implements SavedRecipeDataAcessInterface,
         }
     }
 
+    public static void main(String[] args) {
+        final JSONObject recipeJson = new JSONObject();
+        recipeJson.put("name", "test");
+        final FileRecipeSaver fileRecipeSaver = new FileRecipeSaver();
+        fileRecipeSaver.saveRecipe(recipeJson, "/Users/anisa/Desktop/recipe.json");
+    }
+
     /**
      * Saves the recipe from the API.
      * @param recipeId the recipe ID.
      */
-    public JSONObject fetchrecipefromApi(String recipeId) {
+    public JSONObject fetchRecipeFromApi(String recipeId) {
         final String urlString = "https://api.spoonacular.com/recipes/" + recipeId + "/information?apiKey="
                 + System.getenv("API_KEY");
 
@@ -100,8 +108,8 @@ public class FileRecipeSaver implements SavedRecipeDataAcessInterface,
      * @param recipeId the recipe ID.
      * @param fileName the file name.
      */
-    public void saverecipefromApi(String recipeId, String fileName) {
-        final JSONObject recipeJson = fetchrecipefromApi(recipeId);
+    public void saveRecipeFromApi(String recipeId, String fileName) {
+        final JSONObject recipeJson = fetchRecipeFromApi(recipeId);
         if (recipeJson != null) {
             saveRecipe(recipeJson, fileName);
         }
@@ -113,7 +121,7 @@ public class FileRecipeSaver implements SavedRecipeDataAcessInterface,
     @Override
     public GenericRecipe load(String id) {
         try {
-            final String content = new String(Files.readAllBytes(Paths.get("recipes.json")));
+            final String content = new String(Files.readAllBytes(Paths.get("src/main/java/data_access/recipe.json")));
             final String[] recipes = content.split(System.lineSeparator());
 
             for (String recipeStr : recipes) {
