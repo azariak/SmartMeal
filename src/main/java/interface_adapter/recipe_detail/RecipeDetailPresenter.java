@@ -1,7 +1,6 @@
 package interface_adapter.recipe_detail;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.ingredient_substitutions.SubstitutesViewModel;
 import use_case.recipe_detail.RecipeDetailOutputBoundary;
 import use_case.recipe_detail.RecipeDetailOutputData;
 
