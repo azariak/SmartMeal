@@ -1,5 +1,8 @@
 package interface_adapter.ingredient_search;
 
+/**
+ * The state for ingredient search.
+ */
 public class IngredientSearchState {
 
     private String ingredient1 = "";
