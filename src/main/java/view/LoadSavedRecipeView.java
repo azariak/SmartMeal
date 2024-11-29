@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
 import javax.swing.*;
 
 import javax.swing.BoxLayout;
@@ -15,13 +14,10 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-
 import interface_adapter.load_saved_recipe.LoadSavedRecipeController;
 import interface_adapter.load_saved_recipe.LoadSavedRecipeState;
 import interface_adapter.load_saved_recipe.LoadSavedRecipeViewModel;
-import interface_adapter.load_saved_recipe.LoadSavedRecipeState;
+import interface_adapter.login.LoginController;
 
 /**
  * Represents the view component for loading saved recipes within the application.
@@ -33,7 +29,7 @@ public class LoadSavedRecipeView extends JPanel implements ActionListener, Prope
     private LoadSavedRecipeController loadSavedRecipeController;
 
     private final JButton loadButton;
-    private final JButton cancelButton;
+    private final JButton backButton;
     private final JButton deleteButton;
 
     public LoadSavedRecipeView(LoadSavedRecipeViewModel loadSavedRecipeViewModel) {
@@ -45,7 +41,8 @@ public class LoadSavedRecipeView extends JPanel implements ActionListener, Prope
         final JPanel recipesPanel = new JPanel();
         final String[] recipe = new String[]{"Lasagna:4 cups shredded mozzarella cheese divided, ½ cup shredded Parmesan cheese shredded and divided", "Beef Noodles:", "Chicken Noodle Soup:", "Shrimp Salad:", "Pasta:", "Shrimp Udon:", "Tomato Soup:"};
         final JList<String> recipeList = new JList<>(recipe);
-        recipeList.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+        final int num = 15;
+        recipeList.setFont(new Font("Times New Roman", Font.PLAIN, num));
         recipeList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         final JScrollPane scrollPane = new JScrollPane(recipeList,
                 JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -54,8 +51,8 @@ public class LoadSavedRecipeView extends JPanel implements ActionListener, Prope
         scrollPane.setPreferredSize(new Dimension(dim, dim));
         loadButton = new JButton("load");
         buttons.add(loadButton);
-        cancelButton = new JButton("Cancel");
-        buttons.add(cancelButton);
+        backButton = new JButton("Back");
+        buttons.add(backButton);
         deleteButton = new JButton("Delete");
         buttons.add(deleteButton);
         loadButton.addActionListener(
@@ -70,6 +67,14 @@ public class LoadSavedRecipeView extends JPanel implements ActionListener, Prope
                                     currentState.getRecipe3()
                             );
                         }
+                    }
+                }
+        );
+        backButton.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        final CardLayout cardLayout = (CardLayout) getParent().getLayout();
+                        cardLayout.show(getParent(), "LoginView");
                     }
                 }
         );
@@ -89,7 +94,7 @@ public class LoadSavedRecipeView extends JPanel implements ActionListener, Prope
 
         });
 
-        cancelButton.addActionListener(this);
+        this.backButton.addActionListener(this);
         deleteButton.addActionListener(this);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
