@@ -13,7 +13,6 @@ import javax.swing.JPanel;
 
 import interface_adapter.main_menu.MainMenuController;
 import interface_adapter.main_menu.MainMenuViewModel;
-// import interface_adapter.main_menu.MainMenuState;
 
 /**
  * The main menu view.

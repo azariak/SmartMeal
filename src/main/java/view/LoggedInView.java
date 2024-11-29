@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -17,6 +19,7 @@ import interface_adapter.change_password.ChangePasswordController;
 import interface_adapter.change_password.LoggedInState;
 import interface_adapter.change_password.LoggedInViewModel;
 import interface_adapter.logout.LogoutController;
+import interface_adapter.main_menu.MainMenuController;
 
 /**
  * The View for when the user is logged into the program.
@@ -29,6 +32,8 @@ public class LoggedInView extends JPanel implements PropertyChangeListener {
     private ChangePasswordController changePasswordController;
     private LogoutController logoutController;
 
+    private MainMenuController mainMenuController;
+
     private final JLabel username;
 
     private final JButton logOut;
@@ -36,9 +41,22 @@ public class LoggedInView extends JPanel implements PropertyChangeListener {
     private final JTextField passwordInputField = new JTextField(15);
     private final JButton changePassword;
 
+    private final JButton demoIngredientSearch;
+    private final JButton loadSavedRecipes;
+
+    private final JButton rankedRecipes;
+
     public LoggedInView(LoggedInViewModel loggedInViewModel) {
         this.loggedInViewModel = loggedInViewModel;
         this.loggedInViewModel.addPropertyChangeListener(this);
+
+        MainMenuController mainMenuController = new MainMenuController();
+        MainMenuView mainMenuView = new MainMenuView(mainMenuViewModel);
+        mainMenuView.setMainMenuController(mainMenuController);
+
+        LoggedInView loggedInView = new LoggedInView(loggedInViewModel);
+        loggedInView.setMainMenuController(mainMenuController);
+
 
         final JLabel title = new JLabel("Logged In Screen");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -46,7 +64,7 @@ public class LoggedInView extends JPanel implements PropertyChangeListener {
         final LabelTextPanel passwordInfo = new LabelTextPanel(
                 new JLabel("Password"), passwordInputField);
 
-        final JLabel usernameInfo = new JLabel("Currently logged in: ");
+        final JLabel usernameInfo = new JLabel("Welcome, ");
         username = new JLabel();
 
         final JPanel buttons = new JPanel();
@@ -55,6 +73,15 @@ public class LoggedInView extends JPanel implements PropertyChangeListener {
 
         changePassword = new JButton("Change Password");
         buttons.add(changePassword);
+
+        demoIngredientSearch = new JButton("Demo Ingredient Search");
+        buttons.add(demoIngredientSearch);
+        loadSavedRecipes = new JButton("Saved Recipes");
+        buttons.add(loadSavedRecipes);
+
+        rankedRecipes = new JButton("Ranked Recipes");
+        buttons.add(rankedRecipes);
+
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -100,7 +127,6 @@ public class LoggedInView extends JPanel implements PropertyChangeListener {
                 // This creates an anonymous subclass of ActionListener and instantiates it.
                 evt -> {
                     if (evt.getSource().equals(logOut)) {
-                        // TODO: execute the logout use case through the Controller
 
                         logoutController.execute(loggedInViewModel.getState().getUsername());
                         // 1. get the state out of the loggedInViewModel. It contains the username.
@@ -116,6 +142,32 @@ public class LoggedInView extends JPanel implements PropertyChangeListener {
         this.add(passwordInfo);
         this.add(passwordErrorField);
         this.add(buttons);
+
+        demoIngredientSearch.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        mainMenuController.switchToIngredienSearchView();
+                    }
+                }
+        );
+
+        loadSavedRecipes.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        mainMenuController.switchToLoadSavedRecipeView();
+                    }
+                }
+        );
+
+        rankedRecipes.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        mainMenuController.switchToRankedView();
+                    }
+                }
+        );
+
     }
 
     @Override
@@ -141,5 +193,9 @@ public class LoggedInView extends JPanel implements PropertyChangeListener {
 
     public void setLogoutController(LogoutController logoutController) {
         this.logoutController = logoutController;
+    }
+
+    public void setMainMenuController(MainMenuController mainMenuController) {
+        this.mainMenuController = mainMenuController;
     }
 }

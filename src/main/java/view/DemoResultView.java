@@ -1,7 +1,9 @@
 package view;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import java.awt.HeadlessException;
 import java.util.ArrayList;
 
 public class DemoResultView extends JPanel {
