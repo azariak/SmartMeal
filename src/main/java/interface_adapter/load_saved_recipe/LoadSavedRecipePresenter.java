@@ -60,4 +60,10 @@ public class LoadSavedRecipePresenter implements LoadSavedRecipeOutputBoundary {
         viewManagerModel.setState(resultViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }
+
+    @Override
+    public void backToLastView() {
+        this.viewManagerModel.setState(this.viewManagerModel.getPreviousViewName());
+        this.viewManagerModel.firePropertyChanged();
+    }
 }

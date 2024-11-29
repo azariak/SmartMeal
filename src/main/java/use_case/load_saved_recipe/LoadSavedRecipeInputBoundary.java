@@ -11,5 +11,13 @@ public interface LoadSavedRecipeInputBoundary {
      */
     void execute(LoadSavedRecipeInputData loadsavedrecipeInputData);
 
+    /**
+     * Switch to result view.
+     */
     void switchToResultView();
+
+    /**
+     * Back to last view.
+     */
+    void backToLastView();
 }
