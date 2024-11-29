@@ -1,7 +1,6 @@
 package use_case.ranked;
 
 import entity.Ranked;
-import use_case.ranked.RankedInputData;
 
 /**
  * The interactor for the ranked use case.

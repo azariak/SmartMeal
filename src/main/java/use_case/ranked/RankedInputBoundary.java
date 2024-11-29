@@ -16,5 +16,10 @@ public interface RankedInputBoundary {
      */
     void backToLastView();
 
+    /**
+     * Update star ratings.
+     * @param recipeId The recipe ID.
+     * @param starRating the star rating.
+     */
     void updateStarRating(String recipeId, int starRating);
 }

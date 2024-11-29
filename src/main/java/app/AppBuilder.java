@@ -16,9 +16,6 @@ import entity.GenericResultFactory;
 import entity.ResultFactoryInterface;
 import entity.UserFactory;
 import entity.test.GenericRecipeFactory;
-import interface_adapter.ranked.RankedController;
-import interface_adapter.ranked.RankedPresenter;
-import interface_adapter.ranked.RankedViewModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.change_password.ChangePasswordController;
 import interface_adapter.change_password.ChangePasswordPresenter;
@@ -40,6 +37,9 @@ import interface_adapter.logout.LogoutPresenter;
 import interface_adapter.main_menu.MainMenuController;
 import interface_adapter.main_menu.MainMenuPresenter;
 import interface_adapter.main_menu.MainMenuViewModel;
+import interface_adapter.ranked.RankedController;
+import interface_adapter.ranked.RankedPresenter;
+import interface_adapter.ranked.RankedViewModel;
 import interface_adapter.recipe_detail.RecipeDetailController;
 import interface_adapter.recipe_detail.RecipeDetailPresenter;
 import interface_adapter.recipe_detail.RecipeDetailViewModel;
@@ -82,7 +82,17 @@ import use_case.result.ResultOutputBoundary;
 import use_case.signup.SignupInputBoundary;
 import use_case.signup.SignupInteractor;
 import use_case.signup.SignupOutputBoundary;
-import view.*;
+import view.IngredientSearchView;
+import view.LoadSavedRecipeView;
+import view.LoggedInView;
+import view.LoginView;
+import view.MainMenuView;
+import view.RankedView;
+import view.RecipeDetailView;
+import view.ResultView;
+import view.SignupView;
+import view.SubstitutesView;
+import view.ViewManager;
 
 /**
  * The AppBuilder class is responsible for putting together the pieces of
@@ -325,8 +335,6 @@ public class AppBuilder {
 
         return this;
     }
-
-
 
     /**
      * Adds the main menu use case to the application.

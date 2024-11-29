@@ -32,7 +32,6 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
 
     private final JButton rankedRecipes;
 
-
     public MainMenuView(MainMenuViewModel mainMenuViewModel) {
         this.mainMenuViewModel = mainMenuViewModel;
         mainMenuViewModel.addPropertyChangeListener(this);
