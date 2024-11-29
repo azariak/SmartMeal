@@ -14,10 +14,10 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 
+import data_access.FileRecipeSaver;
 import interface_adapter.load_saved_recipe.LoadSavedRecipeController;
 import interface_adapter.load_saved_recipe.LoadSavedRecipeState;
 import interface_adapter.load_saved_recipe.LoadSavedRecipeViewModel;
-import interface_adapter.login.LoginController;
 
 /**
  * Represents the view component for loading saved recipes within the application.
@@ -29,7 +29,7 @@ public class LoadSavedRecipeView extends JPanel implements ActionListener, Prope
     private LoadSavedRecipeController loadSavedRecipeController;
 
     private final JButton loadButton;
-    private final JButton backButton;
+    private final JButton cancelButton;
     private final JButton deleteButton;
 
     public LoadSavedRecipeView(LoadSavedRecipeViewModel loadSavedRecipeViewModel) {
@@ -51,8 +51,8 @@ public class LoadSavedRecipeView extends JPanel implements ActionListener, Prope
         scrollPane.setPreferredSize(new Dimension(dim, dim));
         loadButton = new JButton("load");
         buttons.add(loadButton);
-        backButton = new JButton("Back");
-        buttons.add(backButton);
+        cancelButton = new JButton("Cancel");
+        buttons.add(cancelButton);
         deleteButton = new JButton("Delete");
         buttons.add(deleteButton);
         loadButton.addActionListener(
@@ -70,14 +70,13 @@ public class LoadSavedRecipeView extends JPanel implements ActionListener, Prope
                     }
                 }
         );
-        backButton.addActionListener(
-                new ActionListener() {
-                    public void actionPerformed(ActionEvent evt) {
-                        final CardLayout cardLayout = (CardLayout) getParent().getLayout();
-                        cardLayout.show(getParent(), "LoginView");
-                    }
-                }
-        );
+        final JButton backButton = new JButton("Back");
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                loadSavedRecipeController.backToLastView();
+            }
+        });
+        buttons.add(backButton);
 
         loadButton.addActionListener(new ActionListener() {
             @Override
@@ -94,7 +93,7 @@ public class LoadSavedRecipeView extends JPanel implements ActionListener, Prope
 
         });
 
-        this.backButton.addActionListener(this);
+        this.cancelButton.addActionListener(this);
         deleteButton.addActionListener(this);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

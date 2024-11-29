@@ -29,4 +29,9 @@ public class LoadSavedRecipeInteractor implements LoadSavedRecipeInputBoundary {
     public void switchToResultView() {
         loadSavedRecipePresenter.switchToResultView();
     }
+
+    @Override
+    public void backToLastView() {
+        loadSavedRecipePresenter.backToLastView();
+    }
 }
