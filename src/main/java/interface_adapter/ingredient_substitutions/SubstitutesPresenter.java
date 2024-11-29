@@ -21,6 +21,9 @@ public class SubstitutesPresenter implements SubstitutesOutputBoundary {
         substitutesState.setIngredientSubstitutes(substitutesOutputData.getIngredientSubstitutes());
         System.out.println(substitutesOutputData.getIngredientSubstitutes());
 
+        this.substitutesViewModel.setState(substitutesState);
+        this.substitutesViewModel.firePropertyChanged();
+
         this.viewManagerModel.switchView(substitutesViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
     }
