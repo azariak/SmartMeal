@@ -16,13 +16,17 @@ import use_case.ingredient_search.IngredientSearchDataAccessInterface;
 /**
  * The data access object for api search call to Spoonacular.
  */
-public class ApiSearchDataAccessObject implements IngredientSearchDataAccessInterface {
+public class IngredientSearchDataAccessObject implements IngredientSearchDataAccessInterface {
     // Note: FOR EACH RECIPE, YOU NEED ANOTHER API CALL FOR THE RECIPE DETAILS.
     // Store the API key as a constant in your code. DO NOT PUSH TO GIT.
     static final int FIVE_THOUSAND = 5000;
     static final int TWO_HUNDRED = 200;
+    static final int HTTP402 = 402;
 
-    public ApiSearchDataAccessObject() {
+    private final ApiAccessKeyManagerInterface keyManager;
+
+    public IngredientSearchDataAccessObject(ApiAccessKeyManagerInterface keyManager) {
+        this.keyManager = keyManager;
     }
 
     /**
@@ -33,9 +37,11 @@ public class ApiSearchDataAccessObject implements IngredientSearchDataAccessInte
      * @return A HashMap where the key is the recipe name and the value is the recipe ID.
      */
     public Map<String, String> excuteSearch(String ingredients) {
-        final Map<String, String> recipeMap = new HashMap<>();
+        Map<String, String> recipeMap = new HashMap<>();
+
+        final String apiKey = keyManager.getValidApiKey();
         final String urlString = "https://api.spoonacular.com/recipes/complexSearch?apiKey="
-                + System.getenv("API_KEY") + "&includeIngredients=" + ingredients + "&number=10";
+                + apiKey + "&includeIngredients=" + ingredients + "&number=10";
 
         try {
             final URL url = new URL(urlString);
@@ -48,6 +54,11 @@ public class ApiSearchDataAccessObject implements IngredientSearchDataAccessInte
             final int responseCode = connection.getResponseCode();
             if (responseCode == TWO_HUNDRED) {
                 addResultToRecipeMap(connection, recipeMap);
+            }
+            else if (responseCode == HTTP402) {
+                // set the key to invalid and start a new search with a valid key
+                keyManager.setKeyInvalid(apiKey);
+                recipeMap = excuteSearch(ingredients);
             }
             else {
                 System.out.println("GET request failed. Response Code: " + responseCode);
