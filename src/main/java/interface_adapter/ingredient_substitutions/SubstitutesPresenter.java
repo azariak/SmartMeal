@@ -1,4 +1,5 @@
 package interface_adapter.ingredient_substitutions;
+
 import interface_adapter.ViewManagerModel;
 import use_case.ingredient_substitutions.SubstitutesOutputBoundary;
 import use_case.ingredient_substitutions.SubstitutesOutputData;
@@ -18,6 +19,10 @@ public class SubstitutesPresenter implements SubstitutesOutputBoundary {
     public void prepareSuccessView(SubstitutesOutputData substitutesOutputData) {
         final SubstitutesState substitutesState = substitutesViewModel.getState();
         substitutesState.setIngredientSubstitutes(substitutesOutputData.getIngredientSubstitutes());
+        System.out.println(substitutesOutputData.getIngredientSubstitutes());
+
+        this.viewManagerModel.switchView(substitutesViewModel.getViewName());
+        this.viewManagerModel.firePropertyChanged();
     }
 
     @Override

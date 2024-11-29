@@ -3,6 +3,7 @@ package entity;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -19,12 +20,15 @@ public class GroceryList {
         this.id = id;
         // Convert the JSONObject provided by the API call to an accessible Array.
         this.groceries = new ArrayList<>();
-        /* for (JSONObject item : groceries) {
-            for (String key : item.keySet()) {
-                 final Object details = item.getJSONArray(key);
-
+        for (JSONObject item : groceries) {
+            final Map<String, Object> newMap = new HashMap<>();
+            final Set<String> keys = item.keySet();
+            for (String key : keys) {
+                final Object details = item.get(key);
+                newMap.put(key, details);
             }
-        } */
+            this.groceries.add(newMap);
+        }
 
     }
 
@@ -41,6 +45,7 @@ public class GroceryList {
      * @return A list of possible grocery products for each ingredient.
      */
     public ArrayList<Map<String, Object>> returnGroceryList() {
-        return this.groceries; }
+        return this.groceries;
+    }
 
 }

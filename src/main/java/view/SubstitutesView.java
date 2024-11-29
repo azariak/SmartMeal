@@ -55,6 +55,7 @@ public class SubstitutesView extends JPanel implements PropertyChangeListener {
         });
         final JLabel ingredientLabel = new JLabel("Ingredient Name:");
         final JLabel ingredientName = new JLabel(substitutesViewModel.getState().getIngredientName());
+        System.out.println("Ingredient name dummy is : " + substitutesViewModel.getState().getIngredientName());
 
         topPanel.add(backButton);
         topPanel.add(ingredientLabel);
@@ -81,8 +82,8 @@ public class SubstitutesView extends JPanel implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getPropertyName().equals("state")) {
-            substitutesController.execute(substitutesViewModel.getState().getIngredientName());
             buildSubstitutesView();
+            System.out.println("Building view...");
         }
     }
 

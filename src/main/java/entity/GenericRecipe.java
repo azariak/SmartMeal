@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import com.google.gson.Gson;
 import data_access.FileRecipeSaver;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -44,6 +45,8 @@ public class GenericRecipe implements GenericRecipeInterface {
         final JSONObject recipeJson = new JSONObject();
         recipeJson.put("id", this.id);
         recipeJson.put("name", this.name);
+        final JSONArray recipeList = new JSONArray();
+        recipeList.put(this);
         return recipeJson;
     }
 
