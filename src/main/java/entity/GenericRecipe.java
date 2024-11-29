@@ -1,12 +1,12 @@
 package entity;
 
-import java.io.FileWriter;
 import java.io.IOException;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import com.google.gson.Gson;
 import data_access.FileRecipeSaver;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 /**
  * A generic recipe entity with basic information of a recipe.

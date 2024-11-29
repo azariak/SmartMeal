@@ -5,12 +5,12 @@ import java.util.ArrayList;
 /**
  * A temporary Advanced Recipe entity for the Recipe Detail use case.
  */
-public class TemporaryAdvancedRecipe implements TemporaryAdvancedRecipeInterface{
+public class TemporaryAdvancedRecipe implements TemporaryAdvancedRecipeInterface {
 
-    private String recipeName;
-    private ArrayList<String> ingredientNames;
-    private ArrayList<String> ingredientQuantities;
-    private String instructions;
+    private final String recipeName;
+    private final ArrayList<String> ingredientNames;
+    private final ArrayList<String> ingredientQuantities;
+    private final String instructions;
 
     public TemporaryAdvancedRecipe(String recipeName,
                                    ArrayList<String> ingredientNames,

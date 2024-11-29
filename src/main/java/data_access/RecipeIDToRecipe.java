@@ -13,10 +13,10 @@ public class RecipeIDToRecipe {
 
     /**
      * This method fetches recipe data for a given recipe ID from the Spoonacular API
-     * and returns a HashMap mapping the recipe name to its ID.
+     * and returns a JSON string with Recipe information.
      *
      * @param id The ID of the recipe.
-     * @return A HashMap where the key is the recipe name and the value is the recipe ID.
+     * @return A JSON string containing the recipe details or an error message.
      */
     public static String recipeIDToRecipe(String id) {
 
@@ -24,6 +24,8 @@ public class RecipeIDToRecipe {
                 "https://api.spoonacular.com/recipes/" + id + "/information?apiKey=" + System.getenv("API_KEY");
         final int fiveThousand = 5000;
         final int twoHundred = 200;
+
+        String result = "Failed.";
 
         try {
             // Make a GET request to the API
@@ -36,8 +38,9 @@ public class RecipeIDToRecipe {
 
             // Get the response code
             final int responseCode = connection.getResponseCode();
+
+            // If the request is successful, read the response
             if (responseCode == twoHundred) {
-                // If the request is successful, read the response
                 final BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String inputLine;
                 final StringBuilder response = new StringBuilder();
@@ -47,19 +50,18 @@ public class RecipeIDToRecipe {
                 }
                 in.close();
 
-                // Output the response (for now, just print it)
-                return response.toString();
+                result = response.toString();
             }
             else {
-                return "GET request failed. Response Code: " + responseCode;
+                result = "GET request failed. Response Code: " + responseCode;
             }
 
         }
         catch (IOException ex) {
             ex.printStackTrace();
-            System.out.println("Failed blah blah blah");
-            return "Failed.";
+            result = "Failed to fetch recipe data due to an exception.";
         }
 
+        return result;
     }
 }

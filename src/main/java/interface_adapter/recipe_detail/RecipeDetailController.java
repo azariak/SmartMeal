@@ -27,7 +27,7 @@ public class RecipeDetailController {
     /**
      * Back to last view.
      */
-    public void backTolastView() {
+    public void backToLastView() {
         recipeDetailInteractor.backToLastView();
     }
 

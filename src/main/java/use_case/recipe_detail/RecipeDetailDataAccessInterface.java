@@ -31,7 +31,7 @@ public interface RecipeDetailDataAccessInterface {
     ArrayList<String> getQuantities(GenericRecipe genericRecipe);
 
     /**
-     * Takes in a Generic Recipe objects and returns the instructions for that recipe
+     * Takes in a Generic Recipe objects and returns the instructions for that recipe.
      * @param genericRecipe the generic recipe object with the recipe name and id.
      * @return the instructions for that recipe as a String.
      */

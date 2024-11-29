@@ -3,16 +3,17 @@ package entity;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * A representation of a Generic Preference in our program.
  */
-public class GenericPreferences implements Preferences{
+public class GenericPreferences implements Preferences {
 
     private final List<String> dietaryRestrictions;
-    private final HashMap<String, List<String>> preferredSubstitutes;
+    private final Map<String, List<String>> preferredSubstitutes;
 
-    public GenericPreferences(List<String> dietaryRestrictions, HashMap<String, List<String>> preferredSubstitutes) {
+    public GenericPreferences(List<String> dietaryRestrictions, Map<String, List<String>> preferredSubstitutes) {
         this.dietaryRestrictions = dietaryRestrictions;
         this.preferredSubstitutes = preferredSubstitutes;
     }
@@ -30,7 +31,7 @@ public class GenericPreferences implements Preferences{
      * A function that returns the users preferred substitutes for each ingredient.
      * @return the users preferred substitutes for each ingredient.
      */
-    public HashMap<String, List<String>> getPreferredSubstitutes() {
+    public Map<String, List<String>> getPreferredSubstitutes() {
         return preferredSubstitutes;
     }
 

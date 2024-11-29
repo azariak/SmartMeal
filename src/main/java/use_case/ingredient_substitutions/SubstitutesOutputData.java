@@ -10,15 +10,16 @@ public class SubstitutesOutputData {
     private final ArrayList<String> ingredientSubstitutes;
     private final boolean useCaseFailed;
 
-    public SubstitutesOutputData(String ingredientName, ArrayList<String> ingredientSubstitutes, boolean useCaseFailed) {
+    public SubstitutesOutputData(String ingredientName, ArrayList<String> ingredientSubs, boolean useCaseFailed) {
         this.ingredientName = ingredientName;
-        this.ingredientSubstitutes = ingredientSubstitutes;
+        this.ingredientSubstitutes = ingredientSubs;
         this.useCaseFailed = useCaseFailed;
     }
 
     public String getIngredientName() {
         return this.ingredientName;
     }
+
     public ArrayList<String> getIngredientSubstitutes() {
         return ingredientSubstitutes;
     }
