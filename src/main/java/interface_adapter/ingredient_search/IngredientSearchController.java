@@ -19,8 +19,8 @@ public class IngredientSearchController {
 
     /**
      * Executes the ingredient search use Case.
-     *
      * @param ingredients a arraylist of ingredients in strings
+     * @throws IOException ioexception.
      */
     public void execute(ArrayList<String> ingredients) throws IOException {
         final IngredientSearchInputData ingredientSearchInputData = new IngredientSearchInputData(
@@ -30,9 +30,9 @@ public class IngredientSearchController {
     }
 
     /**
-     * Executes the "switch to result" Use Case.
+     * Back to last view.
      */
-    public void switchToResultView() {
-        ingredientSearchUseCaseInteractor.switchToResultView();
+    public void backTolastView() {
+        ingredientSearchUseCaseInteractor.backToLastView();
     }
 }

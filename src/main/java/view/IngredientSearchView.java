@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -8,6 +7,7 @@ import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -15,6 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+
+import org.jetbrains.annotations.NotNull;
 
 import interface_adapter.ingredient_search.IngredientSearchController;
 import interface_adapter.ingredient_search.IngredientSearchState;
@@ -32,23 +34,82 @@ import interface_adapter.ingredient_search.IngredientSearchViewModel;
  */
 public class IngredientSearchView extends JPanel implements ActionListener, PropertyChangeListener {
 
-    private final String viewName = "Ingredient Search";
-    private IngredientSearchViewModel ingredientSearchViewModel;
+    private static final String VIEW_NAME = "Ingredient Search";
+
+    private final IngredientSearchViewModel ingredientSearchViewModel;
     private IngredientSearchController ingredientSearchController;
 
     private final JTextField ingredientField1 = new JTextField(15);
     private final JTextField ingredientField2 = new JTextField(15);
     private final JTextField ingredientField3 = new JTextField(15);
 
-    private final JButton search;
-    private final JButton cancel;
+    private final JPanel ingredientSearchPanel;
+    private final JPanel buttons;
+
+    private JButton search;
+    private JButton cancel;
 
     public IngredientSearchView(IngredientSearchViewModel ingredientSearchViewModel) {
 
         this.ingredientSearchViewModel = ingredientSearchViewModel;
 
-        final JLabel title = new JLabel("Ingredient Search");
-        title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        this.ingredientSearchPanel = new JPanel();
+        this.buttons = new JPanel();
+
+        addIngredientSearchPanel();
+        addButtons();
+    }
+
+    private void addButtons() {
+        addSearchButton();
+        addCancelButton();
+
+        this.add(buttons);
+    }
+
+    private void addCancelButton() {
+        cancel = new JButton("cancel");
+        cancel.addActionListener(evt -> ingredientSearchController.backTolastView());
+
+        buttons.add(cancel);
+    }
+
+    private void addSearchButton() {
+        search = new JButton("Search");
+        search.addActionListener(searchButtonListener());
+
+        buttons.add(search);
+    }
+
+    @NotNull
+    private ActionListener searchButtonListener() {
+        return new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                if (evt.getSource().equals(search)) {
+                    final IngredientSearchState currentState = ingredientSearchViewModel.getState();
+                    final ArrayList<String> ingredients = new ArrayList<>();
+
+                    ingredients.add(currentState.getIngredient1());
+                    ingredients.add(currentState.getIngredient2());
+                    ingredients.add(currentState.getIngredient3());
+
+                    try {
+                        ingredientSearchController.execute(ingredients);
+                    }
+                    catch (IOException exception) {
+                        throw new RuntimeException(exception);
+                    }
+                }
+
+            }
+        };
+    }
+
+    private void addIngredientSearchPanel() {
+        ingredientSearchPanel.setLayout(new BoxLayout(ingredientSearchPanel, BoxLayout.Y_AXIS));
+        ingredientSearchPanel.setBorder(BorderFactory.createTitledBorder(VIEW_NAME));
 
         final LabelTextPanel ingredient1 = new LabelTextPanel(
                 new JLabel("Ingredient 1"), ingredientField1);
@@ -57,46 +118,15 @@ public class IngredientSearchView extends JPanel implements ActionListener, Prop
         final LabelTextPanel ingredient3 = new LabelTextPanel(
                 new JLabel("Ingredient 3"), ingredientField3);
 
-        final JPanel buttons = new JPanel();
-        search = new JButton("Search");
-        buttons.add(search);
-        cancel = new JButton("cancel");
-        buttons.add(cancel);
-
-        search.addActionListener(
-                new ActionListener() {
-                    public void actionPerformed(ActionEvent evt) {
-                        if (evt.getSource().equals(search)) {
-                            final IngredientSearchState currentState = ingredientSearchViewModel.getState();
-                            final ArrayList<String> ingredients = new ArrayList<>();
-                            ingredients.add(currentState.getIngredient1());
-                            ingredients.add(currentState.getIngredient2());
-                            ingredients.add(currentState.getIngredient3());
-                            try {
-                                ingredientSearchController.execute(ingredients);
-                            }
-                            catch (IOException exception) {
-                                throw new RuntimeException(exception);
-                            }
-                        }
-
-                    }
-                }
-        );
-
-        cancel.addActionListener(this);
-
         addIngredient1Listener();
         addIngredient2Listener();
         addIngredient3Listener();
 
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        ingredientSearchPanel.add(ingredient1);
+        ingredientSearchPanel.add(ingredient2);
+        ingredientSearchPanel.add(ingredient3);
 
-        this.add(title);
-        this.add(ingredient1);
-        this.add(ingredient2);
-        this.add(ingredient3);
-        this.add(buttons);
+        this.add(ingredientSearchPanel);
     }
 
     private void addIngredient1Listener() {
@@ -104,7 +134,7 @@ public class IngredientSearchView extends JPanel implements ActionListener, Prop
 
             private void documentListenerHelper() {
                 final IngredientSearchState currentState = ingredientSearchViewModel.getState();
-                currentState.setIngredient1(new String(ingredientField1.getText()));
+                currentState.setIngredient1(ingredientField1.getText());
                 ingredientSearchViewModel.setState(currentState);
             }
 
@@ -130,7 +160,7 @@ public class IngredientSearchView extends JPanel implements ActionListener, Prop
 
             private void documentListenerHelper() {
                 final IngredientSearchState currentState = ingredientSearchViewModel.getState();
-                currentState.setIngredient2(new String(ingredientField2.getText()));
+                currentState.setIngredient2(ingredientField2.getText());
                 ingredientSearchViewModel.setState(currentState);
             }
 
@@ -156,7 +186,7 @@ public class IngredientSearchView extends JPanel implements ActionListener, Prop
 
             private void documentListenerHelper() {
                 final IngredientSearchState currentState = ingredientSearchViewModel.getState();
-                currentState.setIngredient3(new String(ingredientField3.getText()));
+                currentState.setIngredient3(ingredientField3.getText());
                 ingredientSearchViewModel.setState(currentState);
             }
 
@@ -178,7 +208,7 @@ public class IngredientSearchView extends JPanel implements ActionListener, Prop
     }
 
     public String getViewName() {
-        return viewName;
+        return VIEW_NAME;
     }
 
     public void setIngredientSearchController(IngredientSearchController ingredientSearchController) {

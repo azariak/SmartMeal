@@ -42,4 +42,10 @@ public class IngredientSearchPresenter implements IngredientSearchOutputBoundary
     public void prepareFailView(String error) {
     }
 
+    @Override
+    public void backToLastView() {
+        this.viewManagerModel.setState(this.viewManagerModel.getPreviousViewName());
+        this.viewManagerModel.firePropertyChanged();
+    }
+
 }
