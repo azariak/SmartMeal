@@ -33,6 +33,7 @@ public class Main {
                                             .addLoadSavedRecipeUseCase()
                                             .addMainMenuView()
                                             .addMainMenuUseCase()
+                                            .addBackUseCase()
                                             .build();
 
         application.pack();
