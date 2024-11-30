@@ -1,8 +1,5 @@
 package use_case.map_groceries;
 
-import entity.GenericRecipe;
-import entity.GroceryList;
-
 import java.io.IOException;
 
 /**
@@ -25,13 +22,13 @@ public class MapGroceriesInteractor implements MapGroceriesInputBoundary {
         final String id = mapGroceriesInputData.getID();
 
         final MapGroceriesOutputData mapGroceriesOutputData =
-                new MapGroceriesOutputData(this.mapGroceriesDataAccess.getRecipeGroceryList(id).returnGroceryList());
+                new MapGroceriesOutputData(this.mapGroceriesDataAccess.getRecipeGroceryList(id));
         mapGroceriesPresenter.prepareGroceriesView(mapGroceriesOutputData);
     }
 
     @Override
     public void backToLastView() {
-        mapGroceriesPresenter.backToLastView();
+        mapGroceriesPresenter.goToLastView();
     }
 
 }
