@@ -171,7 +171,6 @@ public class AppBuilder {
         apiKeys.add("d4ce1e00e8534867af36c1e1fec240bf");
         apiKeys.add("f63d356276804dec89d7bae55063fa28");
 
-
         apiAccessKeyManager.addApiKeys(apiKeys);
     }
 
