@@ -31,7 +31,7 @@ class GenericResultFactoryTest {
 
     @AfterEach
     void tearDown() {
-        recipeList.removeAll(recipeList);
+        recipeList.clear();
 
         GenericResult entityTest = new GenericResult();
         entityTest.addRecipe(recipeList);
