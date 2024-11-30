@@ -1,21 +1,21 @@
 package use_case.recipe_detail;
 
-import entity.TemporaryAdvancedRecipe;
+import entity.AdvancedRecipe;
 
 /**
  * Output data for the Recipe Detail use case.
  */
 public class RecipeDetailOutputData {
-    private final TemporaryAdvancedRecipe temporaryAdvancedRecipe;
+    private final AdvancedRecipe advancedRecipe;
     private final boolean useCaseFailed;
 
-    public RecipeDetailOutputData(TemporaryAdvancedRecipe temporaryAdvancedRecipe, boolean useCaseFailed) {
-        this.temporaryAdvancedRecipe = temporaryAdvancedRecipe;
+    public RecipeDetailOutputData(AdvancedRecipe advancedRecipe, boolean useCaseFailed) {
+        this.advancedRecipe = advancedRecipe;
         this.useCaseFailed = useCaseFailed;
     }
 
-    public TemporaryAdvancedRecipe getTemporaryAdvancedRecipe() {
-        return temporaryAdvancedRecipe;
+    public AdvancedRecipe getAdvancedRecipe() {
+        return advancedRecipe;
     }
 
     public boolean isUseCaseFailed() {

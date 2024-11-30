@@ -7,15 +7,15 @@ public class SavedRecipeInputData {
 
     private String recipeName;
     private String recipeDescription;
-    private String recipeNutririon;
+    private String recipeNutrition;
     private String recipeIngredients;
     private String recipeCalories;
 
-    public SavedRecipeInputData(String recipeName, String recipeDescription, String recipeNutririon,
+    public SavedRecipeInputData(String recipeName, String recipeDescription, String recipeNutrition,
                                 String recipeIngredients, String recipeCalories) {
         this.recipeName = recipeName;
         this.recipeDescription = recipeDescription;
-        this.recipeNutririon = recipeNutririon;
+        this.recipeNutrition = recipeNutrition;
         this.recipeIngredients = recipeIngredients;
         this.recipeCalories = recipeCalories;
     }
@@ -28,12 +28,12 @@ public class SavedRecipeInputData {
         this.recipeName = recipeName;
     }
 
-    public String getRecipeNutririon() {
-        return recipeNutririon;
+    public String getRecipeNutrition() {
+        return recipeNutrition;
     }
 
-    public void setRecipeNutririon(String recipeNutririon) {
-        this.recipeNutririon = recipeNutririon;
+    public void setRecipeNutrition(String recipeNutrition) {
+        this.recipeNutrition = recipeNutrition;
     }
 
     public String getRecipeDescription() {

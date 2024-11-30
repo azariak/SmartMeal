@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.Box;
@@ -12,6 +13,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -29,6 +32,8 @@ public class RecipeDetailView extends JPanel implements PropertyChangeListener {
     private static final int TWO_HUNDRED = 200;
     private static final int FIFTEEN = 15;
     private static final int TEN = 10;
+    private static final int TWELVE = 12;
+    private static final int FOUR_HUNDRED = 400;
 
     private final String viewName = "Recipe Detail";
     private final RecipeDetailViewModel recipeDetailViewModel;
@@ -54,12 +59,22 @@ public class RecipeDetailView extends JPanel implements PropertyChangeListener {
         this.add(createInstructionsPanel());
     }
 
+    /**
+     * This is where the view gets reset.
+     */
+    public void breakRecipeDetailView() {
+        this.removeAll();
+    }
+
     private JPanel createTopPanel() {
         final JButton backButton = new JButton("Back");
         final JLabel recipeLabel = new JLabel("Recipe Name:");
         final JLabel recipeName = new JLabel(recipeDetailViewModel.getState().getRecipeName());
 
-        backButton.addActionListener(event -> recipeDetailController.backToLastView());
+        backButton.addActionListener(event -> {
+            breakRecipeDetailView();
+            recipeDetailController.backToLastView();
+        });
 
         final JPanel topPanel = new JPanel();
         topPanel.add(backButton);
@@ -127,10 +142,10 @@ public class RecipeDetailView extends JPanel implements PropertyChangeListener {
     }
 
     @NotNull
-    private JButton getjButton(ArrayList<String> ingredients, int i) {
-        final String ingredient = ingredients.get(i);
+    private JButton getjButton(ArrayList<String> ingredients, int id) {
+        final String ingredient = ingredients.get(id);
 
-        final JButton substituteButton = new JButton("Substitutes for " + ingredient + " (" + i + ")");
+        final JButton substituteButton = new JButton("Substitutes for " + ingredient + " (" + id + ")");
 
         substituteButton.setPreferredSize(new Dimension(TWO_HUNDRED, FIFTEEN));
         substituteButton.setMaximumSize(new Dimension(TWO_HUNDRED, FIFTEEN));
@@ -143,21 +158,48 @@ public class RecipeDetailView extends JPanel implements PropertyChangeListener {
 
     private JPanel createInstructionsPanel() {
         final JPanel bottomPanel = new JPanel();
+        bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.Y_AXIS));
 
         final JLabel instructionsLabel = new JLabel("Instructions");
+
         final String instructions = recipeDetailViewModel.getState().getInstructions();
-        final JLabel instructionsText = new JLabel(instructions);
+        final String cleanedInstructions = stripHtmlTags(instructions);
+
+        final JTextArea instructionsTextArea = new JTextArea(cleanedInstructions);
+        instructionsTextArea.setLineWrap(true);
+        instructionsTextArea.setWrapStyleWord(true);
+        instructionsTextArea.setEditable(false);
+        instructionsTextArea.setFont(new Font("SansSerif", Font.PLAIN, TWELVE));
+
+        final JScrollPane scrollPane = new JScrollPane(instructionsTextArea);
+        scrollPane.setPreferredSize(new Dimension(FOUR_HUNDRED, TWO_HUNDRED));
 
         bottomPanel.add(instructionsLabel);
-        bottomPanel.add(instructionsText);
+        bottomPanel.add(scrollPane);
 
         return bottomPanel;
+    }
+
+    /**
+     * Removes HTML tags from a string.
+     *
+     * @param text The string containing HTML tags.
+     * @return A clean string with HTML tags removed.
+     */
+    private String stripHtmlTags(String text) {
+        return text.replaceAll("<[^>]+>", "").trim();
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getPropertyName().equals("state")) {
-            recipeDetailController.execute(recipeDetailViewModel.getState().getGenericRecipe());
+            try {
+                recipeDetailController.execute(recipeDetailViewModel.getState().getGenericRecipe());
+            }
+            catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            breakRecipeDetailView();
             buildRecipeDetailView();
         }
     }

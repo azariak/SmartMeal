@@ -35,7 +35,7 @@ public class SavedRecipePresenter implements SavedRecipeOutputBoundary {
 
     @Override
     public void prepareResultView(String recipeName, String recipeCalories, String recipeDescription,
-                                  String recipeIngredients, String recipeNutririon) {
+                                  String recipeIngredients, String recipeNutrition) {
 
     }
 

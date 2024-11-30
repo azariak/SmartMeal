@@ -1,26 +1,25 @@
 package data_access;
 
+import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
-import entity.GenericRecipe;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import org.json.JSONObject;
+
 import entity.AdvancedRecipe;
+import entity.GenericRecipe;
 import use_case.load_saved_recipe.LoadSavedRecipeDataAcessInterface;
-import use_case.saved_recipe.SavedRecipeDataAcessInterface;
+import use_case.saved_recipe.SavedRecipeDataAccessInterface;
 
 /**
  * The DAO for Recipe data.
  */
-public class FileRecipeSaver implements SavedRecipeDataAcessInterface,
+public class FileRecipeSaver implements SavedRecipeDataAccessInterface,
                                          LoadSavedRecipeDataAcessInterface {
 
     @Override
@@ -55,6 +54,10 @@ public class FileRecipeSaver implements SavedRecipeDataAcessInterface,
         }
     }
 
+    /**
+     * Main method.
+     * @param args the arguments.
+     */
     public static void main(String[] args) {
         final JSONObject recipeJson = new JSONObject();
         recipeJson.put("name", "test");
@@ -69,6 +72,8 @@ public class FileRecipeSaver implements SavedRecipeDataAcessInterface,
     public JSONObject fetchRecipeFromApi(String recipeId) {
         final String urlString = "https://api.spoonacular.com/recipes/" + recipeId + "/information?apiKey="
                 + System.getenv("API_KEY");
+
+        JSONObject recipeJson = null;
 
         try {
             final URL url = new URL(urlString);
@@ -89,18 +94,17 @@ public class FileRecipeSaver implements SavedRecipeDataAcessInterface,
                     response.append(inputLine);
                 }
                 in.close();
-                return new JSONObject(response.toString());
+                recipeJson = new JSONObject(response.toString());
             }
             else {
                 System.err.println("Failed to fetch recipe. Response Code: " + responseCode);
-                return null;
             }
-
         }
         catch (IOException exception) {
             exception.printStackTrace();
-            return null;
         }
+
+        return recipeJson;
     }
 
     /**
@@ -120,6 +124,8 @@ public class FileRecipeSaver implements SavedRecipeDataAcessInterface,
 
     @Override
     public GenericRecipe load(String id) {
+        GenericRecipe recipe = null;
+
         try {
             final String content = new String(Files.readAllBytes(Paths.get("src/main/java/data_access/recipe.json")));
             final String[] recipes = content.split(System.lineSeparator());
@@ -127,13 +133,15 @@ public class FileRecipeSaver implements SavedRecipeDataAcessInterface,
             for (String recipeStr : recipes) {
                 final JSONObject recipeJson = new JSONObject(recipeStr);
                 if (recipeJson.getString("id").equals(id)) {
-                    return new GenericRecipe(recipeJson.getString("id"), recipeJson.getString("name"));
+                    recipe = new GenericRecipe(recipeJson.getString("id"), recipeJson.getString("name"));
+                    break;
                 }
             }
         }
         catch (IOException exception) {
             System.err.println("Error loading recipe: " + exception.getMessage());
         }
-        return null;
+
+        return recipe;
     }
 }
