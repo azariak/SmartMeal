@@ -1,7 +1,6 @@
 package interface_adapter.map_groceries;
 
 import interface_adapter.ViewModel;
-import interface_adapter.login.LoginViewModel;
 
 /**
  * The view model for the map groceries view.
