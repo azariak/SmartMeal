@@ -4,7 +4,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import entity.GenericRecipe;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -14,14 +13,14 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import entity.AdvancedRecipe;
-import use_case.load_saved_recipe.LoadSavedRecipeDataAcessInterface;
+import use_case.load_saved_recipe.LoadSavedRecipeDataAccessInterface;
 import use_case.saved_recipe.SavedRecipeDataAcessInterface;
 
 /**
  * The DAO for Recipe data.
  */
 public class FileRecipeSaver implements SavedRecipeDataAcessInterface,
-                                         LoadSavedRecipeDataAcessInterface {
+        LoadSavedRecipeDataAccessInterface {
 
     @Override
     public void save(AdvancedRecipe recipe) {
@@ -136,4 +135,24 @@ public class FileRecipeSaver implements SavedRecipeDataAcessInterface,
         }
         return null;
     }
+
+//    public List<GenericRecipe> loadAll() {
+//        final List<GenericRecipe> recipes = new ArrayList();
+//        try {
+//            final String content = new String(Files.readAllBytes(Paths.get("src/main/java/data_access/recipe.json")));
+//            final String[] recipeLines = content.split(System.lineSeparator());
+//
+//            for (String recipeStr : recipeLines) {
+//                final JSONObject recipeJson = new JSONObject(recipeStr);
+//                recipes.add(new GenericRecipe(
+//                        recipeJson.getString("id"),
+//                        recipeJson.getString("name")
+//                ));
+//            }
+//        }
+//        catch (IOException e) {
+//            System.err.println("Error loading recipes: " + e.getMessage());
+//        }
+//        return recipes;
+//    }
 }

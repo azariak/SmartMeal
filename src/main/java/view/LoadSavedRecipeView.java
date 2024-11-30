@@ -18,6 +18,7 @@ import data_access.FileRecipeSaver;
 import interface_adapter.load_saved_recipe.LoadSavedRecipeController;
 import interface_adapter.load_saved_recipe.LoadSavedRecipeState;
 import interface_adapter.load_saved_recipe.LoadSavedRecipeViewModel;
+import use_case.saved_recipe.SavedRecipeDataAcessInterface;
 
 /**
  * Represents the view component for loading saved recipes within the application.
@@ -34,7 +35,7 @@ public class LoadSavedRecipeView extends JPanel implements ActionListener, Prope
 
     public LoadSavedRecipeView(LoadSavedRecipeViewModel loadSavedRecipeViewModel) {
         this.loadSavedRecipeViewModel = loadSavedRecipeViewModel;
-
+        final SavedRecipeDataAcessInterface recipeSaver = new FileRecipeSaver();
         final JLabel title = new JLabel("Saved Recipes");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         final JPanel buttons = new JPanel();
@@ -111,6 +112,23 @@ public class LoadSavedRecipeView extends JPanel implements ActionListener, Prope
     public void setLoadSavedRecipeController(LoadSavedRecipeController loadSavedRecipeController) {
         this.loadSavedRecipeController = loadSavedRecipeController;
     }
+
+//    private void initializeRecipeList() {
+//        // Fetch recipes via the controller
+//        loadSavedRecipeController.loadAllSavedRecipes();
+//
+//        // Populate the JList
+//        refreshRecipeList();
+//    }
+
+//    private void refreshRecipeList() {
+//        final List<String> recipes = loadSavedRecipeViewModel.getRecipeList();
+//        final DefaultListModel<String> listModel = new DefaultListModel<>();
+//        for (String recipe : recipes) {
+//            listModel.addElement(recipe);
+//        }
+//        recipeList.setModel(listModel);
+//    }
 
     @Override
     public void actionPerformed(ActionEvent evt) {
