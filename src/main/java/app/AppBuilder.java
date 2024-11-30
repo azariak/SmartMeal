@@ -15,6 +15,8 @@ import entity.ResultFactoryInterface;
 import entity.UserFactory;
 import entity.test.GenericRecipeFactory;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.back.BackController;
+import interface_adapter.back.BackPresenter;
 import interface_adapter.change_password.ChangePasswordController;
 import interface_adapter.change_password.ChangePasswordPresenter;
 import interface_adapter.change_password.LoggedInViewModel;
@@ -47,6 +49,9 @@ import interface_adapter.result.ResultViewModel;
 import interface_adapter.signup.SignupController;
 import interface_adapter.signup.SignupPresenter;
 import interface_adapter.signup.SignupViewModel;
+import use_case.back.BackInputBoundary;
+import use_case.back.BackInteractor;
+import use_case.back.BackOutputBoundary;
 import use_case.change_password.ChangePasswordInputBoundary;
 import use_case.change_password.ChangePasswordInteractor;
 import use_case.change_password.ChangePasswordOutputBoundary;
@@ -363,7 +368,8 @@ public class AppBuilder {
      */
     public AppBuilder addMainMenuUseCase() {
         final MainMenuOutputBoundary mainMenuOutputBoundary =
-                new MainMenuPresenter(viewManagerModel, signupViewModel, loginViewModel, mainMenuViewModel);
+                new MainMenuPresenter(viewManagerModel, signupViewModel, loginViewModel,
+                        mainMenuViewModel, ingredientSearchViewModel);
 
         final MainMenuInputBoundary mainMenuInputBoundary =
                 new MainMenuInteractor(mainMenuOutputBoundary);
@@ -480,6 +486,19 @@ public class AppBuilder {
         final SubstitutesController substitutesController = new SubstitutesController(substitutesInteractor);
         recipeDetailView.setSubstitutesController(substitutesController);
         substitutesView.setSubstitutesController(substitutesController);
+        return this;
+    }
+
+    /**
+     * Adds the Signup Use Case to the application.
+     * @return this builder
+     */
+    public AppBuilder addBackUseCase() {
+        final BackOutputBoundary backOutputBoundary = new BackPresenter(viewManagerModel);
+        final BackInputBoundary backInteractor = new BackInteractor(backOutputBoundary);
+
+        final BackController controller = new BackController(backInteractor);
+        ingredientSearchView.setBackController(controller);
         return this;
     }
 
