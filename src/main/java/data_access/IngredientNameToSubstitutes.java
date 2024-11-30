@@ -34,6 +34,7 @@ public class IngredientNameToSubstitutes {
     public static ArrayList<String> ingredientNameToSubstitutes(String ingredientName,
                                                                 ApiAccessKeyManagerInterface keyManager) {
         ArrayList<String> ingredientSubstitutes = new ArrayList<>();
+        // Get a valid key from api key manager
         final String apiKey = keyManager.getValidApiKey();
 
         final String urlString = "https://api.spoonacular.com/food/ingredients/substitutes?apiKey="
