@@ -1,11 +1,12 @@
 package use_case.recipe_detail;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import data_access.RecipeDetailDataAccessObject;
+import entity.AdvancedRecipe;
 import entity.GenericRecipe;
 import entity.GenericRecipeFactoryInterface;
-import entity.TemporaryAdvancedRecipe;
 
 /**
  * The interactor for the Recipe Detail use case.
@@ -25,21 +26,23 @@ public class RecipeDetailInteractor implements RecipeDetailInputBoundary {
     }
 
     @Override
-    public void execute(RecipeDetailInputData recipeDetailInputData) {
+    public void execute(RecipeDetailInputData recipeDetailInputData) throws IOException {
         final GenericRecipe genericRecipe = recipeDetailInputData.getGenericRecipe();
         final ArrayList<Integer> ingredientIds = recipeDetailDataAccessObject.getIngredientIds(genericRecipe);
 
         final String recipeName = genericRecipe.getName();
+        final String recipeId = genericRecipe.getId();
         final ArrayList<String> ingredientNames = recipeDetailDataAccessObject.getIngredientsNames(ingredientIds);
         final ArrayList<String> ingredientQuantities = recipeDetailDataAccessObject.getQuantities(genericRecipe);
         final String instructions = recipeDetailDataAccessObject.getInstructions(genericRecipe);
 
-        final TemporaryAdvancedRecipe temporaryAdvancedRecipe = genericRecipeFactory.createTemporaryAdvancedRecipe(
+        final AdvancedRecipe advancedRecipe = genericRecipeFactory.createAdvancedRecipe(
                 recipeName,
+                recipeId,
                 ingredientNames,
                 ingredientQuantities,
                 instructions);
-        final RecipeDetailOutputData recipeDetailOutputData = new RecipeDetailOutputData(temporaryAdvancedRecipe,
+        final RecipeDetailOutputData recipeDetailOutputData = new RecipeDetailOutputData(advancedRecipe,
                 false);
 
         recipeDetailPresenter.prepareSuccessView(recipeDetailOutputData);

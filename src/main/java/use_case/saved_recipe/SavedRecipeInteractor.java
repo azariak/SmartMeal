@@ -22,7 +22,7 @@ public class SavedRecipeInteractor implements SavedRecipeInputBoundary {
         final String recipeCalories = savedrecipeInputData.getRecipeCalories();
         final String recipeDescription = savedrecipeInputData.getRecipeDescription();
         final String recipeIngredients = savedrecipeInputData.getRecipeIngredients();
-        final String recipeNutririon = savedrecipeInputData.getRecipeNutririon();
+        final String recipeNutririon = savedrecipeInputData.getRecipeNutrition();
         savedRecipePresenter.prepareResultView(recipeName, recipeCalories, recipeDescription, recipeIngredients,
                 recipeNutririon);
     }

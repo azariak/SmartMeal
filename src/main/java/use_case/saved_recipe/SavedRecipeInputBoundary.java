@@ -11,5 +11,8 @@ public interface SavedRecipeInputBoundary {
      */
     void execute(SavedRecipeInputData savedrecipeInputData);
 
+    /**
+     * Switches to the result view.
+     */
     void switchToResultView();
 }

@@ -21,20 +21,15 @@ public interface GenericRecipeFactoryInterface {
      * Creates a new Advanced Recipe.
      * @param name the name of the new recipe.
      * @param id the id of the new recipe.
+     * @param ingredientNames an arraylist of the ingredient names.
+     * @param ingredientQuantities an arraylist of the ingredient quantities.
+     * @param instructions a String of instructions.
+     * @throws IOException an IO exception.
      * @return the new recipe.
      */
-    AdvancedRecipe createAdvancedRecipe(String name, String id);
-
-    /**
-     * Creates a new Temporary Advanced Recipe.
-     * @param recipeName the name of the new recipe.
-     * @param ingredientNames the names of the ingredients for the recipe.
-     * @param ingredientQuantities the quantities of the ingredients for the recipe.
-     * @param instructions the instructions for the recipe.
-     * @return the new recipe.
-     */
-    TemporaryAdvancedRecipe createTemporaryAdvancedRecipe(String recipeName,
-                                                          ArrayList<String> ingredientNames,
-                                                          ArrayList<String> ingredientQuantities,
-                                                          String instructions);
+    AdvancedRecipe createAdvancedRecipe(String name,
+                                        String id,
+                                        ArrayList<String> ingredientNames,
+                                        ArrayList<String> ingredientQuantities,
+                                        String instructions) throws IOException;
 }

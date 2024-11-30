@@ -22,6 +22,7 @@ public class SubstitutesInteractor implements SubstitutesInputBoundary {
     public void execute(SubstitutesInputData substitutesInputData) {
         final String ingredientName = substitutesInputData.getIngredientName();
         final ArrayList<String> ingredientSubstitutes = substitutesDataAccessObject.getIngredientSubstitutes(ingredientName);
+        System.out.println(ingredientSubstitutes.toString());
         final SubstitutesOutputData substitutesOutputData = new SubstitutesOutputData(ingredientName, ingredientSubstitutes, false);
         substitutesPresenter.prepareSuccessView(substitutesOutputData);
     }
