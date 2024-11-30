@@ -30,9 +30,10 @@ public class GenericResult implements Result {
                         && (recipeToAddRecipe.getName().equals(recipe.getName()))) {
                     contained = true;
                 }
-                if (!contained) {
-                    recipes.add(recipeToAddRecipe);
-                }
+            }
+
+            if (!contained) {
+                recipes.add(recipeToAddRecipe);
             }
         }
     }

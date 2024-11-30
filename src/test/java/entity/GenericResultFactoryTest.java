@@ -27,18 +27,23 @@ class GenericResultFactoryTest {
         recipeList.add(recipe2);
         recipeList.add(recipe3);
 
-        GenericResult entityTest = new GenericResult();
-        entityTest.addRecipe(recipeList);
     }
 
     @AfterEach
     void tearDown() {
+        recipeList.removeAll(recipeList);
+
+        GenericResult entityTest = new GenericResult();
+        entityTest.addRecipe(recipeList);
     }
 
     @Test
     void createGenericResult() {
         GenericResultFactory factoryEntity = new GenericResultFactory();
         GenericResult resultEntity = factoryEntity.createGenericResult(recipeList);
+
+        GenericResult entityTest = new GenericResult();
+        entityTest.addRecipe(recipeList);
 
         for (GenericRecipe recipe : entityTest.getRecipes()) {
             assert resultEntity.getRecipes().contains(recipe);
