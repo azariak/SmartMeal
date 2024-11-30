@@ -16,8 +16,4 @@ public interface IngredientSearchOutputBoundary {
      */
     void prepareFailView(String errorMessage);
 
-    /**
-     * Back to last view.
-     */
-    void backToLastView();
 }

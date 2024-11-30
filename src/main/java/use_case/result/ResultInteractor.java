@@ -20,8 +20,4 @@ public class ResultInteractor implements ResultInputBoundary {
         resultPresenter.prepareRecipeDetailView(resultOutputData);
     }
 
-    @Override
-    public void backToLastView() {
-        resultPresenter.backToLastView();
-    }
 }

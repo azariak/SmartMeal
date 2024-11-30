@@ -58,8 +58,4 @@ public class IngredientSearchInteractor implements IngredientSearchInputBoundary
         ingredientSearchPresenter.prepareSuccessView(ingredientSearchOutputData);
     }
 
-    @Override
-    public void backToLastView() {
-        ingredientSearchPresenter.backToLastView();
-    }
 }
