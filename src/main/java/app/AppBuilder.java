@@ -159,7 +159,7 @@ public class AppBuilder {
         userDataAccessObject = new InMemoryUserDataAccessObject();
         ingredientSearchDataAccessObject = new IngredientSearchDataAccessObject(apiAccessKeyManager);
         recipeDetailDataAccessObject = new RecipeDetailDataAccessObject();
-        substitutesDataAccessObject = new SubstitutesDataAccessObject();
+        substitutesDataAccessObject = new SubstitutesDataAccessObject(apiAccessKeyManager);
     }
 
     private void addApiKeysToApiKeyManager() {

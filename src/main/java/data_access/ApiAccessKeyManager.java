@@ -8,9 +8,11 @@ import java.util.Map;
  * The api access key manager.
  */
 public class ApiAccessKeyManager implements ApiAccessKeyManagerInterface {
+    public static final String ENV_API_KEY = System.getenv("API_KEY");
 
     // A map that stores the api keys and a boolean that records if they are still valid (have not reached limit).
     private final Map<String, Boolean> apiKeyMap;
+    private Boolean allInvalid = false;
 
     public ApiAccessKeyManager() {
         this.apiKeyMap = new HashMap<>();
@@ -20,26 +22,38 @@ public class ApiAccessKeyManager implements ApiAccessKeyManagerInterface {
     public void addApiKeys(ArrayList<String> apiKeys) {
         for (String apiKey : apiKeys) {
             this.apiKeyMap.put(apiKey, true);
-            System.out.println("Valid Api Key: " + apiKey + " added to manager");
+            System.out.println("Api Access Key Manager: Valid Api Key: " + apiKey + " added to manager");
         }
     }
 
     @Override
     public String getValidApiKey() {
         // If all keys are not valid, return the default api access key.
-        String result = "e171f919be014c5aab8977a975d27931";
+
+        String result = "";
         for (String apiKey : apiKeyMap.keySet()) {
             if (apiKeyMap.get(apiKey)) {
                 result = apiKey;
+                System.out.println("Api Access Key Manager: Valid Api Key: " + result + " Provided to Api DAO");
             }
         }
-        System.out.println("Valid Api Key: " + result + " Provided to Api DAO");
-        return result;
+        // If no valid keys are found, return the key in environment and set allInvalid to true.
+        if (result.isEmpty()) {
+            allInvalid = true;
+            System.out.println("Api Access Key Manager: Error: All Api key are invalid, returning environment Api key");
+        }
+
+        return ENV_API_KEY;
     }
 
     @Override
     public void setKeyInvalid(String apiKey) {
         apiKeyMap.put(apiKey, false);
-        System.out.println(apiKey + " is not valid");
+        System.out.println("Api Access Key Manager: " + apiKey + " is not valid");
+    }
+
+    @Override
+    public boolean allKeyInvalid() {
+        return allInvalid;
     }
 }

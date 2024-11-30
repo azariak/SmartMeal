@@ -58,7 +58,11 @@ public class IngredientSearchDataAccessObject implements IngredientSearchDataAcc
             else if (responseCode == HTTP402) {
                 // set the key to invalid and start a new search with a valid key
                 keyManager.setKeyInvalid(apiKey);
-                recipeMap = excuteSearch(ingredients);
+
+                if (!keyManager.allKeyInvalid()) {
+                    recipeMap = this.excuteSearch(ingredients);
+                }
+
             }
             else {
                 System.out.println("GET request failed. Response Code: " + responseCode);
