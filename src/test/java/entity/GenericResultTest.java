@@ -30,11 +30,8 @@ class GenericResultTest {
 
     @AfterEach
     void tearDown() {
-        recipes.remove(recipe1);
-        recipes.remove(recipe2);
-        recipes.remove(recipe3);
-        recipes2.remove(recipe2);
-        recipes2.remove(recipe3);
+        recipes.clear();
+        recipes2.clear();
     }
 
     @Test
