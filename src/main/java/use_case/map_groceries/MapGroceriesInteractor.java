@@ -28,20 +28,12 @@ public class MapGroceriesInteractor implements MapGroceriesInputBoundary {
     public void execute(MapGroceriesInputData mapGroceriesInputData) {
         // Recipe id
         final String id = mapGroceriesInputData.getID();
-        /* The Grocery List output data.
-        final GroceryList groceries =
-
-         */
+        // The Grocery List output data.
 
     }
 
     @Override
-    public void goToGroceryView() {
-
-    }
-
-    @Override
-    public void goToLastView() {
+    public void backToLastView() {
 
     }
 
