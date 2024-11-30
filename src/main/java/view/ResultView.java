@@ -125,4 +125,5 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
     public void setBackController(BackController backController) {
         this.backController = backController;
     }
+
 }

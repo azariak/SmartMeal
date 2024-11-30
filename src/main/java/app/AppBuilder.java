@@ -499,6 +499,7 @@ public class AppBuilder {
 
         final BackController controller = new BackController(backInteractor);
         ingredientSearchView.setBackController(controller);
+        resultView.setBackController(controller);
         return this;
     }
 
