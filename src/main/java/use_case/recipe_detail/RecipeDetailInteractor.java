@@ -42,8 +42,7 @@ public class RecipeDetailInteractor implements RecipeDetailInputBoundary {
                 ingredientNames,
                 ingredientQuantities,
                 instructions);
-        final RecipeDetailOutputData recipeDetailOutputData = new RecipeDetailOutputData(advancedRecipe,
-                false);
+        final RecipeDetailOutputData recipeDetailOutputData = new RecipeDetailOutputData(advancedRecipe);
 
         recipeDetailPresenter.prepareSuccessView(recipeDetailOutputData);
     }
