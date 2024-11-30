@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import entity.GenericRecipe;
+import interface_adapter.back.BackController;
 import interface_adapter.result.ResultController;
 import interface_adapter.result.ResultViewModel;
 
@@ -26,7 +27,10 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
     private static final String VIEW_NAME = "Result View";
 
     private final ResultViewModel resultViewModel;
+
     private ResultController resultController;
+    private BackController backController;
+
     private JPanel recipeButtons;
 
     public ResultView(ResultViewModel resultViewModel) {
@@ -42,7 +46,7 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
     private void addBackButton() {
         final JPanel backButtonPanel = new JPanel();
         final JButton back = new JButton("Back");
-        back.addActionListener(evt -> resultController.backTolastView());
+        back.addActionListener(evt -> backController.backToLastView());
         backButtonPanel.add(back);
         this.add(backButtonPanel);
     }
@@ -117,4 +121,9 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
     public void setResultController(ResultController resultController) {
         this.resultController = resultController;
     }
+
+    public void setBackController(BackController backController) {
+        this.backController = backController;
+    }
+
 }

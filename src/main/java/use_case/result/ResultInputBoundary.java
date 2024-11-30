@@ -11,8 +11,4 @@ public interface ResultInputBoundary {
      */
     void execute(ResultInputData inputData);
 
-    /**
-     * Back to last view.
-     */
-    void backToLastView();
 }
