@@ -1,46 +1,50 @@
 package entity;
 
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class GenericRecipeTest {
-
-    private GenericRecipe genericRecipe;
+     GenericRecipe entity;
 
     @BeforeEach
     void setUp() throws IOException {
-        String name = "Pancakes";
-        String id = "5678";
-        genericRecipe = new GenericRecipe(name, id);
-    }
+      
+        entity = new GenericRecipe("name", "id");
 
-    @AfterEach
-    void tearDown() {
-        genericRecipe = null;
     }
 
     @Test
     void getName() {
-        assertEquals("Pancakes", genericRecipe.getName());
+      
+        assertEquals("name", entity.getName());
+      
     }
 
     @Test
     void getId() {
-        assertEquals("5678", genericRecipe.getId());
+      
+        assertEquals("id", entity.getId());
     }
 
     @Test
     void save() {
+
         // Anisa implement
+      
     }
 
     @Test
     void toJson() {
+      
         // Anisa implement
+      
     }
 }
+
