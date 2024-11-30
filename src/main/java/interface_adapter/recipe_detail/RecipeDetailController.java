@@ -34,4 +34,11 @@ public class RecipeDetailController {
         recipeDetailInteractor.backToLastView();
     }
 
+    /**
+     * Switch to map groceries view.
+     */
+    public void goToGroceryView() {
+        recipeDetailInteractor.goToGroceryView();
+    }
+
 }

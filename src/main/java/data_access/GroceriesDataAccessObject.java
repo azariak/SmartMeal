@@ -11,12 +11,20 @@ import java.util.ArrayList;
 /**
  * The data access object for the Map Groceries use case.
  */
-/* public class GroceriesDataAccessObject implements MapGroceriesDataAccessInterface {
+public class GroceriesDataAccessObject implements MapGroceriesDataAccessInterface {
 
     @Override
     public GroceryList getRecipeGroceryList(String id) throws IOException {
-        final ArrayList<JSONObject> apiIngredientResult = new RecipeIDToIngredients().getFullIngredients(id);
-        final GroceryList groceryList = new GroceryList(id, );
+        final ArrayList<String> apiIngredientResult = new RecipeIDToIngredients().getFullIngredients(id);
+        final String apiServingsResult = new RecipeIDToServings().getServings(id);
+
+        final String apiGroceriesInput = "{ \"ingredients\": " + apiIngredientResult.toString() + ", \"servings\": "
+                + apiServingsResult + " }";
+
+        final ArrayList<JSONObject> apiGroceriesResult = new IngredientsToGroceries().getGroceries(apiGroceriesInput);
+        final GroceryList groceryList = new GroceryList(id, apiGroceriesResult);
+
+        return groceryList;
     }
 
-} */
+}
