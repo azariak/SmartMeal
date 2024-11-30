@@ -22,13 +22,13 @@ public class RecipeIDToServings {
     private static final String BASE_URL = "https://api.spoonacular.com/recipes/";
 
     /**
-     * Returns a string of number of servings for the recipe.
+     * Returns a list of length 2 with recipe info; [servings, title].
      * @param id the recipe id.
-     * @return The String of serving numbers or null if request fails.
+     * @return The list of info of strings or null if request fails.
      * @throws IOException if error occurs during API call.
      */
-    public static String getServings(String id) throws IOException {
-        String result = null;
+    public static ArrayList<String> getInfo(String id) throws IOException {
+        ArrayList<String> result = null;
 
         final String urlString = BASE_URL + id + "/information" + "?apiKey="
                 + "ac77230dfdf14548b77b78cb800fe0af";
@@ -63,7 +63,10 @@ public class RecipeIDToServings {
                     map.put(key, jsonObject.get(key));
                 }
 
-                result = map.get("servings").toString();
+                result = new ArrayList<String>();
+                result.add(map.get("servings").toString());
+                result.add(map.get("title").toString());
+
             }
         }
         catch (IOException ex) {

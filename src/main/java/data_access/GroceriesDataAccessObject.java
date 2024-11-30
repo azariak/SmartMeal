@@ -15,14 +15,15 @@ public class GroceriesDataAccessObject implements MapGroceriesDataAccessInterfac
 
     @Override
     public GroceryList getRecipeGroceryList(String id) throws IOException {
+        final String apiRecipeName = new RecipeIDToServings().getInfo(id).get(1);
         final ArrayList<String> apiIngredientResult = new RecipeIDToIngredients().getFullIngredients(id);
-        final String apiServingsResult = new RecipeIDToServings().getServings(id);
+        final String apiServingsResult = new RecipeIDToServings().getInfo(id).get(0);
 
         final String apiGroceriesInput = "{ \"ingredients\": " + apiIngredientResult.toString() + ", \"servings\": "
                 + apiServingsResult + " }";
 
         final ArrayList<JSONObject> apiGroceriesResult = new IngredientsToGroceries().getGroceries(apiGroceriesInput);
-        final GroceryList groceryList = new GroceryList(id, apiGroceriesResult);
+        final GroceryList groceryList = new GroceryList(id, apiRecipeName, apiGroceriesResult);
 
         return groceryList;
     }
