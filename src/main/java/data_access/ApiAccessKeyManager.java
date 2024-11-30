@@ -43,9 +43,10 @@ public class ApiAccessKeyManager implements ApiAccessKeyManagerInterface {
             allInvalid = true;
             System.out.println("Api Access Key Manager: Error: All Api key are invalid, returning environment Api key");
             System.out.println("Api Access Key Manager: Environment Api key: " + ENV_API_KEY + " Provided to Api DAO");
+            result = ENV_API_KEY;
         }
 
-        return ENV_API_KEY;
+        return result;
     }
 
     @Override
