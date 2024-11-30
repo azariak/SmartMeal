@@ -169,12 +169,18 @@ public class AppBuilder {
 
     private void addApiKeysToApiKeyManager() {
         final ArrayList<String> apiKeys = new ArrayList<>();
-        apiKeys.add("6a75fe8f70484b03928ac2c05178f256");
-        apiKeys.add("62842003bb3446dea5816857c6fb7b1f");
-        apiKeys.add("e52f205468974e43b331a87df0ea9378");
-        apiKeys.add("c73fb848e5334d60857265f0b5234458");
-        apiKeys.add("d4ce1e00e8534867af36c1e1fec240bf");
-        apiKeys.add("f63d356276804dec89d7bae55063fa28");
+
+        for (int i = 1; i < 100; i++) {
+
+            String apiKey = System.getenv("API_KEY" + Integer.toString(i));
+            if (apiKey != null) {
+                apiKeys.add(apiKey);
+            }
+            else {
+                break;
+            }
+
+        }
 
         apiAccessKeyManager.addApiKeys(apiKeys);
     }
