@@ -26,4 +26,9 @@ public interface ApiAccessKeyManagerInterface {
      */
     void setKeyInvalid(String apiKey);
 
+    /**
+     * Check if all keys stored in key manager are invalid.
+     * @return Return true if all keys are invalid.
+     */
+    boolean allKeyInvalid();
 }

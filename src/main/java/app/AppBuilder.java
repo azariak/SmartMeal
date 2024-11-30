@@ -159,7 +159,7 @@ public class AppBuilder {
         userDataAccessObject = new InMemoryUserDataAccessObject();
         ingredientSearchDataAccessObject = new IngredientSearchDataAccessObject(apiAccessKeyManager);
         recipeDetailDataAccessObject = new RecipeDetailDataAccessObject();
-        substitutesDataAccessObject = new SubstitutesDataAccessObject();
+        substitutesDataAccessObject = new SubstitutesDataAccessObject(apiAccessKeyManager);
     }
 
     private void addApiKeysToApiKeyManager() {
@@ -169,6 +169,7 @@ public class AppBuilder {
         apiKeys.add("e52f205468974e43b331a87df0ea9378");
         apiKeys.add("c73fb848e5334d60857265f0b5234458");
         apiKeys.add("d4ce1e00e8534867af36c1e1fec240bf");
+        apiKeys.add("f63d356276804dec89d7bae55063fa28");
 
         apiAccessKeyManager.addApiKeys(apiKeys);
     }
