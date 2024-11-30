@@ -1,10 +1,9 @@
 package use_case.map_groceries;
 
-import java.util.ArrayList;
-import java.util.Map;
-
-import entity.AdvancedRecipe;
+import entity.GenericRecipe;
 import entity.GroceryList;
+
+import java.io.IOException;
 
 /**
  * The Map Groceries use case interactor.
@@ -12,29 +11,27 @@ import entity.GroceryList;
  */
 public class MapGroceriesInteractor implements MapGroceriesInputBoundary {
 
+    private final MapGroceriesDataAccessInterface mapGroceriesDataAccess;
     private final MapGroceriesOutputBoundary mapGroceriesPresenter;
-    private final GroceryList groceryList;
-    private final MapGroceriesDataAccessInterface mapGroceriesDataAccessInterface;
 
-    public MapGroceriesInteractor(MapGroceriesOutputBoundary mapGroceriesPresenter,
-                                  GroceryList groceryList,
-                                  MapGroceriesDataAccessInterface mapGroceriesDataAccessInterface) {
+    public MapGroceriesInteractor(MapGroceriesDataAccessInterface mapGroceriesDataAccess,
+                                  MapGroceriesOutputBoundary mapGroceriesPresenter) {
+        this.mapGroceriesDataAccess = mapGroceriesDataAccess;
         this.mapGroceriesPresenter = mapGroceriesPresenter;
-        this.groceryList = groceryList;
-        this.mapGroceriesDataAccessInterface = mapGroceriesDataAccessInterface;
     }
 
     @Override
-    public void execute(MapGroceriesInputData mapGroceriesInputData) {
-        // Recipe id
+    public void execute(MapGroceriesInputData mapGroceriesInputData) throws IOException {
         final String id = mapGroceriesInputData.getID();
-        // The Grocery List output data.
 
+        final MapGroceriesOutputData mapGroceriesOutputData =
+                new MapGroceriesOutputData(this.mapGroceriesDataAccess.getRecipeGroceryList(id).returnGroceryList());
+        mapGroceriesPresenter.prepareGroceriesView(mapGroceriesOutputData);
     }
 
     @Override
     public void backToLastView() {
-
+        mapGroceriesPresenter.backToLastView();
     }
 
 }
