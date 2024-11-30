@@ -7,18 +7,12 @@ import entity.AdvancedRecipe;
  */
 public class RecipeDetailOutputData {
     private final AdvancedRecipe advancedRecipe;
-    private final boolean useCaseFailed;
 
-    public RecipeDetailOutputData(AdvancedRecipe advancedRecipe, boolean useCaseFailed) {
+    public RecipeDetailOutputData(AdvancedRecipe advancedRecipe) {
         this.advancedRecipe = advancedRecipe;
-        this.useCaseFailed = useCaseFailed;
     }
 
     public AdvancedRecipe getAdvancedRecipe() {
         return advancedRecipe;
-    }
-
-    public boolean isUseCaseFailed() {
-        return useCaseFailed;
     }
 }
