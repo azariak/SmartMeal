@@ -101,7 +101,7 @@ Test
   - IntelliJ
   - Functioning Spoonacular API keys in environmental variables
   - This should be formatted in IntelliJ as follows:
-  - API_KEY1=...;API_KEY2=...;
+  - `API_KEY1=...;API_KEY2=...;`
   - Adding multiple API Keys will allow the program to automatically switch to the first that returns a proper output
 ### How to Use
   - To open this app, run the `Main` file in `src\main\java\app\Main`. 
