@@ -104,13 +104,18 @@ Test
 ### Installation Instructions
 - Dependencies:
   - Java
-  - ...
+  - IntelliJ
+  - Functioning Spoonacular API keys in environmental variables
+  - This should be formatted in IntelliJ as follows:
+  - API_KEY1=...;API_KEY2=...;
+  - Adding multiple API Keys will allow the program to automatically switch to the first that returns a proper output
 ### How to Use
   - To open this app, run the `Main` file in `src\main\java\app\Main`. 
-  It will preserve information across sections.
-  - Once it is open...
+  It will preserve information across sections
+  - Once it is open you must create an account and log in, using the provided buttons
+  - Then there are buttons for each User Story
 
-### License
+### License on GitHub
 
 ### Feedback & Contributions
 - To give feedback or contribute, you can open a GitHub issue, or create a pull request.
