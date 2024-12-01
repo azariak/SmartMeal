@@ -124,11 +124,15 @@ public class RankedView extends JPanel implements ActionListener, PropertyChange
 
         if (rankings.length == 0) {
             // Display a message when no recipes are ranked
-            final JLabel noRecipesLabel = new JLabel("<html><h3><font color=#a1150b>No recipes have "
-                    + "been ranked yet.</font></h3></html>");
+            final JLabel noRecipesLabel = new JLabel("<html><h2><font color=#a1150b>No recipes have "
+                    + "been ranked yet.</font></h2></html>");
             noRecipesLabel.setHorizontalAlignment(SwingConstants.CENTER);
-            rankingsPanel.add(noRecipesLabel);
+            noRecipesLabel.setVerticalAlignment(SwingConstants.CENTER);
+            noRecipesLabel.setFont(new Font("Arial", Font.BOLD, 20));
+            rankingsPanel.setLayout(new BorderLayout());
+            rankingsPanel.add(noRecipesLabel, BorderLayout.CENTER);
         }
+
         else {
             for (int i = 0; i < rankings.length; i++) {
                 final int recipeIndex = i;
