@@ -50,6 +50,7 @@ public class RankedViewModel extends ViewModel<RankedViewState> {
      * @return the initial RankedViewState containing the shuffled and rated recipes.
      */
     private RankedViewState initializeState() {
+        // As per Piazza Post #1423, I can hard code in values to save time during the demo.
         String[] recipeNames = {"Spaghetti Bolognese",
                                 "Chicken and Rice", "Chicken Alfredo", "Beef Stroganoff",
                                 "Vegetarian Chili", "Lemon Tart"};

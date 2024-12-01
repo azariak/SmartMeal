@@ -122,67 +122,76 @@ public class RankedView extends JPanel implements ActionListener, PropertyChange
         rankingsPanel.removeAll();
         final String[] rankings = viewModel.getRankings();
 
-        for (int i = 0; i < rankings.length; i++) {
-            final int recipeIndex = i;
-            final JPanel recipePanel = new JPanel(new BorderLayout());
+        if (rankings.length == 0) {
+            // Display a message when no recipes are ranked
+            final JLabel noRecipesLabel = new JLabel("<html><h3><font color=#a1150b>No recipes have "
+                    + "been ranked yet.</font></h3></html>");
+            noRecipesLabel.setHorizontalAlignment(SwingConstants.CENTER);
+            rankingsPanel.add(noRecipesLabel);
+        }
+        else {
+            for (int i = 0; i < rankings.length; i++) {
+                final int recipeIndex = i;
+                final JPanel recipePanel = new JPanel(new BorderLayout());
 
-            // Extract recipe name and current stars
-            final String[] parts = rankings[i].split(": ");
-            final String recipeName = parts[0];
-            final String currentStars = parts[1];
-            final int currentStarCount = currentStars.length() - currentStars.replace("★", "").length();
+                // Extract recipe name and current stars
+                final String[] parts = rankings[i].split(": ");
+                final String recipeName = parts[0];
+                final String currentStars = parts[1];
+                final int currentStarCount = currentStars.length() - currentStars.replace("★", "").length();
 
-            // Recipe name label
-            final JLabel nameLabel = new JLabel("<html><font color=#08289c>" + recipeName + "</font></html>");
+                // Recipe name label
+                final JLabel nameLabel = new JLabel("<html><font color=#08289c>" + recipeName + "</font></html>");
 
-            // Star panel
-            final JPanel starPanel = new JPanel(new GridLayout(1, 5));
-            final int numStars = 5;
-            for (int j = 1; j <= numStars; j++) {
-                final int starCount = j;
+                // Star panel
+                final JPanel starPanel = new JPanel(new GridLayout(1, 5));
+                final int numStars = 5;
+                for (int j = 1; j <= numStars; j++) {
+                    final int starCount = j;
 
-                final JButton starButton;
-                if (j <= currentStarCount) {
-                    starButton = new JButton("★");
+                    final JButton starButton;
+                    if (j <= currentStarCount) {
+                        starButton = new JButton("★");
+                    }
+                    else {
+                        starButton = new JButton("☆");
+                    }
+                    starButton.setOpaque(true);
+                    starButton.setBackground(recipeBoxBackground);
+                    final int twenty = 20;
+                    starButton.setFont(new Font("Dialog", Font.BOLD, twenty));
+                    starButton.setForeground(starColor);
+                    starButton.setBorder(BorderFactory.createEmptyBorder());
+                    starButton.setContentAreaFilled(false);
+
+                    if (isEditMode) {
+                        starButton.addActionListener(e -> {
+                            viewModel.updateStarRating(recipeIndex, starCount);
+                        });
+                    }
+
+                    starPanel.add(starButton);
+                    starPanel.setBackground(recipeBoxBackground);
                 }
-                else {
-                    starButton = new JButton("☆");
-                }
-                starButton.setOpaque(true);
-                starButton.setBackground(recipeBoxBackground);
-                final int twenty = 20;
-                starButton.setFont(new Font("Dialog", Font.BOLD, twenty));
-                starButton.setForeground(starColor);
-                starButton.setBorder(BorderFactory.createEmptyBorder());
-                starButton.setContentAreaFilled(false);
 
-                if (isEditMode) {
-                    starButton.addActionListener(e -> {
-                        viewModel.updateStarRating(recipeIndex, starCount);
-                    });
-                }
+                recipePanel.add(nameLabel, BorderLayout.WEST);
+                recipePanel.add(starPanel, BorderLayout.EAST);
 
-                starPanel.add(starButton);
-                starPanel.setBackground(recipeBoxBackground);
+                final int twelve = 12;
+                recipePanel.setBorder(BorderFactory.createTitledBorder(
+                        BorderFactory.createLineBorder(lineBorder),
+                        "Recipe Ranking",
+                        TitledBorder.CENTER,
+                        TitledBorder.TOP,
+                        new Font("Arial", Font.BOLD, twelve),
+                        lineBorder
+                ));
+                recipePanel.setBackground(recipeBoxBackground);
+
+                rankingsPanel.add(recipePanel);
+                final int ten = 10;
+                rankingsPanel.add(Box.createRigidArea(new Dimension(0, ten)));
             }
-
-            recipePanel.add(nameLabel, BorderLayout.WEST);
-            recipePanel.add(starPanel, BorderLayout.EAST);
-
-            final int twelve = 12;
-            recipePanel.setBorder(BorderFactory.createTitledBorder(
-                    BorderFactory.createLineBorder(lineBorder),
-                    "Recipe Ranking",
-                    TitledBorder.CENTER,
-                    TitledBorder.TOP,
-                    new Font("Arial", Font.BOLD, twelve),
-                    lineBorder
-            ));
-            recipePanel.setBackground(recipeBoxBackground);
-
-            rankingsPanel.add(recipePanel);
-            final int ten = 10;
-            rankingsPanel.add(Box.createRigidArea(new Dimension(0, ten)));
         }
 
         revalidate();
