@@ -1,6 +1,7 @@
 package interface_adapter.ingredient_substitutions;
 
 import java.util.ArrayList;
+
 /**
  * Contains important information to be displayed for the ingredient substitutions use case.
  */

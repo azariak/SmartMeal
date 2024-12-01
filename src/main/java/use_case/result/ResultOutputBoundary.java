@@ -11,8 +11,4 @@ public interface ResultOutputBoundary {
      */
     void prepareRecipeDetailView(ResultOutputData resultOutputData);
 
-    /**
-     * Back to last view.
-     */
-    void backToLastView();
 }

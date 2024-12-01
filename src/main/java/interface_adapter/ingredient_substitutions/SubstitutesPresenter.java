@@ -4,6 +4,9 @@ import interface_adapter.ViewManagerModel;
 import use_case.ingredient_substitutions.SubstitutesOutputBoundary;
 import use_case.ingredient_substitutions.SubstitutesOutputData;
 
+/**
+ * The presenter for the ingredient substitutions use case.
+ */
 public class SubstitutesPresenter implements SubstitutesOutputBoundary {
 
     private final SubstitutesViewModel substitutesViewModel;
@@ -18,6 +21,7 @@ public class SubstitutesPresenter implements SubstitutesOutputBoundary {
     @Override
     public void prepareSuccessView(SubstitutesOutputData substitutesOutputData) {
         final SubstitutesState substitutesState = substitutesViewModel.getState();
+        substitutesState.setIngredientName(substitutesOutputData.getIngredientName());
         substitutesState.setIngredientSubstitutes(substitutesOutputData.getIngredientSubstitutes());
         System.out.println(substitutesOutputData.getIngredientSubstitutes());
 

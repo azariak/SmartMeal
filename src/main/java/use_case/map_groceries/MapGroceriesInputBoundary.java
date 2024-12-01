@@ -15,12 +15,7 @@ public interface MapGroceriesInputBoundary {
     void execute(MapGroceriesInputData mapGroceriesInputData) throws IOException;
 
     /**
-     * Go to Grocery List view.
-     */
-    void goToGroceryView();
-
-    /**
      * Go to previous view.
      */
-    void goToLastView();
+    void backToLastView();
 }

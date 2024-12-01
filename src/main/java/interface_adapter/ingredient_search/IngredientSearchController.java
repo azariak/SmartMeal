@@ -19,7 +19,7 @@ public class IngredientSearchController {
 
     /**
      * Executes the ingredient search use Case.
-     * @param ingredients a arraylist of ingredients in strings
+     * @param ingredients an arraylist of ingredients in strings
      * @throws IOException ioexception.
      */
     public void execute(ArrayList<String> ingredients) throws IOException {
@@ -29,10 +29,4 @@ public class IngredientSearchController {
         ingredientSearchUseCaseInteractor.execute(ingredientSearchInputData);
     }
 
-    /**
-     * Back to last view.
-     */
-    public void backTolastView() {
-        ingredientSearchUseCaseInteractor.backToLastView();
-    }
 }

@@ -1,11 +1,11 @@
 package entity;
 
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+
+import org.json.JSONObject;
 
 /**
  * An implementation of the Grocery List object.
@@ -13,11 +13,14 @@ import java.util.Set;
 public class GroceryList {
 
     private final String id;
+    private final String recipeName;
     private final ArrayList<Map<String, Object>> groceries;
 
-    public GroceryList(String id, ArrayList<JSONObject> groceries) {
+    public GroceryList(String id, String recipeName, ArrayList<JSONObject> groceries) {
         // Save recipe id.
         this.id = id;
+        // Save recipe name.
+        this.recipeName = recipeName;
         // Convert the JSONObject provided by the API call to an accessible Array.
         this.groceries = new ArrayList<>();
         for (JSONObject item : groceries) {
@@ -38,6 +41,13 @@ public class GroceryList {
      */
     public String returnRecipeID() {
         return this.id;
+    }
+
+    /** Returns recipe name.
+     * @return the recipe name.
+     */
+    public String returnRecipeName() {
+        return this.recipeName;
     }
 
     /**

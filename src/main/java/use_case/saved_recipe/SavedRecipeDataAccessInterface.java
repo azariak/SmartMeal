@@ -1,6 +1,5 @@
 package use_case.saved_recipe;
 
-import entity.GenericRecipe;
 import org.json.JSONObject;
 
 import entity.AdvancedRecipe;
@@ -9,7 +8,7 @@ import entity.GenericRecipe;
 /**
  * DAO for the Saved Recipe Use Case.
  */
-public interface SavedRecipeDataAcessInterface {
+public interface SavedRecipeDataAccessInterface {
 
     /**
      * Saves the user.

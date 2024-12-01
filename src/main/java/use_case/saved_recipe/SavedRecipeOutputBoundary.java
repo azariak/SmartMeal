@@ -22,10 +22,10 @@ public interface SavedRecipeOutputBoundary {
      * @param recipeCalories the recipe calories.
      * @param recipeDescription the recipe description.
      * @param recipeIngredients the recipe ingredients.
-     * @param recipeNutririon the recipe nutrition's.
+     * @param recipeNutrition the recipe nutrition's.
      */
     void prepareResultView(String recipeName, String recipeCalories, String recipeDescription,
-            String recipeIngredients, String recipeNutririon);
+            String recipeIngredients, String recipeNutrition);
 
     /**
      * Switch to result view.

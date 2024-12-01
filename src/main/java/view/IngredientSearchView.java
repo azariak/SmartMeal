@@ -18,6 +18,7 @@ import javax.swing.event.DocumentListener;
 
 import org.jetbrains.annotations.NotNull;
 
+import interface_adapter.back.BackController;
 import interface_adapter.ingredient_search.IngredientSearchController;
 import interface_adapter.ingredient_search.IngredientSearchState;
 import interface_adapter.ingredient_search.IngredientSearchViewModel;
@@ -38,6 +39,7 @@ public class IngredientSearchView extends JPanel implements ActionListener, Prop
 
     private final IngredientSearchViewModel ingredientSearchViewModel;
     private IngredientSearchController ingredientSearchController;
+    private BackController backController;
 
     private final JTextField ingredientField1 = new JTextField(15);
     private final JTextField ingredientField2 = new JTextField(15);
@@ -70,8 +72,8 @@ public class IngredientSearchView extends JPanel implements ActionListener, Prop
     }
 
     private void addCancelButton() {
-        cancel = new JButton("cancel");
-        cancel.addActionListener(evt -> ingredientSearchController.backTolastView());
+        cancel = new JButton("Back");
+        cancel.addActionListener(evt -> backController.backToLastView());
 
         buttons.add(cancel);
     }
@@ -213,6 +215,10 @@ public class IngredientSearchView extends JPanel implements ActionListener, Prop
 
     public void setIngredientSearchController(IngredientSearchController ingredientSearchController) {
         this.ingredientSearchController = ingredientSearchController;
+    }
+
+    public void setBackController(BackController backController) {
+        this.backController = backController;
     }
 
     private void setFields(IngredientSearchState state) {

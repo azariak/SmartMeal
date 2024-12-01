@@ -1,37 +1,34 @@
 package entity;
 
+import java.util.ArrayList;
+
 /**
  * The representation of a recipe in our program.
  */
 public interface AdvancedRecipeInterface extends GenericRecipeInterface {
-    /**
-     * Returns the ingredients of the recipe.
-     * @return the username of the user.
-     */
-    String getingredients();
-
-    /**
-     * Returns the nutrition of the recipe.
-     * @return the nutrition of the recipe.
-     */
-    String getnutrition();
 
     /**
      * Returns the name of the recipe.
      * @return the name of the recipe.
      */
-    String getrecipename();
+    String getRecipeName();
 
     /**
-     * Returns the cooking time of the recipe.
-     * @return the cooking time of the recipe.
+     * A method that returns an arraylist of the ingredient names.
+     * @return an arraylist of the ingredient names.
      */
-    int getcooktime();
+    ArrayList<String> getIngredientNames();
 
     /**
-     * Returns a similar recipe to the recipe.
-     * @return a similar recipe to the recipe.
+     * A method that returns an arraylist of the ingredient quantities.
+     * @return an arraylist of the ingredient quantities.
      */
-    String getsimilarrecipe();
+    ArrayList<String> getIngredientQuantities();
+
+    /**
+     * A method that returns a String of the Recipe instructions.
+     * @return a String of the recipe instructions.
+     */
+    String getInstructions();
 
 }

@@ -18,19 +18,28 @@ public class IngredientNameToSubstitutes {
 
     static final int TIMEOUT = 5000;
     static final int HTTP_OK = 200;
+    static final int HTTP_PAYMENT_REQUIRED = 402;
+    static final int HTTP_UNAUTHORIZED = 401;
+
+    public IngredientNameToSubstitutes() {
+    }
 
     /**
      * Makes an API call to Spoonacular's Get Ingredient Substitutes endpoint and retrieves
      * an arraylist of substitutes for the given ingredient.
      *
      * @param ingredientName The name of the ingredient to find substitutes for.
+     * @param keyManager The api key manager.
      * @return An arraylist of substitutes for the ingredient.
      */
-    public static ArrayList<String> ingredientNameToSubstitutes(String ingredientName) {
-        final ArrayList<String> ingredientSubstitutes = new ArrayList<>();
+    public static ArrayList<String> ingredientNameToSubstitutes(String ingredientName,
+                                                                ApiAccessKeyManagerInterface keyManager) {
+        ArrayList<String> ingredientSubstitutes = new ArrayList<>();
+        // Get a valid key from api key manager
+        final String apiKey = keyManager.getValidApiKey();
 
         final String urlString = "https://api.spoonacular.com/food/ingredients/substitutes?apiKey="
-                + System.getenv("API_KEY") + "&ingredientName=" + ingredientName;
+                + apiKey + "&ingredientName=" + ingredientName;
 
         try {
             System.out.println("Executed Ingredient Name To Substitutes Search: " + ingredientName);
@@ -54,6 +63,14 @@ public class IngredientNameToSubstitutes {
                 else {
                     System.out.println("No substitutes found for the ingredient: " + ingredientName);
                 }
+            }
+            else if (responseCode == HTTP_PAYMENT_REQUIRED || responseCode == HTTP_UNAUTHORIZED) {
+                // set the key to invalid and start a new search
+                keyManager.setKeyInvalid(apiKey);
+                if (!keyManager.allKeyInvalid()) {
+                    ingredientSubstitutes = ingredientNameToSubstitutes(ingredientName, keyManager);
+                }
+
             }
             else {
                 System.out.println("GET request failed. Response Code: " + responseCode);

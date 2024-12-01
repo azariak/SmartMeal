@@ -1,12 +1,11 @@
 package use_case.ingredient_substitutions;
 
+import java.util.ArrayList;
+
 import data_access.SubstitutesDataAccessObject;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * The Substitutes interactor.
+ * The interactor for the ingredient substitutes use case.
  */
 public class SubstitutesInteractor implements SubstitutesInputBoundary {
 
@@ -23,7 +22,8 @@ public class SubstitutesInteractor implements SubstitutesInputBoundary {
     public void execute(SubstitutesInputData substitutesInputData) {
         final String ingredientName = substitutesInputData.getIngredientName();
         final ArrayList<String> ingredientSubstitutes = substitutesDataAccessObject.getIngredientSubstitutes(ingredientName);
-        final SubstitutesOutputData substitutesOutputData = new SubstitutesOutputData(ingredientSubstitutes, false);
+        System.out.println(ingredientSubstitutes.toString());
+        final SubstitutesOutputData substitutesOutputData = new SubstitutesOutputData(ingredientName, ingredientSubstitutes, false);
         substitutesPresenter.prepareSuccessView(substitutesOutputData);
     }
 

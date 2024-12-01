@@ -20,8 +20,4 @@ public interface IngredientSearchInputBoundary {
      */
     void execute(IngredientSearchInputData ingredientSearchInputData) throws IOException;
 
-    /**
-     * Back to last view.
-     */
-    void backToLastView();
 }

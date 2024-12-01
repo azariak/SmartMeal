@@ -21,10 +21,10 @@ public class RecipeDetailPresenter implements RecipeDetailOutputBoundary {
     @Override
     public void prepareSuccessView(RecipeDetailOutputData outputData) {
         final RecipeDetailState recipeDetailState = recipeDetailViewModel.getState();
-        recipeDetailState.setIngredients(outputData.getTemporaryAdvancedRecipe().getIngredientNames());
-        recipeDetailState.setQuantities(outputData.getTemporaryAdvancedRecipe().getIngredientQuantities());
-        recipeDetailState.setRecipeName(outputData.getTemporaryAdvancedRecipe().getRecipeName());
-        recipeDetailState.setInstructions(outputData.getTemporaryAdvancedRecipe().getInstructions());
+        recipeDetailState.setRecipeName(outputData.getAdvancedRecipe().getRecipeName());
+        recipeDetailState.setIngredients(outputData.getAdvancedRecipe().getIngredientNames());
+        recipeDetailState.setQuantities(outputData.getAdvancedRecipe().getIngredientQuantities());
+        recipeDetailState.setInstructions(outputData.getAdvancedRecipe().getInstructions());
     }
 
     @Override

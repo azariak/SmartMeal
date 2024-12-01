@@ -1,15 +1,13 @@
 package app;
 
 import java.awt.CardLayout;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import data_access.ApiSearchDataAccessObject;
-import data_access.InMemoryUserDataAccessObject;
-import data_access.RecipeDetailDataAccessObject;
-import data_access.SubstitutesDataAccessObject;
+import data_access.*;
 import entity.CommonUserFactory;
 import entity.GenericRecipeFactoryInterface;
 import entity.GenericResultFactory;
@@ -17,6 +15,8 @@ import entity.ResultFactoryInterface;
 import entity.UserFactory;
 import entity.test.GenericRecipeFactory;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.back.BackController;
+import interface_adapter.back.BackPresenter;
 import interface_adapter.change_password.ChangePasswordController;
 import interface_adapter.change_password.ChangePasswordPresenter;
 import interface_adapter.change_password.LoggedInViewModel;
@@ -49,6 +49,9 @@ import interface_adapter.result.ResultViewModel;
 import interface_adapter.signup.SignupController;
 import interface_adapter.signup.SignupPresenter;
 import interface_adapter.signup.SignupViewModel;
+import use_case.back.BackInputBoundary;
+import use_case.back.BackInteractor;
+import use_case.back.BackOutputBoundary;
 import use_case.change_password.ChangePasswordInputBoundary;
 import use_case.change_password.ChangePasswordInteractor;
 import use_case.change_password.ChangePasswordOutputBoundary;
@@ -115,11 +118,13 @@ public class AppBuilder {
     private final ViewManagerModel viewManagerModel = new ViewManagerModel();
     private final ViewManager viewManager = new ViewManager(cardPanel, cardLayout, viewManagerModel);
 
+    private final ApiAccessKeyManagerInterface apiAccessKeyManager = new ApiAccessKeyManager();
+
     // thought question: is the hard dependency below a problem?
-    private final InMemoryUserDataAccessObject userDataAccessObject = new InMemoryUserDataAccessObject();
-    private final ApiSearchDataAccessObject apiSearchDataAccessObject = new ApiSearchDataAccessObject();
-    private final RecipeDetailDataAccessObject recipeDetailDataAccessObject = new RecipeDetailDataAccessObject();
-    private final SubstitutesDataAccessObject substitutesDataAccessObject = new SubstitutesDataAccessObject();
+    private InMemoryUserDataAccessObject userDataAccessObject;
+    private IngredientSearchDataAccessObject ingredientSearchDataAccessObject;
+    private RecipeDetailDataAccessObject recipeDetailDataAccessObject;
+    private SubstitutesDataAccessObject substitutesDataAccessObject;
 
     private SignupView signupView;
     private SignupViewModel signupViewModel;
@@ -151,6 +156,33 @@ public class AppBuilder {
 
     public AppBuilder() {
         cardPanel.setLayout(cardLayout);
+        addApiKeysToApiKeyManager();
+        initializeDAO();
+    }
+
+    private void initializeDAO() {
+        userDataAccessObject = new InMemoryUserDataAccessObject();
+        ingredientSearchDataAccessObject = new IngredientSearchDataAccessObject(apiAccessKeyManager);
+        recipeDetailDataAccessObject = new RecipeDetailDataAccessObject();
+        substitutesDataAccessObject = new SubstitutesDataAccessObject(apiAccessKeyManager);
+    }
+
+    private void addApiKeysToApiKeyManager() {
+        final ArrayList<String> apiKeys = new ArrayList<>();
+
+        for (int i = 1; i < 100; i++) {
+
+            String apiKey = System.getenv("API_KEY" + Integer.toString(i));
+            if (apiKey != null) {
+                apiKeys.add(apiKey);
+            }
+            else {
+                break;
+            }
+
+        }
+
+        apiAccessKeyManager.addApiKeys(apiKeys);
     }
 
     /**
@@ -342,7 +374,8 @@ public class AppBuilder {
      */
     public AppBuilder addMainMenuUseCase() {
         final MainMenuOutputBoundary mainMenuOutputBoundary =
-                new MainMenuPresenter(viewManagerModel, signupViewModel, loginViewModel, mainMenuViewModel);
+                new MainMenuPresenter(viewManagerModel, signupViewModel, loginViewModel,
+                        mainMenuViewModel, ingredientSearchViewModel);
 
         final MainMenuInputBoundary mainMenuInputBoundary =
                 new MainMenuInteractor(mainMenuOutputBoundary);
@@ -377,7 +410,7 @@ public class AppBuilder {
                         ingredientSearchOutputBoundary,
                         resultFactory,
                         genericRecipeFactory,
-                        apiSearchDataAccessObject);
+                        ingredientSearchDataAccessObject);
 
         final IngredientSearchController ingredientSearchController =
                 new IngredientSearchController(ingredientSearchInteractor);
@@ -458,6 +491,21 @@ public class AppBuilder {
 
         final SubstitutesController substitutesController = new SubstitutesController(substitutesInteractor);
         recipeDetailView.setSubstitutesController(substitutesController);
+        substitutesView.setSubstitutesController(substitutesController);
+        return this;
+    }
+
+    /**
+     * Adds the Signup Use Case to the application.
+     * @return this builder
+     */
+    public AppBuilder addBackUseCase() {
+        final BackOutputBoundary backOutputBoundary = new BackPresenter(viewManagerModel);
+        final BackInputBoundary backInteractor = new BackInteractor(backOutputBoundary);
+
+        final BackController controller = new BackController(backInteractor);
+        ingredientSearchView.setBackController(controller);
+        resultView.setBackController(controller);
         return this;
     }
 
