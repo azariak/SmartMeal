@@ -25,7 +25,11 @@ public interface LoadSavedRecipeInputBoundary {
      */
     void backToLastView();
 
-//    List getAllSavedRecipes();
-
-    LoadSavedRecipeViewModel getViewModel();
+//    /**
+//     * Deletes the selected recipe.
+//     * @param selectedRecipe the selected recipe.
+//     */
+//    void deleteRecipe(String selectedRecipe);
+//
+//    LoadSavedRecipeViewModel getViewModel();
 }

@@ -3,8 +3,6 @@ package interface_adapter.load_saved_recipe;
 import use_case.load_saved_recipe.LoadSavedRecipeInputBoundary;
 import use_case.load_saved_recipe.LoadSavedRecipeInputData;
 
-import java.awt.*;
-
 /**
  * The controller for the Login Use Case.
  */
@@ -63,4 +61,12 @@ public class LoadSavedRecipeController {
     public void backToLastView() {
         loadSavedRecipeUseCaseInteractor.backToLastView();
     }
+//
+//    /**
+//     * Delete button.
+//     * @param selectedRecipe to delete.
+//     */
+//    public void deleteRecipe(String selectedRecipe) {
+//        loadSavedRecipeUseCaseInteractor.deleteRecipe(selectedRecipe);
+//    }
 }

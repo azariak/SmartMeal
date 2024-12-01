@@ -11,6 +11,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 import entity.AdvancedRecipe;
 import use_case.load_saved_recipe.LoadSavedRecipeDataAccessInterface;
@@ -56,7 +58,7 @@ public class FileRecipeSaver implements SavedRecipeDataAcessInterface,
 
     public static void main(String[] args) {
         final JSONObject recipeJson = new JSONObject();
-        recipeJson.put("name", "test");
+        recipeJson.put("1", "lasagna");
         final FileRecipeSaver fileRecipeSaver = new FileRecipeSaver();
         fileRecipeSaver.saveRecipe(recipeJson, "/Users/anisa/Desktop/recipe.json");
     }
@@ -134,6 +136,48 @@ public class FileRecipeSaver implements SavedRecipeDataAcessInterface,
             System.err.println("Error loading recipe: " + exception.getMessage());
         }
         return null;
+    }
+
+    /**
+     * Deletes the recipe.
+     * @param recipeName the recipe name.
+     */
+    public boolean delete(String recipeName) {
+        try {
+            final String content = new String(Files.readAllBytes(Paths.get("src/main/java/data_access/recipe.json")));
+            final String[] recipeLines = content.split(System.lineSeparator());
+
+            final List<String> updatedRecipes = new ArrayList<>();
+            boolean recipeFound = false;
+
+            for (String recipeStr : recipeLines) {
+                final JSONObject recipeJson = new JSONObject(recipeStr);
+                if (recipeJson.getString("name").equals(recipeName)) {
+                    recipeFound = true;
+                }
+                else {
+                    updatedRecipes.add(recipeStr);
+                }
+            }
+
+            if (recipeFound) {
+                // Write back the updated recipes to the file
+                try (FileWriter writer = new FileWriter("src/main/java/data_access/recipe.json")) {
+                    for (String updatedRecipe : updatedRecipes) {
+                        writer.write(updatedRecipe);
+                        writer.write(System.lineSeparator());
+                    }
+                }
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        catch (IOException exception) {
+            System.err.println("Error deleting recipe: " + exception.getMessage());
+            return false;
+        }
     }
 
 //    public List<GenericRecipe> loadAll() {

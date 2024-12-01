@@ -1,9 +1,9 @@
 package use_case.load_saved_recipe.;
 
 import data_access.FileRecipeSaver;
-import data_access.InMemoryUserDataAccessObject;
 import entity.*;
 import entity.test.GenericRecipeFactory;
+import entity.GenericRecipe;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -20,13 +20,13 @@ class LoginInteractorTest {
 
         GenericRecipeFactoryInterface factory = new GenericRecipeFactory();
         GenericRecipe recipe = factory.createGenericRecipe("", "");
-        recipeJson.save(recipe);
+        recipeJson.search((AdvancedRecipe) recipe);
 
-        // This creates a successPresenter that tests whether the test case is as we expect.
-        LoginOutputBoundary successPresenter = new LoginOutputBoundary() {
+        LoadSavedRecipeOutputBoundary successPresenter = new LoadSavedRecipeOutputBoundary() {
+
             @Override
-            public void prepareSuccessView(LoginOutputData user) {
-                assertEquals("Paul", user.getUsername());
+            public void prepareSuccessView(LoadSavedRecipeOutputData recipe) {
+                assertEquals("lasagna", recipe.getRecipeName());
             }
 
             @Override
@@ -35,25 +35,26 @@ class LoginInteractorTest {
             }
         };
 
-        LoginInputBoundary interactor = new LoginInteractor(userRepository, successPresenter);
+        LoadSavedRecipeInputBoundary interactor = new LoadSavedRecipeInteractor(recipeRepository, successPresenter);
         interactor.execute(inputData);
     }
 
     @Test
-    void successUserLoggedInTest() {
-        LoginInputData inputData = new LoginInputData("Paul", "password");
-        LoginUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
+    void successUserLoggedInTest() throws IOException {
+        LoadSavedRecipeInputData inputData = new LoadSavedRecipeInputData("", "");
+        LoadSavedRecipeDataAccessInterface recipeRepository = new FileRecipeSaver();
 
         // For the success test, we need to add Paul to the data access repository before we log in.
-        UserFactory factory = new CommonUserFactory();
-        User user = factory.create("Paul", "password");
-        userRepository.save(user);
+        GenericRecipeFactory factory = new GenericRecipeFactory();
+        GenericRecipe recipe = factory.createGenericRecipe("lasagna", "beef noodles");
+        recipeRepository.get(String.valueOf(recipe));
 
         // This creates a successPresenter that tests whether the test case is as we expect.
-        LoginOutputBoundary successPresenter = new LoginOutputBoundary() {
+        LoadSavedRecipeOutputBoundary successPresenter = new LoadSavedRecipeOutputBoundary() {
+
             @Override
-            public void prepareSuccessView(LoginOutputData user) {
-                assertEquals("Paul", userRepository.getCurrentUsername());
+            public void prepareSuccessView(LoadSavedRecipeOutputData recipe) {
+                assertEquals("lasagna", recipeRepository.getCurrentUsername());
             }
 
             @Override
@@ -62,63 +63,63 @@ class LoginInteractorTest {
             }
         };
 
-        LoginInputBoundary interactor = new LoginInteractor(userRepository, successPresenter);
-        assertEquals(null, userRepository.getCurrentUsername());
+        LoadSavedRecipeInputBoundary interactor = new LoadSavedRecipeInteractor(recipeRepository, successPresenter);
+        assertEquals(null, recipeRepository.getCurrentUsername());
 
         interactor.execute(inputData);
     }
 
     @Test
     void failurePasswordMismatchTest() {
-        LoginInputData inputData = new LoginInputData("Paul", "wrong");
-        LoginUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
+        LoadSavedRecipeInputData inputData = new LoadSavedRecipeInputData("lasagna", "wrong", "beef");
+        LoadSavedRecipeDataAccessInterface recipeRepository = new FileRecipeSaver();
 
         // For this failure test, we need to add Paul to the data access repository before we log in, and
         // the passwords should not match.
-        UserFactory factory = new CommonUserFactory();
-        User user = factory.create("Paul", "password");
-        userRepository.save(user);
+        GenericRecipeFactory factory = new GenericRecipeFactory();
+        GenericRecipe recipe = factory.createGenericRecipe("", "");
+        recipeRepository.save(recipe);
 
         // This creates a presenter that tests whether the test case is as we expect.
-        LoginOutputBoundary failurePresenter = new LoginOutputBoundary() {
+        LoadSavedRecipeOutputBoundary failurePresenter = new LoadSavedRecipeOutputBoundary() {
             @Override
-            public void prepareSuccessView(LoginOutputData user) {
+            public void prepareSuccessView(LoadSavedRecipeOutputData recipe) {
                 // this should never be reached since the test case should fail
                 fail("Use case success is unexpected.");
             }
 
             @Override
             public void prepareFailView(String error) {
-                assertEquals("Incorrect password for \"Paul\".", error);
+                assertEquals("failed to delete recipe\"lasagna\".", error);
             }
         };
 
-        LoginInputBoundary interactor = new LoginInteractor(userRepository, failurePresenter);
+        LoadSavedRecipeInputBoundary interactor = new LoadSavedRecipeInteractor(recipeRepository, failurePresenter);
         interactor.execute(inputData);
     }
 
     @Test
-    void failureUserDoesNotExistTest() {
-        LoginInputData inputData = new LoginInputData("Paul", "password");
-        LoginUserDataAccessInterface userRepository = new InMemoryUserDataAccessObject();
+    void failureRecipeDoesNotExistTest() {
+        LoadSavedRecipeInputData inputData = new LoadSavedRecipeInputData("lasagna","noodles","beef");
+        LoasSavedRecipeDataAccessInterface recipeRepository = new FileRecipeSaver();
 
         // Add Paul to the repo so that when we check later they already exist
 
         // This creates a presenter that tests whether the test case is as we expect.
-        LoginOutputBoundary failurePresenter = new LoginOutputBoundary() {
+        LoadSavedRecipeOutputBoundary failurePresenter = new LoadSavedRecipeOutputBoundary() {
             @Override
-            public void prepareSuccessView(LoginOutputData user) {
+            public void prepareSuccessView(LoadSavedRecipeOutputData user) {
                 // this should never be reached since the test case should fail
                 fail("Use case success is unexpected.");
             }
 
             @Override
             public void prepareFailView(String error) {
-                assertEquals("Paul: Account does not exist.", error);
+                assertEquals("lasagna: recipe does not exist.", error);
             }
         };
 
-        LoginInputBoundary interactor = new LoginInteractor(userRepository, failurePresenter);
+        LoadSavedRecipeInputBoundary interactor = new LoadSavedRecipeInteractor(recipeRepository, failurePresenter);
         interactor.execute(inputData);
     }
 }
