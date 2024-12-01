@@ -108,6 +108,7 @@ Test
   It will preserve information across sections
   - Once it is open you must create an account and log in, using the provided buttons
   - Then there are buttons for each User Story
+    - To use the ranking feature, a logged-in user clicks `Recipe Rankings` to view rankings. They click `Edit Rankings` and then click on the stars to change a ranking.
 
 ### License on GitHub
 
