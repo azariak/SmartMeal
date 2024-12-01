@@ -24,14 +24,15 @@ public class RecipeIDToServings {
     /**
      * Returns a list of length 2 with recipe info; [servings, title].
      * @param id the recipe id.
+     * @param keyManager The api key manager.
      * @return The list of info of strings or null if request fails.
-     * @throws IOException if error occurs during API call.
      */
-    public static ArrayList<String> getInfo(String id) throws IOException {
+    public static ArrayList<String> getInfo(String id, ApiAccessKeyManagerInterface keyManager) {
         ArrayList<String> result = null;
+        final String apiKey = keyManager.getValidApiKey();
 
         final String urlString = BASE_URL + id + "/information" + "?apiKey="
-                + "ac77230dfdf14548b77b78cb800fe0af";
+                + apiKey;
         try {
             final URL url = new URL(urlString);
             final HttpURLConnection connection = (HttpURLConnection) url.openConnection();

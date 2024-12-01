@@ -1,5 +1,7 @@
 package interface_adapter.map_groceries;
 
+import entity.GroceryList;
+
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -8,6 +10,7 @@ import java.util.Map;
  */
 public class MapGroceriesState {
     private String recipeName;
+    private String recipeID;
     private ArrayList<Map<String, Object>> groceries = new ArrayList<>();
 
     /**
@@ -20,6 +23,14 @@ public class MapGroceriesState {
 
     public String getRecipeName() {
         return recipeName;
+    }
+
+    public void setRecipeID(String id) {
+        this.recipeID = id;
+    }
+
+    public String getRecipeID() {
+        return recipeID;
     }
 
     public void setGroceries(ArrayList<Map<String, Object>> groceries) {

@@ -9,7 +9,7 @@ import interface_adapter.login.LoginViewModel;
 public class MapGroceriesViewModel extends ViewModel<MapGroceriesState> {
 
     public MapGroceriesViewModel() {
-        super("Groceries List for Recipe");
+        super("Grocery List");
         setState(new MapGroceriesState());
     }
 }

@@ -26,22 +26,24 @@ public class IngredientsToGroceries {
     /**
      * Returns a JSON Object with grocery information for a recipe.
      * @param info A string of list of ingredients and servings.
+     * @param keyManager The api key manager.
      * @return The list of JSON Objects with ingredient information or null if none.
      * @throws IOException if error occurs during API call.
      */
-    public static ArrayList<JSONObject> getGroceries(String info) throws IOException {
+    public static ArrayList<JSONObject> getGroceries(String info, ApiAccessKeyManagerInterface keyManager) throws IOException {
 
-        final String url = BASE_URL + "?apiKey=" + "ac77230dfdf14548b77b78cb800fe0af";
+        final String apiKey = keyManager.getValidApiKey();
+        final String url = BASE_URL + "?apiKey=" + apiKey;
 
         // Make a POST request to the API
-        HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+        final HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setDoOutput(true);
 
         // Write the request body (JSON payload)
         try (OutputStream os = connection.getOutputStream()) {
-            byte[] input = info.getBytes("utf-8");
+            final byte[] input = info.getBytes("utf-8");
             os.write(input, 0, input.length);
         }
 
