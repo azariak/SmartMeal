@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import javax.swing.*;
-
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -18,7 +17,6 @@ import data_access.FileRecipeSaver;
 import interface_adapter.load_saved_recipe.LoadSavedRecipeController;
 import interface_adapter.load_saved_recipe.LoadSavedRecipeState;
 import interface_adapter.load_saved_recipe.LoadSavedRecipeViewModel;
-import use_case.saved_recipe.SavedRecipeDataAcessInterface;
 
 /**
  * Represents the view component for loading saved recipes within the application.
@@ -178,6 +176,7 @@ public class LoadSavedRecipeView extends JPanel implements ActionListener, Prope
 //        }
 //        recipeList.setModel(listModel);
 //    }
+
 
     @Override
     public void actionPerformed(ActionEvent evt) {

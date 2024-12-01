@@ -5,9 +5,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import entity.GenericRecipe;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
-import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -16,11 +16,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONObject;
-
 import entity.AdvancedRecipe;
-import entity.GenericRecipe;
-import use_case.load_saved_recipe.LoadSavedRecipeDataAcessInterface;
+import use_case.load_saved_recipe.LoadSavedRecipeDataAccessInterface;
 import use_case.saved_recipe.SavedRecipeDataAccessInterface;
 
 /**
@@ -105,10 +102,13 @@ public class FileRecipeSaver implements SavedRecipeDataAccessInterface,
             }
             else {
                 System.err.println("Failed to fetch recipe. Response Code: " + responseCode);
+                return null;
             }
+
         }
         catch (IOException exception) {
             exception.printStackTrace();
+            return null;
         }
 
         return recipeJson;
