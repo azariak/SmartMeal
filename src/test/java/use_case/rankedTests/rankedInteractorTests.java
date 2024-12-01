@@ -1,8 +1,10 @@
+package use_case.rankedTests;
+
 import interface_adapter.ranked.RankedViewModel;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class rankedTests {
+public class rankedInteractorTests {
 
 //    @Test
 //    public void testGetRankings() {
