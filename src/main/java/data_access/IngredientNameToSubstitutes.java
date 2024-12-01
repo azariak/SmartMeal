@@ -19,6 +19,7 @@ public class IngredientNameToSubstitutes {
     static final int TIMEOUT = 5000;
     static final int HTTP_OK = 200;
     static final int HTTP_PAYMENT_REQUIRED = 402;
+    static final int HTTP_UNAUTHORIZED = 401;
 
     public IngredientNameToSubstitutes() {
     }
@@ -63,7 +64,7 @@ public class IngredientNameToSubstitutes {
                     System.out.println("No substitutes found for the ingredient: " + ingredientName);
                 }
             }
-            else if (responseCode == HTTP_PAYMENT_REQUIRED) {
+            else if (responseCode == HTTP_PAYMENT_REQUIRED || responseCode == HTTP_UNAUTHORIZED) {
                 // set the key to invalid and start a new search
                 keyManager.setKeyInvalid(apiKey);
                 if (!keyManager.allKeyInvalid()) {
