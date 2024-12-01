@@ -40,7 +40,7 @@ class SubstitutesInteractorTest {
         substitutes.add("Honey");
         substitutes.add("Maple Syrup");
 
-        when(mockDataAccess.getIngredientSubstitutes("Sugar")).thenReturn(substitutes);
+        when(mockDataAccess.getSubstitutes("Sugar")).thenReturn(substitutes);
 
         interactor.execute(mockInputData);
 
