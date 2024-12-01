@@ -1,6 +1,7 @@
 package use_case.recipe_detail;
 
 import entity.AdvancedRecipe;
+import entity.AdvancedRecipeInterface;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class RecipeDetailOutputDataTest {
 
-    private AdvancedRecipe advancedRecipe;
+    private AdvancedRecipeInterface advancedRecipeInterface;
     private RecipeDetailOutputData recipeDetailOutputData;
 
     @BeforeEach
@@ -31,19 +32,19 @@ class RecipeDetailOutputDataTest {
 
         String instructions = "Mix all ingredients and bake for 30 minutes at 350°F.";
 
-        advancedRecipe = new AdvancedRecipe(name, id, ingredientNames, ingredientQuantities, instructions);
-        recipeDetailOutputData = new RecipeDetailOutputData(advancedRecipe);
+        advancedRecipeInterface = new AdvancedRecipe(name, id, ingredientNames, ingredientQuantities, instructions);
+        recipeDetailOutputData = new RecipeDetailOutputData(advancedRecipeInterface);
     }
 
     @AfterEach
     void tearDown() {
-        advancedRecipe = null;
+        advancedRecipeInterface = null;
         recipeDetailOutputData = null;
     }
 
     @Test
     void getAdvancedRecipe() {
-        AdvancedRecipe retrievedRecipe = recipeDetailOutputData.getAdvancedRecipe();
+        AdvancedRecipeInterface retrievedRecipe = recipeDetailOutputData.getAdvancedRecipe();
         assertEquals("Chocolate Cake", retrievedRecipe.getRecipeName());
         assertEquals("1234", retrievedRecipe.getId());
         assertEquals("Mix all ingredients and bake for 30 minutes at 350°F.", retrievedRecipe.getInstructions());

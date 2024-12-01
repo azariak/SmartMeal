@@ -13,7 +13,7 @@ import entity.GenericRecipeFactoryInterface;
 import entity.GenericResultFactory;
 import entity.ResultFactoryInterface;
 import entity.UserFactory;
-import entity.test.GenericRecipeFactory;
+import entity.GenericRecipeFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.back.BackController;
 import interface_adapter.back.BackPresenter;

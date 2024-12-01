@@ -1,8 +1,8 @@
 package data_access;
 
+import entity.AdvancedRecipeInterface;
 import org.json.JSONObject;
 
-import entity.AdvancedRecipe;
 import use_case.load_saved_recipe.LoadSavedRecipeDataAccessInterface;
 
 /**
@@ -11,12 +11,12 @@ import use_case.load_saved_recipe.LoadSavedRecipeDataAccessInterface;
 public class ReadJson implements LoadSavedRecipeDataAccessInterface {
 
     @Override
-    public void search(AdvancedRecipe recipe) {
+    public void search(AdvancedRecipeInterface recipe) {
 
     }
 
     @Override
-    public AdvancedRecipe get(String ingredient) {
+    public AdvancedRecipeInterface get(String ingredient) {
         return null;
     }
 

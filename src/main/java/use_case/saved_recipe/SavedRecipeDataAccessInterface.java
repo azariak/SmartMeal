@@ -1,9 +1,8 @@
 package use_case.saved_recipe;
 
+import entity.AdvancedRecipeInterface;
+import entity.GenericRecipeInterface;
 import org.json.JSONObject;
-
-import entity.AdvancedRecipe;
-import entity.GenericRecipe;
 
 /**
  * DAO for the Saved Recipe Use Case.
@@ -14,14 +13,14 @@ public interface SavedRecipeDataAccessInterface {
      * Saves the user.
      * @param recipe the user to save
      */
-    void save(AdvancedRecipe recipe);
+    void save(AdvancedRecipeInterface recipe);
 
     /**
      * Returns the user with the given username.
      * @param ingredient the recipe to look up
      * @return the recipe with the given recipe name
      */
-    AdvancedRecipe get(String ingredient);
+    AdvancedRecipeInterface get(String ingredient);
 
     /**
      * Returns the user with the given username.
@@ -34,7 +33,7 @@ public interface SavedRecipeDataAccessInterface {
      * Returns the recipe with the given id.
      * @param id the recipe to look up
      */
-    GenericRecipe load(String id);
+    GenericRecipeInterface load(String id);
 
     boolean delete(String recipeName);
 }

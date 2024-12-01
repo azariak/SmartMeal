@@ -1,19 +1,19 @@
 package use_case.recipe_detail;
 
-import entity.GenericRecipe;
+import entity.GenericRecipeInterface;
 
 /**
  * The input data for the Recipe Detail use case.
  */
 public class RecipeDetailInputData {
 
-    private final GenericRecipe genericRecipe;
+    private final GenericRecipeInterface genericRecipe;
 
-    public RecipeDetailInputData(GenericRecipe genericRecipe) {
+    public RecipeDetailInputData(GenericRecipeInterface genericRecipe) {
         this.genericRecipe = genericRecipe;
     }
 
-    public GenericRecipe getGenericRecipe() {
+    public GenericRecipeInterface getGenericRecipe() {
         return genericRecipe;
     }
 }

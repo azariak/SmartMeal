@@ -11,11 +11,11 @@ public interface Result {
      * Add an array of recipe entities to result.
      * @param recipeToAdd recipe array.
      */
-    void addRecipe(ArrayList<GenericRecipe> recipeToAdd);
+    void addRecipe(ArrayList<GenericRecipeInterface> recipeToAdd);
 
     /**
      * Get the list of GenericRecipe store in this result entity.
      * @return an arraylist of recipe.
      */
-    ArrayList<GenericRecipe> getRecipes();
+    ArrayList<GenericRecipeInterface> getRecipes();
 }

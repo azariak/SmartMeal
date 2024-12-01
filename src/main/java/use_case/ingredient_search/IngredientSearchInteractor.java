@@ -4,9 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
-import data_access.IngredientSearchDataAccessObject;
-import entity.GenericRecipe;
 import entity.GenericRecipeFactoryInterface;
+import entity.GenericRecipeInterface;
 import entity.Result;
 import entity.ResultFactoryInterface;
 
@@ -26,12 +25,12 @@ public class IngredientSearchInteractor implements IngredientSearchInputBoundary
     private final IngredientSearchOutputBoundary ingredientSearchPresenter;
     private final ResultFactoryInterface resultFactory;
     private final GenericRecipeFactoryInterface genericRecipeFactory;
-    private final IngredientSearchDataAccessObject ingredientSearchDataAccessObject;
+    private final IngredientSearchDataAccessInterface ingredientSearchDataAccessObject;
 
     public IngredientSearchInteractor(IngredientSearchOutputBoundary ingredientSearchOutputBoundary,
                                       ResultFactoryInterface resultFactory,
                                       GenericRecipeFactoryInterface genericRecipeFactory,
-                                      IngredientSearchDataAccessObject ingredientSearchDataAccessObject) {
+                                      IngredientSearchDataAccessInterface ingredientSearchDataAccessObject) {
 
         this.ingredientSearchPresenter = ingredientSearchOutputBoundary;
         this.genericRecipeFactory = genericRecipeFactory;
@@ -44,10 +43,10 @@ public class IngredientSearchInteractor implements IngredientSearchInputBoundary
         // recipe title and id
         final Map<String, String> response =
                 ingredientSearchDataAccessObject.excuteSearch(ingredientSearchInputData.getIngredients());
-        final ArrayList<GenericRecipe> recipeArrayList = new ArrayList<>();
+        final ArrayList<GenericRecipeInterface> recipeArrayList = new ArrayList<>();
 
         for (String key : response.keySet()) {
-            final GenericRecipe recipe = genericRecipeFactory.createGenericRecipe(key, response.get(key));
+            final GenericRecipeInterface recipe = genericRecipeFactory.createGenericRecipe(key, response.get(key));
             // add generic recipe to list
             recipeArrayList.add(recipe);
         }

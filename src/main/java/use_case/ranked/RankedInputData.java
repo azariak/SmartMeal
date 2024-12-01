@@ -1,20 +1,20 @@
 package use_case.ranked;
 
-import entity.GenericRecipe;
+import entity.GenericRecipeInterface;
 
 /**
  * Input data for ranked use case.
  */
 public class RankedInputData {
-    private final GenericRecipe recipe;
+    private final GenericRecipeInterface recipe;
     private final String name;
 
-    public RankedInputData(GenericRecipe recipe) {
+    public RankedInputData(GenericRecipeInterface recipe) {
         this.recipe = recipe;
         this.name = recipe.getName();
     }
 
-    public GenericRecipe getRecipe() {
+    public GenericRecipeInterface getRecipe() {
         return recipe;
     }
 

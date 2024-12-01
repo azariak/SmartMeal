@@ -1,17 +1,18 @@
 package use_case.result;
 
-import entity.GenericRecipe;
+import entity.GenericRecipeInterface;
 
 /**
  * Output data for result use case.
  */
 public class ResultOutputData {
-    private final GenericRecipe genericRecipe;
-    public ResultOutputData(GenericRecipe genericRecipe) {
+    private final GenericRecipeInterface genericRecipe;
+
+    public ResultOutputData(GenericRecipeInterface genericRecipe) {
         this.genericRecipe = genericRecipe;
     }
 
-    public GenericRecipe getGenericRecipe() {
+    public GenericRecipeInterface getGenericRecipe() {
         return genericRecipe;
     }
 }

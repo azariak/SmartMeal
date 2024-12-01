@@ -15,7 +15,7 @@ public interface GenericRecipeFactoryInterface {
      * @throws IOException an exception to catch.
      * @return a new GenericRecipe object.
      */
-    GenericRecipe createGenericRecipe(String name, String id) throws IOException;
+    GenericRecipeInterface createGenericRecipe(String name, String id) throws IOException;
 
     /**
      * Creates a new Advanced Recipe.
@@ -27,9 +27,9 @@ public interface GenericRecipeFactoryInterface {
      * @throws IOException an IO exception.
      * @return the new recipe.
      */
-    AdvancedRecipe createAdvancedRecipe(String name,
-                                        String id,
-                                        ArrayList<String> ingredientNames,
-                                        ArrayList<String> ingredientQuantities,
-                                        String instructions) throws IOException;
+    AdvancedRecipeInterface createAdvancedRecipe(String name,
+                                                 String id,
+                                                 ArrayList<String> ingredientNames,
+                                                 ArrayList<String> ingredientQuantities,
+                                                 String instructions) throws IOException;
 }

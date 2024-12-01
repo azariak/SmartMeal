@@ -4,9 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import data_access.RecipeDetailDataAccessObject;
-import entity.AdvancedRecipe;
-import entity.GenericRecipe;
-import entity.GenericRecipeFactoryInterface;
+import entity.*;
 
 /**
  * The interactor for the Recipe Detail use case.
@@ -27,7 +25,7 @@ public class RecipeDetailInteractor implements RecipeDetailInputBoundary {
 
     @Override
     public void execute(RecipeDetailInputData recipeDetailInputData) throws IOException {
-        final GenericRecipe genericRecipe = recipeDetailInputData.getGenericRecipe();
+        final GenericRecipeInterface genericRecipe = recipeDetailInputData.getGenericRecipe();
         final ArrayList<Integer> ingredientIds = recipeDetailDataAccessObject.getIngredientIds(genericRecipe);
 
         final String recipeName = genericRecipe.getName();
@@ -36,13 +34,13 @@ public class RecipeDetailInteractor implements RecipeDetailInputBoundary {
         final ArrayList<String> ingredientQuantities = recipeDetailDataAccessObject.getQuantities(genericRecipe);
         final String instructions = recipeDetailDataAccessObject.getInstructions(genericRecipe);
 
-        final AdvancedRecipe advancedRecipe = genericRecipeFactory.createAdvancedRecipe(
+        final AdvancedRecipeInterface advancedRecipeInterface = genericRecipeFactory.createAdvancedRecipe(
                 recipeName,
                 recipeId,
                 ingredientNames,
                 ingredientQuantities,
                 instructions);
-        final RecipeDetailOutputData recipeDetailOutputData = new RecipeDetailOutputData(advancedRecipe);
+        final RecipeDetailOutputData recipeDetailOutputData = new RecipeDetailOutputData(advancedRecipeInterface);
 
         recipeDetailPresenter.prepareSuccessView(recipeDetailOutputData);
     }
