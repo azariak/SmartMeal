@@ -22,6 +22,7 @@ public class IngredientSearchDataAccessObject implements IngredientSearchDataAcc
     static final int FIVE_THOUSAND = 5000;
     static final int TWO_HUNDRED = 200;
     static final int HTTP402 = 402;
+    static final int HTTP401 = 401;
 
     private final ApiAccessKeyManagerInterface keyManager;
 
@@ -55,7 +56,7 @@ public class IngredientSearchDataAccessObject implements IngredientSearchDataAcc
             if (responseCode == TWO_HUNDRED) {
                 addResultToRecipeMap(connection, recipeMap);
             }
-            else if (responseCode == HTTP402) {
+            else if (responseCode == HTTP402 || responseCode == HTTP401) {
                 // set the key to invalid and start a new search with a valid key
                 keyManager.setKeyInvalid(apiKey);
 
