@@ -47,7 +47,7 @@ As a user, Azaria wants to rank his recipes on a scale of 1 to 5, so that he cou
 ##### Use Cases
 - A user clicks on `Ranked Recipes` to see recipes they've ranked
 - A user clicks `Edit Ranking`. Each recipe has an attribute of an integer {1, 2, 3, 4, 5}. The user can change the ranking by clicking on the respective star.
-![Ranking_View.jpg](images/Azaria_User_Story/Ranking_view.png)
+![Ranking_View.jpg](images/Azaria_User_Story/Ranking_View.png)
 
 [//]: # (![Organizing_view.jpg]&#40;images/Azaria_User_Story/Organizing_view.png&#41;)
 
