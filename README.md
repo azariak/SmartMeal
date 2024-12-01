@@ -52,10 +52,8 @@ As a user, Azaria wants to rank his recipes on a scale of 1 to 5, so that he cou
 [//]: # (![Organizing_view.jpg]&#40;images/Azaria_User_Story/Organizing_view.png&#41;)
 
 #### Anisa (AHK9)
-#### User Story 1
-- As a user, Sara wants to save her favorite recipe for later.
-#### User Story 2
-- As a user Sara wants to reload her previously saved recipes in order to make her favorite
+#### User Story
+- As a user Sara wants to save and reload her previously saved recipes in order to make her favorite
   dish.
 #### Use Cases
 - The user clicks the saved recipes button and is then redirected to her previously
@@ -64,8 +62,7 @@ saved recipes page
 ingredients, steps, and cooking time.
 - The user clicks a delete button on a saved recipe, and the application prompts for 
 confirmation before removing the recipe from her saved collection.
-- The user clicks a favorite or bookmark icon on a recipe, and the recipe 
-is highlighted or added to a "Favorites" section within the saved recipes.
+
 ![smartmeal.png](images/smartmeal.png)
 
 #### Daniel Rafailov (danielrafailov1)
