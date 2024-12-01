@@ -7,6 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+import entity.GenericRecipeInterface;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -28,7 +29,7 @@ public class RecipeDetailDataAccessObject implements RecipeDetailDataAccessInter
     }
 
     @Override
-    public ArrayList<Integer> getIngredientIds(GenericRecipe genericRecipe) {
+    public ArrayList<Integer> getIngredientIds(GenericRecipeInterface genericRecipe) {
         final ArrayList<Integer> ingredientIds = new ArrayList<>();
         final String recipeString = fetchRecipeDetails(genericRecipe.getId());
 
@@ -59,7 +60,7 @@ public class RecipeDetailDataAccessObject implements RecipeDetailDataAccessInter
     }
 
     @Override
-    public ArrayList<String> getQuantities(GenericRecipe genericRecipe) {
+    public ArrayList<String> getQuantities(GenericRecipeInterface genericRecipe) {
         final ArrayList<String> ingredientQuantities = new ArrayList<>();
         final String recipeString = fetchRecipeDetails(genericRecipe.getId());
 
@@ -87,7 +88,7 @@ public class RecipeDetailDataAccessObject implements RecipeDetailDataAccessInter
     }
 
     @Override
-    public String getInstructions(GenericRecipe genericRecipe) {
+    public String getInstructions(GenericRecipeInterface genericRecipe) {
         final String recipeString = fetchRecipeDetails(genericRecipe.getId());
         String instructions = null;
 

@@ -1,6 +1,6 @@
 package interface_adapter.result;
 
-import entity.GenericRecipe;
+import entity.GenericRecipeInterface;
 import use_case.result.ResultInputBoundary;
 import use_case.result.ResultInputData;
 
@@ -18,7 +18,7 @@ public class ResultController {
      * Executes the second api search for recipe details.
      * @param recipe the recipe to search.
      */
-    public void execute(GenericRecipe recipe) {
+    public void execute(GenericRecipeInterface recipe) {
         final ResultInputData resultInputData = new ResultInputData(recipe);
 
         resultUseCaseInteractor.execute(resultInputData);

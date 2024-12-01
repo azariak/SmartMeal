@@ -12,7 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import entity.GenericRecipe;
+import entity.GenericRecipeInterface;
 import interface_adapter.back.BackController;
 import interface_adapter.result.ResultController;
 import interface_adapter.result.ResultViewModel;
@@ -65,7 +65,7 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
      */
     public void addRecipeButtons() {
 
-        final ArrayList<GenericRecipe> recipeArrayList = resultViewModel.getState().getResult().getRecipes();
+        final ArrayList<GenericRecipeInterface> recipeArrayList = resultViewModel.getState().getResult().getRecipes();
 
         if (recipeArrayList.size() == MINIMUM_RECIPE_TO_DISPLAY) {
             final JLabel zeroRecipeErrorMessage = new JLabel("No Recipe Found");
@@ -90,7 +90,7 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
     }
 
     private void addListenerToRecipeButtonByIndex(JButton recipeButton,
-                                                  ArrayList<GenericRecipe> recipeArrayList,
+                                                  ArrayList<GenericRecipeInterface> recipeArrayList,
                                                   int recipeIndex) {
         recipeButton.addActionListener(evt -> {
 

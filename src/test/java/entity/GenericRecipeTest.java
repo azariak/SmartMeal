@@ -11,7 +11,7 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GenericRecipeTest {
-     GenericRecipe entity;
+    GenericRecipeInterface entity;
 
     @BeforeEach
     void setUp() throws IOException {

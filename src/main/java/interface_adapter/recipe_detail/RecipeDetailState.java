@@ -2,20 +2,20 @@ package interface_adapter.recipe_detail;
 
 import java.util.ArrayList;
 
-import entity.GenericRecipe;
+import entity.GenericRecipeInterface;
 
 /**
  * RecipeDetailState. This contains the important information to be displayed.
  */
 public class RecipeDetailState {
 
-    private GenericRecipe genericRecipe;
+    private GenericRecipeInterface genericRecipe;
     private String recipeName = "";
     private ArrayList<String> ingredients = new ArrayList<>();
     private ArrayList<String> quantities = new ArrayList<>();
     private String instructions = "";
 
-    public GenericRecipe getGenericRecipe() {
+    public GenericRecipeInterface getGenericRecipe() {
         return genericRecipe;
     }
 
@@ -39,7 +39,7 @@ public class RecipeDetailState {
         return instructions;
     }
 
-    public void setGenericRecipe(GenericRecipe genericRecipe) {
+    public void setGenericRecipe(GenericRecipeInterface genericRecipe) {
         this.genericRecipe = genericRecipe;
     }
 

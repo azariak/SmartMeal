@@ -1,6 +1,6 @@
 package interface_adapter.ranked;
 
-import entity.GenericRecipe;
+import entity.GenericRecipeInterface;
 import use_case.ranked.RankedInputBoundary;
 import use_case.ranked.RankedInputData;
 
@@ -18,7 +18,7 @@ public class RankedController {
      * Executes ranking for a recipe.
      * @param recipe the recipe to search.
      */
-    public void execute(GenericRecipe recipe) {
+    public void execute(GenericRecipeInterface recipe) {
         final RankedInputData resultInputData = new RankedInputData(recipe);
         rankedUseCaseInteractor.execute(resultInputData);
     }

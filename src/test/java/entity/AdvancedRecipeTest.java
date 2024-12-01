@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AdvancedRecipeTest {
 
-    private AdvancedRecipe advancedRecipe;
+    private AdvancedRecipeInterface advancedRecipeInterface;
 
     @BeforeEach
     void setUp() throws IOException {
@@ -29,17 +29,17 @@ class AdvancedRecipeTest {
 
         String instructions = "Mix all ingredients and bake for 30 minutes at 350°F.";
 
-        advancedRecipe = new AdvancedRecipe(name, id, ingredientNames, ingredientQuantities, instructions);
+        advancedRecipeInterface = new AdvancedRecipe(name, id, ingredientNames, ingredientQuantities, instructions);
     }
 
     @AfterEach
     void tearDown() {
-        advancedRecipe = null;
+        advancedRecipeInterface = null;
     }
 
     @Test
     void getRecipeName() {
-        assertEquals("Chocolate Cake", advancedRecipe.getRecipeName());
+        assertEquals("Chocolate Cake", advancedRecipeInterface.getRecipeName());
     }
 
     @Test
@@ -49,7 +49,7 @@ class AdvancedRecipeTest {
         expectedNames.add("Sugar");
         expectedNames.add("Cocoa Powder");
 
-        assertEquals(expectedNames, advancedRecipe.getIngredientNames());
+        assertEquals(expectedNames, advancedRecipeInterface.getIngredientNames());
     }
 
     @Test
@@ -59,11 +59,11 @@ class AdvancedRecipeTest {
         expectedQuantities.add("1 cup");
         expectedQuantities.add("1/2 cup");
 
-        assertEquals(expectedQuantities, advancedRecipe.getIngredientQuantities());
+        assertEquals(expectedQuantities, advancedRecipeInterface.getIngredientQuantities());
     }
 
     @Test
     void getInstructions() {
-        assertEquals("Mix all ingredients and bake for 30 minutes at 350°F.", advancedRecipe.getInstructions());
+        assertEquals("Mix all ingredients and bake for 30 minutes at 350°F.", advancedRecipeInterface.getInstructions());
     }
 }

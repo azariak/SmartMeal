@@ -1,7 +1,9 @@
 package use_case.ingredient_search;
 
 import entity.GenericRecipe;
+import entity.GenericRecipeInterface;
 import entity.GenericResult;
+import entity.Result;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,10 +14,10 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class IngredientSearchOutputDataTest {
-    private final GenericRecipe recipe1 = new GenericRecipe("name1", "id1");
-    private final GenericRecipe recipe2 = new GenericRecipe("name2", "id3");
-    GenericResult resultEntity;
-    GenericResult resultEntityEmpty;
+    private final GenericRecipeInterface recipe1 = new GenericRecipe("name1", "id1");
+    private final GenericRecipeInterface recipe2 = new GenericRecipe("name2", "id3");
+    Result resultEntity;
+    Result resultEntityEmpty;
     Boolean useCaseTrue = true;
     Boolean useCaseFalse = false;
 
@@ -24,7 +26,7 @@ class IngredientSearchOutputDataTest {
 
     @BeforeEach
     void setUp() {
-        ArrayList<GenericRecipe> recipeList = new ArrayList<>();
+        ArrayList<GenericRecipeInterface> recipeList = new ArrayList<>();
         recipeList.add(recipe1);
         recipeList.add(recipe2);
 

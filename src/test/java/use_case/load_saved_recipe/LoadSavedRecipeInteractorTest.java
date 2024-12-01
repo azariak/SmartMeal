@@ -2,12 +2,10 @@ package use_case.load_saved_recipe.;
 
 import data_access.FileRecipeSaver;
 import entity.*;
-import entity.test.GenericRecipeFactory;
-import entity.GenericRecipe;
+import entity.GenericRecipeFactory;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,8 +17,8 @@ class LoginInteractorTest {
         LoadSavedRecipeDataAccessInterface recipeJson = new FileRecipeSaver();
 
         GenericRecipeFactoryInterface factory = new GenericRecipeFactory();
-        GenericRecipe recipe = factory.createGenericRecipe("", "");
-        recipeJson.search((AdvancedRecipe) recipe);
+        GenericRecipeInterface recipe = factory.createGenericRecipe("", "");
+        recipeJson.search((AdvancedRecipeInterface) recipe);
 
         LoadSavedRecipeOutputBoundary successPresenter = new LoadSavedRecipeOutputBoundary() {
 
@@ -46,7 +44,7 @@ class LoginInteractorTest {
 
         // For the success test, we need to add Paul to the data access repository before we log in.
         GenericRecipeFactory factory = new GenericRecipeFactory();
-        GenericRecipe recipe = factory.createGenericRecipe("lasagna", "beef noodles");
+        GenericRecipeInterface recipe = factory.createGenericRecipe("lasagna", "beef noodles");
         recipeRepository.get(String.valueOf(recipe));
 
         // This creates a successPresenter that tests whether the test case is as we expect.
@@ -77,7 +75,7 @@ class LoginInteractorTest {
         // For this failure test, we need to add Paul to the data access repository before we log in, and
         // the passwords should not match.
         GenericRecipeFactory factory = new GenericRecipeFactory();
-        GenericRecipe recipe = factory.createGenericRecipe("", "");
+        GenericRecipeInterface recipe = factory.createGenericRecipe("", "");
         recipeRepository.save(recipe);
 
         // This creates a presenter that tests whether the test case is as we expect.
