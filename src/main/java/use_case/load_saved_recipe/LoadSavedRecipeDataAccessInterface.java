@@ -1,8 +1,7 @@
 package use_case.load_saved_recipe;
 
+import entity.AdvancedRecipeInterface;
 import org.json.JSONObject;
-
-import entity.AdvancedRecipe;
 
 /**
  * DAO for the Load Saved Recipe Use Case.
@@ -13,14 +12,14 @@ public interface LoadSavedRecipeDataAccessInterface {
      * Search the recipe.
      * @param recipe the user to save
      */
-    void search(AdvancedRecipe recipe);
+    void search(AdvancedRecipeInterface recipe);
 
     /**
      * Returns the saved recipe with the given recipe name.
      * @param ingredient the recipe to look up
      * @return the recipe with the given recipe name
      */
-    AdvancedRecipe get(String ingredient);
+    AdvancedRecipeInterface get(String ingredient);
 
     /**
      * Returns the user with the given username.

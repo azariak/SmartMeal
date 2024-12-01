@@ -1,6 +1,7 @@
 package use_case.recipe_detail;
 
 import entity.GenericRecipe;
+import entity.GenericRecipeInterface;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,25 +13,25 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class RecipeDetailInputDataTest {
 
     private RecipeDetailInputData recipeDetailInputData;
-    private GenericRecipe genericRecipe;
+    private GenericRecipeInterface genericRecipeInterface;
 
     @BeforeEach
     void setUp() throws IOException {
         String name = "Pancakes";
         String id = "5678";
-        genericRecipe = new GenericRecipe(name, id);
-        recipeDetailInputData = new RecipeDetailInputData(genericRecipe);
+        genericRecipeInterface = new GenericRecipe(name, id);
+        recipeDetailInputData = new RecipeDetailInputData(genericRecipeInterface);
     }
 
     @AfterEach
     void tearDown() {
         recipeDetailInputData = null;
-        genericRecipe = null;
+        genericRecipeInterface = null;
     }
 
     @Test
     void getGenericRecipe() {
-        GenericRecipe retrievedRecipe = recipeDetailInputData.getGenericRecipe();
+        GenericRecipeInterface retrievedRecipe = recipeDetailInputData.getGenericRecipe();
         assertEquals("Pancakes", retrievedRecipe.getName());
         assertEquals("5678", retrievedRecipe.getId());
     }

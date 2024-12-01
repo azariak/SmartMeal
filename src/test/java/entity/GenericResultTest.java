@@ -10,11 +10,11 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GenericResultTest {
-    private final GenericRecipe recipe1 = new GenericRecipe("name1", "id1");
-    private final GenericRecipe recipe2 = new GenericRecipe("name2", "id3");
-    private final GenericRecipe recipe3 = new GenericRecipe("name3", "id3");
-    ArrayList<GenericRecipe> recipes = new ArrayList<>();
-    ArrayList<GenericRecipe> recipes2 = new ArrayList<>();
+    private final GenericRecipeInterface recipe1 = new GenericRecipe("name1", "id1");
+    private final GenericRecipeInterface recipe2 = new GenericRecipe("name2", "id3");
+    private final GenericRecipeInterface recipe3 = new GenericRecipe("name3", "id3");
+    ArrayList<GenericRecipeInterface> recipes = new ArrayList<>();
+    ArrayList<GenericRecipeInterface> recipes2 = new ArrayList<>();
 
     GenericResultTest() throws IOException {
     }
@@ -36,7 +36,7 @@ class GenericResultTest {
 
     @Test
     void emptyResult() {
-        final GenericResult result = new GenericResult();
+        final Result result = new GenericResult();
         assert result.getRecipes().isEmpty();
     }
 
@@ -45,11 +45,11 @@ class GenericResultTest {
         assert recipes.contains(recipe1);
         assert recipes.contains(recipe2);
 
-        GenericResult result = new GenericResult();
+        Result result = new GenericResult();
         result.addRecipe(recipes);
 
         assertEquals(2, result.getRecipes().size());
-        for (GenericRecipe recipe : recipes) {
+        for (GenericRecipeInterface recipe : recipes) {
             assert result.getRecipes().contains(recipe);
         }
     }
@@ -64,11 +64,11 @@ class GenericResultTest {
 
         assertEquals(4, recipes.size());
 
-        GenericResult result = new GenericResult();
+        Result result = new GenericResult();
         result.addRecipe(recipes);
 
         assertEquals(3, result.getRecipes().size());
-        for (GenericRecipe recipe : recipes) {
+        for (GenericRecipeInterface recipe : recipes) {
             assert result.getRecipes().contains(recipe);
         }
 
@@ -79,15 +79,15 @@ class GenericResultTest {
         assert recipes.contains(recipe1);
         assert recipes.contains(recipe2);
 
-        GenericResult result = new GenericResult();
+        Result result = new GenericResult();
         result.addRecipe(recipes);
         result.addRecipe(recipes2);
 
         assertEquals(3, result.getRecipes().size());
-        for (GenericRecipe recipe : recipes) {
+        for (GenericRecipeInterface recipe : recipes) {
             assert result.getRecipes().contains(recipe);
         }
-        for (GenericRecipe recipe : recipes2) {
+        for (GenericRecipeInterface recipe : recipes2) {
             assert result.getRecipes().contains(recipe);
         }
 
@@ -98,7 +98,7 @@ class GenericResultTest {
         assert recipes.contains(recipe1);
         assert recipes.contains(recipe2);
 
-        GenericResult result = new GenericResult();
+        Result result = new GenericResult();
         result.addRecipe(recipes);
 
         assert recipes.equals(result.getRecipes());

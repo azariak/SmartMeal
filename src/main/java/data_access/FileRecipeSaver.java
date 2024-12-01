@@ -4,8 +4,10 @@ import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import entity.AdvancedRecipeInterface;
 import entity.GenericRecipe;
 
+import entity.GenericRecipeInterface;
 import org.json.JSONObject;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -14,7 +16,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.charset.StandardCharsets;
 
-import entity.AdvancedRecipe;
 import use_case.load_saved_recipe.LoadSavedRecipeDataAccessInterface;
 import use_case.saved_recipe.SavedRecipeDataAccessInterface;
 
@@ -25,16 +26,16 @@ public class FileRecipeSaver implements SavedRecipeDataAccessInterface,
         LoadSavedRecipeDataAccessInterface {
 
     @Override
-    public void save(AdvancedRecipe recipe) {
+    public void save(AdvancedRecipeInterface recipe) {
     }
 
     @Override
-    public void search(AdvancedRecipe recipe) {
+    public void search(AdvancedRecipeInterface recipe) {
 
     }
 
     @Override
-    public AdvancedRecipe get(String ingredient) {
+    public AdvancedRecipeInterface get(String ingredient) {
         return null;
     }
 
@@ -125,8 +126,8 @@ public class FileRecipeSaver implements SavedRecipeDataAccessInterface,
     }
 
     @Override
-    public GenericRecipe load(String id) {
-        GenericRecipe recipe = null;
+    public GenericRecipeInterface load(String id) {
+        GenericRecipeInterface recipe = null;
 
         try {
             final String content = new String(Files.readAllBytes(Paths.get("src/main/java/data_access/recipe.json")));

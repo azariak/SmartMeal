@@ -11,10 +11,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GenericResultFactoryTest {
 
-    private final GenericRecipe recipe1 = new GenericRecipe("name1", "id1");
-    private final GenericRecipe recipe2 = new GenericRecipe("name2", "id3");
-    private final GenericRecipe recipe3 = new GenericRecipe("name3", "id3");
-    ArrayList<GenericRecipe> recipeList;
+    private final GenericRecipeInterface recipe1 = new GenericRecipe("name1", "id1");
+    private final GenericRecipeInterface recipe2 = new GenericRecipe("name2", "id3");
+    private final GenericRecipeInterface recipe3 = new GenericRecipe("name3", "id3");
+    ArrayList<GenericRecipeInterface> recipeList;
 
     GenericResultFactoryTest() throws IOException {
     }
@@ -32,19 +32,19 @@ class GenericResultFactoryTest {
     void tearDown() {
         recipeList.clear();
 
-        GenericResult entityTest = new GenericResult();
+        Result entityTest = new GenericResult();
         entityTest.addRecipe(recipeList);
     }
 
     @Test
     void createResult() {
         GenericResultFactory factoryEntity = new GenericResultFactory();
-        GenericResult resultEntity = factoryEntity.createResult(recipeList);
+        Result resultEntity = factoryEntity.createResult(recipeList);
 
-        GenericResult entityTest = new GenericResult();
+        Result entityTest = new GenericResult();
         entityTest.addRecipe(recipeList);
 
-        for (GenericRecipe recipe : entityTest.getRecipes()) {
+        for (GenericRecipeInterface recipe : entityTest.getRecipes()) {
             assert resultEntity.getRecipes().contains(recipe);
         }
 
