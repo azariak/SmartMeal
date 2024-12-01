@@ -7,7 +7,7 @@ import entity.AdvancedRecipe;
 /**
  * DAO for the Load Saved Recipe Use Case.
  */
-public interface LoadSavedRecipeDataAcessInterface {
+public interface LoadSavedRecipeDataAccessInterface {
 
     /**
      * Search the recipe.

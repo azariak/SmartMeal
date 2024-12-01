@@ -3,24 +3,28 @@ package data_access;
 import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import entity.GenericRecipe;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
-import org.json.JSONObject;
+import java.util.ArrayList;
+import java.util.List;
 
 import entity.AdvancedRecipe;
-import entity.GenericRecipe;
-import use_case.load_saved_recipe.LoadSavedRecipeDataAcessInterface;
+import use_case.load_saved_recipe.LoadSavedRecipeDataAccessInterface;
 import use_case.saved_recipe.SavedRecipeDataAccessInterface;
 
 /**
  * The DAO for Recipe data.
  */
 public class FileRecipeSaver implements SavedRecipeDataAccessInterface,
-                                         LoadSavedRecipeDataAcessInterface {
+        LoadSavedRecipeDataAccessInterface {
 
     @Override
     public void save(AdvancedRecipe recipe) {
@@ -60,7 +64,7 @@ public class FileRecipeSaver implements SavedRecipeDataAccessInterface,
      */
     public static void main(String[] args) {
         final JSONObject recipeJson = new JSONObject();
-        recipeJson.put("name", "test");
+        recipeJson.put("1", "lasagna");
         final FileRecipeSaver fileRecipeSaver = new FileRecipeSaver();
         fileRecipeSaver.saveRecipe(recipeJson, "/Users/anisa/Desktop/recipe.json");
     }
@@ -98,10 +102,13 @@ public class FileRecipeSaver implements SavedRecipeDataAccessInterface,
             }
             else {
                 System.err.println("Failed to fetch recipe. Response Code: " + responseCode);
+                return null;
             }
+
         }
         catch (IOException exception) {
             exception.printStackTrace();
+            return null;
         }
 
         return recipeJson;
@@ -144,4 +151,66 @@ public class FileRecipeSaver implements SavedRecipeDataAccessInterface,
 
         return recipe;
     }
+
+    /**
+     * Deletes the recipe.
+     * @param recipeName the recipe name.
+     */
+    public boolean delete(String recipeName) {
+        try {
+            final String content = new String(Files.readAllBytes(Paths.get("src/main/java/data_access/recipe.json")));
+            final String[] recipeLines = content.split(System.lineSeparator());
+
+            final List<String> updatedRecipes = new ArrayList<>();
+            boolean recipeFound = false;
+
+            for (String recipeStr : recipeLines) {
+                final JSONObject recipeJson = new JSONObject(recipeStr);
+                if (recipeJson.getString("name").equals(recipeName)) {
+                    recipeFound = true;
+                }
+                else {
+                    updatedRecipes.add(recipeStr);
+                }
+            }
+
+            if (recipeFound) {
+                // Write back the updated recipes to the file
+                try (FileWriter writer = new FileWriter("src/main/java/data_access/recipe.json")) {
+                    for (String updatedRecipe : updatedRecipes) {
+                        writer.write(updatedRecipe);
+                        writer.write(System.lineSeparator());
+                    }
+                }
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        catch (IOException exception) {
+            System.err.println("Error deleting recipe: " + exception.getMessage());
+            return false;
+        }
+    }
+
+//    public List<GenericRecipe> loadAll() {
+//        final List<GenericRecipe> recipes = new ArrayList();
+//        try {
+//            final String content = new String(Files.readAllBytes(Paths.get("src/main/java/data_access/recipe.json")));
+//            final String[] recipeLines = content.split(System.lineSeparator());
+//
+//            for (String recipeStr : recipeLines) {
+//                final JSONObject recipeJson = new JSONObject(recipeStr);
+//                recipes.add(new GenericRecipe(
+//                        recipeJson.getString("id"),
+//                        recipeJson.getString("name")
+//                ));
+//            }
+//        }
+//        catch (IOException e) {
+//            System.err.println("Error loading recipes: " + e.getMessage());
+//        }
+//        return recipes;
+//    }
 }

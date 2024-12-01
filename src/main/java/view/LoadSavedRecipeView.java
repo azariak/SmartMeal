@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import javax.swing.*;
-
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -34,7 +33,7 @@ public class LoadSavedRecipeView extends JPanel implements ActionListener, Prope
 
     public LoadSavedRecipeView(LoadSavedRecipeViewModel loadSavedRecipeViewModel) {
         this.loadSavedRecipeViewModel = loadSavedRecipeViewModel;
-
+//        final SavedRecipeDataAcessInterface recipeSaver = new FileRecipeSaver();
         final JLabel title = new JLabel("Saved Recipes");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         final JPanel buttons = new JPanel();
@@ -77,7 +76,56 @@ public class LoadSavedRecipeView extends JPanel implements ActionListener, Prope
             }
         });
         buttons.add(backButton);
-
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                if (evt.getSource().equals(cancelButton)) {
+                    recipeList.clearSelection();
+                    JOptionPane.showMessageDialog(
+                            LoadSavedRecipeView.this,
+                            "Selection canceled.",
+                            "Info",
+                            JOptionPane.INFORMATION_MESSAGE
+                    );
+                }
+            }
+        });
+//        deleteButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent evt) {
+//                if (evt.getSource().equals(deleteButton)) {
+//                    final int selectedIndex = recipeList.getSelectedIndex();
+//                    if (selectedIndex != -1) {
+//                        final String selectedRecipe = recipeList.getSelectedValue();
+//                        final int confirm = JOptionPane.showConfirmDialog(
+//                                LoadSavedRecipeView.this,
+//                                "Are you sure you want to delete this recipe?",
+//                                "Confirm Delete",
+//                                JOptionPane.YES_NO_OPTION
+//                        );
+//                        if (confirm == JOptionPane.YES_OPTION) {
+//                            loadSavedRecipeController.deleteRecipe(selectedRecipe);
+//                            final DefaultListModel<String> model = (DefaultListModel<String>) recipeList.getModel();
+//                            model.remove(selectedIndex);
+//                            JOptionPane.showMessageDialog(
+//                                    LoadSavedRecipeView.this,
+//                                    "Recipe deleted successfully.",
+//                                    "Info",
+//                                    JOptionPane.INFORMATION_MESSAGE
+//                            );
+//                        }
+//                    }
+//                    else {
+//                        JOptionPane.showMessageDialog(
+//                                LoadSavedRecipeView.this,
+//                                "Please select a recipe to delete.",
+//                                "Error",
+//                                JOptionPane.ERROR_MESSAGE
+//                        );
+//                    }
+//                }
+//            }
+//        });
         loadButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
@@ -111,6 +159,24 @@ public class LoadSavedRecipeView extends JPanel implements ActionListener, Prope
     public void setLoadSavedRecipeController(LoadSavedRecipeController loadSavedRecipeController) {
         this.loadSavedRecipeController = loadSavedRecipeController;
     }
+
+//    private void initializeRecipeList() {
+//        // Fetch recipes via the controller
+//        loadSavedRecipeController.loadAllSavedRecipes();
+//
+//        // Populate the JList
+//        refreshRecipeList();
+//    }
+
+//    private void refreshRecipeList() {
+//        final List<String> recipes = loadSavedRecipeViewModel.getRecipeList();
+//        final DefaultListModel<String> listModel = new DefaultListModel<>();
+//        for (String recipe : recipes) {
+//            listModel.addElement(recipe);
+//        }
+//        recipeList.setModel(listModel);
+//    }
+
 
     @Override
     public void actionPerformed(ActionEvent evt) {
