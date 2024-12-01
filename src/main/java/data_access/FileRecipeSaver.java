@@ -6,15 +6,13 @@ import java.io.IOException;
 
 import entity.GenericRecipe;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
+import java.nio.charset.StandardCharsets;
 
 import entity.AdvancedRecipe;
 import use_case.load_saved_recipe.LoadSavedRecipeDataAccessInterface;
@@ -67,6 +65,7 @@ public class FileRecipeSaver implements SavedRecipeDataAccessInterface,
         recipeJson.put("1", "lasagna");
         final FileRecipeSaver fileRecipeSaver = new FileRecipeSaver();
         fileRecipeSaver.saveRecipe(recipeJson, "/Users/anisa/Desktop/recipe.json");
+        fileRecipeSaver.saveRecipeFromApi("716429", "/Users/anisa/Desktop/recipe.json");
     }
 
     /**
@@ -78,7 +77,6 @@ public class FileRecipeSaver implements SavedRecipeDataAccessInterface,
                 + System.getenv("API_KEY");
 
         JSONObject recipeJson = null;
-
         try {
             final URL url = new URL(urlString);
             final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -86,7 +84,6 @@ public class FileRecipeSaver implements SavedRecipeDataAccessInterface,
             final int num = 5000;
             connection.setConnectTimeout(num);
             connection.setReadTimeout(num);
-
             final int num2 = 200;
             final int responseCode = connection.getResponseCode();
             if (responseCode == num2) {
@@ -104,13 +101,11 @@ public class FileRecipeSaver implements SavedRecipeDataAccessInterface,
                 System.err.println("Failed to fetch recipe. Response Code: " + responseCode);
                 return null;
             }
-
         }
         catch (IOException exception) {
             exception.printStackTrace();
             return null;
         }
-
         return recipeJson;
     }
 
@@ -122,7 +117,7 @@ public class FileRecipeSaver implements SavedRecipeDataAccessInterface,
     public void saveRecipeFromApi(String recipeId, String fileName) {
         final JSONObject recipeJson = fetchRecipeFromApi(recipeId);
         if (recipeJson != null) {
-            saveRecipe(recipeJson, fileName);
+            saveRecipe(recipeJson, "src/main/java/data_access/recipe.json");
         }
         else {
             System.err.println("Failed to save recipe from API.");
@@ -156,13 +151,14 @@ public class FileRecipeSaver implements SavedRecipeDataAccessInterface,
      * Deletes the recipe.
      * @param recipeName the recipe name.
      */
+    @Override
     public boolean delete(String recipeName) {
         try {
-            final String content = new String(Files.readAllBytes(Paths.get("src/main/java/data_access/recipe.json")));
+            final String filePath = "src/main/java/data_access/recipe.json";
+            final String content = Files.readString(Paths.get(filePath), StandardCharsets.UTF_8);
             final String[] recipeLines = content.split(System.lineSeparator());
-
-            final List<String> updatedRecipes = new ArrayList<>();
             boolean recipeFound = false;
+            final StringBuilder updatedContent = new StringBuilder();
 
             for (String recipeStr : recipeLines) {
                 final JSONObject recipeJson = new JSONObject(recipeStr);
@@ -170,23 +166,14 @@ public class FileRecipeSaver implements SavedRecipeDataAccessInterface,
                     recipeFound = true;
                 }
                 else {
-                    updatedRecipes.add(recipeStr);
+                    final int num = 4;
+                    updatedContent.append(recipeJson.toString(num)).append(System.lineSeparator());
                 }
             }
-
             if (recipeFound) {
-                // Write back the updated recipes to the file
-                try (FileWriter writer = new FileWriter("src/main/java/data_access/recipe.json")) {
-                    for (String updatedRecipe : updatedRecipes) {
-                        writer.write(updatedRecipe);
-                        writer.write(System.lineSeparator());
-                    }
-                }
-                return true;
+                Files.writeString(Paths.get(filePath), updatedContent.toString(), StandardCharsets.UTF_8);
             }
-            else {
-                return false;
-            }
+            return recipeFound;
         }
         catch (IOException exception) {
             System.err.println("Error deleting recipe: " + exception.getMessage());
