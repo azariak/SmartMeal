@@ -1,10 +1,9 @@
 package interface_adapter.map_groceries;
 
-import use_case.login.LoginInputData;
+import java.io.IOException;
+
 import use_case.map_groceries.MapGroceriesInputBoundary;
 import use_case.map_groceries.MapGroceriesInputData;
-
-import java.io.IOException;
 
 /**
  * The login controller for the Map Groceries use case.

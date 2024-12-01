@@ -31,6 +31,8 @@ public class Main {
                                             .addSubstitutesUseCase()
                                             .addLoadSavedRecipeView()
                                             .addLoadSavedRecipeUseCase()
+                                            .addMapGroceriesView()
+                                            .addMapGroceriesUseCase()
                                             .addMainMenuView()
                                             .addMainMenuUseCase()
                                             .addBackUseCase()

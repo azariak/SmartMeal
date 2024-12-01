@@ -20,14 +20,16 @@ public class RecipeIDToIngredients {
     /**
      * Returns an array with ingredient information for a recipe.
      * @param id the recipe id.
+     * @param keyManager The api key manager.
      * @return The ArrayList with ingredient names or null if request fails.
      * @throws IOException if error occurs during API call.
      */
-    public static ArrayList<String> getFullIngredients(String id) throws IOException {
+    public static ArrayList<String> getFullIngredients(String id, ApiAccessKeyManagerInterface keyManager) throws IOException {
         ArrayList<String> result = null;
+        final String apiKey = keyManager.getValidApiKey();
 
         final String urlString = BASE_URL + id + "/ingredientWidget.json" + "?apiKey="
-                + "ac77230dfdf14548b77b78cb800fe0af";
+                + apiKey;
         try {
             final URL url = new URL(urlString);
             final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
