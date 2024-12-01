@@ -124,6 +124,7 @@ public class AppBuilder {
     private InMemoryUserDataAccessObject userDataAccessObject;
     private IngredientSearchDataAccessObject ingredientSearchDataAccessObject;
     private RecipeDetailDataAccessObject recipeDetailDataAccessObject;
+    private FileRecipeSaver fileRecipeSaver;
     private SubstitutesDataAccessObject substitutesDataAccessObject;
 
     private SignupView signupView;
@@ -304,7 +305,7 @@ public class AppBuilder {
                 new LoadSavedRecipePresenter(viewManagerModel, loadSavedRecipeViewModel);
 
         final LoadSavedRecipeInputBoundary loadSavedRecipeInteractor =
-                new LoadSavedRecipeInteractor(userDataAccessObject,
+                new LoadSavedRecipeInteractor(fileRecipeSaver,
                         loadSavedRecipeOutputBoundary);
 
         final LoadSavedRecipeController loadSavedRecipeController =

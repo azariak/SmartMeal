@@ -32,10 +32,14 @@ public interface SavedRecipeDataAccessInterface {
 
     /**
      * Returns the recipe with the given id.
-     * @param id the recipe to look up
+     * @param id the recipe to look up.
      */
     GenericRecipe load(String id);
 
+    /**
+     * Deletes the recipe with the given name.
+     * @param recipeName the recipe to delete.
+     */
     boolean delete(String recipeName);
 }
 

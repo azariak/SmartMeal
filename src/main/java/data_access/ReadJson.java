@@ -1,6 +1,6 @@
 package data_access;
 
-import org.json.JSONObject;
+import java.util.List;
 
 import entity.AdvancedRecipe;
 import use_case.load_saved_recipe.LoadSavedRecipeDataAccessInterface;
@@ -21,7 +21,8 @@ public class ReadJson implements LoadSavedRecipeDataAccessInterface {
     }
 
     @Override
-    public void readJson(JSONObject recipeJson, String fileName) {
-
+    public List<AdvancedRecipe> getAllRecipes() {
+        return List.of();
     }
+
 }

@@ -1,6 +1,6 @@
 package use_case.load_saved_recipe;
 
-import org.json.JSONObject;
+import java.util.List;
 
 import entity.AdvancedRecipe;
 
@@ -23,10 +23,8 @@ public interface LoadSavedRecipeDataAccessInterface {
     AdvancedRecipe get(String ingredient);
 
     /**
-     * Returns the user with the given username.
-     * @param recipeJson the recipe to look up
-     * @param fileName the file name.
+     * Returns all the recipes as a list.
      */
-    void readJson(JSONObject recipeJson, String fileName);
+    public List<AdvancedRecipe> getAllRecipes();
 
 }
