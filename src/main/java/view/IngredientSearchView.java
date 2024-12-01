@@ -72,7 +72,7 @@ public class IngredientSearchView extends JPanel implements ActionListener, Prop
     }
 
     private void addCancelButton() {
-        cancel = new JButton("cancel");
+        cancel = new JButton("Back");
         cancel.addActionListener(evt -> backController.backToLastView());
 
         buttons.add(cancel);
