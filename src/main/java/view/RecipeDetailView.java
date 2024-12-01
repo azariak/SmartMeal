@@ -76,6 +76,7 @@ public class RecipeDetailView extends JPanel implements PropertyChangeListener {
         final JButton backButton = new JButton("Back");
         final JLabel recipeLabel = new JLabel("Recipe Name:");
         final JLabel recipeName = new JLabel(recipeDetailViewModel.getState().getRecipeName());
+        final JButton saveButton = new JButton("Save");
         final JButton groceries = new JButton("Grocery List");
 
         backButton.addActionListener(event -> {
@@ -94,6 +95,7 @@ public class RecipeDetailView extends JPanel implements PropertyChangeListener {
 
         final JPanel topPanel = new JPanel();
         topPanel.add(backButton);
+        topPanel.add(saveButton);
         topPanel.add(groceries);
         topPanel.add(recipeLabel);
         topPanel.add(recipeName);
