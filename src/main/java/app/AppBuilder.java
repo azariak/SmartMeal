@@ -163,7 +163,7 @@ public class AppBuilder {
     private void initializeDAO() {
         userDataAccessObject = new InMemoryUserDataAccessObject();
         ingredientSearchDataAccessObject = new IngredientSearchDataAccessObject(apiAccessKeyManager);
-        recipeDetailDataAccessObject = new RecipeDetailDataAccessObject();
+        recipeDetailDataAccessObject = new RecipeDetailDataAccessObject(apiAccessKeyManager);
         substitutesDataAccessObject = new SubstitutesDataAccessObject(apiAccessKeyManager);
     }
 
