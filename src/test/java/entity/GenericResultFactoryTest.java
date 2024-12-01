@@ -15,7 +15,6 @@ class GenericResultFactoryTest {
     private final GenericRecipe recipe2 = new GenericRecipe("name2", "id3");
     private final GenericRecipe recipe3 = new GenericRecipe("name3", "id3");
     ArrayList<GenericRecipe> recipeList;
-    GenericResult entityTest;
 
     GenericResultFactoryTest() throws IOException {
     }
@@ -38,9 +37,9 @@ class GenericResultFactoryTest {
     }
 
     @Test
-    void createGenericResult() {
+    void createResult() {
         GenericResultFactory factoryEntity = new GenericResultFactory();
-        GenericResult resultEntity = factoryEntity.createGenericResult(recipeList);
+        GenericResult resultEntity = factoryEntity.createResult(recipeList);
 
         GenericResult entityTest = new GenericResult();
         entityTest.addRecipe(recipeList);

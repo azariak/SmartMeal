@@ -27,7 +27,6 @@ class IngredientSearchInteractorTest {
     private GenericRecipe mockGenericRecipe;
     private IngredientSearchInputData mockSearchInput;
     private Map<String, String> searchOutputMap;
-    private IngredientSearchOutputData mockOutputData;
     private ArrayList<GenericRecipe> mockRecipeList;
 
     @BeforeEach
@@ -49,7 +48,6 @@ class IngredientSearchInteractorTest {
 
         searchOutputMap = new HashMap<>();
         searchOutputMap.put("name", "id");
-        mockOutputData = mock(IngredientSearchOutputData.class);
 
         mockRecipeList = new ArrayList<>();
         mockRecipeList.add(mockGenericRecipe);
@@ -71,7 +69,7 @@ class IngredientSearchInteractorTest {
     void execute() throws IOException {
         when(mockDataAccess.excuteSearch(mockSearchInput.getIngredients())).thenReturn(searchOutputMap);
         when(mockRecipeFactory.createGenericRecipe("name", "id")).thenReturn(mockGenericRecipe);
-        when(mockResultFactory.createGenericResult(mockRecipeList)).thenReturn(mockGenericResult);
+        when(mockResultFactory.createResult(mockRecipeList)).thenReturn(mockGenericResult);
 
         // Execute the interactor method
         interactor.execute(mockSearchInput);
@@ -88,7 +86,7 @@ class IngredientSearchInteractorTest {
 
         // Verify factory calls
         verify(mockRecipeFactory).createGenericRecipe("name", "id");
-        verify(mockResultFactory).createGenericResult(mockRecipeList);
+        verify(mockResultFactory).createResult(mockRecipeList);
 
         // Verify data access method was called
         verify(mockDataAccess).excuteSearch(mockSearchInput.getIngredients());

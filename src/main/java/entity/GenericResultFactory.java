@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class GenericResultFactory implements ResultFactoryInterface {
     @Override
-    public GenericResult createGenericResult(ArrayList<GenericRecipe> recipes) {
+    public GenericResult createResult(ArrayList<GenericRecipe> recipes) {
         return new GenericResult(recipes);
     }
 }

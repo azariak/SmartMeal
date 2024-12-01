@@ -12,5 +12,5 @@ public interface ResultFactoryInterface {
      * @param recipes a list of recipes to be included in result
      * @return the new result
      */
-    GenericResult createGenericResult(ArrayList<GenericRecipe> recipes);
+    Result createResult(ArrayList<GenericRecipe> recipes);
 }
