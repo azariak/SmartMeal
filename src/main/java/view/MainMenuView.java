@@ -72,13 +72,13 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
         buttons.setLayout(new BoxLayout(buttons, BoxLayout.X_AXIS));
 
         demoIngredientSearch = new JButton("Ingredient Search");
-        buttons.add(demoIngredientSearch);
+        // buttons.add(demoIngredientSearch);
 
         loadSavedRecipes = new JButton("Saved Recipes");
-        buttons.add(loadSavedRecipes);
+        // buttons.add(loadSavedRecipes);
 
         rankedRecipes = new JButton("Ranked Recipes");
-        buttons.add(rankedRecipes);
+        // buttons.add(rankedRecipes);
 
         // Create the login/signup buttons panel
         final JPanel accountButtons = new JPanel();
