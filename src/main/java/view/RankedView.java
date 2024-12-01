@@ -132,7 +132,6 @@ public class RankedView extends JPanel implements ActionListener, PropertyChange
             rankingsPanel.setLayout(new BorderLayout());
             rankingsPanel.add(noRecipesLabel, BorderLayout.CENTER);
         }
-
         else {
             for (int i = 0; i < rankings.length; i++) {
                 final int recipeIndex = i;
