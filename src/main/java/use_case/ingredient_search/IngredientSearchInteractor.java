@@ -7,7 +7,7 @@ import java.util.Map;
 import data_access.IngredientSearchDataAccessObject;
 import entity.GenericRecipe;
 import entity.GenericRecipeFactoryInterface;
-import entity.GenericResult;
+import entity.Result;
 import entity.ResultFactoryInterface;
 
 /**
@@ -52,7 +52,7 @@ public class IngredientSearchInteractor implements IngredientSearchInputBoundary
             recipeArrayList.add(recipe);
         }
         // contains array list of generic recipes
-        final GenericResult result = resultFactory.createGenericResult(recipeArrayList);
+        final Result result = resultFactory.createResult(recipeArrayList);
         final IngredientSearchOutputData ingredientSearchOutputData =
                 new IngredientSearchOutputData(result, false);
         ingredientSearchPresenter.prepareSuccessView(ingredientSearchOutputData);
