@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -47,9 +48,13 @@ public class IngredientSearchView extends JPanel implements ActionListener, Prop
 
     private final JPanel ingredientSearchPanel;
     private final JPanel buttons;
+    private final JPanel loadingPanel;
 
     private JButton search;
     private JButton cancel;
+
+    // JLabel for loading indicator
+    private JLabel loadingLabel;
 
     public IngredientSearchView(IngredientSearchViewModel ingredientSearchViewModel) {
 
@@ -59,9 +64,11 @@ public class IngredientSearchView extends JPanel implements ActionListener, Prop
 
         this.ingredientSearchPanel = new JPanel();
         this.buttons = new JPanel();
+        this.loadingPanel = new JPanel();  // Panel to hold loading indicator
 
         addIngredientSearchPanel();
         addButtons();
+        addLoadingIndicator();  // Add the loading indicator to the view
     }
 
     private void addButtons() {
@@ -97,14 +104,15 @@ public class IngredientSearchView extends JPanel implements ActionListener, Prop
                     ingredients.add(currentState.getIngredient2());
                     ingredients.add(currentState.getIngredient3());
 
+                    // Show loading indicator when search starts
+                    showLoadingIndicator();
+
                     try {
                         ingredientSearchController.execute(ingredients);
-                    }
-                    catch (IOException exception) {
+                    } catch (IOException exception) {
                         throw new RuntimeException(exception);
                     }
                 }
-
             }
         };
     }
@@ -206,6 +214,36 @@ public class IngredientSearchView extends JPanel implements ActionListener, Prop
             public void changedUpdate(DocumentEvent e) {
                 documentListenerHelper();
             }
+        });
+    }
+
+    private void addLoadingIndicator() {
+        // Create and configure the loading indicator (JLabel)
+        loadingLabel = new JLabel("Loading...");
+        loadingLabel.setVisible(false);  // Hide it initially
+
+        // Add the loading indicator to the loadingPanel
+        loadingPanel.add(loadingLabel);
+
+        // Add the loadingPanel to the main panel
+        this.add(loadingPanel);
+    }
+
+    private void showLoadingIndicator() {
+        // Show the loading label and hide other components
+        SwingUtilities.invokeLater(() -> {
+            loadingLabel.setVisible(true);
+            ingredientSearchPanel.setVisible(false);
+            buttons.setVisible(false);
+        });
+    }
+
+    private void hideLoadingIndicator() {
+        // Hide the loading label and show other components
+        SwingUtilities.invokeLater(() -> {
+            loadingLabel.setVisible(false);
+            ingredientSearchPanel.setVisible(true);
+            buttons.setVisible(true);
         });
     }
 
