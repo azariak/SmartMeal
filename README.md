@@ -1,5 +1,5 @@
 # SmartMeal
-## Recipe generation, recipe storage, and nutrient management 
+## Recipe generation, recipe storage, and recipe ranking 
 
 ### Table of Contents
 - [Title](#smartmeal)
@@ -25,10 +25,6 @@
 - Nachuan Wang (December-17th)
 - Vedavi Anandan (vedavia)
 
-
-TODO:
-- [ ] As per Quercus Module, we should include: Title, authors, description. table of contents, feature list,
-installation instructions, how to use (with examples), licence, feedback and contributions
 
 ### Use Cases
 
