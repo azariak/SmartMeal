@@ -42,8 +42,18 @@ public class LoadSavedRecipeController {
      * @param recipe3 recipe3.
      */
     public void loadRecipes(String recipe1, String recipe2, String recipe3) {
-
     }
+
+//    /**
+//     * Fetches all saved recipes and updates the ViewModel.
+//     */
+//    public void loadAllSavedRecipes() {
+//        final List<String> savedRecipes = loadSavedRecipeUseCaseInteractor.getAllSavedRecipes();
+//        // Update the ViewModel (assumes you have a reference to it)
+//        // This step may vary depending on your framework.
+//        final LoadSavedRecipeViewModel viewModel = loadSavedRecipeUseCaseInteractor.getViewModel();
+//        viewModel.setRecipeList(savedRecipes);
+//    }
 
     /**
      * Back button.
@@ -51,4 +61,12 @@ public class LoadSavedRecipeController {
     public void backToLastView() {
         loadSavedRecipeUseCaseInteractor.backToLastView();
     }
+//
+//    /**
+//     * Delete button.
+//     * @param selectedRecipe to delete.
+//     */
+//    public void deleteRecipe(String selectedRecipe) {
+//        loadSavedRecipeUseCaseInteractor.deleteRecipe(selectedRecipe);
+//    }
 }
