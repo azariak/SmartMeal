@@ -4,10 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import entity.AdvancedRecipeInterface;
-import entity.GenericRecipe;
-
-import entity.GenericRecipeInterface;
 import org.json.JSONObject;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -15,7 +11,11 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
+import entity.AdvancedRecipe;
+import entity.GenericRecipe;
 import use_case.load_saved_recipe.LoadSavedRecipeDataAccessInterface;
 import use_case.saved_recipe.SavedRecipeDataAccessInterface;
 
@@ -24,24 +24,26 @@ import use_case.saved_recipe.SavedRecipeDataAccessInterface;
  */
 public class FileRecipeSaver implements SavedRecipeDataAccessInterface,
         LoadSavedRecipeDataAccessInterface {
+    private final List<AdvancedRecipe> recipes = new ArrayList<>();
 
     @Override
-    public void save(AdvancedRecipeInterface recipe) {
+    public void save(AdvancedRecipe recipe) {
+        recipes.add(recipe);
     }
 
     @Override
-    public void search(AdvancedRecipeInterface recipe) {
+    public void search(AdvancedRecipe recipe) {
 
     }
 
     @Override
-    public AdvancedRecipeInterface get(String ingredient) {
+    public AdvancedRecipe get(String ingredient) {
         return null;
     }
 
     @Override
-    public void readJson(JSONObject recipeJson, String fileName) {
-
+    public List<AdvancedRecipe> getAllRecipes() {
+        return new ArrayList<>(recipes);
     }
 
     @Override
@@ -126,8 +128,8 @@ public class FileRecipeSaver implements SavedRecipeDataAccessInterface,
     }
 
     @Override
-    public GenericRecipeInterface load(String id) {
-        GenericRecipeInterface recipe = null;
+    public GenericRecipe load(String id) {
+        GenericRecipe recipe = null;
 
         try {
             final String content = new String(Files.readAllBytes(Paths.get("src/main/java/data_access/recipe.json")));
@@ -182,23 +184,26 @@ public class FileRecipeSaver implements SavedRecipeDataAccessInterface,
         }
     }
 
-//    public List<GenericRecipe> loadAll() {
-//        final List<GenericRecipe> recipes = new ArrayList();
-//        try {
-//            final String content = new String(Files.readAllBytes(Paths.get("src/main/java/data_access/recipe.json")));
-//            final String[] recipeLines = content.split(System.lineSeparator());
-//
-//            for (String recipeStr : recipeLines) {
-//                final JSONObject recipeJson = new JSONObject(recipeStr);
-//                recipes.add(new GenericRecipe(
-//                        recipeJson.getString("id"),
-//                        recipeJson.getString("name")
-//                ));
-//            }
-//        }
-//        catch (IOException e) {
-//            System.err.println("Error loading recipes: " + e.getMessage());
-//        }
-//        return recipes;
-//    }
+    /**
+     * Loads all the recipes.
+     */
+    public List<GenericRecipe> loadAll() {
+        final List<GenericRecipe> recipes = new ArrayList();
+        try {
+            final String content = new String(Files.readAllBytes(Paths.get("src/main/java/data_access/recipe.json")));
+            final String[] recipeLines = content.split(System.lineSeparator());
+
+            for (String recipeStr : recipeLines) {
+                final JSONObject recipeJson = new JSONObject(recipeStr);
+                recipes.add(new GenericRecipe(
+                        recipeJson.getString("id"),
+                        recipeJson.getString("name")
+                ));
+            }
+        }
+        catch (IOException exception) {
+            System.err.println("Error loading recipes: " + exception.getMessage());
+        }
+        return recipes;
+    }
 }

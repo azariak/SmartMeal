@@ -1,26 +1,19 @@
 package use_case.load_saved_recipe;
 
-import data_access.FileRecipeSaver;
 import data_access.InMemoryUserDataAccessObject;
-import interface_adapter.load_saved_recipe.LoadSavedRecipeViewModel;
-
-import java.util.List;
 
 /**
  * The Load saved recipe Interactor.
  */
 public class LoadSavedRecipeInteractor implements LoadSavedRecipeInputBoundary {
 
-    private final InMemoryUserDataAccessObject loadSavedRecipeDataAccessObject;
+    private final LoadSavedRecipeDataAccessInterface recipeDataAccess;
     private final LoadSavedRecipeOutputBoundary loadSavedRecipePresenter;
-//    private final FileRecipeSaver recipeSaver;
 
-    public LoadSavedRecipeInteractor(InMemoryUserDataAccessObject loadSavedRecipeDataAccessObject,
+    public LoadSavedRecipeInteractor(LoadSavedRecipeDataAccessInterface recipeDataAccess,
                                      LoadSavedRecipeOutputBoundary loadSavedRecipeOutputBoundary) {
-
-        this.loadSavedRecipeDataAccessObject = loadSavedRecipeDataAccessObject;
+        this.recipeDataAccess = recipeDataAccess;
         this.loadSavedRecipePresenter = loadSavedRecipeOutputBoundary;
-//        this.recipeSaver = recipeSaver;
     }
 
     @Override

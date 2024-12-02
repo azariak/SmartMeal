@@ -1,123 +1,46 @@
-package use_case.load_saved_recipe.;
+package use_case.load_saved_recipe;
 
 import data_access.FileRecipeSaver;
-import entity.*;
-import entity.GenericRecipeFactory;
+import data_access.InMemoryUserDataAccessObject;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
-import java.io.IOException;
+import static org.mockito.Mockito.*;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class LoginInteractorTest {
+class LoadSavedRecipeInteractorTest {
 
     @Test
-    void successTest() throws IOException {
-        LoadSavedRecipeInputData inputData = new LoadSavedRecipeInputData("", "", "");
-        LoadSavedRecipeDataAccessInterface recipeJson = new FileRecipeSaver();
+    void testExecute() {
+        // Arrange
+        LoadSavedRecipeDataAccessInterface mockDataAccessObject = mock(LoadSavedRecipeDataAccessInterface.class);
+        LoadSavedRecipeOutputBoundary mockPresenter = mock(LoadSavedRecipeOutputBoundary.class);
 
-        GenericRecipeFactoryInterface factory = new GenericRecipeFactory();
-        GenericRecipeInterface recipe = factory.createGenericRecipe("", "");
-        recipeJson.search((AdvancedRecipeInterface) recipe);
-
-        LoadSavedRecipeOutputBoundary successPresenter = new LoadSavedRecipeOutputBoundary() {
-
-            @Override
-            public void prepareSuccessView(LoadSavedRecipeOutputData recipe) {
-                assertEquals("lasagna", recipe.getRecipeName());
-            }
-
-            @Override
-            public void prepareFailView(String error) {
-                fail("Use case failure is unexpected.");
-            }
-        };
-
-        LoadSavedRecipeInputBoundary interactor = new LoadSavedRecipeInteractor(recipeRepository, successPresenter);
+        LoadSavedRecipeInteractor interactor = new LoadSavedRecipeInteractor((FileRecipeSaver) mockDataAccessObject, mockPresenter);
+        LoadSavedRecipeInputData inputData = new LoadSavedRecipeInputData("Recipe1", "Recipe2", "Recipe3");
         interactor.execute(inputData);
+        verify(mockPresenter).prepareResultView("Recipe1", "Recipe2", "Recipe3");
+        verifyNoInteractions(mockDataAccessObject);
     }
 
     @Test
-    void successUserLoggedInTest() throws IOException {
-        LoadSavedRecipeInputData inputData = new LoadSavedRecipeInputData("", "");
-        LoadSavedRecipeDataAccessInterface recipeRepository = new FileRecipeSaver();
+    void testSwitchToResultView() {
+        LoadSavedRecipeDataAccessInterface mockDataAccessObject = mock(LoadSavedRecipeDataAccessInterface.class);
+        LoadSavedRecipeOutputBoundary mockPresenter = mock(LoadSavedRecipeOutputBoundary.class);
 
-        // For the success test, we need to add Paul to the data access repository before we log in.
-        GenericRecipeFactory factory = new GenericRecipeFactory();
-        GenericRecipeInterface recipe = factory.createGenericRecipe("lasagna", "beef noodles");
-        recipeRepository.get(String.valueOf(recipe));
-
-        // This creates a successPresenter that tests whether the test case is as we expect.
-        LoadSavedRecipeOutputBoundary successPresenter = new LoadSavedRecipeOutputBoundary() {
-
-            @Override
-            public void prepareSuccessView(LoadSavedRecipeOutputData recipe) {
-                assertEquals("lasagna", recipeRepository.getCurrentUsername());
-            }
-
-            @Override
-            public void prepareFailView(String error) {
-                fail("Use case failure is unexpected.");
-            }
-        };
-
-        LoadSavedRecipeInputBoundary interactor = new LoadSavedRecipeInteractor(recipeRepository, successPresenter);
-        assertEquals(null, recipeRepository.getCurrentUsername());
-
-        interactor.execute(inputData);
+        LoadSavedRecipeInteractor interactor = new LoadSavedRecipeInteractor((FileRecipeSaver) mockDataAccessObject, mockPresenter);
+        interactor.switchToResultView();
+        verify(mockPresenter).switchToResultView();
+        verifyNoInteractions(mockDataAccessObject);
     }
 
     @Test
-    void failurePasswordMismatchTest() {
-        LoadSavedRecipeInputData inputData = new LoadSavedRecipeInputData("lasagna", "wrong", "beef");
-        LoadSavedRecipeDataAccessInterface recipeRepository = new FileRecipeSaver();
+    void testBackToLastView() {
+        LoadSavedRecipeDataAccessInterface mockDataAccessObject = mock(LoadSavedRecipeDataAccessInterface.class);
+        LoadSavedRecipeOutputBoundary mockPresenter = mock(LoadSavedRecipeOutputBoundary.class);
 
-        // For this failure test, we need to add Paul to the data access repository before we log in, and
-        // the passwords should not match.
-        GenericRecipeFactory factory = new GenericRecipeFactory();
-        GenericRecipeInterface recipe = factory.createGenericRecipe("", "");
-        recipeRepository.save(recipe);
-
-        // This creates a presenter that tests whether the test case is as we expect.
-        LoadSavedRecipeOutputBoundary failurePresenter = new LoadSavedRecipeOutputBoundary() {
-            @Override
-            public void prepareSuccessView(LoadSavedRecipeOutputData recipe) {
-                // this should never be reached since the test case should fail
-                fail("Use case success is unexpected.");
-            }
-
-            @Override
-            public void prepareFailView(String error) {
-                assertEquals("failed to delete recipe\"lasagna\".", error);
-            }
-        };
-
-        LoadSavedRecipeInputBoundary interactor = new LoadSavedRecipeInteractor(recipeRepository, failurePresenter);
-        interactor.execute(inputData);
-    }
-
-    @Test
-    void failureRecipeDoesNotExistTest() {
-        LoadSavedRecipeInputData inputData = new LoadSavedRecipeInputData("lasagna","noodles","beef");
-        LoasSavedRecipeDataAccessInterface recipeRepository = new FileRecipeSaver();
-
-        // Add Paul to the repo so that when we check later they already exist
-
-        // This creates a presenter that tests whether the test case is as we expect.
-        LoadSavedRecipeOutputBoundary failurePresenter = new LoadSavedRecipeOutputBoundary() {
-            @Override
-            public void prepareSuccessView(LoadSavedRecipeOutputData user) {
-                // this should never be reached since the test case should fail
-                fail("Use case success is unexpected.");
-            }
-
-            @Override
-            public void prepareFailView(String error) {
-                assertEquals("lasagna: recipe does not exist.", error);
-            }
-        };
-
-        LoadSavedRecipeInputBoundary interactor = new LoadSavedRecipeInteractor(recipeRepository, failurePresenter);
-        interactor.execute(inputData);
+        LoadSavedRecipeInteractor interactor = new LoadSavedRecipeInteractor((FileRecipeSaver) mockDataAccessObject, mockPresenter);
+        interactor.backToLastView();
+        verify(mockPresenter).backToLastView();
+        verifyNoInteractions(mockDataAccessObject);
     }
 }
