@@ -42,8 +42,8 @@ public class ApiAccessKeyManager implements ApiAccessKeyManagerInterface {
         // If no valid keys are found, return the key in environment and set allInvalid to true.
         if (result.isEmpty()) {
             allInvalid = true;
-            System.out.println("Api Access Key Manager: Error: All Api key are invalid, returning environment Api key");
-            System.out.println("Api Access Key Manager: Environment Api key: " + ENV_API_KEY + " Provided to Api DAO");
+            System.err.println("Api Access Key Manager: Error: All Api key are invalid, returning environment Api key");
+            System.out.println("Api Access Key Manager: Default Env Key: " + ENV_API_KEY + " Provided to Api DAO");
             result = ENV_API_KEY;
         }
 
