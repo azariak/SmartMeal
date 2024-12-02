@@ -11,7 +11,7 @@ import data_access.FileRecipeSaver;
 /**
  * A generic recipe entity with basic information of a recipe.
  */
-public class GenericRecipe implements GenericRecipeInterface {
+public class GenericRecipe extends GenericRecipeFactory implements GenericRecipeInterface {
     private final String name;
     private final String id;
 
