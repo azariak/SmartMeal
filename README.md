@@ -1,5 +1,5 @@
 # SmartMeal
-## Recipe generation, recipe storage, and nutrient management 
+## Recipe generation, recipe storage, and recipe ranking 
 
 ### Table of Contents
 - [Title](#smartmeal)
@@ -26,10 +26,6 @@
 - Vedavi Anandan (vedavia)
 
 
-TODO:
-- [ ] As per Quercus Module, we should include: Title, authors, description. table of contents, feature list,
-installation instructions, how to use (with examples), licence, feedback and contributions
-
 ### Use Cases
 
 #### Nachuan Wang (December-17th)
@@ -49,11 +45,9 @@ Result view
 ##### User story
 As a user, Azaria wants to rank his recipes on a scale of 1 to 5, so that he could remember which recipes he likes.
 ##### Use Cases
-- Each recipe has an attribute of an integer {1, 2, 3, 4, 5}. The user can set the integer by clicking on the respective star.
-- Each recipe has a field for its folder. A user can click on a folder button, and type or select the name of the folder it should be included in.
-Note: Each Folder is a Class that includes a list of recipes in that folder. Each recipe contains an atrribute for its star rating.
-
-![Ranking_view.jpg](images/Azaria_User_Story/Ranking_view.png)
+- A user clicks on `Ranked Recipes` to see recipes they've ranked
+- A user clicks `Edit Ranking`. Each recipe has an attribute of an integer {1, 2, 3, 4, 5}. The user can change the ranking by clicking on the respective star.
+![Ranking_View.jpg](images/Azaria_User_Story/Ranking_View.png)
 
 [//]: # (![Organizing_view.jpg]&#40;images/Azaria_User_Story/Organizing_view.png&#41;)
 
@@ -101,13 +95,19 @@ Test
 ### Installation Instructions
 - Dependencies:
   - Java
-  - ...
+  - IntelliJ
+  - Functioning Spoonacular API keys in environmental variables
+  - This should be formatted in IntelliJ as follows:
+  - `API_KEY1=...;API_KEY2=...;`
+  - Adding multiple API Keys will allow the program to automatically switch to the first that returns a proper output
 ### How to Use
   - To open this app, run the `Main` file in `src\main\java\app\Main`. 
-  It will preserve information across sections.
-  - Once it is open...
+  It will preserve information across sections
+  - Once it is open you must create an account and log in, using the provided buttons
+  - Then there are buttons for each User Story
+    - To use the ranking feature, a logged-in user clicks `Recipe Rankings` to view rankings. They click `Edit Rankings` and then click on the stars to change a ranking.
 
-### License
+### License on GitHub
 
 ### Feedback & Contributions
 - To give feedback or contribute, you can open a GitHub issue, or create a pull request.

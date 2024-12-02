@@ -1,12 +1,11 @@
 package interface_adapter.load_saved_recipe;
 
 import java.awt.*;
-import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 import data_access.FileRecipeSaver;
-import entity.AdvancedRecipe;
-import entity.GenericRecipe;
+import entity.AdvancedRecipeInterface;
+import entity.GenericRecipeInterface;
 import interface_adapter.ViewModel;
 
 /**
@@ -26,7 +25,7 @@ public class LoadSavedRecipeViewModel extends ViewModel<LoadSavedRecipeState> {
      * Saves a recipe with the given ID and name.
      * @param recipe The ID of the recipe.
      */
-    public void saveRecipe(AdvancedRecipe recipe) {
+    public void saveRecipe(AdvancedRecipeInterface recipe) {
         fileRecipeSaver.save(recipe);
     }
 
@@ -34,7 +33,7 @@ public class LoadSavedRecipeViewModel extends ViewModel<LoadSavedRecipeState> {
      * Loads a recipe with the given ID and name.
      * @param id The ID of the recipe.
      */
-    public GenericRecipe loadRecipe(String id) {
+    public GenericRecipeInterface loadRecipe(String id) {
         return fileRecipeSaver.load(id);
     }
 

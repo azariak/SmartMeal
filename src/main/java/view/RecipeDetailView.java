@@ -19,6 +19,8 @@ import javax.swing.JTextArea;
 import org.jetbrains.annotations.NotNull;
 
 import interface_adapter.ingredient_substitutions.SubstitutesController;
+import interface_adapter.map_groceries.MapGroceriesController;
+import interface_adapter.map_groceries.MapGroceriesViewModel;
 import interface_adapter.recipe_detail.RecipeDetailController;
 import interface_adapter.recipe_detail.RecipeDetailViewModel;
 
@@ -39,9 +41,12 @@ public class RecipeDetailView extends JPanel implements PropertyChangeListener {
     private final RecipeDetailViewModel recipeDetailViewModel;
     private RecipeDetailController recipeDetailController;
     private SubstitutesController substitutesController;
+    private MapGroceriesController mapGroceriesController;
+    private final MapGroceriesViewModel mapGroceriesViewModel;
 
-    public RecipeDetailView(RecipeDetailViewModel recipeDetailViewModel) {
+    public RecipeDetailView(RecipeDetailViewModel recipeDetailViewModel, MapGroceriesViewModel mapGroceriesViewModel) {
         this.recipeDetailViewModel = recipeDetailViewModel;
+        this.mapGroceriesViewModel = mapGroceriesViewModel;
         this.recipeDetailViewModel.addPropertyChangeListener(this);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -56,6 +61,7 @@ public class RecipeDetailView extends JPanel implements PropertyChangeListener {
     public void buildRecipeDetailView() {
         this.add(createTopPanel());
         this.add(createMiddlePanel());
+
         this.add(createInstructionsPanel());
     }
 
@@ -70,14 +76,25 @@ public class RecipeDetailView extends JPanel implements PropertyChangeListener {
         final JButton backButton = new JButton("Back");
         final JLabel recipeLabel = new JLabel("Recipe Name:");
         final JLabel recipeName = new JLabel(recipeDetailViewModel.getState().getRecipeName());
+        final JButton groceries = new JButton("Grocery List");
 
         backButton.addActionListener(event -> {
             breakRecipeDetailView();
             recipeDetailController.backToLastView();
         });
 
+        groceries.addActionListener(event -> {
+            try {
+                mapGroceriesController.execute(mapGroceriesViewModel.getState().getRecipeID());
+            }
+            catch (IOException exc) {
+                throw new RuntimeException();
+            }
+        });
+
         final JPanel topPanel = new JPanel();
         topPanel.add(backButton);
+        topPanel.add(groceries);
         topPanel.add(recipeLabel);
         topPanel.add(recipeName);
 
@@ -215,5 +232,8 @@ public class RecipeDetailView extends JPanel implements PropertyChangeListener {
     public void setSubstitutesController(SubstitutesController substitutesController) {
         this.substitutesController = substitutesController;
     }
-}
 
+    public void setMapGroceriesController(MapGroceriesController mapGroceriesController) {
+        this.mapGroceriesController = mapGroceriesController;
+    }
+}

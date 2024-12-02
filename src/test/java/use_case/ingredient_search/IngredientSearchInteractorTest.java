@@ -1,10 +1,7 @@
 package use_case.ingredient_search;
 
 import data_access.IngredientSearchDataAccessObject;
-import entity.GenericRecipe;
-import entity.GenericRecipeFactoryInterface;
-import entity.GenericResult;
-import entity.GenericResultFactory;
+import entity.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,12 +20,11 @@ class IngredientSearchInteractorTest {
     private GenericRecipeFactoryInterface mockRecipeFactory;
     private GenericResultFactory mockResultFactory;
     private IngredientSearchDataAccessObject mockDataAccess;
-    private GenericResult mockGenericResult;
-    private GenericRecipe mockGenericRecipe;
+    private Result mockResult;
+    private GenericRecipeInterface mockGenericRecipe;
     private IngredientSearchInputData mockSearchInput;
     private Map<String, String> searchOutputMap;
-    private IngredientSearchOutputData mockOutputData;
-    private ArrayList<GenericRecipe> mockRecipeList;
+    private ArrayList<GenericRecipeInterface> mockRecipeList;
 
     @BeforeEach
     void setUp() {
@@ -39,7 +35,7 @@ class IngredientSearchInteractorTest {
 
         interactor = new IngredientSearchInteractor(mockPresenter, mockResultFactory, mockRecipeFactory, mockDataAccess);
 
-        mockGenericResult = mock(GenericResult.class);
+        mockResult = mock(GenericResult.class);
         mockGenericRecipe = mock(GenericRecipe.class);
         when(mockGenericRecipe.getName()).thenReturn("name");
         when(mockGenericRecipe.getId()).thenReturn("id");
@@ -49,7 +45,6 @@ class IngredientSearchInteractorTest {
 
         searchOutputMap = new HashMap<>();
         searchOutputMap.put("name", "id");
-        mockOutputData = mock(IngredientSearchOutputData.class);
 
         mockRecipeList = new ArrayList<>();
         mockRecipeList.add(mockGenericRecipe);
@@ -61,7 +56,7 @@ class IngredientSearchInteractorTest {
         mockResultFactory = null;
         mockDataAccess = null;
         interactor = null;
-        mockGenericResult = null;
+        mockResult = null;
         mockSearchInput = null;
         searchOutputMap = null;
         mockRecipeList = null;
@@ -71,7 +66,7 @@ class IngredientSearchInteractorTest {
     void execute() throws IOException {
         when(mockDataAccess.excuteSearch(mockSearchInput.getIngredients())).thenReturn(searchOutputMap);
         when(mockRecipeFactory.createGenericRecipe("name", "id")).thenReturn(mockGenericRecipe);
-        when(mockResultFactory.createGenericResult(mockRecipeList)).thenReturn(mockGenericResult);
+        when(mockResultFactory.createResult(mockRecipeList)).thenReturn(mockResult);
 
         // Execute the interactor method
         interactor.execute(mockSearchInput);
@@ -84,11 +79,11 @@ class IngredientSearchInteractorTest {
 
         // Validate the captured data
         assertNotNull(capturedData);
-        assertEquals(mockGenericResult, capturedData.getResult());
+        assertEquals(mockResult, capturedData.getResult());
 
         // Verify factory calls
         verify(mockRecipeFactory).createGenericRecipe("name", "id");
-        verify(mockResultFactory).createGenericResult(mockRecipeList);
+        verify(mockResultFactory).createResult(mockRecipeList);
 
         // Verify data access method was called
         verify(mockDataAccess).excuteSearch(mockSearchInput.getIngredients());

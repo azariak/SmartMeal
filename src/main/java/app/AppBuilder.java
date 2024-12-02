@@ -13,7 +13,7 @@ import entity.GenericRecipeFactoryInterface;
 import entity.GenericResultFactory;
 import entity.ResultFactoryInterface;
 import entity.UserFactory;
-import entity.test.GenericRecipeFactory;
+import entity.GenericRecipeFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.back.BackController;
 import interface_adapter.back.BackPresenter;
@@ -37,6 +37,9 @@ import interface_adapter.logout.LogoutPresenter;
 import interface_adapter.main_menu.MainMenuController;
 import interface_adapter.main_menu.MainMenuPresenter;
 import interface_adapter.main_menu.MainMenuViewModel;
+import interface_adapter.map_groceries.MapGroceriesController;
+import interface_adapter.map_groceries.MapGroceriesPresenter;
+import interface_adapter.map_groceries.MapGroceriesViewModel;
 import interface_adapter.ranked.RankedController;
 import interface_adapter.ranked.RankedPresenter;
 import interface_adapter.ranked.RankedViewModel;
@@ -73,6 +76,9 @@ import use_case.logout.LogoutOutputBoundary;
 import use_case.main_menu.MainMenuInputBoundary;
 import use_case.main_menu.MainMenuInteractor;
 import use_case.main_menu.MainMenuOutputBoundary;
+import use_case.map_groceries.MapGroceriesInputBoundary;
+import use_case.map_groceries.MapGroceriesInteractor;
+import use_case.map_groceries.MapGroceriesOutputBoundary;
 import use_case.ranked.RankedInputBoundary;
 import use_case.ranked.RankedInteractor;
 import use_case.ranked.RankedOutputBoundary;
@@ -85,17 +91,7 @@ import use_case.result.ResultOutputBoundary;
 import use_case.signup.SignupInputBoundary;
 import use_case.signup.SignupInteractor;
 import use_case.signup.SignupOutputBoundary;
-import view.IngredientSearchView;
-import view.LoadSavedRecipeView;
-import view.LoggedInView;
-import view.LoginView;
-import view.MainMenuView;
-import view.RankedView;
-import view.RecipeDetailView;
-import view.ResultView;
-import view.SignupView;
-import view.SubstitutesView;
-import view.ViewManager;
+import view.*;
 
 /**
  * The AppBuilder class is responsible for putting together the pieces of
@@ -126,6 +122,7 @@ public class AppBuilder {
     private RecipeDetailDataAccessObject recipeDetailDataAccessObject;
     private FileRecipeSaver fileRecipeSaver;
     private SubstitutesDataAccessObject substitutesDataAccessObject;
+    private GroceriesDataAccessObject mapGroceriesDataAccessObject;
 
     private SignupView signupView;
     private SignupViewModel signupViewModel;
@@ -155,6 +152,9 @@ public class AppBuilder {
     private SubstitutesView substitutesView;
     private SubstitutesViewModel substitutesViewModel;
 
+    private MapGroceriesView mapGroceriesView;
+    private MapGroceriesViewModel mapGroceriesViewModel;
+
     public AppBuilder() {
         cardPanel.setLayout(cardLayout);
         addApiKeysToApiKeyManager();
@@ -164,8 +164,9 @@ public class AppBuilder {
     private void initializeDAO() {
         userDataAccessObject = new InMemoryUserDataAccessObject();
         ingredientSearchDataAccessObject = new IngredientSearchDataAccessObject(apiAccessKeyManager);
-        recipeDetailDataAccessObject = new RecipeDetailDataAccessObject();
+        recipeDetailDataAccessObject = new RecipeDetailDataAccessObject(apiAccessKeyManager);
         substitutesDataAccessObject = new SubstitutesDataAccessObject(apiAccessKeyManager);
+        mapGroceriesDataAccessObject = new GroceriesDataAccessObject(apiAccessKeyManager);
     }
 
     private void addApiKeysToApiKeyManager() {
@@ -173,7 +174,7 @@ public class AppBuilder {
 
         for (int i = 1; i < 100; i++) {
 
-            String apiKey = System.getenv("API_KEY" + Integer.toString(i));
+            final String apiKey = System.getenv("API_KEY" + i);
             if (apiKey != null) {
                 apiKeys.add(apiKey);
             }
@@ -337,6 +338,33 @@ public class AppBuilder {
     }
 
     /**
+     * Adds the map groceries view to the application.
+     * @return this builder.
+     */
+    public AppBuilder addMapGroceriesView() {
+        this.mapGroceriesView = new MapGroceriesView(mapGroceriesViewModel);
+        cardPanel.add(mapGroceriesView, mapGroceriesView.getViewName());
+        return this;
+    }
+
+    /**
+     * Add the Recipe Detail use case.
+     * @return this app builder.
+     */
+    public AppBuilder addMapGroceriesUseCase() {
+        final MapGroceriesOutputBoundary mapGroceriesOutputBoundary =
+                new MapGroceriesPresenter(mapGroceriesViewModel, viewManagerModel);
+
+        final MapGroceriesInputBoundary mapGroceriesInteractor =
+                new MapGroceriesInteractor(mapGroceriesDataAccessObject, mapGroceriesOutputBoundary);
+
+        final MapGroceriesController mapGroceriesController = new MapGroceriesController(mapGroceriesInteractor);
+        mapGroceriesView.setMapGroceriesController(mapGroceriesController);
+        recipeDetailView.setMapGroceriesController(mapGroceriesController);
+        return this;
+    }
+
+    /**
      * Adds the main menu view to the application.
      * @return this builder.
      */
@@ -442,7 +470,8 @@ public class AppBuilder {
      */
     public AppBuilder addRecipeDetailView() {
         recipeDetailViewModel = new RecipeDetailViewModel();
-        recipeDetailView = new RecipeDetailView(recipeDetailViewModel);
+        mapGroceriesViewModel = new MapGroceriesViewModel();
+        recipeDetailView = new RecipeDetailView(recipeDetailViewModel, mapGroceriesViewModel);
         cardPanel.add(recipeDetailView, recipeDetailView.getViewName());
         return this;
     }

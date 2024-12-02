@@ -2,7 +2,7 @@ package use_case.recipe_detail;
 
 import java.util.ArrayList;
 
-import entity.GenericRecipe;
+import entity.GenericRecipeInterface;
 
 /**
  * The interface for the Recipe Detail data access object.
@@ -14,7 +14,7 @@ public interface RecipeDetailDataAccessInterface {
      * @param genericRecipe the generic recipe object with the recipe name and id.
      * @return the ingredients for that recipe as a String.
      */
-    ArrayList<Integer> getIngredientIds(GenericRecipe genericRecipe);
+    ArrayList<Integer> getIngredientIds(GenericRecipeInterface genericRecipe);
 
     /**
      * Takes an arraylist of ingredient Ids and returns an arraylist of the names of those ingredients.
@@ -28,13 +28,13 @@ public interface RecipeDetailDataAccessInterface {
      * @param genericRecipe is the generic recipe object.
      * @return an arraylist of Quantities for each ingredient.
      */
-    ArrayList<String> getQuantities(GenericRecipe genericRecipe);
+    ArrayList<String> getQuantities(GenericRecipeInterface genericRecipe);
 
     /**
      * Takes in a Generic Recipe objects and returns the instructions for that recipe.
      * @param genericRecipe the generic recipe object with the recipe name and id.
      * @return the instructions for that recipe as a String.
      */
-    String getInstructions(GenericRecipe genericRecipe);
+    String getInstructions(GenericRecipeInterface genericRecipe);
 
 }

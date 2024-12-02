@@ -1,19 +1,19 @@
 package interface_adapter.result;
 
-import entity.GenericResult;
+import entity.Result;
 
 /**
  * The state for the result view.
  */
 public class ResultViewState {
 
-    private GenericResult result;
+    private Result result;
 
-    public GenericResult getResult() {
+    public Result getResult() {
         return result;
     }
 
-    public void setResult(GenericResult result) {
+    public void setResult(Result result) {
         this.result = result;
     }
 }

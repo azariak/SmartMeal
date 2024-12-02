@@ -1,9 +1,7 @@
 package use_case.recipe_detail;
 
 import data_access.RecipeDetailDataAccessObject;
-import entity.AdvancedRecipe;
-import entity.GenericRecipe;
-import entity.GenericRecipeFactoryInterface;
+import entity.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,7 +18,7 @@ class RecipeDetailInteractorTest {
     private GenericRecipeFactoryInterface mockFactory;
     private RecipeDetailDataAccessObject mockDataAccess;
     private RecipeDetailInputData inputData;
-    private GenericRecipe mockGenericRecipe;
+    private GenericRecipeInterface mockGenericRecipeInterface;
 
     @BeforeEach
     void setUp() {
@@ -30,11 +28,11 @@ class RecipeDetailInteractorTest {
 
         interactor = new RecipeDetailInteractor(mockPresenter, mockFactory, mockDataAccess);
 
-        mockGenericRecipe = mock(GenericRecipe.class);
-        when(mockGenericRecipe.getName()).thenReturn("Pancakes");
-        when(mockGenericRecipe.getId()).thenReturn("1234");
+        mockGenericRecipeInterface = mock(GenericRecipe.class);
+        when(mockGenericRecipeInterface.getName()).thenReturn("Pancakes");
+        when(mockGenericRecipeInterface.getId()).thenReturn("1234");
 
-        inputData = new RecipeDetailInputData(mockGenericRecipe);
+        inputData = new RecipeDetailInputData(mockGenericRecipeInterface);
     }
 
     @AfterEach
@@ -44,7 +42,7 @@ class RecipeDetailInteractorTest {
         mockFactory = null;
         mockDataAccess = null;
         inputData = null;
-        mockGenericRecipe = null;
+        mockGenericRecipeInterface = null;
     }
 
     @Test
@@ -65,18 +63,18 @@ class RecipeDetailInteractorTest {
         String instructions = "Mix all ingredients and cook.";
 
         // Mock responses
-        when(mockDataAccess.getIngredientIds(mockGenericRecipe)).thenReturn(ingredientIds);
+        when(mockDataAccess.getIngredientIds(mockGenericRecipeInterface)).thenReturn(ingredientIds);
         when(mockDataAccess.getIngredientsNames(ingredientIds)).thenReturn(ingredientNames);
-        when(mockDataAccess.getQuantities(mockGenericRecipe)).thenReturn(ingredientQuantities);
-        when(mockDataAccess.getInstructions(mockGenericRecipe)).thenReturn(instructions);
+        when(mockDataAccess.getQuantities(mockGenericRecipeInterface)).thenReturn(ingredientQuantities);
+        when(mockDataAccess.getInstructions(mockGenericRecipeInterface)).thenReturn(instructions);
 
-        AdvancedRecipe mockAdvancedRecipe = mock(AdvancedRecipe.class);
+        AdvancedRecipeInterface mockAdvancedRecipeInterface = mock(AdvancedRecipe.class);
         when(mockFactory.createAdvancedRecipe(
                 "Pancakes",
                 "1234",
                 ingredientNames,
                 ingredientQuantities,
-                instructions)).thenReturn(mockAdvancedRecipe);
+                instructions)).thenReturn(mockAdvancedRecipeInterface);
 
         interactor.execute(inputData);
 

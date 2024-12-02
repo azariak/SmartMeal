@@ -51,8 +51,11 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
 
         // Title and welcome message
         final JLabel title = new JLabel("Welcome to SmartMeal!");
+        final JLabel subTitle = new JLabel("A project by Anisa, Azaria, Daniel, Nachuan, Vedavi");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        subTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
         title.setFont(new Font("Arial", Font.BOLD, 30));
+        subTitle.setFont(new Font("Arial", Font.BOLD, 12));
 
         // Create the panel layout for the main menu
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -60,6 +63,7 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
         // Add the welcome message
         this.add(Box.createVerticalStrut(50));
         this.add(title);
+        this.add(subTitle);
         this.add(Box.createVerticalStrut(50));
         this.setPreferredSize(new Dimension(650, 550));
 
@@ -68,13 +72,13 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
         buttons.setLayout(new BoxLayout(buttons, BoxLayout.X_AXIS));
 
         demoIngredientSearch = new JButton("Ingredient Search");
-        buttons.add(demoIngredientSearch);
+        // buttons.add(demoIngredientSearch);
 
         loadSavedRecipes = new JButton("Saved Recipes");
-        buttons.add(loadSavedRecipes);
+        // buttons.add(loadSavedRecipes);
 
         rankedRecipes = new JButton("Ranked Recipes");
-        buttons.add(rankedRecipes);
+        // buttons.add(rankedRecipes);
 
         // Create the login/signup buttons panel
         final JPanel accountButtons = new JPanel();

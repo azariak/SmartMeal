@@ -23,6 +23,7 @@ public class MapGroceriesPresenter implements MapGroceriesOutputBoundary {
         final MapGroceriesState mapGroceriesState = mapGroceriesViewModel.getState();
         mapGroceriesState.setRecipeName(mapGroceriesOutputData.getRecipeName());
         mapGroceriesState.setGroceries(mapGroceriesOutputData.getGroceryList());
+        mapGroceriesState.setRecipeID(mapGroceriesOutputData.getRecipeID());
         System.out.println(mapGroceriesOutputData.getGroceryList());
 
         this.mapGroceriesViewModel.setState(mapGroceriesState);

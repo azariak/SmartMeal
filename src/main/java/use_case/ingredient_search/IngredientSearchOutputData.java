@@ -1,20 +1,20 @@
 package use_case.ingredient_search;
 
-import entity.GenericResult;
+import entity.Result;
 
 /**
  * Output Data for the ingredient search Use Case.
  */
 public class IngredientSearchOutputData {
-    private final GenericResult result;
+    private final Result result;
     private final boolean useCaseFailed;
 
-    public IngredientSearchOutputData(GenericResult result, Boolean useCaseFailed) {
+    public IngredientSearchOutputData(Result result, Boolean useCaseFailed) {
         this.result = result;
         this.useCaseFailed = useCaseFailed;
     }
 
-    public GenericResult getResult() {
+    public Result getResult() {
         return result;
     }
 

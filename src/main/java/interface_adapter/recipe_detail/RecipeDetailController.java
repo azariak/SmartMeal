@@ -2,7 +2,7 @@ package interface_adapter.recipe_detail;
 
 import java.io.IOException;
 
-import entity.GenericRecipe;
+import entity.GenericRecipeInterface;
 import use_case.recipe_detail.RecipeDetailInputBoundary;
 import use_case.recipe_detail.RecipeDetailInputData;
 
@@ -22,7 +22,7 @@ public class RecipeDetailController {
      * @param genericRecipe is the genericRecipe object of the Recipe the user clicks on.
      * @throws IOException the IO exception.
      */
-    public void execute(GenericRecipe genericRecipe) throws IOException {
+    public void execute(GenericRecipeInterface genericRecipe) throws IOException {
         final RecipeDetailInputData recipeDetailInputData = new RecipeDetailInputData(genericRecipe);
         recipeDetailInteractor.execute(recipeDetailInputData);
     }
@@ -32,13 +32,6 @@ public class RecipeDetailController {
      */
     public void backToLastView() {
         recipeDetailInteractor.backToLastView();
-    }
-
-    /**
-     * Switch to map groceries view.
-     */
-    public void goToGroceryView() {
-        recipeDetailInteractor.goToGroceryView();
     }
 
 }

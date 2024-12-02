@@ -9,7 +9,7 @@ import data_access.SubstitutesDataAccessObject;
  */
 public class SubstitutesInteractor implements SubstitutesInputBoundary {
 
-    private final SubstitutesDataAccessInterface substitutesDataAccessObject;
+    private final SubstitutesDataAccessObject substitutesDataAccessObject;
     private final SubstitutesOutputBoundary substitutesPresenter;
 
     public SubstitutesInteractor(SubstitutesOutputBoundary substitutesOutputBoundary,
@@ -21,9 +21,10 @@ public class SubstitutesInteractor implements SubstitutesInputBoundary {
     @Override
     public void execute(SubstitutesInputData substitutesInputData) {
         final String ingredientName = substitutesInputData.getIngredientName();
-        final ArrayList<String> ingredientSubstitutes = substitutesDataAccessObject.getIngredientSubstitutes(ingredientName);
+        final ArrayList<String> ingredientSubstitutes = substitutesDataAccessObject.getSubstitutes(ingredientName);
         System.out.println(ingredientSubstitutes.toString());
-        final SubstitutesOutputData substitutesOutputData = new SubstitutesOutputData(ingredientName, ingredientSubstitutes, false);
+        final SubstitutesOutputData substitutesOutputData =
+                new SubstitutesOutputData(ingredientName, ingredientSubstitutes, false);
         substitutesPresenter.prepareSuccessView(substitutesOutputData);
     }
 

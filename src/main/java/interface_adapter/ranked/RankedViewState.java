@@ -3,7 +3,7 @@ package interface_adapter.ranked;
 import java.util.ArrayList;
 import java.util.List;
 
-import entity.GenericRecipe;
+import entity.GenericRecipeInterface;
 
 /**
  * The state for the Ranked View.
@@ -41,8 +41,8 @@ public class RankedViewState {
 
     /**
      * Set generic recipe.
-     * @param genericRecipe a generic recipe.
+     * @param genericRecipeInterface a generic recipe.
      */
-    public void setGenericRecipe(GenericRecipe genericRecipe) {
+    public void setGenericRecipe(GenericRecipeInterface genericRecipeInterface) {
     }
 }

@@ -23,4 +23,8 @@ public class MapGroceriesOutputData {
     public String getRecipeName() {
         return groceryList.returnRecipeName();
     }
+
+    public String getRecipeID() {
+        return groceryList.returnRecipeID();
+    }
 }
