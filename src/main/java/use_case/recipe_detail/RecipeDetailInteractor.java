@@ -50,6 +50,4 @@ public class RecipeDetailInteractor implements RecipeDetailInputBoundary {
         recipeDetailPresenter.backToLastView();
     }
 
-    @Override
-    public void goToGroceryView() { }
 }
