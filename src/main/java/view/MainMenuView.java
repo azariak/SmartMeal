@@ -32,8 +32,7 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
     private final JButton signUp;
     private final JButton toLogin;
 
-    // TODO: line below is for demo
-    private final JButton demoIngredientSearch;
+    private final JButton ingredientSearch;
     private final JButton loadSavedRecipes;
 
     private final JButton rankedRecipes;
@@ -71,7 +70,7 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
         final JPanel buttons = new JPanel();
         buttons.setLayout(new BoxLayout(buttons, BoxLayout.X_AXIS));
 
-        demoIngredientSearch = new JButton("Ingredient Search");
+        ingredientSearch = new JButton("Ingredient Search");
         // buttons.add(demoIngredientSearch);
 
         loadSavedRecipes = new JButton("Saved Recipes");
@@ -113,7 +112,7 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
                 }
         );
 
-        demoIngredientSearch.addActionListener(
+        ingredientSearch.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         mainMenuController.switchToIngredienSearchView();

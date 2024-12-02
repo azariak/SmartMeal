@@ -75,7 +75,7 @@ public class LoggedInView extends JPanel implements PropertyChangeListener {
 
         final JPanel buttons = new JPanel();
 
-        demoIngredientSearch = new JButton("Demo Ingredient Search");
+        demoIngredientSearch = new JButton("Ingredient Search");
         buttons.add(demoIngredientSearch);
         loadSavedRecipes = new JButton("Saved Recipes");
         buttons.add(loadSavedRecipes);
