@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import entity.AdvancedRecipeInterface;
 import org.json.JSONObject;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -15,6 +14,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
+import entity.AdvancedRecipeInterface;
 import entity.GenericRecipe;
 import use_case.load_saved_recipe.LoadSavedRecipeDataAccessInterface;
 import use_case.saved_recipe.SavedRecipeDataAccessInterface;

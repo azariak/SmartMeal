@@ -37,7 +37,8 @@ public class LoadSavedRecipeView extends JPanel implements ActionListener, Prope
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         final JPanel buttons = new JPanel();
         final JPanel recipesPanel = new JPanel();
-        final String[] recipe = new String[]{"Lasagna:4 cups shredded mozzarella cheese divided, ½ cup shredded Parmesan cheese shredded and divided", "Beef Noodles:", "Chicken Noodle Soup:", "Shrimp Salad:", "Pasta:", "Shrimp Udon:", "Tomato Soup:"};
+        final String[] recipe = new String[]{"Lasagna:4 cups shredded mozzarella cheese divided, ½ cup shredded Parmesan cheese shredded and divided...", "Beef Noodles: 200g / 7oz beef mince (ground beef) (Note 3), 1 1/4 cups (315 ml) water, plus more as needed...", "Chicken Noodle Soup: ½ teaspoon freshly ground black pepper , to taste, 1/8 teaspoon dried rosemary ,or more, to taste,...", "Shrimp Salad:2 pounds shrimp, peeled and deveined,2 tablespoons finely chopped red onion,¼ teaspoon kosher salt...", "Pasta:Start by shredding both blocks of sharp cheddar cheese and set the cheese to the side, Bring a large pot of salted water to a boil. Boil the macaroni for 4 minutes, then drain it in a colander. Briefly rinse the pasta with cool water to cool it off....", "Shrimp Udon:1 pack (200g) udon noodles preferably vacuum-packed, \n" +
+                "8 white mushrooms sliced, approx 120g...", "Tomato Soup:2 cups chicken stock,1/4 cup chopped fresh basil, plus more to serve,1/2 cup heavy whipping cream, or to taste to combat acidity..."};
         final JList<String> recipeList = new JList<>(recipe);
         final int num = 15;
         recipeList.setFont(new Font("Times New Roman", Font.PLAIN, num));
@@ -132,15 +133,14 @@ public class LoadSavedRecipeView extends JPanel implements ActionListener, Prope
         recipeList.setModel(model);
     }
 
-//    private void refreshRecipeList() {
-//        final List<String> recipes = loadSavedRecipeViewModel.getRecipeList();
-//        final DefaultListModel<String> listModel = new DefaultListModel<>();
-//        for (String recipe : recipes) {
-//            listModel.addElement(recipe);
-//        }
-//        recipeList.setModel(listModel);
-//    }
-
+    private void refreshRecipeList() {
+        final List<String> recipes = loadSavedRecipeViewModel.getRecipeList();
+        final DefaultListModel<String> listModel = new DefaultListModel<>();
+        for (String recipe : recipes) {
+            listModel.addElement(recipe);
+        }
+        recipeList.setModel(listModel);
+    }
 
     @Override
     public void actionPerformed(ActionEvent evt) {
