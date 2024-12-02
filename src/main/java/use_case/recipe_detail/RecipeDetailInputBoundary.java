@@ -19,9 +19,4 @@ public interface RecipeDetailInputBoundary {
      */
     void backToLastView();
 
-    /**
-     * Switch to map groceries view.
-     */
-    void goToGroceryView();
-
 }
