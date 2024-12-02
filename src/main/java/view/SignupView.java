@@ -36,8 +36,7 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
     private final JButton cancel;
     private final JButton toLogin;
 
-    // TODO: line below is for demo
-    private final JButton demoIngredientSearch;
+    private final JButton ingredientSearch;
     private final JButton loadSavedRecipes;
 
     public SignupView(SignupViewModel signupViewModel) {
@@ -61,8 +60,8 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         buttons.add(signUp);
         cancel = new JButton(SignupViewModel.CANCEL_BUTTON_LABEL);
         buttons.add(cancel);
-        demoIngredientSearch = new JButton("Demo Ingredient Search");
-//        buttons.add(demoIngredientSearch);
+        ingredientSearch = new JButton("Ingredient Search");
+//        buttons.add(ingredientSearch);
         loadSavedRecipes = new JButton("Saved Recipes");
 //        buttons.add(loadSavedRecipes);
 
@@ -91,7 +90,7 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
                 }
         );
 
-        demoIngredientSearch.addActionListener(
+        ingredientSearch.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         signupController.switchToIngredienSearchView();
