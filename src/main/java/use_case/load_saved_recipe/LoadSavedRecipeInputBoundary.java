@@ -1,8 +1,8 @@
 package use_case.load_saved_recipe;
 
-import interface_adapter.load_saved_recipe.LoadSavedRecipeViewModel;
+import entity.AdvancedRecipeInterface;
 
-import java.awt.*;
+import java.util.List;
 
 /**
  * Input Boundary for actions which are related to Loading Saved Recipes.
@@ -25,11 +25,8 @@ public interface LoadSavedRecipeInputBoundary {
      */
     void backToLastView();
 
-//    /**
-//     * Deletes the selected recipe.
-//     * @param selectedRecipe the selected recipe.
-//     */
-//    void deleteRecipe(String selectedRecipe);
-//
-//    LoadSavedRecipeViewModel getViewModel();
+    /**
+     * Get all Recipes.
+     */
+    List<AdvancedRecipeInterface> getAllRecipes();
 }

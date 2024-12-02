@@ -1,8 +1,9 @@
 package use_case.saved_recipe;
 
+import org.json.JSONObject;
+
 import entity.AdvancedRecipeInterface;
 import entity.GenericRecipeInterface;
-import org.json.JSONObject;
 
 /**
  * DAO for the Saved Recipe Use Case.

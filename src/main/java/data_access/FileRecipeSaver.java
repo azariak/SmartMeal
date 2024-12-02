@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import entity.AdvancedRecipeInterface;
 import org.json.JSONObject;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -24,25 +25,25 @@ import use_case.saved_recipe.SavedRecipeDataAccessInterface;
  */
 public class FileRecipeSaver implements SavedRecipeDataAccessInterface,
         LoadSavedRecipeDataAccessInterface {
-    private final List<AdvancedRecipe> recipes = new ArrayList<>();
+    private final List<AdvancedRecipeInterface> recipes = new ArrayList<>();
 
     @Override
-    public void save(AdvancedRecipe recipe) {
+    public void save(AdvancedRecipeInterface recipe) {
         recipes.add(recipe);
     }
 
     @Override
-    public void search(AdvancedRecipe recipe) {
+    public void search(AdvancedRecipeInterface recipe) {
 
     }
 
     @Override
-    public AdvancedRecipe get(String ingredient) {
+    public AdvancedRecipeInterface get(String ingredient) {
         return null;
     }
 
     @Override
-    public List<AdvancedRecipe> getAllRecipes() {
+    public List<AdvancedRecipeInterface> getAllRecipes() {
         return new ArrayList<>(recipes);
     }
 

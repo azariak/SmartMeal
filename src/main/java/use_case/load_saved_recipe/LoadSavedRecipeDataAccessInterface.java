@@ -1,8 +1,8 @@
 package use_case.load_saved_recipe;
 
 import java.util.List;
+
 import entity.AdvancedRecipeInterface;
-import org.json.JSONObject;
 
 /**
  * DAO for the Load Saved Recipe Use Case.
@@ -25,6 +25,5 @@ public interface LoadSavedRecipeDataAccessInterface {
     /**
      * Returns all the recipes as a list.
      */
-    public List<AdvancedRecipeInterface> getAllRecipes();
-
+    List<AdvancedRecipeInterface> getAllRecipes();
 }
