@@ -15,7 +15,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-import entity.AdvancedRecipe;
 import entity.GenericRecipe;
 import use_case.load_saved_recipe.LoadSavedRecipeDataAccessInterface;
 import use_case.saved_recipe.SavedRecipeDataAccessInterface;
