@@ -80,18 +80,15 @@ if I don't have the ones mentioned in the recipe
 ![IngredientSubstitutionViewFinal](images/Daniel_User_Story/IngredientSubstitutionViewFinal.jpg)
 
 #### Vedavi Anandan (vedavia)
-Kathy has allergies and inputs the ingredients she does not want in her meals to generate a list of safe recipes. 
+Kathy wants to try a recipe, but has no idea which ingredients to buy at the store as there are many
+options. She opens up the recipe detail view and clicks on the Grocery List button to generate a list
+of possible grocery items she can choose from to get ingredients for the recipe.
 
 #### Use Cases
-- The excluded ingredients are listed in the 'Do not want:' field.
-- The search button is clicked to generate a list of recipes.
-- The preferred recipes are saved to the users 'git statusSaved Recipes' page by clicking the save button.
-
-Test
-
-![462547741_1884070615329762_27190600438312334_n.jpg](images/462547741_1884070615329762_27190600438312334_n.jpg)
-![462547766_770258358585334_312687260887195250_n.jpg](images/462547766_770258358585334_312687260887195250_n.jpg)
-
+- Click on the Grocery List button in the recipe detail view of any recipe. A view will open up with
+  the grocery list.
+- Press the back button to return to the recipe detail screen.
+[grocery button.pdf](images%2FVedavi_User_Story%2Fgrocery%20button.pdf)
 ### Installation Instructions
 - Dependencies:
   - Java
