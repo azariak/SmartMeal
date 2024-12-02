@@ -64,6 +64,7 @@ import use_case.ingredient_search.IngredientSearchOutputBoundary;
 import use_case.ingredient_substitutions.SubstitutesInputBoundary;
 import use_case.ingredient_substitutions.SubstitutesInteractor;
 import use_case.ingredient_substitutions.SubstitutesOutputBoundary;
+import use_case.load_saved_recipe.LoadSavedRecipeDataAccessInterface;
 import use_case.load_saved_recipe.LoadSavedRecipeInputBoundary;
 import use_case.load_saved_recipe.LoadSavedRecipeInteractor;
 import use_case.load_saved_recipe.LoadSavedRecipeOutputBoundary;
@@ -305,12 +306,15 @@ public class AppBuilder {
         final LoadSavedRecipeOutputBoundary loadSavedRecipeOutputBoundary =
                 new LoadSavedRecipePresenter(viewManagerModel, loadSavedRecipeViewModel);
 
+        // Use FileRecipeSaver as the implementation for the data access layer.
+        final LoadSavedRecipeDataAccessInterface recipeDataAccess = new FileRecipeSaver();
+
         final LoadSavedRecipeInputBoundary loadSavedRecipeInteractor =
-                new LoadSavedRecipeInteractor(fileRecipeSaver,
-                        loadSavedRecipeOutputBoundary);
+                new LoadSavedRecipeInteractor(recipeDataAccess, loadSavedRecipeOutputBoundary);
 
         final LoadSavedRecipeController loadSavedRecipeController =
                 new LoadSavedRecipeController(loadSavedRecipeInteractor);
+
         loadSavedRecipeView.setLoadSavedRecipeController(loadSavedRecipeController);
         return this;
     }

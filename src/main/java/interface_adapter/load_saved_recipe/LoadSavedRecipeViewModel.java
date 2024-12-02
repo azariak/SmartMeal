@@ -1,6 +1,6 @@
 package interface_adapter.load_saved_recipe;
 
-import java.awt.*;
+import java.awt.List;
 import java.beans.PropertyChangeSupport;
 
 import data_access.FileRecipeSaver;
@@ -41,6 +41,4 @@ public class LoadSavedRecipeViewModel extends ViewModel<LoadSavedRecipeState> {
         return null;
     }
 
-    public void setRecipeList(List savedRecipes) {
-    }
 }
