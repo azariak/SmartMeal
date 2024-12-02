@@ -31,4 +31,10 @@ public interface ApiAccessKeyManagerInterface {
      * @return Return true if all keys are invalid.
      */
     boolean allKeyInvalid();
+
+    /**
+     * Add the api keys in environment to the manager.
+     * The keys need to be stored as API_KEY[1-9][0-9]*
+     */
+    void addApiKeysToApiKeyManager();
 }

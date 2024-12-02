@@ -9,6 +9,7 @@ import java.util.Map;
  */
 public class ApiAccessKeyManager implements ApiAccessKeyManagerInterface {
     public static final String ENV_API_KEY = System.getenv("API_KEY");
+    public static final Integer ENV_API_MAX = 100;
 
     // A map that stores the api keys and a boolean that records if they are still valid (have not reached limit).
     private final Map<String, Boolean> apiKeyMap;
@@ -58,5 +59,24 @@ public class ApiAccessKeyManager implements ApiAccessKeyManagerInterface {
     @Override
     public boolean allKeyInvalid() {
         return allInvalid;
+    }
+
+    @Override
+    public void addApiKeysToApiKeyManager() {
+        final ArrayList<String> apiKeys = new ArrayList<>();
+
+        for (int i = 1; i < ENV_API_MAX; i++) {
+
+            final String apiKey = System.getenv("API_KEY" + i);
+            if (apiKey != null) {
+                apiKeys.add(apiKey);
+            }
+            else {
+                break;
+            }
+
+        }
+
+        addApiKeys(apiKeys);
     }
 }

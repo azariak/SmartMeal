@@ -158,34 +158,16 @@ public class AppBuilder {
 
     public AppBuilder() {
         cardPanel.setLayout(cardLayout);
-        addApiKeysToApiKeyManager();
-        initializeDAO();
+        apiAccessKeyManager.addApiKeysToApiKeyManager();
+        initializeDao();
     }
 
-    private void initializeDAO() {
+    private void initializeDao() {
         userDataAccessObject = new InMemoryUserDataAccessObject();
         ingredientSearchDataAccessObject = new IngredientSearchDataAccessObject(apiAccessKeyManager);
         recipeDetailDataAccessObject = new RecipeDetailDataAccessObject(apiAccessKeyManager);
         substitutesDataAccessObject = new SubstitutesDataAccessObject(apiAccessKeyManager);
         mapGroceriesDataAccessObject = new GroceriesDataAccessObject(apiAccessKeyManager);
-    }
-
-    private void addApiKeysToApiKeyManager() {
-        final ArrayList<String> apiKeys = new ArrayList<>();
-
-        for (int i = 1; i < 100; i++) {
-
-            final String apiKey = System.getenv("API_KEY" + i);
-            if (apiKey != null) {
-                apiKeys.add(apiKey);
-            }
-            else {
-                break;
-            }
-
-        }
-
-        apiAccessKeyManager.addApiKeys(apiKeys);
     }
 
     /**
