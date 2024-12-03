@@ -1,46 +1,91 @@
 package use_case.load_saved_recipe;
 
-import data_access.FileRecipeSaver;
-import data_access.InMemoryUserDataAccessObject;
+import entity.AdvancedRecipeInterface;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 class LoadSavedRecipeInteractorTest {
 
+    @Mock
+    private LoadSavedRecipeDataAccessInterface mockRecipeDataAccess;
+
+    @Mock
+    private LoadSavedRecipeOutputBoundary mockPresenter;
+
+    private LoadSavedRecipeInteractor interactor;
+
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+        interactor = new LoadSavedRecipeInteractor(mockRecipeDataAccess, mockPresenter);
+    }
+
     @Test
     void testExecute() {
         // Arrange
-        LoadSavedRecipeDataAccessInterface mockDataAccessObject = mock(LoadSavedRecipeDataAccessInterface.class);
-        LoadSavedRecipeOutputBoundary mockPresenter = mock(LoadSavedRecipeOutputBoundary.class);
-
-        LoadSavedRecipeInteractor interactor = new LoadSavedRecipeInteractor((FileRecipeSaver) mockDataAccessObject, mockPresenter);
         LoadSavedRecipeInputData inputData = new LoadSavedRecipeInputData("Recipe1", "Recipe2", "Recipe3");
+
+        // Act
         interactor.execute(inputData);
-        verify(mockPresenter).prepareResultView("Recipe1", "Recipe2", "Recipe3");
-        verifyNoInteractions(mockDataAccessObject);
+
+        // Assert
+        verify(mockPresenter, times(1))
+                .prepareResultView("Recipe1", "Recipe2", "Recipe3");
+        verifyNoInteractions(mockRecipeDataAccess);
     }
 
     @Test
     void testSwitchToResultView() {
-        LoadSavedRecipeDataAccessInterface mockDataAccessObject = mock(LoadSavedRecipeDataAccessInterface.class);
-        LoadSavedRecipeOutputBoundary mockPresenter = mock(LoadSavedRecipeOutputBoundary.class);
 
-        LoadSavedRecipeInteractor interactor = new LoadSavedRecipeInteractor((FileRecipeSaver) mockDataAccessObject, mockPresenter);
         interactor.switchToResultView();
-        verify(mockPresenter).switchToResultView();
-        verifyNoInteractions(mockDataAccessObject);
+
+        verify(mockPresenter, times(1)).switchToResultView();
+        verifyNoInteractions(mockRecipeDataAccess);
     }
 
     @Test
     void testBackToLastView() {
-        LoadSavedRecipeDataAccessInterface mockDataAccessObject = mock(LoadSavedRecipeDataAccessInterface.class);
-        LoadSavedRecipeOutputBoundary mockPresenter = mock(LoadSavedRecipeOutputBoundary.class);
-
-        LoadSavedRecipeInteractor interactor = new LoadSavedRecipeInteractor((FileRecipeSaver) mockDataAccessObject, mockPresenter);
         interactor.backToLastView();
-        verify(mockPresenter).backToLastView();
-        verifyNoInteractions(mockDataAccessObject);
+
+        verify(mockPresenter, times(1)).backToLastView();
+        verifyNoInteractions(mockRecipeDataAccess);
+    }
+
+    @Test
+    void testGetAllRecipes() {
+        // Arrange
+        AdvancedRecipeInterface recipe1 = mock(AdvancedRecipeInterface.class);
+        AdvancedRecipeInterface recipe2 = mock(AdvancedRecipeInterface.class);
+        List<AdvancedRecipeInterface> mockRecipes = Arrays.asList(recipe1, recipe2);
+        when(mockRecipeDataAccess.getAllRecipes()).thenReturn(mockRecipes);
+
+        // Act
+        List<AdvancedRecipeInterface> recipes = interactor.getAllRecipes();
+
+        // Assert
+        verify(mockRecipeDataAccess, times(1)).getAllRecipes();
+        assertEquals(mockRecipes, recipes);
+    }
+
+    @Test
+    void testGetAllRecipesWithNoRecipes() {
+        // Arrange
+        when(mockRecipeDataAccess.getAllRecipes()).thenReturn(Collections.emptyList());
+
+        // Act
+        List<AdvancedRecipeInterface> recipes = interactor.getAllRecipes();
+
+        // Assert
+        verify(mockRecipeDataAccess, times(1)).getAllRecipes();
+        assertEquals(0, recipes.size());
     }
 }
