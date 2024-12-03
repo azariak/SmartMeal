@@ -12,8 +12,12 @@ class IngredientSearchInputDataTest {
     private final ArrayList<String> ingredients = new ArrayList<>();
     private IngredientSearchInputData dataAll;
     private IngredientSearchInputData dataOne;
+    private IngredientSearchInputData dataEmpty;
     @BeforeEach
     void setUp() {
+        ingredients.add("");
+        dataEmpty = new IngredientSearchInputData(ingredients);
+
         ingredients.add("ingredient1");
         dataOne = new IngredientSearchInputData(ingredients);
 
@@ -35,5 +39,9 @@ class IngredientSearchInputDataTest {
 
         String ingredientStringOne = "ingredient1";
         assertEquals(ingredientStringOne, dataOne.getIngredients());
+
+        String ingredientStringZero = "";
+        assertEquals(ingredientStringZero, dataEmpty.getIngredients());
     }
+
 }

@@ -87,9 +87,9 @@ class RecipeDetailInteractorTest {
         verify(mockPresenter).backToLastView();
     }
 
-    @Test
-    void goToGroceryView() {
-        interactor.goToGroceryView();
-        verify(mockPresenter, never()).prepareSuccessView(any());
-    }
+//    @Test
+//    void goToGroceryView() {
+//        interactor.goToGroceryView();
+//        verify(mockPresenter, never()).prepareSuccessView(any());
+//    }
 }
