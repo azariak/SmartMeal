@@ -63,7 +63,7 @@ ingredients, steps, and cooking time.
 - The user clicks a delete button on a saved recipe, and the application prompts for 
 confirmation before removing the recipe from her saved collection.
 
-![smartmeal.png](images/smartmeal.png)
+![Screenshot 2024-12-02 at 6.22.42 PM.png](images/Anisa_User_Story/Screenshot%202024-12-02%20at%206.22.42%E2%80%AFPM.png)
 
 #### Daniel Rafailov (danielrafailov1)
 #### User Story
