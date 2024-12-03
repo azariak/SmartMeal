@@ -522,6 +522,8 @@ public class AppBuilder {
         final BackController controller = new BackController(backInteractor);
         ingredientSearchView.setBackController(controller);
         resultView.setBackController(controller);
+        loginView.setBackController(controller);
+        signupView.setBackController(controller);
         return this;
     }
 

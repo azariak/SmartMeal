@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import interface_adapter.back.BackController;
 import interface_adapter.login.LoginController;
 import interface_adapter.login.LoginState;
 import interface_adapter.login.LoginViewModel;
@@ -34,8 +35,10 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
     private final JLabel passwordErrorField = new JLabel();
 
     private final JButton logIn;
-    private final JButton cancel;
     private LoginController loginController;
+
+    private final JButton cancel;
+    private BackController backController;
 
     public LoginView(LoginViewModel loginViewModel) {
 
@@ -71,7 +74,14 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
                 }
         );
 
-        cancel.addActionListener(this);
+        cancel.addActionListener(
+                new ActionListener() {
+                public void actionPerformed(ActionEvent evt) {
+                    if (evt.getSource().equals(cancel)) {
+                        backController.backToLastView();
+                    }
+                }
+            });
 
         usernameInputField.getDocument().addDocumentListener(new DocumentListener() {
 
@@ -156,5 +166,9 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
 
     public void setLoginController(LoginController loginController) {
         this.loginController = loginController;
+    }
+
+    public void setBackController(BackController backController) {
+        this.backController = backController;
     }
 }
