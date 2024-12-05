@@ -1,5 +1,8 @@
-# SmartMeal
+# **SmartMeal**
 ## Recipe generation, recipe storage, and recipe ranking 
+SmartMeal, created for the course CSC207, is an app that allows anyone to generate recipes based on ingredients they already have.
+They can choose to view the details from a choice of recipes, and they can generate substitutes for particular ingredients, a grocery list, and
+ the user can rank each recipe.
 
 ### Table of Contents
 - [Title](#smartmeal)
@@ -90,8 +93,9 @@ of possible grocery items she can choose from to get ingredients for the recipe.
 - Press the back button to return to the recipe detail screen.
 [grocery button.pdf](images%2FVedavi_User_Story%2Fgrocery%20button.pdf)
 ### Installation Instructions
+- This project is intended for MacOS or Windows.
 - Dependencies:
-  - Java
+  - Java (version 11 or later)
   - IntelliJ
   - Functioning Spoonacular API keys in environmental variables
   - This should be formatted in IntelliJ as follows:
@@ -107,4 +111,6 @@ of possible grocery items she can choose from to get ingredients for the recipe.
 ### License on GitHub
 
 ### Feedback & Contributions
-- To give feedback or contribute, you can open a GitHub issue, or create a pull request.
+- To give feedback or contribute, you can open a [GitHub issue](https://github.com/azariak/SmartMeal/issues), or create a [pull request](https://github.com/azariak/SmartMeal/pulls).
+- All code changes should abide by Clean Architecture, and SOLID design principles.
+- You should expect to hear a response within one week.
